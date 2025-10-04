@@ -34,9 +34,12 @@ export class MermaidParser extends CstParser {
         this.OR([
             { ALT: () => this.SUBRULE(this.nodeStatement) },
             { ALT: () => this.SUBRULE(this.subgraph) },
+            { ALT: () => this.SUBRULE(this.directionStatement) },
             { ALT: () => this.SUBRULE(this.classStatement) },
             { ALT: () => this.SUBRULE(this.styleStatement) },
             { ALT: () => this.SUBRULE(this.classDefStatement) },
+            { ALT: () => this.SUBRULE(this.clickStatement) },
+            { ALT: () => this.SUBRULE(this.linkStyleStatement) },
             { ALT: () => this.CONSUME(tokens.Newline) } // Empty lines
         ]);
     });
@@ -88,6 +91,8 @@ export class MermaidParser extends CstParser {
                     this.OPTION(() => {
                         this.CONSUME(tokens.NumberLiteral, { LABEL: "nodeIdSuffix" });
                     });
+                    // Optional typed-shape attribute object: A@{ shape: rect, label: "Text" }
+                    this.OPTION1(() => this.SUBRULE(this.attrObject));
                 }
             },
             { 
@@ -106,6 +111,179 @@ export class MermaidParser extends CstParser {
         this.OPTION3(() => {
             this.CONSUME(tokens.TripleColon);
             this.CONSUME3(tokens.Identifier, { LABEL: 'nodeClass' });
+        });
+    });
+
+    // Attribute object used by typed shapes syntax after node id: @ { key: value, ... }
+    private attrObject = this.RULE('attrObject', () => {
+        this.CONSUME(tokens.AtSign);
+        this.CONSUME(tokens.DiamondOpen, { LABEL: 'attrLCurly' }); // reuse '{'
+        this.OPTION(() => {
+            this.SUBRULE(this.attrPair);
+            this.MANY(() => {
+                this.CONSUME(tokens.Comma);
+                this.SUBRULE2(this.attrPair);
+            });
+        });
+        this.CONSUME(tokens.DiamondClose, { LABEL: 'attrRCurly' });
+    });
+
+    private attrPair = this.RULE('attrPair', () => {
+        this.CONSUME(tokens.Identifier, { LABEL: 'attrKey' });
+        this.CONSUME(tokens.Colon);
+        // Parser-level guard for shape values to reduce ambiguity (semantics remains authoritative)
+        this.OR([
+            {
+                GATE: () => {
+                    const prev = this.LA( -1 ) as any; // colon
+                    const keyTok = this.LA( -2 ) as any; // Identifier key
+                    return keyTok && /^(shape)$/i.test(String(keyTok.image || ''));
+                },
+                ALT: () => this.SUBRULE(this.attrShapeValue)
+            },
+            { ALT: () => this.CONSUME(tokens.QuotedString) },
+            { ALT: () => this.CONSUME2(tokens.Identifier) },
+            { ALT: () => this.CONSUME(tokens.NumberLiteral) },
+            { ALT: () => this.CONSUME(tokens.Text) },
+        ]);
+    });
+
+    private attrShapeValue = this.RULE('attrShapeValue', () => {
+        // Accept only known shapes when possible; otherwise still consume a generic token to keep parsing.
+        const isKnownShapeId = () => {
+            const la: any = this.LA(1);
+            if (!la || la.tokenType !== tokens.Identifier) return false;
+            const v = String(la.image || '').toLowerCase();
+            return (
+                v === 'rect' || v === 'round' || v === 'rounded' || v === 'stadium' || v === 'subroutine' ||
+                v === 'circle' || v === 'cylinder' || v === 'diamond' || v === 'trapezoid' || v === 'trapezoidalt' ||
+                v === 'parallelogram' || v === 'hexagon' || v === 'lean-l' || v === 'lean-r' || v === 'icon' || v === 'image'
+            );
+        };
+        const isKnownShapeQuoted = () => {
+            const la: any = this.LA(1);
+            if (!la || la.tokenType !== tokens.QuotedString) return false;
+            const raw = String(la.image || '');
+            const unq = raw.length >= 2 && (raw.startsWith('"') || raw.startsWith("'")) ? raw.slice(1, -1) : raw;
+            const v = unq.toLowerCase();
+            return (
+                v === 'rect' || v === 'round' || v === 'rounded' || v === 'stadium' || v === 'subroutine' ||
+                v === 'circle' || v === 'cylinder' || v === 'diamond' || v === 'trapezoid' || v === 'trapezoidalt' ||
+                v === 'parallelogram' || v === 'hexagon' || v === 'lean-l' || v === 'lean-r' || v === 'icon' || v === 'image'
+            );
+        };
+        this.OR([
+            { GATE: isKnownShapeId, ALT: () => this.CONSUME(tokens.Identifier, { LABEL: 'shapeId' }) },
+            { GATE: isKnownShapeQuoted, ALT: () => this.CONSUME(tokens.QuotedString, { LABEL: 'shapeQuoted' }) },
+            // Fallback: accept any identifier/quoted/number/text so parse continues; semantics will flag unknowns
+            { ALT: () => this.CONSUME2(tokens.Identifier) },
+            { ALT: () => this.CONSUME2(tokens.QuotedString) },
+            { ALT: () => this.CONSUME(tokens.NumberLiteral) },
+            { ALT: () => this.CONSUME(tokens.Text) },
+        ]);
+    });
+
+    // Interaction statements — parsed permissively to avoid false errors
+    private clickStatement = this.RULE('clickStatement', () => {
+        this.CONSUME(tokens.ClickKeyword);
+        // target id
+        this.CONSUME(tokens.Identifier, { LABEL: 'clickTarget' });
+        // Structured modes: href/call; keep permissive semantics in diagnostics
+        this.OR([
+            { 
+              GATE: () => this.LA(1).tokenType === tokens.Identifier && /^(href)$/i.test((this.LA(1) as any).image || ''),
+              ALT: () => this.SUBRULE(this.clickHref)
+            },
+            { 
+              GATE: () => this.LA(1).tokenType === tokens.Identifier && /^(call|callback)$/i.test((this.LA(1) as any).image || ''),
+              ALT: () => this.SUBRULE(this.clickCall)
+            }
+        ]);
+        this.OPTION(() => this.CONSUME(tokens.Newline));
+    });
+
+    private clickHref = this.RULE('clickHref', () => {
+        // mode identifier (usually 'href')
+        this.CONSUME(tokens.Identifier, { LABEL: 'mode' });
+        // required URL
+        this.CONSUME(tokens.QuotedString, { LABEL: 'url' });
+        // optional tooltip
+        this.OPTION(() => this.CONSUME2(tokens.QuotedString, { LABEL: 'tooltip' }));
+        // optional target (_blank/_self/etc.)
+        this.OPTION2(() => this.CONSUME2(tokens.Identifier, { LABEL: 'target' }));
+    });
+
+    private clickCall = this.RULE('clickCall', () => {
+        // mode identifier (usually 'call' or 'callback')
+        this.CONSUME1(tokens.Identifier, { LABEL: 'mode' });
+        // function name (identifier), optional
+        this.OPTION1(() => {
+            this.CONSUME2(tokens.Identifier, { LABEL: 'fn' });
+            // Optional empty parentheses or simple () after function name to match CLI examples
+            this.OPTION2(() => {
+                this.CONSUME3(tokens.RoundOpen);
+                this.OPTION3(() => {
+                    // Accept a permissive single token inside parens if present (identifier/number/text)
+                    this.OR([
+                        { ALT: () => this.CONSUME4(tokens.Identifier) },
+                        { ALT: () => this.CONSUME5(tokens.NumberLiteral) },
+                        { ALT: () => this.CONSUME6(tokens.Text) },
+                    ]);
+                });
+                this.CONSUME7(tokens.RoundClose);
+            });
+        });
+        // optional tooltip as quoted string
+        this.OPTION4(() => this.CONSUME8(tokens.QuotedString, { LABEL: 'tooltip' }));
+    });
+
+    private linkStyleStatement = this.RULE('linkStyleStatement', () => {
+        this.CONSUME(tokens.LinkStyleKeyword);
+        this.SUBRULE(this.linkStyleIndexList);
+        this.OPTION1(() => this.CONSUME1(tokens.Newline));
+        this.SUBRULE(this.linkStylePairs);
+        this.OPTION2(() => this.CONSUME2(tokens.Newline));
+    });
+
+    private linkStyleIndexList = this.RULE('linkStyleIndexList', () => {
+        this.CONSUME(tokens.NumberLiteral, { LABEL: 'index' });
+        this.MANY(() => {
+            this.CONSUME(tokens.Comma);
+            this.CONSUME2(tokens.NumberLiteral, { LABEL: 'index' });
+        });
+    });
+
+    private linkStylePairs = this.RULE('linkStylePairs', () => {
+        // one or more key:value pairs, comma/newline-separated
+        this.SUBRULE(this.linkStylePair);
+        this.MANY(() => {
+            this.CONSUME(tokens.Comma);
+            this.OPTION(() => this.CONSUME(tokens.Newline));
+            this.SUBRULE2(this.linkStylePair);
+        });
+    });
+
+    private linkStylePair = this.RULE('linkStylePair', () => {
+        this.CONSUME1(tokens.Identifier, { LABEL: 'key' });
+        this.CONSUME(tokens.Colon);
+        this.SUBRULE(this.linkStyleValueChunk);
+    });
+
+    private linkStyleValueChunk = this.RULE('linkStyleValueChunk', () => {
+        this.AT_LEAST_ONE({
+            GATE: () => {
+                const la: any = this.LA(1);
+                return la && la.tokenType !== tokens.Comma && la.tokenType !== tokens.Newline;
+            },
+            DEF: () => {
+                this.OR([
+                    { ALT: () => this.CONSUME(tokens.ColorValue) },
+                    { ALT: () => this.CONSUME(tokens.QuotedString) },
+                    { ALT: () => this.CONSUME(tokens.NumberLiteral) },
+                    { ALT: () => this.CONSUME(tokens.Identifier) },
+                    { ALT: () => this.CONSUME(tokens.Text) },
+                ]);
+            }
         });
     });
     

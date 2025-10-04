@@ -29,9 +29,12 @@ This file contains all valid sequence test fixtures rendered with both Mermaid a
 14. [notes](#14-notes)
 15. [par and](#15-par-and)
 16. [par minimal](#16-par-minimal)
-17. [participant double in double](#17-participant-double-in-double)
-18. [participant escaped quotes](#18-participant-escaped-quotes)
-19. [participant unclosed quote](#19-participant-unclosed-quote)
+17. [par over actors](#17-par-over-actors)
+18. [participant double in double](#18-participant-double-in-double)
+19. [participant escaped quotes](#19-participant-escaped-quotes)
+20. [participant unclosed quote](#20-participant-unclosed-quote)
+21. [suffix balance](#21-suffix-balance)
+22. [suffix misuse](#22-suffix-misuse)
 
 ---
 
@@ -911,7 +914,64 @@ sequenceDiagram
 
 ---
 
-## 17. Participant Double In Double
+## 17. Par Over Actors
+
+📄 **Source**: [`par-over-actors.mmd`](./valid/par-over-actors.mmd)
+
+### Rendered Output
+
+<table>
+<tr>
+<th width="50%">Mermaid (Official)</th>
+<th width="50%">Maid (Experimental)</th>
+</tr>
+<tr>
+<td>
+
+```mermaid
+sequenceDiagram
+  participant A
+  participant B
+  participant C
+  par over A,B Parallel work
+    A->>B: one
+  and
+    B->>A: two
+  end
+
+
+```
+
+</td>
+<td>
+
+<img src="./rendered/par-over-actors.svg" alt="Maid Rendered Diagram" />
+
+</td>
+</tr>
+</table>
+
+<details>
+<summary>View source code</summary>
+
+```
+sequenceDiagram
+  participant A
+  participant B
+  participant C
+  par over A,B Parallel work
+    A->>B: one
+  and
+    B->>A: two
+  end
+
+
+```
+</details>
+
+---
+
+## 18. Participant Double In Double
 
 📄 **Source**: [`participant-double-in-double.mmd`](./valid/participant-double-in-double.mmd)
 
@@ -956,7 +1016,7 @@ sequenceDiagram
 
 ---
 
-## 18. Participant Escaped Quotes
+## 19. Participant Escaped Quotes
 
 📄 **Source**: [`participant-escaped-quotes.mmd`](./valid/participant-escaped-quotes.mmd)
 
@@ -1001,7 +1061,7 @@ sequenceDiagram
 
 ---
 
-## 19. Participant Unclosed Quote
+## 20. Participant Unclosed Quote
 
 📄 **Source**: [`participant-unclosed-quote.mmd`](./valid/participant-unclosed-quote.mmd)
 
@@ -1039,6 +1099,106 @@ sequenceDiagram
 sequenceDiagram
   participant "Bob
   A->B: hi
+
+
+```
+</details>
+
+---
+
+## 21. Suffix Balance
+
+📄 **Source**: [`suffix-balance.mmd`](./valid/suffix-balance.mmd)
+
+### Rendered Output
+
+<table>
+<tr>
+<th width="50%">Mermaid (Official)</th>
+<th width="50%">Maid (Experimental)</th>
+</tr>
+<tr>
+<td>
+
+```mermaid
+sequenceDiagram
+  participant A
+  participant B
+  A->>+B: start
+  B-->>A: done
+  deactivate B
+
+```
+
+</td>
+<td>
+
+<img src="./rendered/suffix-balance.svg" alt="Maid Rendered Diagram" />
+
+</td>
+</tr>
+</table>
+
+<details>
+<summary>View source code</summary>
+
+```
+sequenceDiagram
+  participant A
+  participant B
+  A->>+B: start
+  B-->>A: done
+  deactivate B
+
+```
+</details>
+
+---
+
+## 22. Suffix Misuse
+
+📄 **Source**: [`suffix-misuse.mmd`](./valid/suffix-misuse.mmd)
+
+### Rendered Output
+
+<table>
+<tr>
+<th width="50%">Mermaid (Official)</th>
+<th width="50%">Maid (Experimental)</th>
+</tr>
+<tr>
+<td>
+
+```mermaid
+sequenceDiagram
+  participant A
+  participant B
+  activate B
+  A->>+B: already active
+  B-->>-A: not active to deactivate
+
+
+```
+
+</td>
+<td>
+
+<img src="./rendered/suffix-misuse.svg" alt="Maid Rendered Diagram" />
+
+</td>
+</tr>
+</table>
+
+<details>
+<summary>View source code</summary>
+
+```
+sequenceDiagram
+  participant A
+  participant B
+  activate B
+  A->>+B: already active
+  B-->>-A: not active to deactivate
 
 
 ```

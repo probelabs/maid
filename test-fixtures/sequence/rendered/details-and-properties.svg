@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="370" height="198" viewBox="-50 -10 370 198">
+  <style>
+    .node-shape { fill: #eef0ff; stroke: #3f3f3f; stroke-width: 1px; }
+    .node-label { fill: #333; font-family: Arial, sans-serif; font-size: 14px; }
+    .edge-path { stroke: #555555; stroke-width: 2px; fill: none; }
+    .edge-label-bg { fill: rgba(232,232,232, 0.8); opacity: 0.5; }
+    .edge-label-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+
+    /* Cluster (flowchart + sequence blocks) */
+    .cluster-bg { fill: #ffffde; }
+    .cluster-border { fill: none; stroke: #aaaa33; stroke-width: 1px; }
+    .cluster-title-bg { fill: rgba(255,255,255,0.8); }
+    .cluster-label-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+
+    /* Notes */
+    .note { fill: #fff5ad; stroke: #aaaa33; stroke-width: 1px; }
+    .note-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+
+    /* Sequence-specific add-ons (safe for flowcharts too) */
+    .actor-rect { fill: #eaeaea; stroke: #666; stroke-width: 1.5px; }
+    .actor-label { fill: #111; font-family: Arial, sans-serif; font-size: 16px; }
+    .lifeline { stroke: #999; stroke-width: 0.5px; }
+    .activation { fill: #f4f4f4; stroke: #666; stroke-width: 1px; }
+    .msg-line { stroke: #333; stroke-width: 1.5px; fill: none; }
+    .msg-line.dotted { stroke-dasharray: 2 2; }
+    .msg-line.thick { stroke-width: 3px; }
+    .msg-label { fill: #333; font-family: Arial, sans-serif; font-size: 12px; dominant-baseline: middle; }
+    .msg-label-bg { fill: #ffffff; stroke: #cccccc; stroke-width: 1px; rx: 3; }
+  </style>
+  <title>Order Flow</title>
+  <text class="node-label" x="160" y="0" text-anchor="middle" font-size="16">Order Flow</text>
+  <g class="actor" transform="translate(24,24)">
+    <rect class="node-shape" width="110" height="32" rx="0"/>
+    <text class="node-label" x="55" y="16" text-anchor="middle" dominant-baseline="middle">A</text>
+  </g>
+  <g class="actor" transform="translate(158,24)">
+    <rect class="node-shape" width="110" height="32" rx="0"/>
+    <text class="node-label" x="55" y="16" text-anchor="middle" dominant-baseline="middle">B</text>
+  </g>
+  <line class="lifeline" x1="79" y1="62" x2="79" y2="102"/>
+  <line class="lifeline" x1="213" y1="62" x2="213" y2="102"/>
+  <path class="msg-line solid" d="M 79 82 L 213 82" />
+  <path d="M213,82 L204,85.5 L204,78.5 Z" fill="#333" />
+  <rect class="msg-label-bg" x="130" y="62" width="32" height="16" rx="3"/>
+  <text class="msg-label" x="146" y="70" text-anchor="middle">Pay</text>
+  <g class="actor" transform="translate(24,102)">
+    <rect class="node-shape" width="110" height="32" rx="0"/>
+    <text class="node-label" x="55" y="16" text-anchor="middle" dominant-baseline="middle">A</text>
+  </g>
+  <g class="actor" transform="translate(158,102)">
+    <rect class="node-shape" width="110" height="32" rx="0"/>
+    <text class="node-label" x="55" y="16" text-anchor="middle" dominant-baseline="middle">B</text>
+  </g>
+</svg>

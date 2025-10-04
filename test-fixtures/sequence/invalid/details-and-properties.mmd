@@ -1,0 +1,8 @@
+sequenceDiagram
+  title Order Flow
+  participant A
+  participant B
+  properties: retry=3, timeout=5s
+  details: This scenario covers failed payment retry.
+  A->>B: Pay
+

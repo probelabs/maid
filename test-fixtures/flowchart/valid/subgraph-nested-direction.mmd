@@ -1,0 +1,10 @@
+flowchart TD
+  subgraph Outer[Outer Title]
+    direction LR
+    A[Start] --> B[Next]
+    subgraph Inner [Inner Title]
+      direction TB
+      C --> D
+    end
+    B --> C
+  end

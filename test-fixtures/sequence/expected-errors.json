@@ -50,6 +50,16 @@
   "note-malformed.mmd": [
     "SE-NOTE-MALFORMED"
   ],
+  "details-and-properties.mmd": [
+    "SE-META-UNSUPPORTED",
+    "SE-PROPERTIES-UNSUPPORTED",
+    "SE-DETAILS-UNSUPPORTED"
+  ],
+  "title-and-accessibility.mmd": [
+    "SE-META-UNSUPPORTED",
+    "SE-META-UNSUPPORTED",
+    "SE-META-UNSUPPORTED"
+  ],
   "unmatched-end.mmd": [
     "SE-END-WITHOUT-BLOCK"
   ],

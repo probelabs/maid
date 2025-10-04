@@ -12,7 +12,7 @@ import { renderMermaid } from '../out/renderer/index.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SUPPORTED = ['flowchart', 'pie', 'sequence']; // class/state not rendered by Maid yet
+const SUPPORTED = ['flowchart', 'pie', 'sequence', 'class', 'state'];
 
 function ensureDir(p) { fs.mkdirSync(p, { recursive: true }); }
 
@@ -171,4 +171,3 @@ async function main() {
 }
 
 main().catch(e => { console.error(e.stack || e.message || String(e)); process.exit(1); });
-

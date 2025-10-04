@@ -1,0 +1,15 @@
+classDiagram
+class Map
+class Pair
+Map <|-- Pair
+class Service
+class Client
+Client ..> Service : uses
+%% Generics in class names / member types (Mermaid CLI may not support these)
+class Repo
+Repo : get(): Result<string,int>
+Repo : put(item: Pair<string,int>): void
+class Node
+Node <|-- Tree
+Tree : root: Node<string>
+

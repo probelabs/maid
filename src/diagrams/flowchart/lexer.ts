@@ -65,6 +65,9 @@ export const ClassDefKeyword = createToken({
     pattern: /classDef/,
     longer_alt: Identifier
 });
+// Interactions
+export const ClickKeyword = createToken({ name: "ClickKeyword", pattern: /click/, longer_alt: Identifier });
+export const LinkStyleKeyword = createToken({ name: "LinkStyleKeyword", pattern: /linkStyle/, longer_alt: Identifier });
 
 
 // Special operators
@@ -202,6 +205,8 @@ export const DiamondClose = createToken({ name: "DiamondClose", pattern: /\}/ })
 export const AngleOpen = createToken({ name: "AngleOpen", pattern: />/ });
 // Support '<' inside labels (e.g., <br/>) when not part of an arrow token
 export const AngleLess = createToken({ name: "AngleLess", pattern: /</ });
+// Attribute marker for typed shapes (e.g., A@{ shape: rect })
+export const AtSign = createToken({ name: "AtSign", pattern: /@/ });
 
 // Link text delimiter
 export const Pipe = createToken({ name: "Pipe", pattern: /\|/ });
@@ -273,6 +278,8 @@ export const allTokens = [
     ClassDefKeyword,
     ClassKeyword,
     StyleKeyword,
+    ClickKeyword,
+    LinkStyleKeyword,
     Direction,
     
     // Special multi-char brackets before arrows (some contain > or -)
@@ -312,6 +319,7 @@ export const allTokens = [
     DiamondClose,
     AngleOpen,
     AngleLess,
+    AtSign,
     ForwardSlash,
     Backslash,
     Pipe,

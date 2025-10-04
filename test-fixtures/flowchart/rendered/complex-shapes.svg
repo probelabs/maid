@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="338" height="979" viewBox="0 0 338 979">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="338" height="979" viewBox="0 0 338 979">
   <rect x="0" y="0" width="338" height="979" fill="#ffffff" />
   <style>
     .node-shape { fill: #eef0ff; stroke: #3f3f3f; stroke-width: 1px; }
@@ -6,6 +6,8 @@
     .edge-path { stroke: #555555; stroke-width: 2px; fill: none; }
     .edge-label-bg { fill: rgba(232,232,232, 0.8); opacity: 0.5; }
     .edge-label-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+    .edge-marker { stroke: #555555; }
+    .edge-marker-fill { fill: #555555; }
 
     /* Cluster (flowchart + sequence blocks) */
     .cluster-bg { fill: #ffffde; }
@@ -20,13 +22,19 @@
     /* Sequence-specific add-ons (safe for flowcharts too) */
     .actor-rect { fill: #eaeaea; stroke: #666; stroke-width: 1.5px; }
     .actor-label { fill: #111; font-family: Arial, sans-serif; font-size: 16px; }
-    .lifeline { stroke: #999; stroke-width: 0.5px; }
+    .lifeline { stroke: #999; stroke-width: 1px; }
     .activation { fill: #f4f4f4; stroke: #666; stroke-width: 1px; }
     .msg-line { stroke: #333; stroke-width: 1.5px; fill: none; }
     .msg-line.dotted { stroke-dasharray: 2 2; }
     .msg-line.thick { stroke-width: 3px; }
+    .openhead { fill: none; stroke: #333; stroke-width: 1.5px; }
+    .crosshead path { stroke: #333; stroke-width: 1.5px; }
     .msg-label { fill: #333; font-family: Arial, sans-serif; font-size: 12px; dominant-baseline: middle; }
     .msg-label-bg { fill: #ffffff; stroke: #cccccc; stroke-width: 1px; rx: 3; }
+
+    /* State overlays */
+    .lane-divider { stroke: #aaaaaa; stroke-width: 1px; stroke-dasharray: 4 3; }
+    .end-double { stroke: #3f3f3f; stroke-width: 1px; fill: none; }
   </style>
   <defs>
     <marker id="arrow" viewBox="0 0 11 11" markerWidth="11" markerHeight="11" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse">
@@ -41,18 +49,22 @@
   </defs>
   <g id="A">
     <rect class="node-shape"  x="123.75" y="40" width="103" height="40" rx="0" ry="0" />
+    
     <text class="node-label" x="175.25" y="64.9" text-anchor="middle">Rectangle</text>
   </g>
   <g id="B">
     <circle class="node-shape"  cx="175.25" cy="171" r="41" />
+    
     <text class="node-label" x="175.25" y="175.9" text-anchor="middle">Circle</text>
   </g>
   <g id="C">
     <polygon class="node-shape"  points="175.25,262 228.75,315.5 175.25,369 121.75,315.5" />
+    
     <text class="node-label" x="175.25" y="320.4" text-anchor="middle">Diamond</text>
   </g>
   <g id="D">
     <rect class="node-shape"  x="40" y="444" width="107" height="40" rx="20" ry="20" />
+    
     <text class="node-label" x="93.5" y="468.9" text-anchor="middle">Stadium</text>
   </g>
   <g id="E">
@@ -61,6 +73,7 @@
           <line class="node-shape"  x1="202" y1="439" x2="202" y2="489" />
           <line class="node-shape"  x1="312" y1="439" x2="312" y2="489" />
         </g>
+    
     <text class="node-label" x="257" y="468.9" text-anchor="middle">Subroutine</text>
   </g>
   <g id="F">
@@ -69,53 +82,58 @@
           <ellipse class="node-shape"  cx="175.25" cy="552.2" rx="48" ry="13.2" />
           <path class="node-shape"  d="M127.25,552.2 L127.25,585.8 A48,13.2 0 0,0 223.25,585.8 L223.25,552.2" fill="none" />
         </g>
+    
     <text class="node-label" x="175.25" y="573.9" text-anchor="middle">Database</text>
   </g>
   <g id="H">
     <polygon class="node-shape"  points="102.8,739 278.75,739 247.7,779 71.75,779" />
+    
     <text class="node-label" x="175.25" y="763.9" text-anchor="middle">Parallelogram Alt</text>
   </g>
   <g id="G">
     <polygon class="node-shape"  points="173.25,649 317.75,649 292.25,689 147.75,689" />
+    
     <text class="node-label" x="232.75" y="673.9" text-anchor="middle">Parallelogram</text>
   </g>
   <g id="I">
     <polygon class="node-shape"  points="128.35,829 222.15,829 242.25,869 108.25,869" />
+    
     <text class="node-label" x="175.25" y="853.9" text-anchor="middle">Trapezoid</text>
   </g>
   <g id="J">
     <polygon class="node-shape"  points="109.75,919 240.75,919 221.1,959 129.4,959" />
+    
     <text class="node-label" x="175.25" y="943.9" text-anchor="middle">Trapezoid Alt</text>
   </g>
   <g><path class="edge-path" d="M175.25,80 L175.25,90 C175.25,102 175.25,114 175.25,120 L175.25,130" stroke-linecap="round" stroke-linejoin="round" />
-<path d="M175.25,130 L172.25,122 L178.25,122 Z" fill="#555555" /></g>
+<path d="M175.25,130 L172.75,124 L177.75,124 Z" fill="#555555" /></g>
   <g><path class="edge-path" d="M175.25,212 L175.25,222 C175.25,234 175.25,246 175.25,252 L175.25,262" stroke-linecap="round" stroke-linejoin="round" />
-<path d="M175.25,262 L172.25,254 L178.25,254 Z" fill="#555555" /></g>
+<path d="M175.25,262 L172.75,256 L177.75,256 Z" fill="#555555" /></g>
   <g>
-    <path class="edge-path" d="M125.83050847457628,369 L119.04512235200397,376.3456473620507 C110.90265900491718,385.1604241965116 93.5,428 93.5,434 L93.5,444" stroke-linecap="round" stroke-linejoin="round" />
+    <path class="edge-path" d="M151.875,345.625 L143.11875,354.38125 C132.61125,364.8887500000001 93.5,428 93.5,434 L93.5,444" stroke-linecap="round" stroke-linejoin="round" />
     <rect class="edge-label-bg" x="71.5" y="397.55873114551076" width="44" height="14" rx="3" />
     <text class="edge-label-text" x="93.5" y="404.55873114551076" text-anchor="middle" dominant-baseline="middle">Link 1</text>
-    <path d="M93.5,444 L90.5,436 L96.5,436 Z" fill="#555555" />
+    <path d="M93.5,444 L91,438 L96,438 Z" fill="#555555" />
   </g>
   <g>
-    <path class="edge-path" d="M224.66949152542372,369 L231.45487764799603,376.3456473620507 C239.59734099508282,385.1604241965116 257,423 257,429 L257,439" stroke-linecap="round" stroke-linejoin="round" />
+    <path class="edge-path" d="M198.625,345.625 L207.38125,354.38125 C217.88875,364.8887500000001 257,423 257,429 L257,439" stroke-linecap="round" stroke-linejoin="round" />
     <rect class="edge-label-bg" x="233.51313947239237" y="395.3903711719477" width="44" height="14" rx="3" />
     <text class="edge-label-text" x="255.51313947239237" y="402.3903711719477" text-anchor="middle" dominant-baseline="middle">Link 2</text>
-    <path d="M257,439 L254,431 L260,431 Z" fill="#555555" />
+    <path d="M257,439 L254.5,433 L259.5,433 Z" fill="#555555" />
   </g>
   <g><path class="edge-path" d="M93.5,484 L93.5,494 C93.5,506 117.38387900545622,530.068664774313 122.36208346931923,533.4179154839456 L130.6590909090909,539" stroke-linecap="round" stroke-linejoin="round" />
-<path d="M130.6590909090909,539 L122.34685960245727,537.023434619088 L125.69611031208987,532.045230155225 Z" fill="#555555" /></g>
+<path d="M130.6590909090909,539 L124.28536531621431,537.7250011503103 L127.07640757424149,533.5764974304244 Z" fill="#555555" /></g>
   <g><path class="edge-path" d="M257,489 L257,499 C257,511 233.11612099454376,530.068664774313 228.13791653068077,533.4179154839456 L219.8409090909091,539" stroke-linecap="round" stroke-linejoin="round" />
-<path d="M219.8409090909091,539 L224.80388968791013,532.045230155225 L228.15314039754273,537.023434619088 Z" fill="#555555" /></g>
+<path d="M219.8409090909091,539 L223.4235924257585,533.5764974304244 L226.21463468378568,537.7250011503103 Z" fill="#555555" /></g>
   <g><path class="edge-path" d="M143.88636363636363,599 L136.65994506488664,605.9122264596737 C139.53030303030303,603.1666666666666 122.10606060606061,612.3333333333334 117.75,624 C113.39393939393939,635.6666666666666 117.75,654 117.75,669 C117.75,684 112.42592592592592,702.3333333333334 117.75,714 L149.69444444444446,739" stroke-linecap="round" stroke-linejoin="round" />
-<path d="M149.69444444444446,739 L141.54547965140944,736.4320489097579 L145.24332922135812,731.7070189037124 Z" fill="#555555" /></g>
+<path d="M149.69444444444446,739 L143.42864378425367,737.2709129325704 L146.5101850925442,733.3333879275324 Z" fill="#555555" /></g>
   <g><path class="edge-path" d="M206.61363636363637,599 L213.84005493511336,605.9122264596737 C222.51175722088573,614.206898211282 232.75,633 232.75,639 L232.75,649" stroke-linecap="round" stroke-linejoin="round" />
-<path d="M232.75,649 L229.75,641 L235.75,641 Z" fill="#555555" /></g>
+<path d="M232.75,649 L230.25,643 L235.25,643 Z" fill="#555555" /></g>
   <g><path class="edge-path" d="M232.75,689 L232.75,699 C232.75,711 213.40563557167692,729.1390678134703 208.6806055656314,732.836917383419 L200.80555555555554,739" stroke-linecap="round" stroke-linejoin="round" />
-<path d="M200.80555555555554,739 L205.25667077864188,731.7070189037124 L208.95452034859056,736.4320489097579 Z" fill="#555555" /></g>
+<path d="M200.80555555555554,739 L203.9898149074558,733.3333879275324 L207.07135621574633,737.2709129325704 Z" fill="#555555" /></g>
   <g><path class="edge-path" d="M175.25,779 L175.25,789 C175.25,801 175.25,813 175.25,819 L175.25,829" stroke-linecap="round" stroke-linejoin="round" />
-<path d="M175.25,829 L172.25,821 L178.25,821 Z" fill="#555555" /></g>
+<path d="M175.25,829 L172.75,823 L177.75,823 Z" fill="#555555" /></g>
   <g><path class="edge-path" d="M175.25,869 L175.25,879 C175.25,891 175.25,903 175.25,909 L175.25,919" stroke-linecap="round" stroke-linejoin="round" />
-<path d="M175.25,919 L172.25,911 L178.25,911 Z" fill="#555555" /></g>
+<path d="M175.25,919 L172.75,913 L177.75,913 Z" fill="#555555" /></g>
   
 </svg>

@@ -1,10 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="370" height="300" viewBox="-50 -10 370 300">
+<svg xmlns="http://www.w3.org/2000/svg" width="370" height="296" viewBox="-50 -10 370 296">
   <style>
     .node-shape { fill: #eef0ff; stroke: #3f3f3f; stroke-width: 1px; }
     .node-label { fill: #333; font-family: Arial, sans-serif; font-size: 14px; }
     .edge-path { stroke: #555555; stroke-width: 2px; fill: none; }
     .edge-label-bg { fill: rgba(232,232,232, 0.8); opacity: 0.5; }
     .edge-label-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+    .edge-marker { stroke: #555555; }
+    .edge-marker-fill { fill: #555555; }
 
     /* Cluster (flowchart + sequence blocks) */
     .cluster-bg { fill: #ffffde; }
@@ -19,47 +21,53 @@
     /* Sequence-specific add-ons (safe for flowcharts too) */
     .actor-rect { fill: #eaeaea; stroke: #666; stroke-width: 1.5px; }
     .actor-label { fill: #111; font-family: Arial, sans-serif; font-size: 16px; }
-    .lifeline { stroke: #999; stroke-width: 0.5px; }
+    .lifeline { stroke: #999; stroke-width: 1px; }
     .activation { fill: #f4f4f4; stroke: #666; stroke-width: 1px; }
     .msg-line { stroke: #333; stroke-width: 1.5px; fill: none; }
     .msg-line.dotted { stroke-dasharray: 2 2; }
     .msg-line.thick { stroke-width: 3px; }
+    .openhead { fill: none; stroke: #333; stroke-width: 1.5px; }
+    .crosshead path { stroke: #333; stroke-width: 1.5px; }
     .msg-label { fill: #333; font-family: Arial, sans-serif; font-size: 12px; dominant-baseline: middle; }
     .msg-label-bg { fill: #ffffff; stroke: #cccccc; stroke-width: 1px; rx: 3; }
+
+    /* State overlays */
+    .lane-divider { stroke: #aaaaaa; stroke-width: 1px; stroke-dasharray: 4 3; }
+    .end-double { stroke: #3f3f3f; stroke-width: 1px; fill: none; }
   </style>
   <g class="actor" transform="translate(24,24)">
-    <rect class="node-shape" width="110" height="32" rx="0"/>
-    <text class="node-label" x="55" y="16" text-anchor="middle" dominant-baseline="middle">FE</text>
+    <rect class="node-shape" width="110" height="30" rx="0"/>
+    <text class="node-label" x="55" y="15" text-anchor="middle" dominant-baseline="middle">FE</text>
   </g>
   <g class="actor" transform="translate(158,24)">
-    <rect class="node-shape" width="110" height="32" rx="0"/>
-    <text class="node-label" x="55" y="16" text-anchor="middle" dominant-baseline="middle">BE</text>
+    <rect class="node-shape" width="110" height="30" rx="0"/>
+    <text class="node-label" x="55" y="15" text-anchor="middle" dominant-baseline="middle">BE</text>
   </g>
-<g class="cluster-bg-layer" transform="translate(16,40)">
-  <rect class="cluster-bg" x="0" y="0" width="260" height="100" rx="0"/>
+<g class="cluster-bg-layer" transform="translate(12,34)">
+  <rect class="cluster-bg" x="0" y="0" width="268" height="108" rx="0"/>
 </g>
-  <line class="lifeline" x1="79" y1="60" x2="79" y2="204"/>
-  <line class="lifeline" x1="213" y1="60" x2="213" y2="204"/>
-  <path class="msg-line solid" d="M 79 150 L 213 150" />
-  <path d="M213,150 L205,153 L205,147 Z" fill="#333" />
-  <rect class="msg-label-bg" x="108.5" y="132" width="75" height="16" rx="0"/>
-  <text class="msg-label" x="146" y="140" text-anchor="middle">Get /user</text>
-  <path class="msg-line solid" d="M 79 186 L 213 186" />
-  <path d="M213,186 L205,189 L205,183 Z" fill="#333" />
-  <rect class="msg-label-bg" x="94" y="168" width="104" height="16" rx="0"/>
-  <text class="msg-label" x="146" y="176" text-anchor="middle">Get /settings</text>
-<g class="cluster-overlay" transform="translate(16,40)">
-<rect class="cluster-border" x="0" y="0" width="260" height="100" rx="0"/>
-<rect class="cluster-title-bg" x="6" y="-2" width="168" height="18" rx="3"/>
-<text class="cluster-label-text" x="12" y="11" text-anchor="start">par: Fetch in parallel</text>
-<line x1="0" y1="56" x2="260" y2="56" class="cluster-border" />
+  <line class="lifeline" x1="79" y1="58" x2="79" y2="202"/>
+  <line class="lifeline" x1="213" y1="58" x2="213" y2="202"/>
+  <path class="msg-line solid" d="M 79 148 L 213 148" />
+  <path d="M213,148 L204,151.5 L204,144.5 Z" fill="#333" />
+  <rect class="msg-label-bg" x="108.5" y="126" width="75" height="16" rx="3"/>
+  <text class="msg-label" x="146" y="134" text-anchor="middle">Get /user</text>
+  <path class="msg-line solid" d="M 79 184 L 213 184" />
+  <path d="M213,184 L204,187.5 L204,180.5 Z" fill="#333" />
+  <rect class="msg-label-bg" x="94" y="162" width="104" height="16" rx="3"/>
+  <text class="msg-label" x="146" y="170" text-anchor="middle">Get /settings</text>
+<g class="cluster-overlay" transform="translate(12,34)">
+<rect class="cluster-border" x="0" y="0" width="268" height="108" rx="0"/>
+<rect class="cluster-title-bg" x="6" y="6" width="32" height="18" rx="3"/>
+<text class="cluster-label-text" x="12" y="19" text-anchor="start">par</text>
+<line x1="0" y1="60.5" x2="268" y2="60.5" class="cluster-border" />
 </g>
-  <g class="actor" transform="translate(24,204)">
-    <rect class="node-shape" width="110" height="32" rx="0"/>
-    <text class="node-label" x="55" y="16" text-anchor="middle" dominant-baseline="middle">FE</text>
+  <g class="actor" transform="translate(24,202)">
+    <rect class="node-shape" width="110" height="30" rx="0"/>
+    <text class="node-label" x="55" y="15" text-anchor="middle" dominant-baseline="middle">FE</text>
   </g>
-  <g class="actor" transform="translate(158,204)">
-    <rect class="node-shape" width="110" height="32" rx="0"/>
-    <text class="node-label" x="55" y="16" text-anchor="middle" dominant-baseline="middle">BE</text>
+  <g class="actor" transform="translate(158,202)">
+    <rect class="node-shape" width="110" height="30" rx="0"/>
+    <text class="node-label" x="55" y="15" text-anchor="middle" dominant-baseline="middle">BE</text>
   </g>
 </svg>

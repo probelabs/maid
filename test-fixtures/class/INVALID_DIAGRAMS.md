@@ -9,10 +9,11 @@ This file contains invalid class test fixtures with:
 
 ## Table of Contents
 
-1. [Invalid Relation](#1-invalid-relation)
-2. [Missing Rbrace](#2-missing-rbrace)
-3. [Quoted Name Double In Double](#3-quoted-name-double-in-double)
-4. [Relation Missing Target](#4-relation-missing-target)
+1. [Generics And Types](#1-generics-and-types)
+2. [Invalid Relation](#2-invalid-relation)
+3. [Missing Rbrace](#3-missing-rbrace)
+4. [Quoted Name Double In Double](#4-quoted-name-double-in-double)
+5. [Relation Missing Target](#5-relation-missing-target)
 
 ---
 
@@ -20,14 +21,106 @@ This file contains invalid class test fixtures with:
 
 | # | Diagram | mermaid-cli | maid | Auto-fix? |
 |---:|---|:---:|:---:|:---:|
-| 1 | [invalid relation](#1-invalid-relation) | INVALID | INVALID | ✅ safe |
-| 2 | [missing rbrace](#2-missing-rbrace) | INVALID | INVALID | ✅ safe |
-| 3 | [quoted name double in double](#3-quoted-name-double-in-double) | INVALID | INVALID | ✅ safe |
-| 4 | [relation missing target](#4-relation-missing-target) | INVALID | INVALID | — |
+| 1 | [generics and types](#1-generics-and-types) | INVALID | INVALID | — |
+| 2 | [invalid relation](#2-invalid-relation) | INVALID | INVALID | ✅ safe |
+| 3 | [missing rbrace](#3-missing-rbrace) | INVALID | INVALID | ✅ safe |
+| 4 | [quoted name double in double](#4-quoted-name-double-in-double) | INVALID | INVALID | ✅ safe |
+| 5 | [relation missing target](#5-relation-missing-target) | INVALID | INVALID | — |
 
 ---
 
-## 1. Invalid Relation
+## 1. Generics And Types
+
+📄 **Source**: [`generics-and-types.mmd`](./invalid/generics-and-types.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+classDiagram
+class Map
+class Pair
+Map <|-- Pair
+class Service
+class Client
+Client ..> Service : uses
+%% Generics in class names / member types (Mermaid CLI may not support these)
+class Repo
+Repo : get(): Result<string,int>
+Repo : put(item: Pair<string,int>): void
+class Node
+Node <|-- Tree
+Tree : root: Node<string>
+
+
+```
+
+### mermaid-cli Result: INVALID
+
+```
+Error: Parse error on line 9:
+...ss RepoRepo : get(): Result<string,int>
+----------------------^
+Expecting 'NEWLINE', 'EOF', got 'LABEL'
+Parser3.parseError (node_modules/mermaid/dist/mermaid.js:127920:28)
+    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
+    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
+    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
+    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
+    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
+    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
+    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
+    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
+    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
+    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+```
+
+### maid Result: INVALID
+
+```
+error: Redundant input, expecting EOF but found: <string,int>
+at test-fixtures/class/invalid/generics-and-types.mmd:10:21
+   9 | class Repo
+  10 | Repo : get(): Result<string,int>
+     |                     ^^^^^^^^^^^^
+  11 | Repo : put(item: Pair<string,int>): void
+```
+
+### maid Auto-fix (`--fix`) Preview
+
+No auto-fix changes (safe level).
+
+### maid Auto-fix (`--fix=all`) Preview
+
+No auto-fix changes (all level).
+
+<details>
+<summary>View source code</summary>
+
+```
+classDiagram
+class Map
+class Pair
+Map <|-- Pair
+class Service
+class Client
+Client ..> Service : uses
+%% Generics in class names / member types (Mermaid CLI may not support these)
+class Repo
+Repo : get(): Result<string,int>
+Repo : put(item: Pair<string,int>): void
+class Node
+Node <|-- Tree
+Tree : root: Node<string>
+
+
+```
+</details>
+
+---
+
+## 2. Invalid Relation
 
 📄 **Source**: [`invalid-relation.mmd`](./invalid/invalid-relation.mmd)
 
@@ -100,7 +193,7 @@ Foo -> Bar : wrong arrow
 
 ---
 
-## 2. Missing Rbrace
+## 3. Missing Rbrace
 
 📄 **Source**: [`missing-rbrace.mmd`](./invalid/missing-rbrace.mmd)
 
@@ -177,7 +270,7 @@ class Foo {
 
 ---
 
-## 3. Quoted Name Double In Double
+## 4. Quoted Name Double In Double
 
 📄 **Source**: [`quoted-name-double-in-double.mmd`](./invalid/quoted-name-double-in-double.mmd)
 
@@ -250,7 +343,7 @@ class "Logger "core"" as L
 
 ---
 
-## 4. Relation Missing Target
+## 5. Relation Missing Target
 
 📄 **Source**: [`relation-missing-target.mmd`](./invalid/relation-missing-target.mmd)
 

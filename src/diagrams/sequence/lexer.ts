@@ -22,6 +22,9 @@ export const LeftKeyword = createToken({ name: 'LeftKeyword', pattern: /left/i, 
 export const RightKeyword = createToken({ name: 'RightKeyword', pattern: /right/i, longer_alt: Identifier });
 export const OverKeyword = createToken({ name: 'OverKeyword', pattern: /over/i, longer_alt: Identifier });
 export const OfKeyword = createToken({ name: 'OfKeyword', pattern: /of/i, longer_alt: Identifier });
+export const TitleKeyword = createToken({ name: 'TitleKeyword', pattern: /title/i, longer_alt: Identifier });
+export const AccTitleKeyword = createToken({ name: 'AccTitleKeyword', pattern: /acc_title|accTitle/i, longer_alt: Identifier });
+export const AccDescrKeyword = createToken({ name: 'AccDescrKeyword', pattern: /acc_descr|accDescr/i, longer_alt: Identifier });
 
 export const ActivateKeyword = createToken({ name: 'ActivateKeyword', pattern: /activate/i, longer_alt: Identifier });
 export const DeactivateKeyword = createToken({ name: 'DeactivateKeyword', pattern: /deactivate/i, longer_alt: Identifier });
@@ -43,6 +46,8 @@ export const EndKeyword = createToken({ name: 'EndKeyword', pattern: /end/i, lon
 
 export const LinksKeyword = createToken({ name: 'LinksKeyword', pattern: /links/i, longer_alt: Identifier });
 export const LinkKeyword = createToken({ name: 'LinkKeyword', pattern: /link/i, longer_alt: Identifier });
+export const PropertiesKeyword = createToken({ name: 'PropertiesKeyword', pattern: /properties/i, longer_alt: Identifier });
+export const DetailsKeyword = createToken({ name: 'DetailsKeyword', pattern: /details/i, longer_alt: Identifier });
 
 export const BreakKeyword = createToken({ name: 'BreakKeyword', pattern: /break/i, longer_alt: Identifier });
 
@@ -91,6 +96,9 @@ export const allTokens = [
   Newline,
   // Header/Keywords
   SequenceKeyword,
+  TitleKeyword,
+  AccTitleKeyword,
+  AccDescrKeyword,
   ParticipantKeyword,
   ActorKeyword,
   AsKeyword,
@@ -119,6 +127,8 @@ export const allTokens = [
   EndKeyword,
   LinksKeyword,
   LinkKeyword,
+  PropertiesKeyword,
+  DetailsKeyword,
   // Arrows
   BidirAsyncDotted,
   BidirAsync,

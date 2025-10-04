@@ -10,7 +10,12 @@ import { buildPieModel } from './pie-builder.js';
 import { renderPie } from './pie-renderer.js';
 import { buildSequenceModel } from './sequence-builder.js';
 import { renderSequence } from './sequence-renderer.js';
+import { applyFlowLikeTheme } from './styles.js';
+import { buildStateModel } from './state-builder.js';
+import { renderState } from './state-renderer.js';
 import { parseFrontmatter } from '../core/frontmatter.js';
+import { buildClassModel } from './class-builder.js';
+import { renderClass } from './class-renderer.js';
 
 export interface RenderOptions {
   /** Include validation errors as overlays on the diagram */
@@ -199,9 +204,33 @@ export class MermaidRenderer {
         return { svg: this.generateErrorSvg(msg), graph: { nodes: [], edges: [], direction: 'TD' }, errors: err };
       }
     }
+    if (/^classDiagram\b/.test(firstLine)) {
+      try {
+        const model = buildClassModel(content);
+        const svg = renderClass(model, { theme });
+        const themed = theme ? applyFlowLikeTheme(svg, theme) : svg;
+        return { svg: themed, graph: { nodes: [], edges: [], direction: model.direction }, errors: [] };
+      } catch (e: any) {
+        const msg = e?.message || 'Class render error';
+        const err = [{ line: 1, column: 1, message: msg, severity: 'error', code: 'CLASS_RENDER' } as ValidationError];
+        return { svg: this.generateErrorSvg(msg), graph: { nodes: [], edges: [], direction: 'TD' }, errors: err };
+      }
+    }
+    if (/^stateDiagram(?:-v2)?\b/.test(firstLine)) {
+      try {
+        const model = buildStateModel(content);
+        const svg = renderState(model);
+        const themed = theme ? applyFlowLikeTheme(svg, theme) : svg;
+        return { svg: themed, graph: { nodes: [], edges: [], direction: model.direction }, errors: [] };
+      } catch (e: any) {
+        const msg = e?.message || 'State render error';
+        const err = [{ line: 1, column: 1, message: msg, severity: 'error', code: 'STATE_RENDER' } as ValidationError];
+        return { svg: this.generateErrorSvg(msg), graph: { nodes: [], edges: [], direction: 'TD' }, errors: err };
+      }
+    }
 
     // Unsupported diagram type
-    const errorSvg = this.generateErrorSvg('Unsupported diagram type. Rendering supports flowchart, pie, and sequence for now.');
+    const errorSvg = this.generateErrorSvg('Unsupported diagram type. Rendering supports flowchart, pie, sequence, class, and state.');
 
     return {
       svg: errorSvg,
@@ -366,6 +395,11 @@ function applyFlowchartTheme(svg: string, theme?: Record<string, any>): string {
     out = out.replace(/(<path d="M0,0 L0,[0-9.]+ L[0-9.]+,[0-9.]+ z"[^>]*)(fill="[^"]*")/g, (_m, p1) => `${p1}fill="${String(theme.arrowheadColor)}"`);
     out = out.replace(/(<circle cx="4\.5" cy="4\.5" r="4\.5"[^>]*)(fill="[^"]*")/g, (_m, p1) => `${p1}fill="${String(theme.arrowheadColor)}"`);
   }
+  // Edge label text color (optional)
+  if ((theme as any).edgeLabelTextColor) {
+    const c = String((theme as any).edgeLabelTextColor);
+    out = out.replace(/\.edge-label-text\s*\{[^}]*\}/, (m) => m.replace(/fill:\s*[^;]+;/, `fill: ${c};`));
+  }
   // Cluster styles via CSS (background and border are separate classes)
   if (theme.clusterBkg) {
     out = out.replace(/\.cluster-bg\s*\{[^}]*\}/, (m) => m.replace(/fill:\s*[^;]+;/, `fill: ${String(theme.clusterBkg)};`));
@@ -376,6 +410,10 @@ function applyFlowchartTheme(svg: string, theme?: Record<string, any>): string {
   if (theme.clusterTextColor) {
     out = out.replace(/\.cluster-label-text\s*\{[^}]*\}/, (m) => m.replace(/fill:\s*[^;]+;/, `fill: ${String(theme.clusterTextColor)};`));
   }
+  // Notes styling (shared CSS)
+  if ((theme as any).noteBkg) out = out.replace(/\.note\s*\{[^}]*\}/, (m) => m.replace(/fill:\s*[^;]+;/, `fill: ${String((theme as any).noteBkg)};`));
+  if ((theme as any).noteBorder) out = out.replace(/\.note\s*\{[^}]*\}/, (m) => m.replace(/stroke:\s*[^;]+;/, `stroke: ${String((theme as any).noteBorder)};`));
+  if ((theme as any).noteTextColor) out = out.replace(/\.note-text\s*\{[^}]*\}/, (m) => m.replace(/fill:\s*[^;]+;/, `fill: ${String((theme as any).noteTextColor)};`));
   // Fonts via CSS
   if (theme.fontFamily) out = out.replace(/\.node-label\s*\{[^}]*\}/, (m) => m.replace(/font-family:\s*[^;]+;/, `font-family: ${String(theme.fontFamily)};`));
   if (theme.fontSize) out = out.replace(/\.node-label\s*\{[^}]*\}/, (m) => m.replace(/font-size:\s*[^;]+;/, `font-size: ${String(theme.fontSize)};`));

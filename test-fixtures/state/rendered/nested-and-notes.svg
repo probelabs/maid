@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="650" height="460" viewBox="0 0 650 460">
+  <rect x="0" y="0" width="650" height="460" fill="#ffffff" />
+  <style>
+    .node-shape { fill: #eef0ff; stroke: #3f3f3f; stroke-width: 1px; }
+    .node-label { fill: #333; font-family: Arial, sans-serif; font-size: 14px; }
+    .edge-path { stroke: #555555; stroke-width: 2px; fill: none; }
+    .edge-label-bg { fill: rgba(232,232,232, 0.8); opacity: 0.5; }
+    .edge-label-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+    .edge-marker { stroke: #555555; }
+    .edge-marker-fill { fill: #555555; }
+
+    /* Cluster (flowchart + sequence blocks) */
+    .cluster-bg { fill: #ffffde; }
+    .cluster-border { fill: none; stroke: #aaaa33; stroke-width: 1px; }
+    .cluster-title-bg { fill: rgba(255,255,255,0.8); }
+    .cluster-label-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+
+    /* Notes */
+    .note { fill: #fff5ad; stroke: #aaaa33; stroke-width: 1px; }
+    .note-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+
+    /* Sequence-specific add-ons (safe for flowcharts too) */
+    .actor-rect { fill: #eaeaea; stroke: #666; stroke-width: 1.5px; }
+    .actor-label { fill: #111; font-family: Arial, sans-serif; font-size: 16px; }
+    .lifeline { stroke: #999; stroke-width: 1px; }
+    .activation { fill: #f4f4f4; stroke: #666; stroke-width: 1px; }
+    .msg-line { stroke: #333; stroke-width: 1.5px; fill: none; }
+    .msg-line.dotted { stroke-dasharray: 2 2; }
+    .msg-line.thick { stroke-width: 3px; }
+    .openhead { fill: none; stroke: #333; stroke-width: 1.5px; }
+    .crosshead path { stroke: #333; stroke-width: 1.5px; }
+    .msg-label { fill: #333; font-family: Arial, sans-serif; font-size: 12px; dominant-baseline: middle; }
+    .msg-label-bg { fill: #ffffff; stroke: #cccccc; stroke-width: 1px; rx: 3; }
+
+    /* State overlays */
+    .lane-divider { stroke: #aaaaaa; stroke-width: 1px; stroke-dasharray: 4 3; }
+    .end-double { stroke: #3f3f3f; stroke-width: 1px; fill: none; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 11 11" markerWidth="11" markerHeight="11" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L0,11 L11,6 z" fill="#555555" />
+    </marker>
+    <marker id="circle-marker" viewBox="0 0 9 9" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <circle cx="4.5" cy="4.5" r="4.5" fill="#555555" />
+    </marker>
+    <marker id="cross-marker" viewBox="0 0 12 12" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1.5,1.5 L10.5,10.5 M10.5,1.5 L1.5,10.5" stroke="#555555" stroke-width="2.25" />
+    </marker>
+  </defs>
+  <g class="subgraph-bg"></g>
+  <g id="Auth">
+    <rect class="node-shape"  x="201" y="380" width="80" height="40" rx="0" ry="0" />
+    
+    <text class="node-label" x="241" y="404.9" text-anchor="middle">Auth</text>
+  </g>
+  <g id="__start_44">
+    <circle class="node-shape"  cx="91" cy="200" r="40" />
+    
+    <text class="node-label" x="91" y="204.9" text-anchor="middle"></text>
+  </g>
+  <g id="Login">
+    <rect class="node-shape"  x="201" y="180" width="80" height="40" rx="0" ry="0" />
+    
+    <text class="node-label" x="241" y="204.9" text-anchor="middle">Login</text>
+  </g>
+  <g id="MFA">
+    <rect class="node-shape"  x="351" y="180" width="80" height="40" rx="0" ry="0" />
+    
+    <text class="node-label" x="391" y="204.9" text-anchor="middle">MFA</text>
+  </g>
+  <g id="Success">
+    <rect class="node-shape"  x="501" y="180" width="89" height="40" rx="0" ry="0" />
+    
+    <text class="node-label" x="545.5" y="204.9" text-anchor="middle">Success</text>
+  </g>
+  <g id="__start_101">
+    <circle class="node-shape"  cx="91" cy="400" r="40" />
+    
+    <text class="node-label" x="91" y="404.9" text-anchor="middle"></text>
+  </g>
+  <g id="__end_123">
+    <circle class="node-shape"  cx="391" cy="400" r="40" />
+    
+    <text class="node-label" x="391" y="404.9" text-anchor="middle"></text>
+  </g>
+  <g><path class="edge-path" d="M131,200 L141,200 C153,200 185,200 191,200 L201,200" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M201,200 L195,202.5 L195,197.5 Z" fill="#555555" /></g>
+  <g><path class="edge-path" d="M281,200 L291,200 C303,200 335,200 341,200 L351,200" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M351,200 L345,202.5 L345,197.5 Z" fill="#555555" /></g>
+  <g><path class="edge-path" d="M431,200 L441,200 C453,200 485,200 491,200 L501,200" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M501,200 L495,202.5 L495,197.5 Z" fill="#555555" /></g>
+  <g><path class="edge-path" d="M131,400 L141,400 C153,400 185,400 191,400 L201,400" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M201,400 L195,402.5 L195,397.5 Z" fill="#555555" /></g>
+  <g><path class="edge-path" d="M281,400 L291,400 C303,400 335,400 341,400 L351,400" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M351,400 L345,402.5 L345,397.5 Z" fill="#555555" /></g>
+  
+<g class="state-overlays"><circle class="end-double" cx="360" cy="380" r="37" fill="none" /></g></svg>

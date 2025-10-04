@@ -51,9 +51,27 @@ export function validateFlowchart(text: string, options: ValidateOptions = {}): 
         hint: 'Example: A["He said &quot;Hi&quot;"]',
         scopeEndTokenNames: [
           'SquareClose','RoundClose','DiamondClose','DoubleSquareClose','DoubleRoundClose','StadiumClose','CylinderClose','HexagonClose'
+        ],
+        scopeStartTokenNames: [
+          'SquareOpen','RoundOpen','DiamondOpen','DoubleSquareOpen','DoubleRoundOpen','StadiumOpen','CylinderOpen','HexagonOpen'
         ]
       }).filter(e => !seenDoubleLines.has(e.line) && !escapedLinesAll.has(e.line));
       const errs = escWarn.concat(dbl);
+      // Heuristic: map generic parser error for two identifiers on one line (missing arrow)
+      const generic = (prevErrors || []).filter(e => e.severity === 'error' && !('code' in e) && typeof e.message === 'string');
+      for (const ge of generic) {
+        const msg = String((ge as any).message || '');
+        if (msg.includes('Newline') && msg.includes('EOF')) {
+          errs.push({
+            line: (ge as any).line ?? 1,
+            column: (ge as any).column ?? 1,
+            severity: 'error',
+            code: 'FL-LINK-MISSING',
+            message: "Two nodes on one line must be connected with an arrow.",
+            hint: 'Insert --> between nodes, e.g., A --> B.'
+          });
+        }
+      }
       // File-level unclosed quote detection: only if overall quote count is odd (Mermaid treats
       // per-line mismatches as OK as long as the file balances quotes overall).
       const dblEsc = (text.match(/\\\"/g) || []).length;

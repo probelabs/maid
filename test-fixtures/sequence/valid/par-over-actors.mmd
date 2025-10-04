@@ -1,0 +1,10 @@
+sequenceDiagram
+  participant A
+  participant B
+  participant C
+  par over A,B Parallel work
+    A->>B: one
+  and
+    B->>A: two
+  end
+

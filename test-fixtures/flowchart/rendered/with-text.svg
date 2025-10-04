@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="719" height="190" viewBox="0 0 719 190">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="719" height="190" viewBox="0 0 719 190">
   <rect x="0" y="0" width="719" height="190" fill="#ffffff" />
   <style>
     .node-shape { fill: #eef0ff; stroke: #3f3f3f; stroke-width: 1px; }
@@ -6,6 +6,8 @@
     .edge-path { stroke: #555555; stroke-width: 2px; fill: none; }
     .edge-label-bg { fill: rgba(232,232,232, 0.8); opacity: 0.5; }
     .edge-label-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+    .edge-marker { stroke: #555555; }
+    .edge-marker-fill { fill: #555555; }
 
     /* Cluster (flowchart + sequence blocks) */
     .cluster-bg { fill: #ffffde; }
@@ -20,13 +22,19 @@
     /* Sequence-specific add-ons (safe for flowcharts too) */
     .actor-rect { fill: #eaeaea; stroke: #666; stroke-width: 1.5px; }
     .actor-label { fill: #111; font-family: Arial, sans-serif; font-size: 16px; }
-    .lifeline { stroke: #999; stroke-width: 0.5px; }
+    .lifeline { stroke: #999; stroke-width: 1px; }
     .activation { fill: #f4f4f4; stroke: #666; stroke-width: 1px; }
     .msg-line { stroke: #333; stroke-width: 1.5px; fill: none; }
     .msg-line.dotted { stroke-dasharray: 2 2; }
     .msg-line.thick { stroke-width: 3px; }
+    .openhead { fill: none; stroke: #333; stroke-width: 1.5px; }
+    .crosshead path { stroke: #333; stroke-width: 1.5px; }
     .msg-label { fill: #333; font-family: Arial, sans-serif; font-size: 12px; dominant-baseline: middle; }
     .msg-label-bg { fill: #ffffff; stroke: #cccccc; stroke-width: 1px; rx: 3; }
+
+    /* State overlays */
+    .lane-divider { stroke: #aaaaaa; stroke-width: 1px; stroke-dasharray: 4 3; }
+    .end-double { stroke: #3f3f3f; stroke-width: 1px; fill: none; }
   </style>
   <defs>
     <marker id="arrow" viewBox="0 0 11 11" markerWidth="11" markerHeight="11" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse">
@@ -41,41 +49,46 @@
   </defs>
   <g id="A">
     <rect class="node-shape"  x="40" y="85" width="131" height="40" rx="0" ry="0" />
+    
     <text class="node-label" x="105.5" y="109.9" text-anchor="middle">Start Process</text>
   </g>
   <g id="B">
     <polygon class="node-shape"  points="278.5,47.5 336,105 278.5,162.5 221,105" />
+    
     <text class="node-label" x="278.5" y="109.9" text-anchor="middle">Decision</text>
   </g>
   <g id="C">
     <rect class="node-shape"  x="427.5" y="40" width="124" height="40" rx="0" ry="0" />
+    
     <text class="node-label" x="489.5" y="64.9" text-anchor="middle">Do something</text>
   </g>
   <g id="D">
     <rect class="node-shape"  x="410" y="130" width="159" height="40" rx="0" ry="0" />
+    
     <text class="node-label" x="489.5" y="154.9" text-anchor="middle">Do something else</text>
   </g>
   <g id="E">
     <rect class="node-shape"  x="619" y="85" width="80" height="40" rx="0" ry="0" />
+    
     <text class="node-label" x="659" y="109.9" text-anchor="middle">End</text>
   </g>
   <g><path class="edge-path" d="M171,105 L181,105 C193,105 205,105 211,105 L221,105" stroke-linecap="round" stroke-linejoin="round" />
-<path d="M221,105 L213,108 L213,102 Z" fill="#555555" /></g>
+<path d="M221,105 L215,107.5 L215,102.5 Z" fill="#555555" /></g>
   <g>
-    <path class="edge-path" d="M336,77.61904761904762 L345.0286051882393,73.31971181512414 C355.8629314141264,68.16050885041595 411.5,60 417.5,60 L427.5,60" stroke-linecap="round" stroke-linejoin="round" />
+    <path class="edge-path" d="M332,101 L339.0710678118655,93.92893218813452 C347.55634918610406,85.44365081389596 411.5,60 417.5,60 L427.5,60" stroke-linecap="round" stroke-linejoin="round" />
     <rect class="edge-label-bg" x="371.53361325989937" y="53" width="26" height="14" rx="3" />
     <text class="edge-label-text" x="384.53361325989937" y="60" text-anchor="middle" dominant-baseline="middle">Yes</text>
-    <path d="M427.5,60 L419.5,63 L419.5,57 Z" fill="#555555" />
+    <path d="M427.5,60 L421.5,62.5 L421.5,57.5 Z" fill="#555555" />
   </g>
   <g>
-    <path class="edge-path" d="M336,132.38095238095238 L345.0286051882393,136.68028818487585 C355.8629314141264,141.83949114958403 394,150 400,150 L410,150" stroke-linecap="round" stroke-linejoin="round" />
+    <path class="edge-path" d="M332,109 L339.0710678118655,116.07106781186548 C347.55634918610406,124.55634918610404 394,150 400,150 L410,150" stroke-linecap="round" stroke-linejoin="round" />
     <rect class="edge-label-bg" x="364.90861325989937" y="143" width="20" height="14" rx="3" />
     <text class="edge-label-text" x="374.90861325989937" y="150" text-anchor="middle" dominant-baseline="middle">No</text>
-    <path d="M410,150 L402,153 L402,147 Z" fill="#555555" />
+    <path d="M410,150 L404,152.5 L404,147.5 Z" fill="#555555" />
   </g>
   <g><path class="edge-path" d="M551.5,60 L561.5,60 C573.5,60 616.9560360448107,75.89264033871507 621.8891891946733,79.30790021169692 L630.1111111111111,85" stroke-linecap="round" stroke-linejoin="round" />
-<path d="M630.1111111111111,85 L621.82594364147,82.91289674428887 L625.2412035144517,77.9797435944262 Z" fill="#555555" /></g>
+<path d="M630.1111111111111,85 L623.7549330141727,83.6402206061276 L626.6009829083242,79.5292596479087 Z" fill="#555555" /></g>
   <g><path class="edge-path" d="M569,150 L579,150 C591,150 616.9560360448107,134.10735966128496 621.8891891946733,130.6920997883031 L630.1111111111111,125" stroke-linecap="round" stroke-linejoin="round" />
-<path d="M630.1111111111111,125 L625.2412035144517,132.0202564055738 L621.82594364147,127.08710325571113 Z" fill="#555555" /></g>
+<path d="M630.1111111111111,125 L626.6009829083242,130.4707403520913 L623.7549330141727,126.35977939387242 Z" fill="#555555" /></g>
   
 </svg>

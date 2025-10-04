@@ -11,6 +11,7 @@ export const Direction = createToken({ name: 'Direction', pattern: /LR|RL|TB|BT|
 export const ClassKw = createToken({ name: 'ClassKw', pattern: /class/, longer_alt: Identifier });
 export const AsKw = createToken({ name: 'AsKw', pattern: /as/, longer_alt: Identifier });
 export const NoteKw = createToken({ name: 'NoteKw', pattern: /note/, longer_alt: Identifier });
+export const ForKw = createToken({ name: 'ForKw', pattern: /for/, longer_alt: Identifier });
 
 // Relationship operators (order matters: longest first)
 export const RelCompToAgg = createToken({ name: 'RelCompToAgg', pattern: /\*--o/ });
@@ -25,6 +26,10 @@ export const RelAggregation = createToken({ name: 'RelAggregation', pattern: /o-
 export const RelDependency = createToken({ name: 'RelDependency', pattern: /\.\.>/ });
 export const RelRealization = createToken({ name: 'RelRealization', pattern: /\.\.\|>/ });
 export const RelAssociation = createToken({ name: 'RelAssociation', pattern: /--/ });
+// Leftward variants
+export const RelDependencyLeft = createToken({ name: 'RelDependencyLeft', pattern: /<\.\./ });
+export const RelRealizationLeft = createToken({ name: 'RelRealizationLeft', pattern: /<\|\.\./ });
+export const RelExtendsRight = createToken({ name: 'RelExtendsRight', pattern: /--\|>/ });
 // Invalid short arrow used by mistake in relations
 export const InvalidRelArrow = createToken({ name: 'InvalidRelArrow', pattern: /->(?!>)/ });
 
@@ -38,6 +43,8 @@ export const Comma = createToken({ name: 'Comma', pattern: /,/ });
 export const Visibility = createToken({ name: 'Visibility', pattern: /[+\-#~]/ });
 export const LTlt = createToken({ name: 'LTlt', pattern: /<</ });
 export const GTgt = createToken({ name: 'GTgt', pattern: />>/ });
+// Simple generic angle segment <...> (no nesting)
+export const GenericAngle = createToken({ name: 'GenericAngle', pattern: /<[^\n\r>]+>/ });
 
 export const QuotedString = createToken({ name: 'QuotedString', pattern: /"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'/ });
 export const BacktickName = createToken({ name: 'BacktickName', pattern: /`(?:\\.|[^`\\])*`/ });
@@ -56,6 +63,7 @@ export const allTokens = [
   ClassKw,
   AsKw,
   NoteKw,
+  ForKw,
   Direction,
   // Relationship ops
   RelCompToAgg,
@@ -67,6 +75,9 @@ export const allTokens = [
   RelRealization,
   RelDependency,
   RelExtends,
+  RelDependencyLeft,
+  RelRealizationLeft,
+  RelExtendsRight,
   RelComposition,
   RelAggregation,
   RelAssociation,
@@ -74,6 +85,7 @@ export const allTokens = [
   // Punct
   LTlt,
   GTgt,
+  GenericAngle,
   LCurly, RCurly,
   LParen, RParen,
   SquareOpen, SquareClose,

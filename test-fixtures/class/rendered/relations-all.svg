@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="370" height="288" viewBox="-20 -20 370 288">
+<style>
+    .node-shape { fill: #eef0ff; stroke: #3f3f3f; stroke-width: 1px; }
+    .node-label { fill: #333; font-family: Arial, sans-serif; font-size: 14px; }
+    .edge-path { stroke: #555555; stroke-width: 2px; fill: none; }
+    .edge-label-bg { fill: rgba(232,232,232, 0.8); opacity: 0.5; }
+    .edge-label-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+    .edge-marker { stroke: #555555; }
+    .edge-marker-fill { fill: #555555; }
+
+    /* Cluster (flowchart + sequence blocks) */
+    .cluster-bg { fill: #ffffde; }
+    .cluster-border { fill: none; stroke: #aaaa33; stroke-width: 1px; }
+    .cluster-title-bg { fill: rgba(255,255,255,0.8); }
+    .cluster-label-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+
+    /* Notes */
+    .note { fill: #fff5ad; stroke: #aaaa33; stroke-width: 1px; }
+    .note-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+
+    /* Sequence-specific add-ons (safe for flowcharts too) */
+    .actor-rect { fill: #eaeaea; stroke: #666; stroke-width: 1.5px; }
+    .actor-label { fill: #111; font-family: Arial, sans-serif; font-size: 16px; }
+    .lifeline { stroke: #999; stroke-width: 1px; }
+    .activation { fill: #f4f4f4; stroke: #666; stroke-width: 1px; }
+    .msg-line { stroke: #333; stroke-width: 1.5px; fill: none; }
+    .msg-line.dotted { stroke-dasharray: 2 2; }
+    .msg-line.thick { stroke-width: 3px; }
+    .openhead { fill: none; stroke: #333; stroke-width: 1.5px; }
+    .crosshead path { stroke: #333; stroke-width: 1.5px; }
+    .msg-label { fill: #333; font-family: Arial, sans-serif; font-size: 12px; dominant-baseline: middle; }
+    .msg-label-bg { fill: #ffffff; stroke: #cccccc; stroke-width: 1px; rx: 3; }
+
+    /* State overlays */
+    .lane-divider { stroke: #aaaaaa; stroke-width: 1px; stroke-dasharray: 4 3; }
+    .end-double { stroke: #3f3f3f; stroke-width: 1px; fill: none; }
+  
+    .class-title { font-weight: 600; }
+    .class-divider { stroke: #aaa; stroke-width: 1; }
+    .class-member { font-size: 12px; }
+  </style>
+  <g transform="translate(20,106)">
+    <rect class="node-shape" width="120" height="36" rx="0"/>
+    <text class="node-label class-title" x="60" y="22" text-anchor="middle" dominant-baseline="middle">A</text>
+  </g>
+  <g transform="translate(190,20)">
+    <rect class="node-shape" width="120" height="36" rx="0"/>
+    <text class="node-label class-title" x="60" y="22" text-anchor="middle" dominant-baseline="middle">B</text>
+  </g>
+  <g transform="translate(190,106)">
+    <rect class="node-shape" width="120" height="36" rx="0"/>
+    <text class="node-label class-title" x="60" y="22" text-anchor="middle" dominant-baseline="middle">C</text>
+  </g>
+  <g transform="translate(190,192)">
+    <rect class="node-shape" width="120" height="36" rx="0"/>
+    <text class="node-label class-title" x="60" y="22" text-anchor="middle" dominant-baseline="middle">D</text>
+  </g>
+<polyline class="edge-path edge-path" points="97.79069767441861,106 165,38 190,38" fill="none"/>
+<text class="edge-label-text" x="165" y="28" text-anchor="middle"><tspan x="165" dy="0">extends</tspan></text>
+<polyline class="edge-path edge-path" points="140,124 165,124 190,124" fill="none"/>
+<text class="edge-label-text" x="165" y="114" text-anchor="middle"><tspan x="165" dy="0">has</tspan></text>
+<polyline class="edge-path edge-path" points="97.79069767441861,142 165,210 190,210" fill="none"/>
+<text class="edge-label-text" x="165" y="200" text-anchor="middle"><tspan x="165" dy="0">owns</tspan></text>
+<polyline class="edge-path edge-path" points="97.79069767441861,106 165,38 190,38" fill="none"/>
+<text class="edge-label-text" x="165" y="28" text-anchor="middle"><tspan x="165" dy="0">uses</tspan></text>
+<polyline class="edge-path edge-path" points="97.79069767441861,106 165,38 190,38" fill="none"/>
+<text class="edge-label-text" x="165" y="28" text-anchor="middle"><tspan x="165" dy="0">realizes</tspan></text>
+</svg>

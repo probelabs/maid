@@ -45,14 +45,14 @@ export interface SequenceLayout {
 const MARGIN_X = 24;
 const MARGIN_Y = 24;
 const ACTOR_FONT_SIZE = 16;
-const ACTOR_H = 32;
-const LIFELINE_GAP = 4; // vertical gap between actor box and lifeline start
+const ACTOR_H = 30;
+const LIFELINE_GAP = 4; // closer to Mermaid
 const ACTOR_PAD_X = 12;
 const COL_MIN = 110;
-const ROW_H = 36;
+const ROW_H = 36; // row height tuned for parity
 const NOTE_W = 160;
 const NOTE_PAD = 8;
-const BLOCK_PAD = 8;
+const BLOCK_PAD = 12;
 const TITLE_EXTRA_TOP = 12; // extra space to fit the title pill
 
 export function layoutSequence(model: SequenceModel): SequenceLayout {
@@ -146,7 +146,7 @@ export function layoutSequence(model: SequenceModel): SequenceLayout {
     if (start != null) {
       const p = col.get(actor);
       if (p) {
-        activations.push({ actor, x: p.x + p.width / 2 - 4, y: yForRow(start) - ROW_H / 2, width: 8, height: yForRow(r) - yForRow(start) });
+        activations.push({ actor, x: p.x + p.width / 2 - 3, y: yForRow(start) - ROW_H / 2, width: 6, height: yForRow(r) - yForRow(start) });
       }
     }
     actStack.set(actor, arr);
@@ -243,7 +243,7 @@ export function layoutSequence(model: SequenceModel): SequenceLayout {
   // Close any remaining activations at end
   const lastRow = row;
   for (const [actor, arr] of actStack.entries()) {
-    while (arr.length) { const start = arr.pop()!; const p = col.get(actor); if (p) activations.push({ actor, x: p.x + p.width / 2 - 4, y: yForRow(start) - ROW_H / 2, width: 8, height: yForRow(lastRow) - yForRow(start) }); }
+    while (arr.length) { const start = arr.pop()!; const p = col.get(actor); if (p) activations.push({ actor, x: p.x + p.width / 2 - 3, y: yForRow(start) - ROW_H / 2, width: 6, height: yForRow(lastRow) - yForRow(start) }); }
   }
 
   return { width, height, participants, lifelines, messages, notes, blocks, activations };

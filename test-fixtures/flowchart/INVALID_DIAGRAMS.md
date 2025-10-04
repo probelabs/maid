@@ -12,20 +12,27 @@ This file contains invalid flowchart test fixtures with:
 1. [Edge Label Parens](#1-edge-label-parens)
 2. [Empty Nodes](#2-empty-nodes)
 3. [Escaped Quotes In Decision](#3-escaped-quotes-in-decision)
-4. [Invalid Arrow](#4-invalid-arrow)
-5. [Invalid Class](#5-invalid-class)
-6. [Invalid Node Syntax](#6-invalid-node-syntax)
-7. [Invalid Subgraph](#7-invalid-subgraph)
-8. [Missing Arrow](#8-missing-arrow)
-9. [Mixed Brackets](#9-mixed-brackets)
-10. [No Diagram Type](#10-no-diagram-type)
-11. [Quotes Double Inside Single](#11-quotes-double-inside-single)
-12. [Unclosed Bracket](#12-unclosed-bracket)
-13. [Unclosed Quote In Label](#13-unclosed-quote-in-label)
-14. [Unescaped Quotes In Decision](#14-unescaped-quotes-in-decision)
-15. [Unmatched End](#15-unmatched-end)
-16. [Unquoted Label With Quotes](#16-unquoted-label-with-quotes)
-17. [Wrong Direction](#17-wrong-direction)
+4. [Interactions Click Call Missing Fn](#4-interactions-click-call-missing-fn)
+5. [Interactions Click Call Parens](#5-interactions-click-call-parens)
+6. [Interactions Click Href](#6-interactions-click-href)
+7. [Interactions Linkstyle Multi](#7-interactions-linkstyle-multi)
+8. [Interactions Linkstyle Ranges](#8-interactions-linkstyle-ranges)
+9. [Invalid Arrow](#9-invalid-arrow)
+10. [Invalid Class](#10-invalid-class)
+11. [Invalid Node Syntax](#11-invalid-node-syntax)
+12. [Invalid Subgraph](#12-invalid-subgraph)
+13. [Missing Arrow](#13-missing-arrow)
+14. [Mixed Brackets](#14-mixed-brackets)
+15. [No Diagram Type](#15-no-diagram-type)
+16. [Quotes Double Inside Single](#16-quotes-double-inside-single)
+17. [Typed Shapes All](#17-typed-shapes-all)
+18. [Typed Shapes Unknowns](#18-typed-shapes-unknowns)
+19. [Unclosed Bracket](#19-unclosed-bracket)
+20. [Unclosed Quote In Label](#20-unclosed-quote-in-label)
+21. [Unescaped Quotes In Decision](#21-unescaped-quotes-in-decision)
+22. [Unmatched End](#22-unmatched-end)
+23. [Unquoted Label With Quotes](#23-unquoted-label-with-quotes)
+24. [Wrong Direction](#24-wrong-direction)
 
 ---
 
@@ -36,20 +43,27 @@ This file contains invalid flowchart test fixtures with:
 | 1 | [edge label parens](#1-edge-label-parens) | INVALID | INVALID | — |
 | 2 | [empty nodes](#2-empty-nodes) | INVALID | INVALID | ✅ safe |
 | 3 | [escaped quotes in decision](#3-escaped-quotes-in-decision) | INVALID | INVALID | ✅ safe |
-| 4 | [invalid arrow](#4-invalid-arrow) | INVALID | INVALID | ✅ safe |
-| 5 | [invalid class](#5-invalid-class) | INVALID | INVALID | — |
-| 6 | [invalid node syntax](#6-invalid-node-syntax) | INVALID | INVALID | ✅ safe |
-| 7 | [invalid subgraph](#7-invalid-subgraph) | INVALID | INVALID | — |
-| 8 | [missing arrow](#8-missing-arrow) | INVALID | INVALID | ✅ all |
-| 9 | [mixed brackets](#9-mixed-brackets) | INVALID | INVALID | ✅ safe |
-| 10 | [no diagram type](#10-no-diagram-type) | INVALID | INVALID | — |
-| 11 | [quotes double inside single](#11-quotes-double-inside-single) | INVALID | INVALID | ✅ safe |
-| 12 | [unclosed bracket](#12-unclosed-bracket) | INVALID | INVALID | ✅ safe |
-| 13 | [unclosed quote in label](#13-unclosed-quote-in-label) | INVALID | INVALID | ✅ all |
-| 14 | [unescaped quotes in decision](#14-unescaped-quotes-in-decision) | INVALID | INVALID | ✅ safe |
-| 15 | [unmatched end](#15-unmatched-end) | INVALID | INVALID | — |
-| 16 | [unquoted label with quotes](#16-unquoted-label-with-quotes) | INVALID | INVALID | ✅ safe |
-| 17 | [wrong direction](#17-wrong-direction) | INVALID | INVALID | — |
+| 4 | [interactions click call missing fn](#4-interactions-click-call-missing-fn) | INVALID | INVALID | — |
+| 5 | [interactions click call parens](#5-interactions-click-call-parens) | INVALID | INVALID | — |
+| 6 | [interactions click href](#6-interactions-click-href) | INVALID | INVALID | — |
+| 7 | [interactions linkstyle multi](#7-interactions-linkstyle-multi) | INVALID | INVALID | — |
+| 8 | [interactions linkstyle ranges](#8-interactions-linkstyle-ranges) | INVALID | INVALID | — |
+| 9 | [invalid arrow](#9-invalid-arrow) | INVALID | INVALID | ✅ safe |
+| 10 | [invalid class](#10-invalid-class) | INVALID | INVALID | — |
+| 11 | [invalid node syntax](#11-invalid-node-syntax) | INVALID | INVALID | ✅ safe |
+| 12 | [invalid subgraph](#12-invalid-subgraph) | INVALID | INVALID | — |
+| 13 | [missing arrow](#13-missing-arrow) | INVALID | INVALID | ✅ all |
+| 14 | [mixed brackets](#14-mixed-brackets) | INVALID | INVALID | ✅ safe |
+| 15 | [no diagram type](#15-no-diagram-type) | INVALID | INVALID | — |
+| 16 | [quotes double inside single](#16-quotes-double-inside-single) | INVALID | INVALID | ✅ safe |
+| 17 | [typed shapes all](#17-typed-shapes-all) | INVALID | INVALID | — |
+| 18 | [typed shapes unknowns](#18-typed-shapes-unknowns) | INVALID | INVALID | — |
+| 19 | [unclosed bracket](#19-unclosed-bracket) | INVALID | INVALID | ✅ safe |
+| 20 | [unclosed quote in label](#20-unclosed-quote-in-label) | INVALID | INVALID | ✅ all |
+| 21 | [unescaped quotes in decision](#21-unescaped-quotes-in-decision) | INVALID | INVALID | ✅ safe |
+| 22 | [unmatched end](#22-unmatched-end) | INVALID | INVALID | — |
+| 23 | [unquoted label with quotes](#23-unquoted-label-with-quotes) | INVALID | INVALID | ✅ safe |
+| 24 | [wrong direction](#24-wrong-direction) | INVALID | INVALID | — |
 
 ---
 
@@ -301,7 +315,382 @@ flowchart TD
 
 ---
 
-## 4. Invalid Arrow
+## 4. Interactions Click Call Missing Fn
+
+📄 **Source**: [`interactions-click-call-missing-fn.mmd`](./invalid/interactions-click-call-missing-fn.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+flowchart TD
+  A[Start]
+  click A call "Tip only"
+
+
+```
+
+### mermaid-cli Result: INVALID
+
+```
+Error: Parse error on line 6:
+...A call "Tip only"
+--------------------^
+Expecting 'SEMI', 'NEWLINE', 'SPACE', 'EOF', 'CALLBACKARGS', got 'CALLBACKNAME'
+Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
+    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
+    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
+    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
+    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
+    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
+    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
+    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
+    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
+    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
+    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+```
+
+### maid Result: INVALID
+
+```
+error[FL-CLICK-CALL-NAME-MISSING]: 'click … call' requires a function name.
+at test-fixtures/flowchart/invalid/interactions-click-call-missing-fn.mmd:3:11
+  2 |   A[Start]
+  3 |   click A call "Tip only"
+    |           ^
+  4 | 
+hint: Example: click A call doThing() "Tooltip"
+
+error[FL-CLICK-CALL-EXTRA-TEXT]: Tooltip/text after 'call()' is not supported by Mermaid CLI.
+at test-fixtures/flowchart/invalid/interactions-click-call-missing-fn.mmd:3:16
+  2 |   A[Start]
+  3 |   click A call "Tip only"
+    |                ^
+  4 | 
+hint: Use: click A call doThing()
+```
+
+### maid Auto-fix (`--fix`) Preview
+
+No auto-fix changes (safe level).
+
+### maid Auto-fix (`--fix=all`) Preview
+
+No auto-fix changes (all level).
+
+<details>
+<summary>View source code</summary>
+
+```
+flowchart TD
+  A[Start]
+  click A call "Tip only"
+
+
+```
+</details>
+
+---
+
+## 5. Interactions Click Call Parens
+
+📄 **Source**: [`interactions-click-call-parens.mmd`](./invalid/interactions-click-call-parens.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+flowchart TD
+  A[Start]
+  click A call openDetails() "Open details" _blank
+
+
+```
+
+### mermaid-cli Result: INVALID
+
+```
+Error: Parse error on line 3:
+...ils() "Open details" _blank
+-----------------------^
+Expecting 'SEMI', 'NEWLINE', 'EOF', got 'SPACE'
+Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
+    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
+    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
+    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
+    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
+    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
+    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
+    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
+    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
+    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
+    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+```
+
+### maid Result: INVALID
+
+```
+error[FL-CLICK-CALL-EXTRA-TEXT]: Tooltip/text after 'call()' is not supported by Mermaid CLI.
+at test-fixtures/flowchart/invalid/interactions-click-call-parens.mmd:3:30
+  2 |   A[Start]
+  3 |   click A call openDetails() "Open details" _blank
+    |                              ^
+  4 | 
+hint: Use: click A call doThing()
+```
+
+### maid Auto-fix (`--fix`) Preview
+
+No auto-fix changes (safe level).
+
+### maid Auto-fix (`--fix=all`) Preview
+
+No auto-fix changes (all level).
+
+<details>
+<summary>View source code</summary>
+
+```
+flowchart TD
+  A[Start]
+  click A call openDetails() "Open details" _blank
+
+
+```
+</details>
+
+---
+
+## 6. Interactions Click Href
+
+📄 **Source**: [`interactions-click-href.mmd`](./invalid/interactions-click-href.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+flowchart TD
+  A[Start] --> B[Next]
+  click A href "https://example.com" "Open" _blank
+  linkStyle 1 stroke:#f00,stroke-width:2px
+
+
+```
+
+### mermaid-cli Result: INVALID
+
+```
+TypeError: Cannot set properties of undefined (setting 'style')
+node_modules/mermaid/dist/mermaid.js:45745:37
+Array.forEach (<anonymous>)
+    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
+    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
+    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
+    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
+    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
+    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
+    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
+    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
+    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
+    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+```
+
+### maid Result: INVALID
+
+```
+error[FL-LINKSTYLE-INDEX-OUT-OF-RANGE]: linkStyle index 1 is out of range (0..0).
+at test-fixtures/flowchart/invalid/interactions-click-href.mmd:4:13
+  3 |   click A href "https://example.com" "Open" _blank
+  4 |   linkStyle 1 stroke:#f00,stroke-width:2px
+    |             ^
+  5 | 
+hint: Use an index between 0 and 0 or add more links first.
+```
+
+### maid Auto-fix (`--fix`) Preview
+
+No auto-fix changes (safe level).
+
+### maid Auto-fix (`--fix=all`) Preview
+
+No auto-fix changes (all level).
+
+<details>
+<summary>View source code</summary>
+
+```
+flowchart TD
+  A[Start] --> B[Next]
+  click A href "https://example.com" "Open" _blank
+  linkStyle 1 stroke:#f00,stroke-width:2px
+
+
+```
+</details>
+
+---
+
+## 7. Interactions Linkstyle Multi
+
+📄 **Source**: [`interactions-linkstyle-multi.mmd`](./invalid/interactions-linkstyle-multi.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+flowchart TD
+  A[Start] --> B[Next]
+  B --> C[End]
+  %% indices include duplicate and out-of-range; styles split across lines
+  linkStyle 0, 0, 5
+    stroke:#f00,
+    stroke-width:2px
+
+
+```
+
+### mermaid-cli Result: INVALID
+
+```
+Error: Parse error on line 4:
+...[End]  linkStyle 0, 0, 5    stroke:#f0
+----------------------^
+Expecting 'NUM', got 'SPACE'
+Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
+    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
+    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
+    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
+    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
+    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
+    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
+    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
+    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
+    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
+    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+```
+
+### maid Result: INVALID
+
+```
+error[FL-LINKSTYLE-INDEX-OUT-OF-RANGE]: linkStyle index 5 is out of range (0..1).
+at test-fixtures/flowchart/invalid/interactions-linkstyle-multi.mmd:5:19
+  4 |   %% indices include duplicate and out-of-range; styles split across lines
+  5 |   linkStyle 0, 0, 5
+    |                   ^
+  6 |     stroke:#f00,
+hint: Use an index between 0 and 1 or add more links first.
+
+warning[FL-LINKSTYLE-DUPLICATE-INDEX]: Duplicate linkStyle index 0.
+at test-fixtures/flowchart/invalid/interactions-linkstyle-multi.mmd:5:13
+  4 |   %% indices include duplicate and out-of-range; styles split across lines
+  5 |   linkStyle 0, 0, 5
+    |             ^
+  6 |     stroke:#f00,
+hint: Remove duplicates.
+```
+
+### maid Auto-fix (`--fix`) Preview
+
+No auto-fix changes (safe level).
+
+### maid Auto-fix (`--fix=all`) Preview
+
+No auto-fix changes (all level).
+
+<details>
+<summary>View source code</summary>
+
+```
+flowchart TD
+  A[Start] --> B[Next]
+  B --> C[End]
+  %% indices include duplicate and out-of-range; styles split across lines
+  linkStyle 0, 0, 5
+    stroke:#f00,
+    stroke-width:2px
+
+
+```
+</details>
+
+---
+
+## 8. Interactions Linkstyle Ranges
+
+📄 **Source**: [`interactions-linkstyle-ranges.mmd`](./invalid/interactions-linkstyle-ranges.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+flowchart TD
+  A[Start] --> B[Next]
+  B --> C[End]
+  linkStyle 0:1 stroke:#f00,stroke-width:2px
+
+
+```
+
+### mermaid-cli Result: INVALID
+
+```
+Error: Parse error on line 4:
+...C[End]  linkStyle 0:1 stroke:#f00,strok
+----------------------^
+Expecting 'SPACE', 'COMMA', got 'COLON'
+Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
+    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
+    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
+    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
+    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
+    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
+    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
+    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
+    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
+    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
+    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+```
+
+### maid Result: INVALID
+
+```
+error: Expecting token of type --> Identifier <-- but found --> ':' <--
+at test-fixtures/flowchart/invalid/interactions-linkstyle-ranges.mmd:4:14
+  3 |   B --> C[End]
+  4 |   linkStyle 0:1 stroke:#f00,stroke-width:2px
+    |              ^
+  5 |
+```
+
+### maid Auto-fix (`--fix`) Preview
+
+No auto-fix changes (safe level).
+
+### maid Auto-fix (`--fix=all`) Preview
+
+No auto-fix changes (all level).
+
+<details>
+<summary>View source code</summary>
+
+```
+flowchart TD
+  A[Start] --> B[Next]
+  B --> C[End]
+  linkStyle 0:1 stroke:#f00,stroke-width:2px
+
+
+```
+</details>
+
+---
+
+## 9. Invalid Arrow
 
 📄 **Source**: [`invalid-arrow.mmd`](./invalid/invalid-arrow.mmd)
 
@@ -371,7 +760,7 @@ flowchart TD
 
 ---
 
-## 5. Invalid Class
+## 10. Invalid Class
 
 📄 **Source**: [`invalid-class.mmd`](./invalid/invalid-class.mmd)
 
@@ -436,7 +825,7 @@ flowchart TD
 
 ---
 
-## 6. Invalid Node Syntax
+## 11. Invalid Node Syntax
 
 📄 **Source**: [`invalid-node-syntax.mmd`](./invalid/invalid-node-syntax.mmd)
 
@@ -506,7 +895,7 @@ flowchart TD
 
 ---
 
-## 7. Invalid Subgraph
+## 12. Invalid Subgraph
 
 📄 **Source**: [`invalid-subgraph.mmd`](./invalid/invalid-subgraph.mmd)
 
@@ -571,7 +960,7 @@ flowchart TD
 
 ---
 
-## 8. Missing Arrow
+## 13. Missing Arrow
 
 📄 **Source**: [`missing-arrow.mmd`](./invalid/missing-arrow.mmd)
 
@@ -607,11 +996,11 @@ Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
 ### maid Result: INVALID
 
 ```
-error[FL-LINK-MISSING]: Two nodes on one line must be connected with an arrow before 'B'.
-at test-fixtures/flowchart/invalid/missing-arrow.mmd:2:7
+error[FL-LINK-MISSING]: Two nodes on one line must be connected with an arrow before 'A'.
+at test-fixtures/flowchart/invalid/missing-arrow.mmd:2:5
   1 | flowchart TD
   2 |     A B
-    |       ^
+    |     ^
 hint: Insert --> between nodes, e.g., A --> B.
 ```
 
@@ -637,7 +1026,7 @@ flowchart TD
 
 ---
 
-## 9. Mixed Brackets
+## 14. Mixed Brackets
 
 📄 **Source**: [`mixed-brackets.mmd`](./invalid/mixed-brackets.mmd)
 
@@ -719,7 +1108,7 @@ flowchart LR
 
 ---
 
-## 10. No Diagram Type
+## 15. No Diagram Type
 
 📄 **Source**: [`no-diagram-type.mmd`](./invalid/no-diagram-type.mmd)
 
@@ -780,7 +1169,7 @@ B --> C
 
 ---
 
-## 11. Quotes Double Inside Single
+## 16. Quotes Double Inside Single
 
 📄 **Source**: [`quotes-double-inside-single.mmd`](./invalid/quotes-double-inside-single.mmd)
 
@@ -853,7 +1242,217 @@ flowchart LR
 
 ---
 
-## 12. Unclosed Bracket
+## 17. Typed Shapes All
+
+📄 **Source**: [`typed-shapes-all.mmd`](./invalid/typed-shapes-all.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+flowchart LR
+  A@{ shape: rect, label: "Rect" }
+  B@{ shape: rounded, label: "Rounded" }
+  C@{ shape: stadium, label: "Stadium" }
+  D@{ shape: subroutine, label: "Subroutine" }
+  E@{ shape: circle, label: "Circle" }
+  F@{ shape: cylinder, label: "Cylinder" }
+  G@{ shape: diamond, label: "Decision" }
+  H@{ shape: hexagon, label: "Hexagon" }
+  I@{ shape: parallelogram, label: "Para" }
+  J@{ shape: trapezoid, label: "Trap" }
+  K@{ shape: trapezoidAlt, label: "TrapAlt" }
+  L@{ shape: "lean-l", label: "LeanL" }
+  M@{ shape: "lean-r", label: "LeanR" }
+  A --> B --> C --> D --> E --> F --> G --> H --> I --> J --> K --> L --> M
+
+
+```
+
+### mermaid-cli Result: INVALID
+
+```
+Error: No such shape: parallelogram.
+FlowDB.addVertex (node_modules/mermaid/dist/mermaid.js:45607:23)
+    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
+    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
+    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
+    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
+    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
+    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
+    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
+    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
+    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
+    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+```
+
+### maid Result: INVALID
+
+```
+error[FL-TYPED-SHAPE-UNSUPPORTED]: Typed shape 'hexagon' is not supported by current Mermaid CLI.
+at test-fixtures/flowchart/invalid/typed-shapes-all.mmd:9:14
+   8 |   G@{ shape: diamond, label: "Decision" }
+   9 |   H@{ shape: hexagon, label: "Hexagon" }
+     |              ^
+  10 |   I@{ shape: parallelogram, label: "Para" }
+hint: Use one of: rect, rounded, diamond, circle, cylinder, stadium, subroutine, "lean-l", "lean-r"
+
+error[FL-TYPED-SHAPE-UNSUPPORTED]: Typed shape 'parallelogram' is not supported by current Mermaid CLI.
+at test-fixtures/flowchart/invalid/typed-shapes-all.mmd:10:14
+   9 |   H@{ shape: hexagon, label: "Hexagon" }
+  10 |   I@{ shape: parallelogram, label: "Para" }
+     |              ^
+  11 |   J@{ shape: trapezoid, label: "Trap" }
+hint: Use one of: rect, rounded, diamond, circle, cylinder, stadium, subroutine, "lean-l", "lean-r"
+
+error[FL-TYPED-SHAPE-UNSUPPORTED]: Typed shape 'trapezoid' is not supported by current Mermaid CLI.
+at test-fixtures/flowchart/invalid/typed-shapes-all.mmd:11:14
+  10 |   I@{ shape: parallelogram, label: "Para" }
+  11 |   J@{ shape: trapezoid, label: "Trap" }
+     |              ^
+  12 |   K@{ shape: trapezoidAlt, label: "TrapAlt" }
+hint: Use one of: rect, rounded, diamond, circle, cylinder, stadium, subroutine, "lean-l", "lean-r"
+
+error[FL-TYPED-SHAPE-UNSUPPORTED]: Typed shape 'trapezoidAlt' is not supported by current Mermaid CLI.
+at test-fixtures/flowchart/invalid/typed-shapes-all.mmd:12:14
+  11 |   J@{ shape: trapezoid, label: "Trap" }
+  12 |   K@{ shape: trapezoidAlt, label: "TrapAlt" }
+     |              ^
+  13 |   L@{ shape: "lean-l", label: "LeanL" }
+hint: Use one of: rect, rounded, diamond, circle, cylinder, stadium, subroutine, "lean-l", "lean-r"
+```
+
+### maid Auto-fix (`--fix`) Preview
+
+No auto-fix changes (safe level).
+
+### maid Auto-fix (`--fix=all`) Preview
+
+No auto-fix changes (all level).
+
+<details>
+<summary>View source code</summary>
+
+```
+flowchart LR
+  A@{ shape: rect, label: "Rect" }
+  B@{ shape: rounded, label: "Rounded" }
+  C@{ shape: stadium, label: "Stadium" }
+  D@{ shape: subroutine, label: "Subroutine" }
+  E@{ shape: circle, label: "Circle" }
+  F@{ shape: cylinder, label: "Cylinder" }
+  G@{ shape: diamond, label: "Decision" }
+  H@{ shape: hexagon, label: "Hexagon" }
+  I@{ shape: parallelogram, label: "Para" }
+  J@{ shape: trapezoid, label: "Trap" }
+  K@{ shape: trapezoidAlt, label: "TrapAlt" }
+  L@{ shape: "lean-l", label: "LeanL" }
+  M@{ shape: "lean-r", label: "LeanR" }
+  A --> B --> C --> D --> E --> F --> G --> H --> I --> J --> K --> L --> M
+
+
+```
+</details>
+
+---
+
+## 18. Typed Shapes Unknowns
+
+📄 **Source**: [`typed-shapes-unknowns.mmd`](./invalid/typed-shapes-unknowns.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+flowchart TD
+  A@{ shape: rhombus, label: "X" }
+  B@{ shape: rect, padding: "ten" }
+  C@{ shape: rect, label: X }
+  D@{ badKey: 1, shape: rect }
+
+
+```
+
+### mermaid-cli Result: INVALID
+
+```
+Error: No such shape: rhombus.
+FlowDB.addVertex (node_modules/mermaid/dist/mermaid.js:45607:23)
+    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
+    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
+    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
+    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
+    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
+    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
+    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
+    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
+    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
+    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+```
+
+### maid Result: INVALID
+
+```
+error[FL-TYPED-SHAPE-UNKNOWN]: Unknown shape 'rhombus' in '@{ shape: … }'.
+at test-fixtures/flowchart/invalid/typed-shapes-unknowns.mmd:2:14
+  1 | flowchart TD
+  2 |   A@{ shape: rhombus, label: "X" }
+    |              ^
+  3 |   B@{ shape: rect, padding: "ten" }
+hint: Use one of: rect, round, stadium, subroutine, circle, cylinder, diamond, trapezoid, parallelogram, hexagon, lean-l, lean-r, icon, image
+
+warning[FL-TYPED-NUMERIC-EXPECTED]: 'padding' expects a number (optionally with px).
+at test-fixtures/flowchart/invalid/typed-shapes-unknowns.mmd:3:29
+  2 |   A@{ shape: rhombus, label: "X" }
+  3 |   B@{ shape: rect, padding: "ten" }
+    |                             ^
+  4 |   C@{ shape: rect, label: X }
+hint: Use: padding: 8 or padding: "8px"
+
+warning[FL-TYPED-LABEL-NOT-STRING]: Typed-shape 'label' should be a quoted string.
+at test-fixtures/flowchart/invalid/typed-shapes-unknowns.mmd:4:27
+  3 |   B@{ shape: rect, padding: "ten" }
+  4 |   C@{ shape: rect, label: X }
+    |                           ^
+  5 |   D@{ badKey: 1, shape: rect }
+hint: Example: A@{ shape: rect, label: "Start" }
+
+warning[FL-TYPED-KEY-UNKNOWN]: Unknown typed-shape key 'badKey'.
+at test-fixtures/flowchart/invalid/typed-shapes-unknowns.mmd:5:7
+  4 |   C@{ shape: rect, label: X }
+  5 |   D@{ badKey: 1, shape: rect }
+    |       ^
+  6 | 
+hint: Allowed keys: shape, label, padding, cornerRadius, icon, image
+```
+
+### maid Auto-fix (`--fix`) Preview
+
+No auto-fix changes (safe level).
+
+### maid Auto-fix (`--fix=all`) Preview
+
+No auto-fix changes (all level).
+
+<details>
+<summary>View source code</summary>
+
+```
+flowchart TD
+  A@{ shape: rhombus, label: "X" }
+  B@{ shape: rect, padding: "ten" }
+  C@{ shape: rect, label: X }
+  D@{ badKey: 1, shape: rect }
+
+
+```
+</details>
+
+---
+
+## 19. Unclosed Bracket
 
 📄 **Source**: [`unclosed-bracket.mmd`](./invalid/unclosed-bracket.mmd)
 
@@ -923,7 +1522,7 @@ flowchart LR
 
 ---
 
-## 13. Unclosed Quote In Label
+## 20. Unclosed Quote In Label
 
 📄 **Source**: [`unclosed-quote-in-label.mmd`](./invalid/unclosed-quote-in-label.mmd)
 
@@ -999,7 +1598,7 @@ flowchart TD
 
 ---
 
-## 14. Unescaped Quotes In Decision
+## 21. Unescaped Quotes In Decision
 
 📄 **Source**: [`unescaped-quotes-in-decision.mmd`](./invalid/unescaped-quotes-in-decision.mmd)
 
@@ -1075,7 +1674,7 @@ flowchart TD
 
 ---
 
-## 15. Unmatched End
+## 22. Unmatched End
 
 📄 **Source**: [`unmatched-end.mmd`](./invalid/unmatched-end.mmd)
 
@@ -1140,7 +1739,7 @@ flowchart TD
 
 ---
 
-## 16. Unquoted Label With Quotes
+## 23. Unquoted Label With Quotes
 
 📄 **Source**: [`unquoted-label-with-quotes.mmd`](./invalid/unquoted-label-with-quotes.mmd)
 
@@ -1255,7 +1854,7 @@ flowchart TD
 
 ---
 
-## 17. Wrong Direction
+## 24. Wrong Direction
 
 📄 **Source**: [`wrong-direction.mmd`](./invalid/wrong-direction.mmd)
 

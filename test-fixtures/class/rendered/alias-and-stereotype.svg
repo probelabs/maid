@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="224" viewBox="-20 -20 200 224">
+<style>
+    .node-shape { fill: #eef0ff; stroke: #3f3f3f; stroke-width: 1px; }
+    .node-label { fill: #333; font-family: Arial, sans-serif; font-size: 14px; }
+    .edge-path { stroke: #555555; stroke-width: 2px; fill: none; }
+    .edge-label-bg { fill: rgba(232,232,232, 0.8); opacity: 0.5; }
+    .edge-label-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+    .edge-marker { stroke: #555555; }
+    .edge-marker-fill { fill: #555555; }
+
+    /* Cluster (flowchart + sequence blocks) */
+    .cluster-bg { fill: #ffffde; }
+    .cluster-border { fill: none; stroke: #aaaa33; stroke-width: 1px; }
+    .cluster-title-bg { fill: rgba(255,255,255,0.8); }
+    .cluster-label-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+
+    /* Notes */
+    .note { fill: #fff5ad; stroke: #aaaa33; stroke-width: 1px; }
+    .note-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+
+    /* Sequence-specific add-ons (safe for flowcharts too) */
+    .actor-rect { fill: #eaeaea; stroke: #666; stroke-width: 1.5px; }
+    .actor-label { fill: #111; font-family: Arial, sans-serif; font-size: 16px; }
+    .lifeline { stroke: #999; stroke-width: 1px; }
+    .activation { fill: #f4f4f4; stroke: #666; stroke-width: 1px; }
+    .msg-line { stroke: #333; stroke-width: 1.5px; fill: none; }
+    .msg-line.dotted { stroke-dasharray: 2 2; }
+    .msg-line.thick { stroke-width: 3px; }
+    .openhead { fill: none; stroke: #333; stroke-width: 1.5px; }
+    .crosshead path { stroke: #333; stroke-width: 1.5px; }
+    .msg-label { fill: #333; font-family: Arial, sans-serif; font-size: 12px; dominant-baseline: middle; }
+    .msg-label-bg { fill: #ffffff; stroke: #cccccc; stroke-width: 1px; rx: 3; }
+
+    /* State overlays */
+    .lane-divider { stroke: #aaaaaa; stroke-width: 1px; stroke-dasharray: 4 3; }
+    .end-double { stroke: #3f3f3f; stroke-width: 1px; fill: none; }
+  
+    .class-title { font-weight: 600; }
+    .class-divider { stroke: #aaa; stroke-width: 1; }
+    .class-member { font-size: 12px; }
+  </style>
+  <g transform="translate(20,20)">
+    <rect class="node-shape" width="120" height="58" rx="0"/>
+    <text class="node-label class-title" x="60" y="22" text-anchor="middle" dominant-baseline="middle">IService</text>
+    <line class="class-divider" x1="0" y1="28" x2="120" y2="28"/>
+    <text class="node-label class-member" x="12" y="36" dominant-baseline="hanging">Interface</text>
+  </g>
+  <g transform="translate(20,128)">
+    <rect class="node-shape" width="120" height="36" rx="0"/>
+    <text class="node-label class-title" x="60" y="22" text-anchor="middle" dominant-baseline="middle">Service</text>
+  </g>
+<polyline class="edge-path edge-path" points="80,78 80,103 80,128" fill="none"/>
+<text class="edge-label-text" x="80" y="93" text-anchor="middle"><tspan x="80" dy="0">implements</tspan></text>
+</svg>

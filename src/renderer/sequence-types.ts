@@ -74,5 +74,10 @@ export interface SequenceModel {
   participants: Participant[];
   events: SequenceEvent[];
   autonumber: AutonumberConfig;
+  /** Optional diagram title ("title ...") */
+  title?: string;
+  /** Optional accessibility title ("accTitle ...") */
+  accTitle?: string;
+  /** Optional accessibility description ("accDescr ...") */
+  accDescr?: string;
 }
-

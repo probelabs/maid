@@ -1,0 +1,9 @@
+classDiagram
+  class User {
+    +id: string
+    +email: string
+  }
+  class Order {
+    +id: string
+  }
+  User "1" -- "*" Order : places

@@ -25,7 +25,7 @@ const __dirname = path.dirname(__filename);
 
 const SUPPORTED_TYPES = ['flowchart', 'pie', 'sequence', 'class', 'state'];
 // Diagram types currently supported by our experimental renderer
-const RENDER_SUPPORTED = new Set(['flowchart', 'pie', 'sequence']);
+const RENDER_SUPPORTED = new Set(['flowchart', 'pie', 'sequence', 'class', 'state']);
 
 function stripAnsi(input) {
   if (!input) return input;
@@ -141,6 +141,13 @@ function generateValidPreview(diagramType, { withRenderer = true } = {}) {
   if (!fs.existsSync(validDir)) {
     throw new Error(`No valid fixtures found for diagram type: ${diagramType}`);
   }
+  // Load compat gaps for known divergences with mermaid-cli
+  const compatPath = path.join(fixturesDir, 'compat-gaps.json');
+  let compat = { diagramType, items: [] };
+  if (fs.existsSync(compatPath)) {
+    try { compat = JSON.parse(fs.readFileSync(compatPath, 'utf8')); } catch {}
+  }
+  const compatSet = new Set((compat.items || []).map((it) => typeof it === 'string' ? it : it.file).filter(Boolean));
   const repoRoot = path.resolve(__dirname, '..');
   const files = fs.readdirSync(validDir).filter(f => f.endsWith('.mmd')).sort();
 
@@ -151,7 +158,7 @@ function generateValidPreview(diagramType, { withRenderer = true } = {}) {
     const rel = path.relative(repoRoot, abs);
     const mer = runMermaidCli(rel);
     const ours = runMaid(rel);
-    if (!mer.valid) {
+    if (!mer.valid && !compatSet.has(file)) {
       mismatches.push({ file, tool: 'mermaid-cli', message: mer.message });
     }
     if (!ours.valid) {

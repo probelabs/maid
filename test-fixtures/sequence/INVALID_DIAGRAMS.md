@@ -21,13 +21,15 @@ This file contains invalid sequence test fixtures with:
 10. [Create Missing Name](#10-create-missing-name)
 11. [Critical Else](#11-critical-else)
 12. [Destroy Malformed](#12-destroy-malformed)
-13. [Else Outside Alt](#13-else-outside-alt)
-14. [Missing Colon](#14-missing-colon)
-15. [Note Malformed](#15-note-malformed)
-16. [Option In Par](#16-option-in-par)
-17. [Option Outside Critical](#17-option-outside-critical)
-18. [Unmatched End](#18-unmatched-end)
-19. [Wrong Arrow](#19-wrong-arrow)
+13. [Details And Properties](#13-details-and-properties)
+14. [Else Outside Alt](#14-else-outside-alt)
+15. [Missing Colon](#15-missing-colon)
+16. [Note Malformed](#16-note-malformed)
+17. [Option In Par](#17-option-in-par)
+18. [Option Outside Critical](#18-option-outside-critical)
+19. [Title And Accessibility](#19-title-and-accessibility)
+20. [Unmatched End](#20-unmatched-end)
+21. [Wrong Arrow](#21-wrong-arrow)
 
 ---
 
@@ -47,13 +49,15 @@ This file contains invalid sequence test fixtures with:
 | 10 | [create missing name](#10-create-missing-name) | INVALID | INVALID | — |
 | 11 | [critical else](#11-critical-else) | INVALID | INVALID | ✅ safe |
 | 12 | [destroy malformed](#12-destroy-malformed) | INVALID | INVALID | — |
-| 13 | [else outside alt](#13-else-outside-alt) | INVALID | INVALID | — |
-| 14 | [missing colon](#14-missing-colon) | INVALID | INVALID | ✅ safe |
-| 15 | [note malformed](#15-note-malformed) | INVALID | INVALID | ✅ safe |
-| 16 | [option in par](#16-option-in-par) | INVALID | INVALID | — |
-| 17 | [option outside critical](#17-option-outside-critical) | INVALID | INVALID | — |
-| 18 | [unmatched end](#18-unmatched-end) | INVALID | INVALID | — |
-| 19 | [wrong arrow](#19-wrong-arrow) | INVALID | INVALID | — |
+| 13 | [details and properties](#13-details-and-properties) | INVALID | INVALID | — |
+| 14 | [else outside alt](#14-else-outside-alt) | INVALID | INVALID | — |
+| 15 | [missing colon](#15-missing-colon) | INVALID | INVALID | ✅ safe |
+| 16 | [note malformed](#16-note-malformed) | INVALID | INVALID | ✅ safe |
+| 17 | [option in par](#17-option-in-par) | INVALID | INVALID | — |
+| 18 | [option outside critical](#18-option-outside-critical) | INVALID | INVALID | — |
+| 19 | [title and accessibility](#19-title-and-accessibility) | INVALID | INVALID | — |
+| 20 | [unmatched end](#20-unmatched-end) | INVALID | INVALID | — |
+| 21 | [wrong arrow](#21-wrong-arrow) | INVALID | INVALID | — |
 
 ---
 
@@ -1044,7 +1048,101 @@ sequenceDiagram
 
 ---
 
-## 13. Else Outside Alt
+## 13. Details And Properties
+
+📄 **Source**: [`details-and-properties.mmd`](./invalid/details-and-properties.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+sequenceDiagram
+  title Order Flow
+  participant A
+  participant B
+  properties: retry=3, timeout=5s
+  details: This scenario covers failed payment retry.
+  A->>B: Pay
+
+
+```
+
+### mermaid-cli Result: INVALID
+
+```
+Error: Parse error on line 5:
+...ipant B  properties: retry=3, timeout=5...
+----------------------^
+Expecting 'ACTOR', got 'TXT'
+Parser3.parseError (node_modules/mermaid/dist/mermaid.js:123898:28)
+    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
+    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
+    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
+    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
+    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
+    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
+    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
+    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
+    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
+    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+```
+
+### maid Result: INVALID
+
+```
+error[SE-META-UNSUPPORTED]: Title/accTitle/accDescr are not accepted by current Mermaid CLI for sequence diagrams.
+at test-fixtures/sequence/invalid/details-and-properties.mmd:2:3
+  1 | sequenceDiagram
+  2 |   title Order Flow
+    |   ^^^^^
+  3 |   participant A
+hint: Remove this line (e.g., 'title …') to match mermaid-cli.
+
+error[SE-PROPERTIES-UNSUPPORTED]: 'properties' is not accepted by current Mermaid CLI for sequence diagrams.
+at test-fixtures/sequence/invalid/details-and-properties.mmd:5:3
+  4 |   participant B
+  5 |   properties: retry=3, timeout=5s
+    |   ^^^^^^^^^^
+  6 |   details: This scenario covers failed payment retry.
+hint: Remove the 'properties:' line to match mermaid-cli.
+
+error[SE-DETAILS-UNSUPPORTED]: 'details' is not accepted by current Mermaid CLI for sequence diagrams.
+at test-fixtures/sequence/invalid/details-and-properties.mmd:6:3
+  5 |   properties: retry=3, timeout=5s
+  6 |   details: This scenario covers failed payment retry.
+    |   ^^^^^^^
+  7 |   A->>B: Pay
+hint: Remove the 'details:' line to match mermaid-cli.
+```
+
+### maid Auto-fix (`--fix`) Preview
+
+No auto-fix changes (safe level).
+
+### maid Auto-fix (`--fix=all`) Preview
+
+No auto-fix changes (all level).
+
+<details>
+<summary>View source code</summary>
+
+```
+sequenceDiagram
+  title Order Flow
+  participant A
+  participant B
+  properties: retry=3, timeout=5s
+  details: This scenario covers failed payment retry.
+  A->>B: Pay
+
+
+```
+</details>
+
+---
+
+## 14. Else Outside Alt
 
 📄 **Source**: [`else-outside-alt.mmd`](./invalid/else-outside-alt.mmd)
 
@@ -1116,7 +1214,7 @@ sequenceDiagram
 
 ---
 
-## 14. Missing Colon
+## 15. Missing Colon
 
 📄 **Source**: [`missing-colon.mmd`](./invalid/missing-colon.mmd)
 
@@ -1195,7 +1293,7 @@ sequenceDiagram
 
 ---
 
-## 15. Note Malformed
+## 16. Note Malformed
 
 📄 **Source**: [`note-malformed.mmd`](./invalid/note-malformed.mmd)
 
@@ -1274,7 +1372,7 @@ sequenceDiagram
 
 ---
 
-## 16. Option In Par
+## 17. Option In Par
 
 📄 **Source**: [`option-in-par.mmd`](./invalid/option-in-par.mmd)
 
@@ -1354,7 +1452,7 @@ sequenceDiagram
 
 ---
 
-## 17. Option Outside Critical
+## 18. Option Outside Critical
 
 📄 **Source**: [`option-outside-critical.mmd`](./invalid/option-outside-critical.mmd)
 
@@ -1429,7 +1527,101 @@ sequenceDiagram
 
 ---
 
-## 18. Unmatched End
+## 19. Title And Accessibility
+
+📄 **Source**: [`title-and-accessibility.mmd`](./invalid/title-and-accessibility.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+sequenceDiagram
+  title Checkout Flow
+  accTitle Accessible Title
+  accDescr This diagram describes the checkout steps.
+  participant A as Alice
+  participant B as Bob
+  A->>B: Start
+
+
+```
+
+### mermaid-cli Result: INVALID
+
+```
+Error: Parse error on line 3:
+...tle Accessible Title  accDescr This dia
+-----------------------^
+Expecting 'SOLID_OPEN_ARROW', 'DOTTED_OPEN_ARROW', 'SOLID_ARROW', 'BIDIRECTIONAL_SOLID_ARROW', 'DOTTED_ARROW', 'BIDIRECTIONAL_DOTTED_ARROW', 'SOLID_CROSS', 'DOTTED_CROSS', 'SOLID_POINT', 'DOTTED_POINT', got 'NEWLINE'
+Parser3.parseError (node_modules/mermaid/dist/mermaid.js:123898:28)
+    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
+    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
+    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
+    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
+    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
+    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
+    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
+    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
+    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
+    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+```
+
+### maid Result: INVALID
+
+```
+error[SE-META-UNSUPPORTED]: Title/accTitle/accDescr are not accepted by current Mermaid CLI for sequence diagrams.
+at test-fixtures/sequence/invalid/title-and-accessibility.mmd:2:3
+  1 | sequenceDiagram
+  2 |   title Checkout Flow
+    |   ^^^^^
+  3 |   accTitle Accessible Title
+hint: Remove this line (e.g., 'title …') to match mermaid-cli.
+
+error[SE-META-UNSUPPORTED]: Title/accTitle/accDescr are not accepted by current Mermaid CLI for sequence diagrams.
+at test-fixtures/sequence/invalid/title-and-accessibility.mmd:3:3
+  2 |   title Checkout Flow
+  3 |   accTitle Accessible Title
+    |   ^^^^^^^^
+  4 |   accDescr This diagram describes the checkout steps.
+hint: Remove this line (e.g., 'title …') to match mermaid-cli.
+
+error[SE-META-UNSUPPORTED]: Title/accTitle/accDescr are not accepted by current Mermaid CLI for sequence diagrams.
+at test-fixtures/sequence/invalid/title-and-accessibility.mmd:4:3
+  3 |   accTitle Accessible Title
+  4 |   accDescr This diagram describes the checkout steps.
+    |   ^^^^^^^^
+  5 |   participant A as Alice
+hint: Remove this line (e.g., 'title …') to match mermaid-cli.
+```
+
+### maid Auto-fix (`--fix`) Preview
+
+No auto-fix changes (safe level).
+
+### maid Auto-fix (`--fix=all`) Preview
+
+No auto-fix changes (all level).
+
+<details>
+<summary>View source code</summary>
+
+```
+sequenceDiagram
+  title Checkout Flow
+  accTitle Accessible Title
+  accDescr This diagram describes the checkout steps.
+  participant A as Alice
+  participant B as Bob
+  A->>B: Start
+
+
+```
+</details>
+
+---
+
+## 20. Unmatched End
 
 📄 **Source**: [`unmatched-end.mmd`](./invalid/unmatched-end.mmd)
 
@@ -1501,7 +1693,7 @@ sequenceDiagram
 
 ---
 
-## 19. Wrong Arrow
+## 21. Wrong Arrow
 
 📄 **Source**: [`wrong-arrow.mmd`](./invalid/wrong-arrow.mmd)
 

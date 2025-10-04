@@ -16,10 +16,10 @@ const text = fs.readFileSync(file, 'utf8');
 const { svg } = renderMermaid(text);
 
 // Expect participant boxes, lifelines, a message line and label
-expect(/class=\"actor-rect\"/.test(svg), 'missing actor-rect');
+// Actor boxes use shared .node-shape class
+expect(/class=\"node-shape\"/.test(svg), 'missing node-shape');
 expect(/class=\"lifeline\"/.test(svg), 'missing lifeline');
 expect(/class=\"msg-line/.test(svg), 'missing msg-line');
 expect(/class=\"msg-label\"/.test(svg), 'missing msg-label');
 
 console.log('OK renderer sequence smoke test');
-

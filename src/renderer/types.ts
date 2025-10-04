@@ -3,6 +3,7 @@
 export interface NodeStyle {
   stroke?: string;
   strokeWidth?: number;
+  strokeOpacity?: number;
   fill?: string;
 }
 
@@ -15,6 +16,18 @@ export interface Node {
   width?: number;
   height?: number;
   style?: NodeStyle;
+  link?: {
+    href?: string;
+    target?: string;
+    tooltip?: string;
+    call?: string; // for 'call' mode; informational only in static SVG
+  };
+  typed?: {
+    padding?: number;
+    cornerRadius?: number;
+    lean?: 'l' | 'r';
+    media?: { icon?: string; image?: string };
+  };
 }
 
 export interface Edge {
@@ -25,6 +38,7 @@ export interface Edge {
   type: ArrowType;
   markerStart?: 'none' | 'arrow' | 'circle' | 'cross';
   markerEnd?: 'none' | 'arrow' | 'circle' | 'cross';
+  style?: NodeStyle; // reuse basic stroke/strokeWidth/strokeOpacity
 }
 
 export interface Graph {

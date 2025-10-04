@@ -1,0 +1,9 @@
+stateDiagram-v2
+  state Composite {
+    [*] --> S1
+    S1 --> [H]
+    [H*] --> S2
+  }
+  [*] --> Composite
+  Composite --> [*]
+

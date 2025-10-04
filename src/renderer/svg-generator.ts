@@ -74,6 +74,8 @@ export class SVGRenderer implements IRenderer {
       const depthOf = (sg:any) => { let d=0; let p=sg.parent; while(p){ d++; p = map.get(p)?.parent; } return d; };
       const bgs: string[] = [];
       for (const sg of order) {
+        // Skip lane subgraphs (layout-only) identified by id containing "__lane"
+        if (sg.id && sg.id.includes('__lane')) continue;
         const x = sg.x + padX;
         const y = sg.y + padY;
         bgs.push(blockBackground(x, y, sg.width, sg.height, 0));
@@ -119,7 +121,7 @@ export class SVGRenderer implements IRenderer {
       edgeStroke: this.arrowStroke,
     });
     const css = `<style>${sharedCss}</style>`;
-    return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+    return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
   ${bg}
   ${css}
   ${elements.join('\n  ')}
@@ -174,15 +176,19 @@ export class SVGRenderer implements IRenderer {
     const stroke = (node.style?.stroke ?? undefined);
     const fill = (node.style?.fill ?? undefined);
     const styleAttr = this.buildNodeStyleAttrs({ stroke, strokeWidth, fill });
+    const typed = (node as any).typed as (undefined | { padding?: number; cornerRadius?: number; lean?: 'l'|'r'; media?: { icon?: string; image?: string } });
+    const innerPad = Math.max(0, (typed?.padding ?? 10));
 
     switch (node.shape) {
       case 'rectangle':
         shape = `<rect class="node-shape" ${styleAttr} x="${x}" y="${y}" width="${node.width}" height="${node.height}" rx="0" ry="0" />`;
         break;
 
-      case 'round':
-        shape = `<rect class="node-shape" ${styleAttr} x="${x}" y="${y}" width="${node.width}" height="${node.height}" rx="5" ry="5" />`;
+      case 'round': {
+        const rx = Math.max(0, typed?.cornerRadius ?? 5);
+        shape = `<rect class="node-shape" ${styleAttr} x="${x}" y="${y}" width="${node.width}" height="${node.height}" rx="${rx}" ry="${rx}" />`;
         break;
+      }
 
       case 'stadium':
         const radius = node.height / 2;
@@ -221,12 +227,20 @@ export class SVGRenderer implements IRenderer {
 
       case 'parallelogram': {
         const skew = node.width * 0.15;
-        const points = [
-          `${x + skew},${y}`,                       // top-left
-          `${x + node.width},${y}`,                 // top-right
-          `${x + node.width - skew},${y + node.height}`, // bottom-right
-          `${x},${y + node.height}`                 // bottom-left
-        ].join(' ');
+        const leftLean = typed?.lean === 'l';
+        const points = (leftLean
+          ? [
+              `${x},${y}`,
+              `${x + node.width - skew},${y}`,
+              `${x + node.width},${y + node.height}`,
+              `${x + skew},${y + node.height}`
+            ]
+          : [
+              `${x + skew},${y}`,
+              `${x + node.width},${y}`,
+              `${x + node.width - skew},${y + node.height}`,
+              `${x},${y + node.height}`
+            ]).join(' ');
         shape = `<polygon class="node-shape" ${styleAttr} points="${points}" />`;
         break;
       }
@@ -298,12 +312,36 @@ export class SVGRenderer implements IRenderer {
     }
 
     // Add text label with wrapping
-    const text = this.generateWrappedText(node.label, cx, labelCenterY, node.width - 20);
+    const text = this.generateWrappedText(node.label, cx, labelCenterY, node.width - innerPad * 2);
 
-    return `<g id="${node.id}">
+    // Optional typed media (image) near left edge
+    let media = '';
+    if (typed?.media?.image) {
+      const iw = Math.min(24, Math.max(12, node.height - 10));
+      const ih = iw;
+      const ix = x + 4;
+      const iy = y + (node.height - ih) / 2;
+      media = `<image xlink:href="${this.escapeXml(typed.media.image)}" x="${ix}" y="${iy}" width="${iw}" height="${ih}" />`;
+    }
+
+    const baseGroup = `<g id="${node.id}">
     ${shape}
+    ${media}
     ${text}
   </g>`;
+    const link = (node as any).link as (undefined | { href?: string; target?: string; tooltip?: string; call?: string });
+    if (link && link.href) {
+      const tt = link.tooltip ? `<title>${this.escapeXml(link.tooltip)}</title>` : '';
+      const tgt = link.target ? ` target="${this.escapeXml(link.target)}" rel="noopener noreferrer"` : '';
+      return `<a xlink:href="${this.escapeXml(link.href)}"${tgt} class="node-link">${tt}${baseGroup}</a>`;
+    }
+    if (link && link.tooltip) {
+      return `<g class="node-call">
+<title>${this.escapeXml(link.tooltip)}</title>
+${baseGroup}
+</g>`;
+    }
+    return baseGroup;
   }
 
   private generateWrappedText(text: string, x: number, y: number, maxWidth: number): string {
@@ -587,12 +625,29 @@ export class SVGRenderer implements IRenderer {
     const pathData = pathParts.join(' ');
 
     let edgeElement = `<path class="edge-path" d="${pathData}" stroke-linecap="round" stroke-linejoin="round"`;
+    // Per-edge style overrides (from linkStyle)
+    const styleStroke = (edge as any).style?.stroke as (string|undefined);
+    const styleStrokeWidth = (edge as any).style?.strokeWidth as (number|undefined);
+    const styleStrokeOpacity = (edge as any).style?.strokeOpacity as (number|undefined);
+    if ((edge as any).dasharray) strokeDasharray = String((edge as any).dasharray);
     if (strokeDasharray) {
       edgeElement += ` stroke-dasharray="${strokeDasharray}"`;
     }
+    if (styleStrokeWidth != null) {
+      edgeElement += ` stroke-width="${styleStrokeWidth}"`;
+    } else {
+      if (strokeWidth && strokeWidth !== 1.5) edgeElement += ` stroke-width="${strokeWidth}"`;
+    }
+    if (styleStrokeOpacity != null) {
+      edgeElement += ` stroke-opacity="${styleStrokeOpacity}"`;
+    }
+    if (styleStroke) {
+      edgeElement += ` stroke="${styleStroke}"`;
+    }
     // Apply explicit markers from edge if present
-    const startMarkUrl = mStart === 'arrow' ? 'url(#arrow)' : mStart === 'circle' ? 'url(#circle-marker)' : mStart === 'cross' ? 'url(#cross-marker)' : '';
-    const endMarkUrl = mEnd === 'arrow' ? 'url(#arrow)' : mEnd === 'circle' ? 'url(#circle-marker)' : mEnd === 'cross' ? 'url(#cross-marker)' : (markerEnd || '');
+    // Use overlay shapes for arrow/circle/cross; avoid marker URLs so per-edge color applies
+    const startMarkUrl = '';
+    const endMarkUrl = (markerEnd || '');
     // No tangent fix needed: last command is a straight L into the node boundary
     // Prefer overlay triangles for arrowheads; keep circle/cross as markers
     if (startMarkUrl && mStart !== 'arrow') edgeElement += ` marker-start="${startMarkUrl}"`;
@@ -619,20 +674,23 @@ export class SVGRenderer implements IRenderer {
       const vlenl = Math.hypot(vxl, vyl) || 1;
       const uxl = vxl / vlenl; const uyl = vyl / vlenl;
       const nxl = -uyl; const nyl = uxl;
-      const triLenL = 8; const triWL = 6;
+      // Scale overlay arrowhead with stroke width if provided (linkStyle)
+      const ow = (styleStrokeWidth != null ? styleStrokeWidth : strokeWidth);
+      const triLenL = Math.max(6, Math.min(14, 6 + (ow - 1.5) * 3));
+      const triWL   = Math.max(5, Math.min(12, 5 + (ow - 1.5) * 2.5));
       // Arrow points forward in direction of travel: tip AT boundaryEnd, base pulled back
       const p1xL = boundaryEnd.x, p1yL = boundaryEnd.y; // tip at boundary
       const baseXL = boundaryEnd.x - uxl * triLenL; const baseYL = boundaryEnd.y - uyl * triLenL;
       const p2xL = baseXL + nxl * (triWL/2), p2yL = baseYL + nyl * (triWL/2);
       const p3xL = baseXL - nxl * (triWL/2), p3yL = baseYL - nyl * (triWL/2);
-      overlay += triangleAtEnd(prevEndL, boundaryEnd, this.arrowStroke);
+      overlay += triangleAtEnd(prevEndL, boundaryEnd, (styleStroke || this.arrowStroke), triLenL, triWL);
       if (mStart === 'arrow' && points.length >= 2) {
         const firstLeg = points[1];
         const svx = boundaryStart.x - firstLeg.x; const svy = boundaryStart.y - firstLeg.y;
         const slen = Math.hypot(svx, svy) || 1; const sux = svx/slen; const suy = svy/slen;
         const snx = -suy; const sny = sux;
         const sbaseX = boundaryStart.x - sux * triLenL; const sbaseY = boundaryStart.y - suy * triLenL;
-        overlay += triangleAtStart(boundaryStart, firstLeg, this.arrowStroke);
+        overlay += triangleAtStart(boundaryStart, firstLeg, (styleStroke || this.arrowStroke), triLenL, triWL);
       }
 
       const pathGroup = `<g>
@@ -652,9 +710,10 @@ export class SVGRenderer implements IRenderer {
     const vlen = Math.hypot(vx, vy) || 1;
     const ux = vx / vlen; const uy = vy / vlen;
     const nx = -uy; const ny = ux;
-    // reuse triLen from above (8px)
-    const triLen = 8; // px overlay triangle length
-    const triW = 6;   // px base width
+    // Scale overlay arrowhead with stroke width if provided (linkStyle)
+    const ow2 = (styleStrokeWidth != null ? styleStrokeWidth : strokeWidth);
+    const triLen = Math.max(6, Math.min(14, 6 + (ow2 - 1.5) * 3));
+    const triW   = Math.max(5, Math.min(12, 5 + (ow2 - 1.5) * 2.5));
     // Arrow points forward in direction of travel: tip AT boundaryEnd, base pulled back
     const p1x = boundaryEnd.x, p1y = boundaryEnd.y; // tip at boundary
     const baseX = boundaryEnd.x - ux * triLen;
@@ -662,7 +721,7 @@ export class SVGRenderer implements IRenderer {
     const p2x = baseX + nx * (triW/2), p2y = baseY + ny * (triW/2);
     const p3x = baseX - nx * (triW/2), p3y = baseY - ny * (triW/2);
 
-    if (mEnd === 'arrow') overlay += triangleAtEnd(prevEnd, boundaryEnd, this.arrowStroke);
+    if (mEnd === 'arrow') overlay += triangleAtEnd(prevEnd, boundaryEnd, (styleStroke || this.arrowStroke), triLen, triW);
     // Optional: support start arrow overlay if needed
     if (mStart === 'arrow' && points.length >= 2) {
       const firstLeg = points[1];
@@ -670,8 +729,16 @@ export class SVGRenderer implements IRenderer {
       const slen = Math.hypot(svx, svy) || 1; const sux = svx/slen; const suy = svy/slen;
       const snx = -suy; const sny = sux;
       // Arrow points backward from boundaryStart toward firstLeg (start arrow points back toward source)
-      overlay += triangleAtStart(boundaryStart, firstLeg, this.arrowStroke);
+      overlay += triangleAtStart(boundaryStart, firstLeg, (styleStroke || this.arrowStroke), triLen, triW);
     }
+    // Circle/Cross overlays for both ends
+    const owStroke = (styleStroke || this.arrowStroke);
+    const addCircle = (at:{x:number;y:number}) => `<circle cx=\"${at.x}\" cy=\"${at.y}\" r=\"4.5\" fill=\"none\" stroke=\"${owStroke}\" stroke-width=\"${ow2}\" />`;
+    const addCross = (at:{x:number;y:number}) => `<g transform=\"translate(${at.x},${at.y})\"><path d=\"M -4 -4 L 4 4\" stroke=\"${owStroke}\" stroke-width=\"${ow2}\"/><path d=\"M -4 4 L 4 -4\" stroke=\"${owStroke}\" stroke-width=\"${ow2}\"/></g>`;
+    if (mEnd === 'circle') overlay += addCircle(boundaryEnd);
+    if (mEnd === 'cross') overlay += addCross(boundaryEnd);
+    if (mStart === 'circle') overlay += addCircle(boundaryStart);
+    if (mStart === 'cross') overlay += addCross(boundaryStart);
 
     if (overlay) {
       const grouped = `<g>${edgeElement}\n${overlay}</g>`;
@@ -800,6 +867,17 @@ export class SVGRenderer implements IRenderer {
       {x:node.x, y:node.y+node.height}
     ]);
     switch (shape) {
+      case 'round': {
+        // Approximate as rectangle for intersection; fall back to nearest boundary
+        const poly = [
+          {x:node.x, y:node.y},
+          {x:node.x+node.width, y:node.y},
+          {x:node.x+node.width, y:node.y+node.height},
+          {x:node.x, y:node.y+node.height}
+        ];
+        const hit = this.linePolygonIntersection(p1, p2, poly);
+        return hit || this.nearestPointOnPolygon(p2, poly);
+      }
       case 'circle': {
         const cx = node.x + node.width/2; const cy = node.y + node.height/2; const r = Math.min(node.width, node.height)/2;
         return this.lineCircleIntersection(p1, p2, {cx, cy, r});
@@ -807,7 +885,8 @@ export class SVGRenderer implements IRenderer {
       case 'diamond': {
         const cx = node.x + node.width/2; const cy = node.y + node.height/2;
         const poly = [ {x:cx, y:node.y}, {x:node.x+node.width, y:cy}, {x:cx, y:node.y+node.height}, {x:node.x, y:cy} ];
-        return this.linePolygonIntersection(p1, p2, poly);
+        const hit = this.linePolygonIntersection(p1, p2, poly);
+        return hit || this.nearestPointOnPolygon(p2, poly);
       }
       case 'hexagon': {
         const s = Math.max(10, node.width * 0.2);
@@ -819,7 +898,8 @@ export class SVGRenderer implements IRenderer {
           {x:node.x + s, y:node.y + node.height},
           {x:node.x, y:node.y + node.height/2}
         ];
-        return this.linePolygonIntersection(p1, p2, poly);
+        const hit = this.linePolygonIntersection(p1, p2, poly);
+        return hit || this.nearestPointOnPolygon(p2, poly);
       }
       case 'parallelogram': {
         const o = Math.min(node.width*0.25, node.height*0.6);
@@ -829,7 +909,8 @@ export class SVGRenderer implements IRenderer {
           {x:node.x + node.width - o, y:node.y + node.height},
           {x:node.x, y:node.y + node.height}
         ];
-        return this.linePolygonIntersection(p1, p2, poly);
+        const hit = this.linePolygonIntersection(p1, p2, poly);
+        return hit || this.nearestPointOnPolygon(p2, poly);
       }
       case 'trapezoid': { // top narrow
         const o = Math.min(node.width*0.2, node.height*0.5);
@@ -839,7 +920,8 @@ export class SVGRenderer implements IRenderer {
           {x:node.x + node.width, y:node.y + node.height},
           {x:node.x, y:node.y + node.height}
         ];
-        return this.linePolygonIntersection(p1, p2, poly);
+        const hit = this.linePolygonIntersection(p1, p2, poly);
+        return hit || this.nearestPointOnPolygon(p2, poly);
       }
       case 'trapezoidAlt': { // bottom narrow
         const o = Math.min(node.width*0.2, node.height*0.5);
@@ -849,7 +931,8 @@ export class SVGRenderer implements IRenderer {
           {x:node.x + node.width - o, y:node.y + node.height},
           {x:node.x + o, y:node.y + node.height}
         ];
-        return this.linePolygonIntersection(p1, p2, poly);
+        const hit = this.linePolygonIntersection(p1, p2, poly);
+        return hit || this.nearestPointOnPolygon(p2, poly);
       }
       case 'stadium': { // capsule: rectangle with semicircle caps left/right
         const r = Math.min(node.height/2, node.width/2);
@@ -872,11 +955,14 @@ export class SVGRenderer implements IRenderer {
           for (const pt of pts) if (pt) { const d = -( (pt.x - p2.x)**2 + (pt.y - p2.y)**2 ); if (d>bestd) { bestd=d; best=pt; } }
           return best;
         };
-        return pick(left, right);
+        const hit = pick(left, right);
+        return hit || this.nearestPointOnPolygon(p2, rect);
       }
       default: {
         // default to rectangle
-        return this.linePolygonIntersection(p1, p2, rectPoly());
+        const poly = rectPoly();
+        const hit = this.linePolygonIntersection(p1, p2, poly);
+        return hit || this.nearestPointOnPolygon(p2, poly);
       }
     }
   }
@@ -909,6 +995,26 @@ export class SVGRenderer implements IRenderer {
       }
     }
     return best;
+  }
+
+  // Fallback helpers when lines are colinear or miss due to smoothing
+  private nearestPointOnSegment(p:{x:number;y:number}, a:{x:number;y:number}, b:{x:number;y:number}): {x:number;y:number} {
+    const abx = b.x - a.x, aby = b.y - a.y;
+    const ab2 = abx*abx + aby*aby || 1;
+    const apx = p.x - a.x, apy = p.y - a.y;
+    let t = (apx*abx + apy*aby) / ab2; t = Math.max(0, Math.min(1, t));
+    return { x: a.x + abx*t, y: a.y + aby*t };
+  }
+
+  private nearestPointOnPolygon(to:{x:number;y:number}, poly:Array<{x:number;y:number}>): {x:number;y:number} {
+    let best = poly[0]; let bestD = Infinity;
+    for (let i=0;i<poly.length;i++){
+      const a = poly[i]; const b = poly[(i+1)%poly.length];
+      const p = this.nearestPointOnSegment(to, a, b);
+      const d = (p.x - to.x)*(p.x - to.x) + (p.y - to.y)*(p.y - to.y);
+      if (d < bestD) { bestD = d; best = p; }
+    }
+    return { x: best.x, y: best.y };
   }
 
   private segmentIntersection(p:{x:number;y:number}, p2:{x:number;y:number}, q:{x:number;y:number}, q2:{x:number;y:number}): {x:number;y:number;t:number;u:number}|null {

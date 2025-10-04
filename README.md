@@ -219,6 +219,14 @@ npm run compare:renderers:sequence   # or :flowchart / :pie
 ```
 Outputs (Mermaid+Maid SVG/PNG and diffs) go to `.tmp-compare-all/`.
 
+### Development
+
+#### Parsing Parity Quick Loop
+- Compare against Mermaid CLI for one type: `node scripts/compare-linters.js flowchart`
+- Run error-code tests for all: `npm run test:errors:all`
+- Regenerate previews (all types): `npm run generate:previews`
+- CI parity bundle locally: `npm run ci:test` and `npm run ci:previews`
+
 ### Autofix in a nutshell
 
 ```bash

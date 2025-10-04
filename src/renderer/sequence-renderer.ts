@@ -4,7 +4,7 @@ import { layoutSequence } from './sequence-layout.js';
 import { escapeXml, measureText } from './utils.js';
 import { triangleAtEnd, triangleAtStart } from './arrow-utils.js';
 import { blockBackground, blockOverlay } from './block-utils.js';
-import { buildSharedCss } from './styles.js';
+import { buildSharedCss, applyFlowLikeTheme } from './styles.js';
 
 export interface SequenceRenderOptions {
   width?: number; // not used, layout is intrinsic
@@ -27,6 +27,19 @@ export function renderSequence(model: SequenceModel, opts: SequenceRenderOptions
     edgeStroke: '#555555',
   });
   svgParts.push(`  <style>${sharedCss}</style>`);
+
+  // Accessible <title>/<desc> and visible title
+  const accTitle = model.accTitle || model.title || undefined;
+  const accDesc = model.accDescr || undefined;
+  if (accTitle) svgParts.push(`  <title>${escapeXml(accTitle)}</title>`);
+  if (accDesc) svgParts.push(`  <desc>${escapeXml(accDesc)}</desc>`);
+  if (model.title) {
+    const t = escapeXml(model.title);
+    const tW = Math.max(20, measureText(model.title, 16));
+    const xMid = width / 2;
+    // place near top, above participant boxes
+    svgParts.push(`  <text class="node-label" x="${xMid}" y="0" text-anchor="middle" font-size="16">${t}</text>`);
+  }
 
   // Participants
   for (const p of layout.participants) drawParticipant(svgParts, p);
@@ -54,7 +67,7 @@ export function renderSequence(model: SequenceModel, opts: SequenceRenderOptions
     const title = b.title ? `${b.type}: ${b.title}` : b.type;
     const branches = (b.branches || []).map(br => ({ y: br.y, title: br.title }));
     // Left-align title/branch labels to mirror Mermaid's sequence blocks
-    svgParts.push(blockOverlay(b.x, b.y, b.width, b.height, title, branches, 0, 'left', 'left', 0));
+    svgParts.push(blockOverlay(b.x, b.y, b.width, b.height, title, branches.map(br => ({...br, y: br.y + 0.5})), 8, 'left', 'left', 0));
   }
 
   // Bottom actor boxes (Mermaid draws both top and bottom)
@@ -62,7 +75,8 @@ export function renderSequence(model: SequenceModel, opts: SequenceRenderOptions
 
   svgParts.push('</svg>');
   let svg = svgParts.join('\n');
-  if (opts.theme) svg = applySequenceTheme(svg, opts.theme);
+  // Apply baseline flow-like theme, then sequence-specific overrides
+  if (opts.theme) svg = applySequenceTheme(applyFlowLikeTheme(svg, opts.theme), opts.theme);
   return svg;
 }
 
@@ -90,8 +104,9 @@ function drawMessage(out: string[], m: LayoutMessage) {
   out.push(`  <path class="${cls}" d="M ${x1} ${y} L ${x2} ${y}" />`);
   // Markers: start/end
   const start = { x: x1, y } as const; const end = { x: x2, y } as const;
-  if (m.endMarker === 'arrow') out.push('  ' + triangleAtEnd(start, end));
-  if (m.startMarker === 'arrow') out.push('  ' + triangleAtStart(start, end));
+  // Slightly larger overlay triangles for sequence arrows
+  if (m.endMarker === 'arrow') out.push('  ' + triangleAtEnd(start, end, undefined as any, 9, 7));
+  if (m.startMarker === 'arrow') out.push('  ' + triangleAtStart(start, end, undefined as any, 9, 7));
   if (m.endMarker === 'open') out.push(`  <circle class="openhead" cx="${x2}" cy="${y}" r="4" />`);
   if (m.startMarker === 'open') out.push(`  <circle class="openhead" cx="${x1}" cy="${y}" r="4" />`);
   if (m.endMarker === 'cross') out.push(`  <g class="crosshead" transform="translate(${x2},${y})"><path d="M -4 -4 L 4 4"/><path d="M -4 4 L 4 -4"/></g>`);
@@ -112,8 +127,8 @@ function drawMessageLabel(out: string[], m: LayoutMessage, label: string, _count
   const h = 16;
   const w = Math.max(20, measureText(label, 12) + 10);
   const x = xMid - w / 2;
-  const y = m.y - 10 - h / 2; // above the line
-  out.push(`  <rect class=\"msg-label-bg\" x=\"${x}\" y=\"${y}\" width=\"${w}\" height=\"${h}\" rx=\"0\"/>`);
+  const y = m.y - 14 - h / 2; // a bit more above the line
+  out.push(`  <rect class=\"msg-label-bg\" x=\"${x}\" y=\"${y}\" width=\"${w}\" height=\"${h}\" rx=\"3\"/>`);
   out.push(`  <text class=\"msg-label\" x=\"${xMid}\" y=\"${y + h/2}\" text-anchor=\"middle\">${escapeXml(label)}</text>`);
 }
 
@@ -148,16 +163,14 @@ function drawBlock(out: string[], b: LayoutBlock) {
 
 function applySequenceTheme(svg: string, theme: Record<string, any>): string {
   let out = svg;
-  // actor colors
-  if (theme.actorBkg) out = out.replace(/\.actor-rect\s*\{[^}]*\}/, (m) => m.replace(/fill:\s*[^;]+;/, `fill: ${String(theme.actorBkg)};`));
-  if (theme.actorBorder) out = out.replace(/\.actor-rect\s*\{[^}]*\}/, (m) => m.replace(/stroke:\s*[^;]+;/, `stroke: ${String(theme.actorBorder)};`));
-  if (theme.actorTextColor) out = out.replace(/\.actor-label\s*\{[^}]*\}/, (m) => m.replace(/fill:\s*[^;]+;/, `fill: ${String(theme.actorTextColor)};`));
+  // Participant colors piggyback on .node-shape/.node-label via applyFlowLikeTheme;
   // lifeline color
   if (theme.lifelineColor) out = out.replace(/\.lifeline\s*\{[^}]*\}/, (m) => m.replace(/stroke:\s*[^;]+;/, `stroke: ${String(theme.lifelineColor)};`));
   // message line + arrowhead
   if (theme.lineColor) out = out.replace(/\.msg-line\s*\{[^}]*\}/, (m) => m.replace(/stroke:\s*[^;]+;/, `stroke: ${String(theme.lineColor)};`));
   if (theme.arrowheadColor) {
-    out = out.replace(/\.arrowhead\s*\{[^}]*\}/, (m) => m.replace(/fill:\s*[^;]+;/, `fill: ${String(theme.arrowheadColor)};`));
+    // Replace inline triangle fills (overlay arrowheads)
+    out = out.replace(/(<path d=\"M[0-9.,\s-]+Z\" fill=\")[^\"]+(\")/g, (_m, p1, p2) => `${p1}${String(theme.arrowheadColor)}${p2}`);
     out = out.replace(/\.openhead\s*\{[^}]*\}/, (m) => m.replace(/stroke:\s*[^;]+;/, `stroke: ${String(theme.arrowheadColor)};`));
     out = out.replace(/\.crosshead\s*\{[^}]*\}/, (m) => m.replace(/stroke:\s*[^;]+;/, `stroke: ${String(theme.arrowheadColor)};`));
   }

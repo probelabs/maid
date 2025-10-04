@@ -200,7 +200,27 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
       continue;
     }
     if (is('FL-LINK-MISSING', e)) {
-      if (level === 'all') edits.push(insertAt(text, at(e), ' --> '));
+      if (level === 'all') {
+        const line = e.line;
+        const lineText = lineTextAt(text, line);
+        if (!/-->/.test(lineText)) {
+          // Heuristic: find two consecutive node refs and insert an arrow between them
+          // Supports simple IDs and IDs with immediate shapes: A[...], A(...), A{...}, A[[...]], A((...))
+          const shapePart = "(?:\\[[^\\]]*\\]|\\([^\\)]*\\)|\\{[^}]*\\}|\\[\\[[^\\]]*\\]\\]|\\(\\([^\\)]*\\)\\))?";
+          const id = "[A-Za-z0-9_]+";
+          const re = new RegExp(`^\\s*(${id}${shapePart})\\s+(${id})`);
+          const m = re.exec(lineText);
+          if (m) {
+            const before = m[0];
+            const insertIdx = (before.length - m[2].length); // 0-based index where second id starts
+            const col = insertIdx + 1; // to 1-based column
+            edits.push(insertAt(text, { line, column: col }, ' --> '));
+          } else {
+            // Fallback to original caret-based insertion
+            edits.push(insertAt(text, at(e), ' --> '));
+          }
+        }
+      }
       continue;
     }
     if (is('FL-NODE-UNCLOSED-BRACKET', e)) {

@@ -18,6 +18,7 @@ export class SequenceParser extends CstParser {
 
   private line = this.RULE('line', () => {
     this.OR([
+      { ALT: () => this.SUBRULE(this.metaStmt) },
       { ALT: () => this.SUBRULE(this.participantDecl) },
       { ALT: () => this.SUBRULE(this.autonumberStmt) },
       { ALT: () => this.SUBRULE(this.noteStmt) },
@@ -26,6 +27,8 @@ export class SequenceParser extends CstParser {
       { ALT: () => this.SUBRULE(this.createStmt) },
       { ALT: () => this.SUBRULE(this.destroyStmt) },
       { ALT: () => this.SUBRULE(this.linkStmt) },
+      { ALT: () => this.SUBRULE(this.propertiesStmt) },
+      { ALT: () => this.SUBRULE(this.detailsStmt) },
       { ALT: () => this.SUBRULE(this.altBlock) },
       { ALT: () => this.SUBRULE(this.optBlock) },
       { ALT: () => this.SUBRULE(this.loopBlock) },
@@ -36,6 +39,19 @@ export class SequenceParser extends CstParser {
       { ALT: () => this.SUBRULE(this.boxBlock) },
       { ALT: () => this.SUBRULE(this.messageStmt) },
       { ALT: () => this.SUBRULE(this.blankLine) },
+    ]);
+  });
+
+  private metaStmt = this.RULE('metaStmt', () => {
+    this.OR([
+      { ALT: () => this.CONSUME(t.TitleKeyword) },
+      { ALT: () => this.CONSUME(t.AccTitleKeyword) },
+      { ALT: () => this.CONSUME(t.AccDescrKeyword) },
+    ]);
+    this.OPTION(() => this.SUBRULE(this.lineRemainder));
+    this.OR2([
+      { ALT: () => this.AT_LEAST_ONE(() => this.CONSUME(t.Newline)) },
+      { ALT: () => this.CONSUME(EOF) }
     ]);
   });
 
@@ -178,6 +194,26 @@ export class SequenceParser extends CstParser {
     ]);
   });
 
+  private propertiesStmt = this.RULE('propertiesStmt', () => {
+    this.CONSUME(t.PropertiesKeyword);
+    this.OPTION(() => this.CONSUME(t.Colon));
+    this.OPTION1(() => this.SUBRULE(this.lineRemainder));
+    this.OR2([
+      { ALT: () => this.AT_LEAST_ONE(() => this.CONSUME(t.Newline)) },
+      { ALT: () => this.CONSUME(EOF) }
+    ]);
+  });
+
+  private detailsStmt = this.RULE('detailsStmt', () => {
+    this.CONSUME(t.DetailsKeyword);
+    this.OPTION(() => this.CONSUME(t.Colon));
+    this.OPTION1(() => this.SUBRULE(this.lineRemainder));
+    this.OR2([
+      { ALT: () => this.AT_LEAST_ONE(() => this.CONSUME(t.Newline)) },
+      { ALT: () => this.CONSUME(EOF) }
+    ]);
+  });
+
   private messageStmt = this.RULE('messageStmt', () => {
     this.SUBRULE(this.actorRef);
     this.SUBRULE(this.arrow);
@@ -254,7 +290,7 @@ export class SequenceParser extends CstParser {
 
   private parBlock = this.RULE('parBlock', () => {
     this.CONSUME(t.ParKeyword);
-    this.OPTION(() => this.SUBRULE(this.lineRemainder));
+    this.OPTION(() => this.SUBRULE(this.parHeader));
     this.AT_LEAST_ONE(() => this.CONSUME(t.Newline));
     this.MANY(() => this.SUBRULE(this.line));
     this.MANY2(() => {
@@ -267,6 +303,21 @@ export class SequenceParser extends CstParser {
     this.OR3([
       { ALT: () => this.AT_LEAST_ONE3(() => this.CONSUME3(t.Newline)) },
       { ALT: () => this.CONSUME3(EOF) }
+    ]);
+  });
+
+  private parHeader = this.RULE('parHeader', () => {
+    this.OR([
+      {
+        GATE: () => this.LA(1).tokenType === t.OverKeyword,
+        ALT: () => {
+          this.CONSUME(t.OverKeyword);
+          this.SUBRULE(this.actorRef);
+          this.OPTION(() => { this.CONSUME(t.Comma); this.SUBRULE2(this.actorRef); });
+          this.OPTION1(() => this.SUBRULE(this.lineRemainder));
+        }
+      },
+      { ALT: () => this.SUBRULE2(this.lineRemainder) }
     ]);
   });
 
@@ -348,6 +399,9 @@ export class SequenceParser extends CstParser {
       { ALT: () => this.CONSUME(t.BreakKeyword) },
       { ALT: () => this.CONSUME(t.BoxKeyword) },
       { ALT: () => this.CONSUME(t.EndKeyword) },
+      { ALT: () => this.CONSUME(t.TitleKeyword) },
+      { ALT: () => this.CONSUME(t.AccTitleKeyword) },
+      { ALT: () => this.CONSUME(t.AccDescrKeyword) },
       { ALT: () => this.CONSUME(t.NoteKeyword) },
       { ALT: () => this.CONSUME(t.LeftKeyword) },
       { ALT: () => this.CONSUME(t.RightKeyword) },

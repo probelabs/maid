@@ -24,6 +24,8 @@ export const StyleClassDefKw = createToken({ name: 'StyleClassDefKw', pattern: /
 export const StyleClassKw = createToken({ name: 'StyleClassKw', pattern: /class(?!Diagram)/, longer_alt: Identifier });
 
 export const Start = createToken({ name: 'Start', pattern: /\[\*\]/ });
+export const HistoryShallow = createToken({ name: 'HistoryShallow', pattern: /\[H\]/ });
+export const HistoryDeep = createToken({ name: 'HistoryDeep', pattern: /\[H\*\]/ });
 export const Arrow = createToken({ name: 'Arrow', pattern: /-->/ });
 export const InvalidArrow = createToken({ name: 'InvalidArrow', pattern: /->(?!>)/ });
 export const Hyphen = createToken({ name: 'Hyphen', pattern: /-/ });
@@ -52,6 +54,8 @@ export const allTokens = [
   NoteKw, LeftKw, RightKw, OfKw, OverKw,
   AngleAngleOpen, AngleAngleClose,
   Start,
+  HistoryDeep,
+  HistoryShallow,
   Arrow,
   InvalidArrow,
   Dashes,

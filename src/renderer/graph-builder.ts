@@ -11,10 +11,12 @@ export class GraphBuilder {
   private edgeCounter = 0;
   private subgraphs: Subgraph[] = [];
   private currentSubgraphStack: string[] = [];
+  private pendingLinkStyles: Array<{ indices: number[]; props: Record<string,string> }>= [];
   // Styling support (classDef/class/style)
   private classStyles: Map<string, Record<string,string>> = new Map();
   private nodeStyles: Map<string, Record<string,string>> = new Map();
   private nodeClasses: Map<string, Set<string>> = new Map();
+  private nodeLinks: Map<string, { href?: string; target?: string; tooltip?: string; call?: string }> = new Map();
 
   build(cst: CstNode | undefined): Graph {
     this.reset();
@@ -31,6 +33,12 @@ export class GraphBuilder {
 
     const direction = this.extractDirection(cst);
     this.processStatements(cst);
+
+    // Apply any collected node links onto nodes (if node exists)
+    for (const [id, link] of this.nodeLinks.entries()) {
+      const node = this.nodes.get(id);
+      if (node) node.link = link;
+    }
 
     return {
       nodes: Array.from(this.nodes.values()),
@@ -50,6 +58,8 @@ export class GraphBuilder {
     this.classStyles.clear();
     this.nodeStyles.clear();
     this.nodeClasses.clear();
+    this.pendingLinkStyles = [];
+    this.nodeLinks.clear();
   }
 
   private extractDirection(cst: CstNode): Direction {
@@ -81,9 +91,64 @@ export class GraphBuilder {
         this.processClassAssign(stmt.children.classStatement[0] as CstNode);
       } else if (stmt.children?.styleStatement) {
         this.processStyle(stmt.children.styleStatement[0] as CstNode);
+      } else if (stmt.children?.linkStyleStatement) {
+        this.processLinkStyle(stmt.children.linkStyleStatement[0] as CstNode);
+      } else if (stmt.children?.clickStatement) {
+        this.processClick(stmt.children.clickStatement[0] as CstNode);
       }
       // Skip class, style, and other statements for now
     }
+
+    // Apply pending link styles to edges after all edges have been created
+    this.applyLinkStyles();
+  }
+
+  private unquote(s: string | undefined): string | undefined {
+    if (!s) return s;
+    if ((s.startsWith('"') && s.endsWith('"')) || (s.startsWith("'") && s.endsWith("'"))) return s.slice(1, -1);
+    return s;
+  }
+
+  private processClick(cst: CstNode) {
+    const ch = (cst.children || {}) as any;
+    const tgtTok = (ch.clickTarget?.[0] as IToken | undefined);
+    if (!tgtTok) return;
+    const id = tgtTok.image;
+    const link: { href?: string; target?: string; tooltip?: string; call?: string } = {};
+    if (ch.clickHref && ch.clickHref[0]) {
+      const hrefCh = (ch.clickHref[0].children || {}) as any;
+      if (hrefCh.url && hrefCh.url[0]) link.href = this.unquote((hrefCh.url[0] as IToken).image);
+      if (hrefCh.tooltip && hrefCh.tooltip[0]) link.tooltip = this.unquote((hrefCh.tooltip[0] as IToken).image);
+      if (hrefCh.target && hrefCh.target[0]) link.target = (hrefCh.target[0] as IToken).image;
+    } else if (ch.clickCall && ch.clickCall[0]) {
+      const callCh = (ch.clickCall[0].children || {}) as any;
+      if (callCh.fn && callCh.fn[0]) link.call = (callCh.fn[0] as IToken).image;
+      if (callCh.tooltip && callCh.tooltip[0]) link.tooltip = this.unquote((callCh.tooltip[0] as IToken).image);
+    } else {
+      // Legacy fallback
+      const idents: IToken[] = (ch.Identifier as IToken[] | undefined) || [];
+      const texts: IToken[] = (ch.Text as IToken[] | undefined) || [];
+      const quotes: IToken[] = (ch.QuotedString as IToken[] | undefined) || [];
+      const modeTok = idents.find(t => /^(href|call|callback)$/i.test(t.image));
+      const mode = modeTok?.image?.toLowerCase();
+      if (mode === 'href') {
+        const urlTok = quotes[0];
+        const tipTok = quotes[1];
+        const targetTok = idents.find(t => /^_(blank|self|parent|top)$/i.test(t.image));
+        if (urlTok) link.href = this.unquote(urlTok.image);
+        if (tipTok) link.tooltip = this.unquote(tipTok.image);
+        if (targetTok) link.target = targetTok.image;
+      } else if (mode === 'call' || mode === 'callback') {
+        const reserved = new Set(['href','call','callback','_blank','_self','_parent','_top']);
+        const after = idents.filter(t => (t.startOffset ?? 0) > (modeTok?.startOffset ?? -1));
+        const nameTok = after.find(t => !reserved.has(t.image.toLowerCase()));
+        const tstr = texts.map(t => t.image).join(' ').trim();
+        link.call = nameTok ? nameTok.image + (tstr ? ` ${tstr}` : '') : (tstr || undefined);
+        const tipTok = quotes[0];
+        if (tipTok) link.tooltip = this.unquote(tipTok.image);
+      }
+    }
+    if (Object.keys(link).length) this.nodeLinks.set(id, { ...(this.nodeLinks.get(id) || {}), ...link });
   }
 
   private processNodeStatement(stmt: CstNode) {
@@ -214,7 +279,7 @@ export class GraphBuilder {
       return null;
     }
 
-    // Extract shape and label
+    // Extract shape and label (bracket-based)
     let shape: NodeShape = 'rectangle';
     let label = id; // Default label is the ID
 
@@ -225,6 +290,31 @@ export class GraphBuilder {
       if (result.label) label = result.label;
     }
 
+    // Typed-shape attribute object after node id (A@{ ... })
+    const attrNode = (children as any).attrObject?.[0] as CstNode | undefined;
+    let typedShape: { shape?: string; label?: string; padding?: number; cornerRadius?: number; icon?: string; image?: string; lean?: 'l'|'r' } | undefined;
+    if (attrNode && !shapeNode) {
+      typedShape = this.parseTypedAttrObject(attrNode);
+      if (typedShape.shape) {
+        const m = typedShape.shape;
+        if (m === 'rect') shape = 'rectangle';
+        else if (m === 'round' || m === 'rounded') shape = 'round';
+        else if (m === 'stadium') shape = 'stadium';
+        else if (m === 'subroutine') shape = 'subroutine';
+        else if (m === 'circle') shape = 'circle';
+        else if (m === 'cylinder') shape = 'cylinder';
+        else if (m === 'diamond') shape = 'diamond';
+        else if (m === 'trapezoid') shape = 'trapezoid';
+        else if (m === 'trapezoidAlt') shape = 'trapezoidAlt';
+        else if (m === 'parallelogram' || m === 'lean-l' || m === 'lean-r') { shape = 'parallelogram'; typedShape.lean = (m === 'lean-l' ? 'l' : (m === 'lean-r' ? 'r' : undefined)); }
+        else if (m === 'hexagon') shape = 'hexagon';
+        else if (m === 'icon' || m === 'image') shape = 'rectangle';
+      }
+      if (typeof typedShape.label === 'string' && typedShape.label.length > 0) {
+        label = typedShape.label;
+      }
+    }
+
     // Capture inline class annotation if present
     const clsTok = (children as any).nodeClass?.[0] as IToken | undefined;
     if (clsTok) {
@@ -233,7 +323,47 @@ export class GraphBuilder {
       this.nodeClasses.set(id, set);
     }
 
-    return { id, label, shape };
+    const out: any = { id, label, shape } as Node;
+    if (typedShape) {
+      const padding = typedShape.padding;
+      const cornerRadius = typedShape.cornerRadius;
+      const lean = typedShape.lean;
+      const media = (typedShape.icon || typedShape.image) ? { icon: typedShape.icon, image: typedShape.image } : undefined;
+      out.typed = { padding, cornerRadius, lean, media };
+    }
+    return out;
+  }
+
+  private parseTypedAttrObject(attrNode: CstNode): { shape?: string; label?: string; padding?: number; cornerRadius?: number; icon?: string; image?: string } {
+    const ch = (attrNode.children || {}) as any;
+    const pairs: CstNode[] = (ch.attrPair || []) as CstNode[];
+    const out: any = {};
+    for (const p of pairs) {
+      const keyTok = (p.children?.attrKey?.[0] as IToken | undefined);
+      if (!keyTok) continue;
+      const k = keyTok.image;
+      const vTok = (p.children?.QuotedString?.[0] || p.children?.Identifier?.[0] || p.children?.NumberLiteral?.[0] || p.children?.Text?.[0]) as IToken | undefined;
+      if (!vTok) continue;
+      let raw = vTok.image;
+      if ((raw.startsWith('"') && raw.endsWith('"')) || (raw.startsWith("'") && raw.endsWith("'"))) raw = raw.slice(1, -1);
+      switch (k) {
+        case 'shape': out.shape = raw; break;
+        case 'label': out.label = raw; break;
+        case 'padding': {
+          const n = parseFloat(raw);
+          if (Number.isFinite(n)) out.padding = n;
+          break;
+        }
+        case 'cornerRadius': {
+          const n = parseFloat(raw);
+          if (Number.isFinite(n)) out.cornerRadius = n;
+          break;
+        }
+        case 'icon': out.icon = raw; break;
+        case 'image': out.image = raw; break;
+      }
+    }
+    return out;
   }
 
   private extractShapeAndLabel(shapeNode: CstNode): { shape: NodeShape; label: string } {
@@ -577,6 +707,63 @@ export class GraphBuilder {
       if (k && v) props[k.trim()] = v.trim();
     }
     return props;
+  }
+
+  private processLinkStyle(cst: CstNode) {
+    const ch = (cst.children || {}) as any;
+    // Prefer structured: linkStyleIndexList + linkStylePairs
+    if (ch.linkStyleIndexList && ch.linkStylePairs) {
+      const idxNode = ch.linkStyleIndexList[0] as CstNode;
+      const pairNode = ch.linkStylePairs[0] as CstNode;
+      const idxToks: IToken[] = ((idxNode.children || {}) as any).index || [];
+      const indices = idxToks.map(t => parseInt(t.image, 10)).filter(n => Number.isFinite(n));
+      // Extract key:value pairs
+      const pairs: CstNode[] = ((pairNode.children || {}) as any).linkStylePair || [];
+      const props: Record<string,string> = {};
+      for (const p of pairs) {
+        const pch = (p.children || {}) as any;
+        const keyTok = pch.key?.[0] as IToken | undefined;
+        const vTok = (pch.valueColor?.[0] || pch.valueQuoted?.[0] || pch.valueNum?.[0] || pch.valueId?.[0] || pch.valueText?.[0]) as IToken | undefined;
+        if (!keyTok || !vTok) continue;
+        let val = vTok.image;
+        if ((vTok.tokenType?.name === 'QuotedString') && (val.startsWith('"') || val.startsWith("'"))) {
+          val = val.slice(1, -1);
+        }
+        props[keyTok.image] = val;
+      }
+      this.pendingLinkStyles.push({ indices, props });
+      return;
+    }
+    // Fallback: legacy token sweep
+    const nums = (cst.children?.NumberLiteral as IToken[] | undefined) || [];
+    const indices = nums.map(n => parseInt(n.image, 10)).filter(n => Number.isFinite(n));
+    const props = this.collectStyleProps(cst);
+    this.pendingLinkStyles.push({ indices, props });
+  }
+
+  private applyLinkStyles() {
+    if (!this.pendingLinkStyles.length || !this.edges.length) return;
+    const normalize = (s: Record<string,string>): Record<string, any> => {
+      const out: Record<string, any> = {};
+      for (const [kRaw, vRaw] of Object.entries(s)) {
+        const k = kRaw.trim().toLowerCase(); const v = vRaw.trim();
+        if (k === 'stroke') out.stroke = v;
+        else if (k === 'stroke-width') { const num = parseFloat(v); if (!Number.isNaN(num)) out.strokeWidth = num; }
+        else if (k === 'opacity' || k === 'stroke-opacity') { const num = parseFloat(v); if (!Number.isNaN(num)) out.strokeOpacity = num; }
+        else if (k === 'stroke-dasharray') out.dasharray = v;
+      }
+      return out;
+    };
+    for (const cmd of this.pendingLinkStyles) {
+      const style = normalize(cmd.props);
+      for (const idx of cmd.indices) {
+        if (idx >= 0 && idx < this.edges.length) {
+          const e = this.edges[idx] as any;
+          e.style = { ...(e.style || {}), stroke: style.stroke ?? (e.style?.stroke), strokeWidth: style.strokeWidth ?? (e.style?.strokeWidth), strokeOpacity: style.strokeOpacity ?? (e.style?.strokeOpacity) };
+          if (style.dasharray) e.dasharray = style.dasharray;
+        }
+      }
+    }
   }
 
   private computeNodeStyle(nodeId: string): Record<string, any> {

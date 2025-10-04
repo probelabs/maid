@@ -1,0 +1,5 @@
+flowchart LR
+  A@{ shape: rect, label: "Start" } --> B@{ shape: lean-r, label: "Next" }
+  C@{ shape: diamond, label: "Decision" } -->|Yes| D@{ shape: rect, label: "Do" }
+  C@{ shape: diamond, label: "Decision" } -->|No| E@{ shape: rect, label: "Skip" }
+
