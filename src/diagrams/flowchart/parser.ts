@@ -499,18 +499,8 @@ export class MermaidParser extends CstParser {
     // Subgraph definition
     private subgraph = this.RULE("subgraph", () => {
         this.CONSUME(tokens.SubgraphKeyword);
-        // Require at least an ID, a quoted title, or a title in brackets
+        // Accept ID, quoted title, bracketed title, or conservative unquoted multi-word title
         this.OR([
-            {
-                ALT: () => {
-                    this.CONSUME(tokens.Identifier, { LABEL: 'subgraphId' });
-                    this.OPTION(() => {
-                        this.CONSUME1(tokens.SquareOpen);
-                        this.SUBRULE(this.nodeContent);
-                        this.CONSUME1(tokens.SquareClose);
-                    });
-                }
-            },
             {
                 ALT: () => {
                     // Quoted subgraph title: subgraph "My Title"
@@ -519,9 +509,40 @@ export class MermaidParser extends CstParser {
             },
             {
                 ALT: () => {
+                    // Bracketed title: subgraph [My Title]
                     this.CONSUME2(tokens.SquareOpen);
                     this.SUBRULE2(this.nodeContent);
                     this.CONSUME2(tokens.SquareClose);
+                }
+            },
+            {
+                ALT: () => {
+                    // Identifier-based header: ID only, ID [Title], or unquoted words
+                    this.CONSUME1(tokens.Identifier, { LABEL: 'subgraphIdOrFirstWord' });
+                    this.OPTION(() => {
+                        this.OR1([
+                            {
+                                ALT: () => {
+                                    // Bracketed title after ID
+                                    this.CONSUME1(tokens.SquareOpen);
+                                    this.SUBRULE(this.nodeContent);
+                                    this.CONSUME1(tokens.SquareClose);
+                                }
+                            },
+                            {
+                                ALT: () => {
+                                    // Additional words/numbers until newline: acts as an unquoted title
+                                    this.AT_LEAST_ONE(() => {
+                                        this.OR2([
+                                            { ALT: () => this.CONSUME2(tokens.Identifier) },
+                                            { ALT: () => this.CONSUME(tokens.Text) },
+                                            { ALT: () => this.CONSUME(tokens.NumberLiteral) }
+                                        ]);
+                                    });
+                                }
+                            }
+                        ]);
+                    });
                 }
             }
         ]);

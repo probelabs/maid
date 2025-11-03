@@ -437,7 +437,6 @@ sequenceDiagram
     Alice->>Bob: Step
   end
 
-
 ```
 
 </td>
@@ -469,7 +468,6 @@ sequenceDiagram
   loop Until done
     Alice->>Bob: Step
   end
-
 
 ```
 </details>

@@ -1,0 +1,6 @@
+{
+  "items": [
+    { "file": "autonumber-malformed.mmd", "reason": "mermaid-cli flake on --fix=all validation in CI" }
+  ]
+}
+

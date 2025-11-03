@@ -520,20 +520,24 @@ export function mapFlowchartParserError(err: IRecognitionException, text: string
     };
   }
 
-  // 6b) Subgraph title with spaces must be quoted
+  // 6b) Subgraph title quoting: allow plain words + spaces; require quotes for "hazard" characters
   if (isInRule(err, 'subgraph') && err.name === 'MismatchedTokenException' && expecting(err, 'Newline')) {
-    // Check if we're after a subgraph keyword and the current line has unquoted text with spaces
     const subgraphIdx = lineStr.indexOf('subgraph');
     if (subgraphIdx !== -1) {
       const afterSubgraph = lineStr.slice(subgraphIdx + 8).trim();
-      // If there's text with spaces that isn't quoted, it's an unquoted title with spaces
-      if (afterSubgraph && !afterSubgraph.startsWith('"') && !afterSubgraph.startsWith("'") && afterSubgraph.includes(' ')) {
-        return {
-          line, column, severity: 'error', code: 'FL-SUBGRAPH-UNQUOTED-TITLE',
-          message: 'Subgraph titles with spaces must be quoted.',
-          hint: 'Example: subgraph "Existing Logic Path" or use underscores: subgraph Existing_Logic_Path',
-          length: afterSubgraph.length
-        };
+      if (afterSubgraph && !afterSubgraph.startsWith('"') && !afterSubgraph.startsWith("'")) {
+        // Hazards that often confuse Mermaid if unquoted in titles
+        const hasHazard = /[\[\](){}/:|"'\\]/.test(afterSubgraph);
+        // If hazards present, or if the lexer specifically balked here, surface an error
+        if (hasHazard) {
+          return {
+            line, column, severity: 'error', code: 'FL-SUBGRAPH-UNQUOTED-TITLE',
+            message: 'Subgraph title contains special characters; wrap it in quotes.',
+            hint: 'Example: subgraph "Streams (inside Gateway)"',
+            length: afterSubgraph.length
+          };
+        }
+        // Otherwise allow unquoted titles with spaces (e.g., "Tyk Gateway").
       }
     }
   }

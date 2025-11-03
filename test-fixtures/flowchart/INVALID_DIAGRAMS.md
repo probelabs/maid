@@ -12,46 +12,49 @@ This file contains invalid flowchart test fixtures with:
 1. [Agent Schema Workflow](#1-agent-schema-workflow)
 2. [Backticks In Quoted Label](#2-backticks-in-quoted-label)
 3. [Curly In Quoted](#3-curly-in-quoted)
-4. [Diamond Parens Unquoted](#4-diamond-parens-unquoted)
-5. [Edge Label Backticks](#5-edge-label-backticks)
-6. [Edge Label Brackets](#6-edge-label-brackets)
-7. [Edge Label Parens](#7-edge-label-parens)
-8. [Empty Nodes](#8-empty-nodes)
-9. [Escaped Quotes In Decision](#9-escaped-quotes-in-decision)
-10. [Interactions Click Call Missing Fn](#10-interactions-click-call-missing-fn)
-11. [Interactions Click Call Parens](#11-interactions-click-call-parens)
-12. [Interactions Click Href](#12-interactions-click-href)
-13. [Interactions Linkstyle Multi](#13-interactions-linkstyle-multi)
-14. [Interactions Linkstyle Ranges](#14-interactions-linkstyle-ranges)
-15. [Invalid Arrow](#15-invalid-arrow)
-16. [Invalid Class](#16-invalid-class)
-17. [Invalid Node Syntax](#17-invalid-node-syntax)
-18. [Invalid Subgraph](#18-invalid-subgraph)
-19. [Label With At Sign](#19-label-with-at-sign)
-20. [Label With Function Call](#20-label-with-function-call)
-21. [Label With Tip](#21-label-with-tip)
-22. [Link One Sided Marker](#22-link-one-sided-marker)
-23. [Linkstyle Id Unknown](#23-linkstyle-id-unknown)
-24. [Method Parens In Unquoted Label](#24-method-parens-in-unquoted-label)
-25. [Missing Arrow](#25-missing-arrow)
-26. [Mixed Brackets](#26-mixed-brackets)
-27. [Mixed Quotes In Labels](#27-mixed-quotes-in-labels)
-28. [Model Initialize Call](#28-model-initialize-call)
-29. [No Diagram Type](#29-no-diagram-type)
-30. [Quotes Double Inside Single](#30-quotes-double-inside-single)
-31. [Quotes In Node Labels](#31-quotes-in-node-labels)
-32. [Round Parens Unquoted](#32-round-parens-unquoted)
-33. [Title Unsupported](#33-title-unsupported)
-34. [Typed Shapes All](#34-typed-shapes-all)
-35. [Typed Shapes Unknowns](#35-typed-shapes-unknowns)
-36. [Unclosed Bracket](#36-unclosed-bracket)
-37. [Unclosed Quote In Label](#37-unclosed-quote-in-label)
-38. [Unescaped Quotes In Decision](#38-unescaped-quotes-in-decision)
-39. [Unmatched End](#39-unmatched-end)
-40. [Unquoted Label With Quotes](#40-unquoted-label-with-quotes)
-41. [Unquoted Parens In Labels](#41-unquoted-parens-in-labels)
-42. [Unquoted Parens With Backticks](#42-unquoted-parens-with-backticks)
-43. [Wrong Direction](#43-wrong-direction)
+4. [Diamond Indexof Brackets](#4-diamond-indexof-brackets)
+5. [Diamond Parens Unquoted](#5-diamond-parens-unquoted)
+6. [Edge Label Backticks](#6-edge-label-backticks)
+7. [Edge Label Brackets](#7-edge-label-brackets)
+8. [Edge Label Parens](#8-edge-label-parens)
+9. [Empty Nodes](#9-empty-nodes)
+10. [Escaped Quotes In Decision](#10-escaped-quotes-in-decision)
+11. [Interactions Click Call Missing Fn](#11-interactions-click-call-missing-fn)
+12. [Interactions Click Call Parens](#12-interactions-click-call-parens)
+13. [Interactions Click Href](#13-interactions-click-href)
+14. [Interactions Linkstyle Multi](#14-interactions-linkstyle-multi)
+15. [Interactions Linkstyle Ranges](#15-interactions-linkstyle-ranges)
+16. [Invalid Arrow](#16-invalid-arrow)
+17. [Invalid Class](#17-invalid-class)
+18. [Invalid Node Syntax](#18-invalid-node-syntax)
+19. [Invalid Subgraph](#19-invalid-subgraph)
+20. [Label With At Sign](#20-label-with-at-sign)
+21. [Label With At Slash](#21-label-with-at-slash)
+22. [Label With Function Call](#22-label-with-function-call)
+23. [Label With Tip](#23-label-with-tip)
+24. [Link One Sided Marker](#24-link-one-sided-marker)
+25. [Linkstyle Id Unknown](#25-linkstyle-id-unknown)
+26. [Method Parens In Unquoted Label](#26-method-parens-in-unquoted-label)
+27. [Missing Arrow](#27-missing-arrow)
+28. [Mixed Brackets](#28-mixed-brackets)
+29. [Mixed Quotes In Labels](#29-mixed-quotes-in-labels)
+30. [Model Initialize Call](#30-model-initialize-call)
+31. [No Diagram Type](#31-no-diagram-type)
+32. [Quotes Double Inside Single](#32-quotes-double-inside-single)
+33. [Quotes In Node Labels](#33-quotes-in-node-labels)
+34. [Round Parens Unquoted](#34-round-parens-unquoted)
+35. [Title Unsupported](#35-title-unsupported)
+36. [Typed Parallelogram Parens](#36-typed-parallelogram-parens)
+37. [Typed Shapes All](#37-typed-shapes-all)
+38. [Typed Shapes Unknowns](#38-typed-shapes-unknowns)
+39. [Unclosed Bracket](#39-unclosed-bracket)
+40. [Unclosed Quote In Label](#40-unclosed-quote-in-label)
+41. [Unescaped Quotes In Decision](#41-unescaped-quotes-in-decision)
+42. [Unmatched End](#42-unmatched-end)
+43. [Unquoted Label With Quotes](#43-unquoted-label-with-quotes)
+44. [Unquoted Parens In Labels](#44-unquoted-parens-in-labels)
+45. [Unquoted Parens With Backticks](#45-unquoted-parens-with-backticks)
+46. [Wrong Direction](#46-wrong-direction)
 
 ---
 
@@ -62,46 +65,49 @@ This file contains invalid flowchart test fixtures with:
 | 1 | [agent schema workflow](#1-agent-schema-workflow) | INVALID | INVALID | ❌ safe |
 | 2 | [backticks in quoted label](#2-backticks-in-quoted-label) | INVALID | INVALID | ✅ safe |
 | 3 | [curly in quoted](#3-curly-in-quoted) | INVALID | INVALID | — |
-| 4 | [diamond parens unquoted](#4-diamond-parens-unquoted) | INVALID | INVALID | ✅ safe |
-| 5 | [edge label backticks](#5-edge-label-backticks) | INVALID | INVALID | ✅ safe |
-| 6 | [edge label brackets](#6-edge-label-brackets) | INVALID | INVALID | ✅ safe |
-| 7 | [edge label parens](#7-edge-label-parens) | INVALID | INVALID | — |
-| 8 | [empty nodes](#8-empty-nodes) | INVALID | INVALID | ✅ safe |
-| 9 | [escaped quotes in decision](#9-escaped-quotes-in-decision) | INVALID | INVALID | ✅ safe |
-| 10 | [interactions click call missing fn](#10-interactions-click-call-missing-fn) | INVALID | INVALID | — |
-| 11 | [interactions click call parens](#11-interactions-click-call-parens) | INVALID | INVALID | — |
-| 12 | [interactions click href](#12-interactions-click-href) | INVALID | INVALID | — |
-| 13 | [interactions linkstyle multi](#13-interactions-linkstyle-multi) | INVALID | INVALID | — |
-| 14 | [interactions linkstyle ranges](#14-interactions-linkstyle-ranges) | INVALID | INVALID | — |
-| 15 | [invalid arrow](#15-invalid-arrow) | INVALID | INVALID | ✅ safe |
-| 16 | [invalid class](#16-invalid-class) | INVALID | INVALID | — |
-| 17 | [invalid node syntax](#17-invalid-node-syntax) | INVALID | INVALID | ✅ all |
-| 18 | [invalid subgraph](#18-invalid-subgraph) | INVALID | INVALID | — |
-| 19 | [label with at sign](#19-label-with-at-sign) | INVALID | INVALID | ✅ safe |
-| 20 | [label with function call](#20-label-with-function-call) | INVALID | INVALID | ✅ safe |
-| 21 | [label with tip](#21-label-with-tip) | INVALID | INVALID | ✅ safe |
-| 22 | [link one sided marker](#22-link-one-sided-marker) | INVALID | INVALID | ✅ safe |
-| 23 | [linkstyle id unknown](#23-linkstyle-id-unknown) | INVALID | INVALID | — |
-| 24 | [method parens in unquoted label](#24-method-parens-in-unquoted-label) | INVALID | INVALID | ✅ safe |
-| 25 | [missing arrow](#25-missing-arrow) | INVALID | INVALID | ✅ all |
-| 26 | [mixed brackets](#26-mixed-brackets) | INVALID | INVALID | ✅ safe |
-| 27 | [mixed quotes in labels](#27-mixed-quotes-in-labels) | INVALID | INVALID | — |
-| 28 | [model initialize call](#28-model-initialize-call) | INVALID | INVALID | ✅ safe |
-| 29 | [no diagram type](#29-no-diagram-type) | INVALID | INVALID | — |
-| 30 | [quotes double inside single](#30-quotes-double-inside-single) | INVALID | INVALID | ✅ safe |
-| 31 | [quotes in node labels](#31-quotes-in-node-labels) | INVALID | INVALID | — |
-| 32 | [round parens unquoted](#32-round-parens-unquoted) | INVALID | INVALID | ✅ safe |
-| 33 | [title unsupported](#33-title-unsupported) | INVALID | INVALID | ✅ all |
-| 34 | [typed shapes all](#34-typed-shapes-all) | INVALID | INVALID | — |
-| 35 | [typed shapes unknowns](#35-typed-shapes-unknowns) | INVALID | INVALID | — |
-| 36 | [unclosed bracket](#36-unclosed-bracket) | INVALID | INVALID | ✅ safe |
-| 37 | [unclosed quote in label](#37-unclosed-quote-in-label) | INVALID | INVALID | ✅ all |
-| 38 | [unescaped quotes in decision](#38-unescaped-quotes-in-decision) | INVALID | INVALID | ✅ safe |
-| 39 | [unmatched end](#39-unmatched-end) | INVALID | INVALID | — |
-| 40 | [unquoted label with quotes](#40-unquoted-label-with-quotes) | INVALID | INVALID | ✅ safe |
-| 41 | [unquoted parens in labels](#41-unquoted-parens-in-labels) | INVALID | INVALID | ✅ safe |
-| 42 | [unquoted parens with backticks](#42-unquoted-parens-with-backticks) | INVALID | INVALID | ✅ safe |
-| 43 | [wrong direction](#43-wrong-direction) | INVALID | INVALID | — |
+| 4 | [diamond indexof brackets](#4-diamond-indexof-brackets) | INVALID | INVALID | ✅ safe |
+| 5 | [diamond parens unquoted](#5-diamond-parens-unquoted) | INVALID | INVALID | ✅ safe |
+| 6 | [edge label backticks](#6-edge-label-backticks) | INVALID | INVALID | ✅ safe |
+| 7 | [edge label brackets](#7-edge-label-brackets) | INVALID | INVALID | ✅ safe |
+| 8 | [edge label parens](#8-edge-label-parens) | INVALID | INVALID | — |
+| 9 | [empty nodes](#9-empty-nodes) | INVALID | INVALID | ✅ safe |
+| 10 | [escaped quotes in decision](#10-escaped-quotes-in-decision) | INVALID | INVALID | ✅ safe |
+| 11 | [interactions click call missing fn](#11-interactions-click-call-missing-fn) | INVALID | INVALID | — |
+| 12 | [interactions click call parens](#12-interactions-click-call-parens) | INVALID | INVALID | — |
+| 13 | [interactions click href](#13-interactions-click-href) | INVALID | INVALID | — |
+| 14 | [interactions linkstyle multi](#14-interactions-linkstyle-multi) | INVALID | INVALID | — |
+| 15 | [interactions linkstyle ranges](#15-interactions-linkstyle-ranges) | INVALID | INVALID | — |
+| 16 | [invalid arrow](#16-invalid-arrow) | INVALID | INVALID | ✅ safe |
+| 17 | [invalid class](#17-invalid-class) | INVALID | INVALID | — |
+| 18 | [invalid node syntax](#18-invalid-node-syntax) | INVALID | INVALID | ✅ all |
+| 19 | [invalid subgraph](#19-invalid-subgraph) | INVALID | INVALID | — |
+| 20 | [label with at sign](#20-label-with-at-sign) | INVALID | INVALID | ✅ safe |
+| 21 | [label with at slash](#21-label-with-at-slash) | INVALID | INVALID | ✅ safe |
+| 22 | [label with function call](#22-label-with-function-call) | INVALID | INVALID | ✅ safe |
+| 23 | [label with tip](#23-label-with-tip) | INVALID | INVALID | ✅ safe |
+| 24 | [link one sided marker](#24-link-one-sided-marker) | INVALID | INVALID | ✅ safe |
+| 25 | [linkstyle id unknown](#25-linkstyle-id-unknown) | INVALID | INVALID | — |
+| 26 | [method parens in unquoted label](#26-method-parens-in-unquoted-label) | INVALID | INVALID | ✅ safe |
+| 27 | [missing arrow](#27-missing-arrow) | INVALID | INVALID | ✅ all |
+| 28 | [mixed brackets](#28-mixed-brackets) | INVALID | INVALID | ✅ safe |
+| 29 | [mixed quotes in labels](#29-mixed-quotes-in-labels) | INVALID | INVALID | — |
+| 30 | [model initialize call](#30-model-initialize-call) | INVALID | INVALID | ✅ safe |
+| 31 | [no diagram type](#31-no-diagram-type) | INVALID | INVALID | — |
+| 32 | [quotes double inside single](#32-quotes-double-inside-single) | INVALID | INVALID | ✅ safe |
+| 33 | [quotes in node labels](#33-quotes-in-node-labels) | INVALID | INVALID | — |
+| 34 | [round parens unquoted](#34-round-parens-unquoted) | INVALID | INVALID | ✅ safe |
+| 35 | [title unsupported](#35-title-unsupported) | INVALID | INVALID | ✅ all |
+| 36 | [typed parallelogram parens](#36-typed-parallelogram-parens) | INVALID | INVALID | ✅ safe |
+| 37 | [typed shapes all](#37-typed-shapes-all) | INVALID | INVALID | — |
+| 38 | [typed shapes unknowns](#38-typed-shapes-unknowns) | INVALID | INVALID | — |
+| 39 | [unclosed bracket](#39-unclosed-bracket) | INVALID | INVALID | ✅ safe |
+| 40 | [unclosed quote in label](#40-unclosed-quote-in-label) | INVALID | INVALID | ✅ all |
+| 41 | [unescaped quotes in decision](#41-unescaped-quotes-in-decision) | INVALID | INVALID | ✅ safe |
+| 42 | [unmatched end](#42-unmatched-end) | INVALID | INVALID | — |
+| 43 | [unquoted label with quotes](#43-unquoted-label-with-quotes) | INVALID | INVALID | ✅ safe |
+| 44 | [unquoted parens in labels](#44-unquoted-parens-in-labels) | INVALID | INVALID | ✅ safe |
+| 45 | [unquoted parens with backticks](#45-unquoted-parens-with-backticks) | INVALID | INVALID | ✅ safe |
+| 46 | [wrong direction](#46-wrong-direction) | INVALID | INVALID | — |
 
 ---
 
@@ -279,21 +285,7 @@ graph TB
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 34:
-...r/>Return: {\"name\": \"John Doe\", \"ag
------------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'STR'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -333,14 +325,6 @@ at test-fixtures/flowchart/invalid/agent-schema-workflow.mmd:112:282
       |                                                                                                                                                                                                                                                                                          ^^
   113 |     
 hint: Prefer &quot; inside quoted labels, e.g., A["He said &quot;Hi&quot;"]
-
-error[FL-LABEL-PARENS-UNQUOTED]: Parentheses inside an unquoted label are not supported by Mermaid.
-at test-fixtures/flowchart/invalid/agent-schema-workflow.mmd:38:45
-   37 |     
-   38 |     SchemaProcessing -->|Yes| RecursiveCall["Recursive answer() call<br/>with schema prompt:<br/><br/>'CRITICAL: You MUST respond with<br/>ONLY valid JSON DATA that conforms<br/>to this schema structure.<br/>DO NOT return the schema<br/>definition itself.<br/><br/>Schema to follow:<br/>[schema]<br/><br/>REQUIREMENTS:<br/>- Return ONLY the JSON object/array<br/>with REAL DATA<br/>- DO NOT return the schema definition<br/>- NO additional text, explanations,<br/>or markdown formatting<br/>- NO code blocks or backticks<br/>- The JSON must be parseable<br/>- Fill in actual values<br/><br/>EXAMPLE:<br/>If schema defines type object<br/>with properties name, age<br/>Return: {\"name\": \"John Doe\", \"age\": 25}<br/>NOT: {\"type\": \"object\", \"properties\": ...}'<br/><br/>Options: _schemaFormatted = true<br/>lines 1717-1741"]
-      |                                             ^
-   39 |     
-hint: Wrap the label in quotes, e.g., A["Mark (X)"] — or replace ( and ) with HTML entities: &#40; and &#41;.
 
 error[FL-LABEL-PARENS-UNQUOTED]: Parentheses inside an unquoted label are not supported by Mermaid.
 at test-fixtures/flowchart/invalid/agent-schema-workflow.mmd:128:43
@@ -395,7 +379,7 @@ graph TB
     
     SchemaProcessing -->|No| SkipSchema[Skip schema processing]
     
-    SchemaProcessing -->|Yes| RecursiveCall["&quot;Recursive answer() call<br/>with schema prompt:<br/><br/>'CRITICAL: You MUST respond with<br/>ONLY valid JSON DATA that conforms<br/>to this schema structure.<br/>DO NOT return the schema<br/>definition itself.<br/><br/>Schema to follow:<br/>[schema"]<br/><br/>REQUIREMENTS:<br/>- Return ONLY the JSON object/array<br/>with REAL DATA<br/>- DO NOT return the schema definition<br/>- NO additional text, explanations,<br/>or markdown formatting<br/>- NO code blocks or backticks<br/>- The JSON must be parseable<br/>- Fill in actual values<br/><br/>EXAMPLE:<br/>If schema defines type object<br/>with properties name, age<br/>Return: {&quot;name&quot;: &quot;John Doe&quot;, &quot;age&quot;: 25}<br/>NOT: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: ...}'<br/><br/>Options: _schemaFormatted = true<br/>lines 1717-1741"]
+    SchemaProcessing -->|Yes| RecursiveCall["Recursive answer() call<br/>with schema prompt:<br/><br/>'CRITICAL: You MUST respond with<br/>ONLY valid JSON DATA that conforms<br/>to this schema structure.<br/>DO NOT return the schema<br/>definition itself.<br/><br/>Schema to follow:<br/>[schema]<br/><br/>REQUIREMENTS:<br/>- Return ONLY the JSON object/array<br/>with REAL DATA<br/>- DO NOT return the schema definition<br/>- NO additional text, explanations,<br/>or markdown formatting<br/>- NO code blocks or backticks<br/>- The JSON must be parseable<br/>- Fill in actual values<br/><br/>EXAMPLE:<br/>If schema defines type object<br/>with properties name, age<br/>Return: {&quot;name&quot;: &quot;John Doe&quot;, &quot;age&quot;: 25}<br/>NOT: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: ...}'<br/><br/>Options: _schemaFormatted = true<br/>lines 1717-1741"]
     
     RecursiveCall --> CleanResponse1[cleanSchemaResponse<br/>Extract JSON from markdown<br/>line 1744]
     
@@ -701,20 +685,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Lexical error on line 2. Unrecognized text.
-...rt TD  A["`{% if %}` template"] --> B{S
-----------------------^
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -797,21 +768,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
-...2[Append 'tyk-trace-{id}' tag to Analyti
------------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'DIAMOND_START'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -855,7 +812,97 @@ flowchart TD
 
 ---
 
-## 4. Diamond Parens Unquoted
+## 4. Diamond Indexof Brackets
+
+📄 **Source**: [`diamond-indexof-brackets.mmd`](./invalid/diamond-indexof-brackets.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+graph TD
+  %% Decision label contains parentheses and bracket characters
+  A[Line of Text] --> B{indexOf('[') + indexOf(']')}
+  B --> C[Next]
+
+
+```
+
+### Error Comparison: mermaid-cli vs maid
+
+<table>
+<tr>
+<th width="50%">mermaid-cli</th>
+<th width="50%">maid</th>
+</tr>
+<tr>
+<td valign="top">
+
+**Result**: ❌ INVALID
+
+```
+Syntax error in text
+```
+
+</td>
+<td valign="top">
+
+**Result**: ❌ INVALID
+
+```
+error[FL-LABEL-PARENS-UNQUOTED]: Parentheses inside an unquoted label are not supported by Mermaid.
+at test-fixtures/flowchart/invalid/diamond-indexof-brackets.mmd:3:32
+  2 |   %% Decision label contains parentheses and bracket characters
+  3 |   A[Line of Text] --> B{indexOf('[') + indexOf(']')}
+    |                                ^
+  4 |   B --> C[Next]
+hint: Wrap the label in quotes, e.g., A["Mark (X)"] — or replace ( and ) with HTML entities: &#40; and &#41;.
+
+error[FL-LABEL-PARENS-UNQUOTED]: Parentheses inside an unquoted label are not supported by Mermaid.
+at test-fixtures/flowchart/invalid/diamond-indexof-brackets.mmd:3:35
+  2 |   %% Decision label contains parentheses and bracket characters
+  3 |   A[Line of Text] --> B{indexOf('[') + indexOf(']')}
+    |                                   ^
+  4 |   B --> C[Next]
+hint: Wrap the label in quotes, e.g., A["Mark (X)"] — or replace ( and ) with HTML entities: &#40; and &#41;.
+```
+
+</td>
+</tr>
+</table>
+
+### maid Auto-fix (`--fix`) Preview
+
+```mermaid
+graph TD
+  %% Decision label contains parentheses and bracket characters
+  A[Line of Text] --> B{"indexOf('[') + indexOf(']')"}
+  B --> C[Next]
+
+
+```
+
+### maid Auto-fix (`--fix=all`) Preview
+
+Shown above (safe changes applied).
+
+<details>
+<summary>View source code</summary>
+
+```
+graph TD
+  %% Decision label contains parentheses and bracket characters
+  A[Line of Text] --> B{indexOf('[') + indexOf(']')}
+  B --> C[Next]
+
+
+```
+</details>
+
+---
+
+## 5. Diamond Parens Unquoted
 
 📄 **Source**: [`diamond-parens-unquoted.mmd`](./invalid/diamond-parens-unquoted.mmd)
 
@@ -883,21 +930,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
-...-> D{Return comment (even if only header
------------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'PS'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -945,7 +978,7 @@ flowchart TD
 
 ---
 
-## 5. Edge Label Backticks
+## 6. Edge Label Backticks
 
 📄 **Source**: [`edge-label-backticks.mmd`](./invalid/edge-label-backticks.mmd)
 
@@ -981,21 +1014,7 @@ graph TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 7:
-...    B -- Detects `"` in unquoted label -...
------------------------^
-Expecting 'LINK', 'UNICODE_TEXT', 'EDGE_TEXT', got 'MD_STR'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -1082,7 +1101,7 @@ graph TD
 
 ---
 
-## 6. Edge Label Brackets
+## 7. Edge Label Brackets
 
 📄 **Source**: [`edge-label-brackets.mmd`](./invalid/edge-label-brackets.mmd)
 
@@ -1118,21 +1137,7 @@ graph TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 5:
-...ook]    D -->|run: [aggregate]| E[Aggre
-----------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'SQS'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -1196,7 +1201,7 @@ graph TD
 
 ---
 
-## 7. Edge Label Parens
+## 8. Edge Label Parens
 
 📄 **Source**: [`edge-label-parens.mmd`](./invalid/edge-label-parens.mmd)
 
@@ -1224,21 +1229,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
-...    A -->|optional (external)| B
-----------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'PS'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -1280,7 +1271,7 @@ flowchart TD
 
 ---
 
-## 8. Empty Nodes
+## 9. Empty Nodes
 
 📄 **Source**: [`empty-nodes.mmd`](./invalid/empty-nodes.mmd)
 
@@ -1307,21 +1298,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
-...lowchart TD    A[""] --> B[" "]    B -
-----------------------^
-Expecting 'TAGEND', 'STR', 'MD_STR', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'SQE'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -1382,7 +1359,7 @@ flowchart TD
 
 ---
 
-## 9. Escaped Quotes In Decision
+## 10. Escaped Quotes In Decision
 
 📄 **Source**: [`escaped-quotes-in-decision.mmd`](./invalid/escaped-quotes-in-decision.mmd)
 
@@ -1415,21 +1392,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 6:
-...--> D{"Is \"Driver\" AND \"AuthCheck.Pat
------------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'STR'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -1495,7 +1458,7 @@ flowchart TD
 
 ---
 
-## 10. Interactions Click Call Missing Fn
+## 11. Interactions Click Call Missing Fn
 
 📄 **Source**: [`interactions-click-call-missing-fn.mmd`](./invalid/interactions-click-call-missing-fn.mmd)
 
@@ -1524,21 +1487,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 6:
-...A call "Tip only"
---------------------^
-Expecting 'SEMI', 'NEWLINE', 'SPACE', 'EOF', 'CALLBACKARGS', got 'CALLBACKNAME'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -1590,7 +1539,7 @@ flowchart TD
 
 ---
 
-## 11. Interactions Click Call Parens
+## 12. Interactions Click Call Parens
 
 📄 **Source**: [`interactions-click-call-parens.mmd`](./invalid/interactions-click-call-parens.mmd)
 
@@ -1619,21 +1568,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
-...ils() "Open details" _blank
------------------------^
-Expecting 'SEMI', 'NEWLINE', 'EOF', got 'SPACE'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -1677,7 +1612,7 @@ flowchart TD
 
 ---
 
-## 12. Interactions Click Href
+## 13. Interactions Click Href
 
 📄 **Source**: [`interactions-click-href.mmd`](./invalid/interactions-click-href.mmd)
 
@@ -1707,19 +1642,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-TypeError: Cannot set properties of undefined (setting 'style')
-node_modules/mermaid/dist/mermaid.js:45745:37
-Array.forEach (<anonymous>)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -1764,7 +1687,7 @@ flowchart TD
 
 ---
 
-## 13. Interactions Linkstyle Multi
+## 14. Interactions Linkstyle Multi
 
 📄 **Source**: [`interactions-linkstyle-multi.mmd`](./invalid/interactions-linkstyle-multi.mmd)
 
@@ -1797,21 +1720,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
-...[End]  linkStyle 0, 0, 5    stroke:#f0
-----------------------^
-Expecting 'NUM', got 'SPACE'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -1859,7 +1768,7 @@ flowchart TD
 
 ---
 
-## 14. Interactions Linkstyle Ranges
+## 15. Interactions Linkstyle Ranges
 
 📄 **Source**: [`interactions-linkstyle-ranges.mmd`](./invalid/interactions-linkstyle-ranges.mmd)
 
@@ -1889,21 +1798,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
-...C[End]  linkStyle 0:1 stroke:#f00,strok
-----------------------^
-Expecting 'SPACE', 'COMMA', got 'COLON'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -1948,7 +1843,7 @@ flowchart TD
 
 ---
 
-## 15. Invalid Arrow
+## 16. Invalid Arrow
 
 📄 **Source**: [`invalid-arrow.mmd`](./invalid/invalid-arrow.mmd)
 
@@ -1975,21 +1870,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
-flowchart TD    A -> B    B --> C
-------------------^
-Expecting 'SEMI', 'NEWLINE', 'EOF', 'AMP', 'START_LINK', 'LINK', 'LINK_ID', got 'MINUS'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -2035,7 +1916,7 @@ flowchart TD
 
 ---
 
-## 16. Invalid Class
+## 17. Invalid Class
 
 📄 **Source**: [`invalid-class.mmd`](./invalid/invalid-class.mmd)
 
@@ -2062,21 +1943,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
-... A --> B    class A
-----------------------^
-Expecting 'SPACE', 'AMP', 'COLON', 'DOWN', 'DEFAULT', 'NUM', 'COMMA', 'NODE_STRING', 'BRKT', 'MINUS', 'MULT', 'UNICODE_TEXT', got 'NEWLINE'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -2117,7 +1984,7 @@ flowchart TD
 
 ---
 
-## 17. Invalid Node Syntax
+## 18. Invalid Node Syntax
 
 📄 **Source**: [`invalid-node-syntax.mmd`](./invalid/invalid-node-syntax.mmd)
 
@@ -2144,21 +2011,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
-...( --> B    B --> C
----------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got '1'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -2204,7 +2057,7 @@ flowchart TD
 
 ---
 
-## 18. Invalid Subgraph
+## 19. Invalid Subgraph
 
 📄 **Source**: [`invalid-subgraph.mmd`](./invalid/invalid-subgraph.mmd)
 
@@ -2232,18 +2085,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-TypeError: Cannot read properties of undefined (reading 'text')
-FlowDB.addSubGraph (node_modules/mermaid/dist/mermaid.js:45974:26)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -2286,7 +2128,7 @@ flowchart TD
 
 ---
 
-## 19. Label With At Sign
+## 20. Label With At Sign
 
 📄 **Source**: [`label-with-at-sign.mmd`](./invalid/label-with-at-sign.mmd)
 
@@ -2315,21 +2157,7 @@ graph TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
-...A[package.json] --> B[@probelabs/probe v
------------------------^
-Expecting 'AMP', 'COLON', 'PIPE', 'TESTSTR', 'DOWN', 'DEFAULT', 'NUM', 'COMMA', 'NODE_STRING', 'BRKT', 'MINUS', 'MULT', 'UNICODE_TEXT', got 'LINK_ID'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -2379,7 +2207,89 @@ graph TD
 
 ---
 
-## 20. Label With Function Call
+## 21. Label With At Slash
+
+📄 **Source**: [`label-with-at-slash.mmd`](./invalid/label-with-at-slash.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+graph TD
+  A[ScriptCheckProvider] --> B[Secure Sandbox]
+  B --> F[@nyariv/sandboxjs]
+  C[Memory Store] --> G[Persistent Storage]
+
+
+```
+
+### Error Comparison: mermaid-cli vs maid
+
+<table>
+<tr>
+<th width="50%">mermaid-cli</th>
+<th width="50%">maid</th>
+</tr>
+<tr>
+<td valign="top">
+
+**Result**: ❌ INVALID
+
+```
+Syntax error in text
+```
+
+</td>
+<td valign="top">
+
+**Result**: ❌ INVALID
+
+```
+error[FL-LABEL-AT-IN-UNQUOTED]: '@' inside an unquoted label can be misparsed by Mermaid.
+at test-fixtures/flowchart/invalid/label-with-at-slash.mmd:3:11
+  2 |   A[ScriptCheckProvider] --> B[Secure Sandbox]
+  3 |   B --> F[@nyariv/sandboxjs]
+    |           ^
+  4 |   C[Memory Store] --> G[Persistent Storage]
+hint: Wrap the label in quotes, e.g., B["@probelabs/probe v0.6.0-rc149"]
+```
+
+</td>
+</tr>
+</table>
+
+### maid Auto-fix (`--fix`) Preview
+
+```mermaid
+graph TD
+  A[ScriptCheckProvider] --> B[Secure Sandbox]
+  B --> F["@nyariv/sandboxjs"]
+  C[Memory Store] --> G[Persistent Storage]
+
+
+```
+
+### maid Auto-fix (`--fix=all`) Preview
+
+Shown above (safe changes applied).
+
+<details>
+<summary>View source code</summary>
+
+```
+graph TD
+  A[ScriptCheckProvider] --> B[Secure Sandbox]
+  B --> F[@nyariv/sandboxjs]
+  C[Memory Store] --> G[Persistent Storage]
+
+
+```
+</details>
+
+---
+
+## 22. Label With Function Call
 
 📄 **Source**: [`label-with-function-call.mmd`](./invalid/label-with-function-call.mmd)
 
@@ -2416,21 +2326,7 @@ graph TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 7:
-...   F --> G[path.join(__dirname, 'output/
------------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'PS'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -2496,7 +2392,7 @@ graph TD
 
 ---
 
-## 21. Label With Tip
+## 23. Label With Tip
 
 📄 **Source**: [`label-with-tip.mmd`](./invalid/label-with-tip.mmd)
 
@@ -2535,21 +2431,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 7:
-...    F --> G[Print: "💡 Tip: Try using sy...
------------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'STR'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -2619,7 +2501,7 @@ flowchart TD
 
 ---
 
-## 22. Link One Sided Marker
+## 24. Link One Sided Marker
 
 📄 **Source**: [`link-one-sided-marker.mmd`](./invalid/link-one-sided-marker.mmd)
 
@@ -2647,21 +2529,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
-flowchart TD  A --x--> B  A --o--> C
--------------------^
-Expecting 'AMP', 'COLON', 'PIPE', 'TESTSTR', 'DOWN', 'DEFAULT', 'NUM', 'COMMA', 'NODE_STRING', 'BRKT', 'MINUS', 'MULT', 'UNICODE_TEXT', got 'LINK'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -2717,7 +2585,7 @@ flowchart TD
 
 ---
 
-## 23. Linkstyle Id Unknown
+## 25. Linkstyle Id Unknown
 
 📄 **Source**: [`linkstyle-id-unknown.mmd`](./invalid/linkstyle-id-unknown.mmd)
 
@@ -2746,21 +2614,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
-...A --> B  linkStyle e999 stroke:#f00
-----------------------^
-Expecting 'DEFAULT', 'NUM', got 'NODE_STRING'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -2803,7 +2657,7 @@ flowchart TD
 
 ---
 
-## 24. Method Parens In Unquoted Label
+## 26. Method Parens In Unquoted Label
 
 📄 **Source**: [`method-parens-in-unquoted-label.mmd`](./invalid/method-parens-in-unquoted-label.mmd)
 
@@ -2838,21 +2692,7 @@ graph TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 5:
-...to string via .Error()];    D -- No -->
------------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'PS'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -2922,7 +2762,7 @@ graph TD
 
 ---
 
-## 25. Missing Arrow
+## 27. Missing Arrow
 
 📄 **Source**: [`missing-arrow.mmd`](./invalid/missing-arrow.mmd)
 
@@ -2948,21 +2788,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
-flowchart TD    A B
-------------------^
-Expecting 'SEMI', 'NEWLINE', 'EOF', 'AMP', 'START_LINK', 'LINK', 'LINK_ID', got 'NODE_STRING'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -3005,7 +2831,7 @@ flowchart TD
 
 ---
 
-## 26. Mixed Brackets
+## 28. Mixed Brackets
 
 📄 **Source**: [`mixed-brackets.mmd`](./invalid/mixed-brackets.mmd)
 
@@ -3036,21 +2862,7 @@ flowchart LR
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
-...  A[Text] --> B(Text]    B --> C    X{
------------------------^
-Expecting 'PE', 'TAGEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'SQE'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -3104,7 +2916,7 @@ flowchart LR
 
 ---
 
-## 27. Mixed Quotes In Labels
+## 29. Mixed Quotes In Labels
 
 📄 **Source**: [`mixed-quotes-in-labels.mmd`](./invalid/mixed-quotes-in-labels.mmd)
 
@@ -3142,21 +2954,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
-... dependency 'D' of "C"};        S2 --> 
------------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'STR'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -3209,7 +3007,7 @@ flowchart TD
 
 ---
 
-## 28. Model Initialize Call
+## 30. Model Initialize Call
 
 📄 **Source**: [`model-initialize-call.mmd`](./invalid/model-initialize-call.mmd)
 
@@ -3246,21 +3044,7 @@ graph TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
-...-> C[initializeModel() called]    C -->
------------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'PS'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -3334,7 +3118,7 @@ graph TD
 
 ---
 
-## 29. No Diagram Type
+## 31. No Diagram Type
 
 📄 **Source**: [`no-diagram-type.mmd`](./invalid/no-diagram-type.mmd)
 
@@ -3360,19 +3144,7 @@ B --> C
 **Result**: ❌ INVALID
 
 ```
-UnknownDiagramError: No diagram type detected matching given configuration for text: A --> B
-B --> C
-detectType (node_modules/mermaid/dist/mermaid.js:20437:15)
-    at $eval ($eval at renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:33), <anonymous>:48:45)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
+UnknownDiagramError: No diagram type detected
 ```
 
 </td>
@@ -3412,7 +3184,7 @@ B --> C
 
 ---
 
-## 30. Quotes Double Inside Single
+## 32. Quotes Double Inside Single
 
 📄 **Source**: [`quotes-double-inside-single.mmd`](./invalid/quotes-double-inside-single.mmd)
 
@@ -3440,21 +3212,7 @@ flowchart LR
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
-...t LR  A['She said "Hello"'] --> B
-----------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'STR'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -3502,7 +3260,7 @@ flowchart LR
 
 ---
 
-## 31. Quotes In Node Labels
+## 33. Quotes In Node Labels
 
 📄 **Source**: [`quotes-in-node-labels.mmd`](./invalid/quotes-in-node-labels.mmd)
 
@@ -3554,21 +3312,7 @@ graph TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 9:
-...  E -->|Yes| F[Log "skipping check..."];
------------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'STR'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -3635,7 +3379,7 @@ graph TD
 
 ---
 
-## 32. Round Parens Unquoted
+## 34. Round Parens Unquoted
 
 📄 **Source**: [`round-parens-unquoted.mmd`](./invalid/round-parens-unquoted.mmd)
 
@@ -3663,21 +3407,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
-...CheckExecutionEngine(octokit));
------------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'PS'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -3725,7 +3455,7 @@ flowchart TD
 
 ---
 
-## 33. Title Unsupported
+## 35. Title Unsupported
 
 📄 **Source**: [`title-unsupported.mmd`](./invalid/title-unsupported.mmd)
 
@@ -3753,21 +3483,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
-...lowchart TD  title Dependency Relations
-----------------------^
-Expecting 'SEMI', 'NEWLINE', 'EOF', 'AMP', 'START_LINK', 'LINK', 'LINK_ID', got 'NODE_STRING'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -3814,7 +3530,86 @@ flowchart TD
 
 ---
 
-## 34. Typed Shapes All
+## 36. Typed Parallelogram Parens
+
+📄 **Source**: [`typed-parallelogram-parens.mmd`](./invalid/typed-parallelogram-parens.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+flowchart TD
+  %% Parallelogram-style label with parentheses inside (invalid unless encoded)
+  API[/Streams API\n(/streams-api)/]
+
+
+```
+
+### Error Comparison: mermaid-cli vs maid
+
+<table>
+<tr>
+<th width="50%">mermaid-cli</th>
+<th width="50%">maid</th>
+</tr>
+<tr>
+<td valign="top">
+
+**Result**: ❌ INVALID
+
+```
+Syntax error in text
+```
+
+</td>
+<td valign="top">
+
+**Result**: ❌ INVALID
+
+```
+error[FL-LABEL-PARENS-UNQUOTED]: Parentheses inside an unquoted label are not supported by Mermaid.
+at test-fixtures/flowchart/invalid/typed-parallelogram-parens.mmd:3:21
+  2 |   %% Parallelogram-style label with parentheses inside (invalid unless encoded)
+  3 |   API[/Streams API\n(/streams-api)/]
+    |                     ^
+  4 | 
+hint: Wrap the label in quotes, e.g., A["Mark (X)"] — or replace ( and ) with HTML entities: &#40; and &#41;.
+```
+
+</td>
+</tr>
+</table>
+
+### maid Auto-fix (`--fix`) Preview
+
+```mermaid
+flowchart TD
+  %% Parallelogram-style label with parentheses inside (invalid unless encoded)
+  API[/Streams API\n&#40;/streams-api&#41;/]
+
+
+```
+
+### maid Auto-fix (`--fix=all`) Preview
+
+Shown above (safe changes applied).
+
+<details>
+<summary>View source code</summary>
+
+```
+flowchart TD
+  %% Parallelogram-style label with parentheses inside (invalid unless encoded)
+  API[/Streams API\n(/streams-api)/]
+
+
+```
+</details>
+
+---
+
+## 37. Typed Shapes All
 
 📄 **Source**: [`typed-shapes-all.mmd`](./invalid/typed-shapes-all.mmd)
 
@@ -3856,17 +3651,6 @@ flowchart LR
 
 ```
 Error: No such shape: parallelogram.
-FlowDB.addVertex (node_modules/mermaid/dist/mermaid.js:45607:23)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
 ```
 
 </td>
@@ -3946,7 +3730,7 @@ flowchart LR
 
 ---
 
-## 35. Typed Shapes Unknowns
+## 38. Typed Shapes Unknowns
 
 📄 **Source**: [`typed-shapes-unknowns.mmd`](./invalid/typed-shapes-unknowns.mmd)
 
@@ -3978,17 +3762,6 @@ flowchart TD
 
 ```
 Error: No such shape: rhombus.
-FlowDB.addVertex (node_modules/mermaid/dist/mermaid.js:45607:23)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
 ```
 
 </td>
@@ -4058,7 +3831,7 @@ flowchart TD
 
 ---
 
-## 36. Unclosed Bracket
+## 39. Unclosed Bracket
 
 📄 **Source**: [`unclosed-bracket.mmd`](./invalid/unclosed-bracket.mmd)
 
@@ -4085,21 +3858,7 @@ flowchart LR
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
-...t --> B    B --> C
----------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got '1'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -4145,7 +3904,7 @@ flowchart LR
 
 ---
 
-## 37. Unclosed Quote In Label
+## 40. Unclosed Quote In Label
 
 📄 **Source**: [`unclosed-quote-in-label.mmd`](./invalid/unclosed-quote-in-label.mmd)
 
@@ -4174,21 +3933,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 6:
-... label]  A --> B
--------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got '1'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -4238,7 +3983,7 @@ flowchart TD
 
 ---
 
-## 38. Unescaped Quotes In Decision
+## 41. Unescaped Quotes In Decision
 
 📄 **Source**: [`unescaped-quotes-in-decision.mmd`](./invalid/unescaped-quotes-in-decision.mmd)
 
@@ -4267,21 +4012,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
-...s --> C{"Is "Driver" configured?"}
------------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'STR'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -4331,7 +4062,7 @@ flowchart TD
 
 ---
 
-## 39. Unmatched End
+## 42. Unmatched End
 
 📄 **Source**: [`unmatched-end.mmd`](./invalid/unmatched-end.mmd)
 
@@ -4358,21 +4089,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
-... TD    A --> B    end
----------------------^
-Expecting 'SEMI', 'NEWLINE', 'SPACE', 'EOF', 'subgraph', 'acc_title', 'acc_descr', 'acc_descr_multiline_value', 'AMP', 'COLON', 'STYLE', 'LINKSTYLE', 'CLASSDEF', 'CLASS', 'CLICK', 'DOWN', 'DEFAULT', 'NUM', 'COMMA', 'NODE_STRING', 'BRKT', 'MINUS', 'MULT', 'UNICODE_TEXT', 'direction_tb', 'direction_bt', 'direction_rl', 'direction_lr', got 'end'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -4413,7 +4130,7 @@ flowchart TD
 
 ---
 
-## 40. Unquoted Label With Quotes
+## 43. Unquoted Label With Quotes
 
 📄 **Source**: [`unquoted-label-with-quotes.mmd`](./invalid/unquoted-label-with-quotes.mmd)
 
@@ -4455,21 +4172,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 7:
-...F[Calls logger.debug("message", data)];
------------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'PS'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -4545,7 +4248,7 @@ flowchart TD
 
 ---
 
-## 41. Unquoted Parens In Labels
+## 44. Unquoted Parens In Labels
 
 📄 **Source**: [`unquoted-parens-in-labels.mmd`](./invalid/unquoted-parens-in-labels.mmd)
 
@@ -4593,21 +4296,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
-...C{Attempt JSON.parse(stdout)};        C
------------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'PS'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -4695,7 +4384,7 @@ flowchart TD
 
 ---
 
-## 42. Unquoted Parens With Backticks
+## 45. Unquoted Parens With Backticks
 
 📄 **Source**: [`unquoted-parens-with-backticks.mmd`](./invalid/unquoted-parens-with-backticks.mmd)
 
@@ -4725,21 +4414,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
-...   G[JS Expressions (`fail_if`, `value_j
------------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'PS'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -4791,7 +4466,7 @@ flowchart TD
 
 ---
 
-## 43. Wrong Direction
+## 46. Wrong Direction
 
 📄 **Source**: [`wrong-direction.mmd`](./invalid/wrong-direction.mmd)
 
@@ -4817,20 +4492,7 @@ flowchart XY
 **Result**: ❌ INVALID
 
 ```
-Error: Lexical error on line 1. Unrecognized text.
-flowchart XY    A --> B
----------^
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:91236:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>

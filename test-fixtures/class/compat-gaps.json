@@ -2,6 +2,10 @@
   "diagramType": "class",
   "items": [
     {
+      "file": "member-without-name.mmd",
+      "reason": "Mermaid CLI rejects unnamed member signature; kept as valid example for Maid"
+    },
+    {
       "file": "interface-example.mmd",
       "reason": "interface keyword not supported by mermaid-cli yet"
     },

@@ -521,8 +521,10 @@ class FlowSemanticsVisitor extends BaseVisitor {
         const last = allChildren[allChildren.length - 1];
         const isSlash = (t: IToken) => t.image === '/' || t.image === '\\';
         if (isSlash(first) && isSlash(last)) {
-          // This is a parallelogram/trapezoid shape - parentheses are allowed
-          continue;
+          // Parallelogram/Trapezoid typed label [ / ... / ]: do NOT early-continue.
+          // Mermaid still rejects unquoted parentheses inside these labels; keep scanning
+          // for RoundOpen/RoundClose below so we can surface FL-LABEL-PARENS-UNQUOTED
+          // and let autofix encode parens/quotes when needed.
         }
       }
 

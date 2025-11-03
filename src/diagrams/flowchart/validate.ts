@@ -124,18 +124,18 @@ export function validateFlowchart(text: string, options: ValidateOptions = {}): 
         }
       }
       
-      // Heuristic sweep: parens inside an unquoted square-bracket node label anywhere in the file.
-      // This ensures we still surface FL-LABEL-PARENS-UNQUOTED even when an earlier parser error short-circuited detailed mapping.
+      // Heuristic sweep: detect parens in unquoted square-bracket node labels, robustly scanning
+      // across all labels per line while ignoring brackets inside quoted strings.
       {
         // Collect already-reported positions (line:column) from parser-mapped errors and our own augmentations
-        const byLine = new Map<number, number[]>();
+        const byLine = new Map<number, {start:number,end:number}[]>();
         const collect = (arr: any[]) => {
           for (const e of (arr || [])) {
-            if (e && (e as any).code === 'FL-LABEL-PARENS-UNQUOTED') {
+            if (e && ((e as any).code === 'FL-LABEL-PARENS-UNQUOTED' || (e as any).code === 'FL-LABEL-AT-IN-UNQUOTED')) {
               const ln = (e as any).line ?? 0;
               const col = (e as any).column ?? 1;
               const list = byLine.get(ln) || [];
-              list.push(col);
+              list.push({ start: col, end: col });
               byLine.set(ln, list);
             }
           }
@@ -145,35 +145,69 @@ export function validateFlowchart(text: string, options: ValidateOptions = {}): 
 
         const lines2 = text.split(/\r?\n/);
         for (let ii = 0; ii < lines2.length; ii++) {
-          const raw2 = lines2[ii] || '';
-          if (!raw2.includes('[') || !raw2.includes(']')) continue;
-          let search = 0;
-          while (true) {
-            const open2 = raw2.indexOf('[', search);
-            if (open2 === -1) break;
-            const close2 = raw2.indexOf(']', open2 + 1);
-            if (close2 === -1) break;
+          const raw = lines2[ii] || '';
+          if (!raw.includes('[') || !raw.includes(']')) continue;
 
-            const seg2 = raw2.slice(open2 + 1, close2);
-            const trimmed2 = seg2.trim();
-            const ln2 = ii + 1;
-
-            // Skip typed/compound shapes inside label (parallelogram/trapezoid or cylinder/stadium within square)
-            const lsp = trimmed2.slice(0,1); const rsp = trimmed2.slice(-1);
-            const isSlashPair = ((lsp === '/' || lsp === '\\') && (rsp === '/' || rsp === '\\'));
-            const isParenWrapped = (lsp === '(' && rsp === ')');
-
-            const segStartCol = open2 + 2;
-            const segEndCol = close2 + 1;
-            const existing = byLine.get(ln2) || [];
-            const covered = existing.some((c) => c >= segStartCol && c <= segEndCol);
-
-            if (!covered && !(/^".*"$/.test(trimmed2)) && (seg2.includes('(') || seg2.includes(')')) && !isSlashPair && !isParenWrapped) {
-              errs.push({ line: ln2, column: segStartCol, severity: 'error', code: 'FL-LABEL-PARENS-UNQUOTED', message: 'Parentheses inside an unquoted label are not supported by Mermaid.', hint: 'Wrap the label in quotes, e.g., A["Mark (X)"] — or replace ( and ) with HTML entities: &#40; and &#41;.' } as any);
-              byLine.set(ln2, existing.concat([segStartCol]));
+          let i = 0; const n = raw.length; let inQuote = false; let esc = false;
+          while (i < n) {
+            const ch = raw[i];
+            if (inQuote) {
+              if (esc) { esc = false; }
+              else if (ch === '\\') { esc = true; }
+              else if (ch === '"') { inQuote = false; }
+              i++; continue;
             }
-
-            search = close2 + 1;
+            if (ch === '"') { inQuote = true; i++; continue; }
+            if (ch === '[') {
+              // find matching ']' while respecting quotes
+              let j = i + 1; let inQ = false; let esc2 = false; let depth = 1;
+              while (j < n && depth > 0) {
+                const cj = raw[j];
+                if (inQ) {
+                  if (esc2) { esc2 = false; }
+                  else if (cj === '\\') { esc2 = true; }
+                  else if (cj === '"') { inQ = false; }
+                  j++; continue;
+                }
+                if (cj === '"') { inQ = true; j++; continue; }
+                if (cj === '[') depth++;
+                else if (cj === ']') depth--;
+                j++;
+              }
+              if (depth === 0) {
+                const startCol = i + 2; const endCol = j; // 1-based inclusive at end
+                const seg = raw.slice(i + 1, j - 1);
+                const trimmed = seg.trim();
+                const ln = ii + 1;
+                // Skip parallelogram/trapezoid markers [/.../], [\...\]
+                const lsp = trimmed.slice(0,1), rsp = trimmed.slice(-1);
+                const isSlashPair = ((lsp === '/' || lsp === '\\') && (rsp === '/' || rsp === '\\'));
+                const isParenWrapped = (lsp === '(' && rsp === ')'); // cylinder/stadium in square
+                const isQuoted = /^"[\s\S]*"$/.test(trimmed);
+                const existing = byLine.get(ln) || [];
+                const covered = existing.some(r => !(endCol < r.start || startCol > r.end));
+                // Report hazards in unquoted labels.
+                // - Parentheses: for both normal and typed [/…/] labels (we can encode for typed shapes)
+                // - At-sign: only for normal labels; parallelogram/trapezoid do not support quotes
+                const hasParens = seg.includes('(') || seg.includes(')');
+                const hasAt = seg.includes('@');
+                if (!covered && !isQuoted && !isParenWrapped && hasParens) {
+                  errs.push({ line: ln, column: startCol, severity: 'error', code: 'FL-LABEL-PARENS-UNQUOTED', message: 'Parentheses inside an unquoted label are not supported by Mermaid.', hint: 'Wrap the label in quotes, e.g., A["Mark (X)"] — or replace ( and ) with HTML entities: &#40; and &#41;.' } as any);
+                  existing.push({ start: startCol, end: endCol });
+                  byLine.set(ln, existing);
+                }
+                if (!covered && !isQuoted && !isSlashPair && hasAt) {
+                  errs.push({ line: ln, column: startCol, severity: 'error', code: 'FL-LABEL-AT-IN-UNQUOTED', message: "'@' inside an unquoted label can be misparsed by Mermaid.", hint: 'Wrap the label in quotes, e.g., B["@probelabs/probe v0.6.0-rc149"]' } as any);
+                  existing.push({ start: startCol, end: endCol });
+                  byLine.set(ln, existing);
+                }
+                i = j; // continue after this segment
+                continue;
+              } else {
+                break;
+              }
+            }
+            i++;
           }
         }
       }

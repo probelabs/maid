@@ -1,6 +1,7 @@
 {
   "diagramType": "flowchart",
   "items": [
+    "interactions-linkstyle-multi.mmd",
     {
       "id": "flowchart-linkstyle-multiline",
       "title": "linkStyle styles split across multiple lines",

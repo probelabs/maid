@@ -76,20 +76,7 @@ stateDiagram-v2
 **Result**: ❌ INVALID
 
 ```
-Error: Lexical error on line 4. Unrecognized text.
-...A --> B : ev1    ---    ---    C --> 
-----------------------^
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:129832:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -192,20 +179,7 @@ stateDiagram-v2
 **Result**: ❌ INVALID
 
 ```
-Error: Lexical error on line 4. Unrecognized text.
-...A --> B : ev1    ---  }
-----------------------^
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:129832:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -290,20 +264,7 @@ stateDiagram-v2
 **Result**: ❌ INVALID
 
 ```
-Error: Lexical error on line 3. Unrecognized text.
-...2  state S {    ---    A --> B : ev1
----------------------^
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:129832:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -387,21 +348,7 @@ A --> [*]
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
-...iagram-v2[*] --> A---A --> [*]
----------------------^
-Expecting 'SPACE', 'NL', 'HIDE_EMPTY', 'scale', 'COMPOSIT_STATE', 'STRUCT_STOP', 'STATE_DESCR', 'ID', 'FORK', 'JOIN', 'CHOICE', 'CONCURRENT', 'note', 'acc_title', 'acc_descr', 'acc_descr_multiline_value', 'CLICK', 'classDef', 'style', 'class', 'direction_tb', 'direction_bt', 'direction_rl', 'direction_lr', 'EDGE_STATE', got 'INVALID'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:129832:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -477,20 +424,7 @@ stateDiagram-v2
 **Result**: ❌ INVALID
 
 ```
-Error: Lexical error on line 4. Unrecognized text.
-...    [*] --> A    ---    [*] --> B  }
-----------------------^
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:129832:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -564,20 +498,7 @@ A --> B
 **Result**: ❌ INVALID
 
 ```
-UnknownDiagramError: No diagram type detected matching given configuration for text: A --> B
-
-
-detectType (node_modules/mermaid/dist/mermaid.js:20437:15)
-    at $eval ($eval at renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:33), <anonymous>:48:45)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
+UnknownDiagramError: No diagram type detected
 ```
 
 </td>
@@ -646,21 +567,7 @@ Idle -> Running : start
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
-...tateDiagram-v2Idle -> Running : start
-----------------------^
-Expecting 'SPACE', 'NL', 'DESCR', '-->', 'HIDE_EMPTY', 'scale', 'COMPOSIT_STATE', 'STRUCT_STOP', 'STATE_DESCR', 'ID', 'FORK', 'JOIN', 'CHOICE', 'CONCURRENT', 'note', 'acc_title', 'acc_descr', 'acc_descr_multiline_value', 'CLICK', 'STRING', 'HREF', 'classDef', 'style', 'class', 'direction_tb', 'direction_bt', 'direction_rl', 'direction_lr', 'EDGE_STATE', 'STYLE_SEPARATOR', got 'INVALID'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:129832:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -740,20 +647,7 @@ state Auth {
 **Result**: ❌ INVALID
 
 ```
-Error: Lexical error on line 4. Unrecognized text.
-... [*] --> Stage1  ---  Stage2 --> [*]}
-----------------------^
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:129832:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -830,21 +724,7 @@ state Foo {
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
-...--> A  A --> [*]
--------------------^
-Expecting 'SPACE', 'NL', 'HIDE_EMPTY', 'scale', 'COMPOSIT_STATE', 'STRUCT_STOP', 'STATE_DESCR', 'ID', 'FORK', 'JOIN', 'CHOICE', 'CONCURRENT', 'note', 'acc_title', 'acc_descr', 'acc_descr_multiline_value', 'CLICK', 'classDef', 'style', 'class', 'direction_tb', 'direction_bt', 'direction_rl', 'direction_lr', 'EDGE_STATE', got '1'
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:129832:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -927,20 +807,7 @@ Auth --> [*]Note over Auth: Handles user auth
 **Result**: ❌ INVALID
 
 ```
-Error: Lexical error on line 4. Unrecognized text.
-...thAuth --> [*]Note over Auth: Handles u
-----------------------^
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:129832:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -1014,20 +881,7 @@ A --> B : ok
 **Result**: ❌ INVALID
 
 ```
-Error: Lexical error on line 2. Unrecognized text.
-...m-v2Note right of A Missing colonA -->
-----------------------^
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:129832:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>
@@ -1106,20 +960,7 @@ A --> B
 **Result**: ❌ INVALID
 
 ```
-Error: Lexical error on line 2. Unrecognized text.
-...tateDiagram-v2Note over A,B Missing col
-----------------------^
-Parser3.parseError (node_modules/mermaid/dist/mermaid.js:129832:28)
-    at #evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:388:19)
-    at async ExecutionContext.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:16)
-    at async IsolatedWorld.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:16)
-    at async CdpJSHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/JSHandle.js:146:20)
-    at async CdpElementHandle.evaluate (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:340:20)
-    at async CdpElementHandle.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/ElementHandle.js:494:24)
-    at async CdpFrame.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:450:20)
-    at async CdpPage.$eval (node_modules/puppeteer-core/lib/esm/puppeteer/api/Page.js:450:20)
-    at async renderMermaid (node_modules/@mermaid-js/mermaid-cli/src/index.js:266:22)
-    at fromText (node_modules/mermaid/dist/mermaid.js:153955:21)
+Syntax error in text
 ```
 
 </td>

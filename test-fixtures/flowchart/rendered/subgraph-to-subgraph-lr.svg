@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="401" height="410" viewBox="0 0 401 410">
-  <rect x="0" y="0" width="401" height="410" fill="#ffffff" />
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="341" height="660" viewBox="0 0 341 660">
+  <rect x="0" y="0" width="341" height="660" fill="#ffffff" />
   <style>
     .node-shape { fill: #eef0ff; stroke: #3f3f3f; stroke-width: 1px; }
     .node-label { fill: #333; font-family: Arial, sans-serif; font-size: 14px; }
@@ -50,43 +50,53 @@
       <path d="M1.5,1.5 L10.5,10.5 M10.5,1.5 L1.5,10.5" stroke="#555555" stroke-width="2.25" />
     </marker>
   </defs>
-  <g class="subgraph-bg"><g class="cluster-bg-layer" transform="translate(41,112)">
+  <g class="subgraph-bg"><g class="cluster-bg-layer" transform="translate(21,232)">
   <rect class="cluster-bg" x="0" y="0" width="290" height="118" rx="0"/>
-</g><g class="cluster-bg-layer" transform="translate(41,272)">
+</g><g class="cluster-bg-layer" transform="translate(21,392)">
   <rect class="cluster-bg" x="0" y="0" width="290" height="118" rx="0"/>
 </g></g>
   <g id="A">
-    <rect class="node-shape"  x="71" y="160" width="80" height="40" rx="0" ry="0" />
+    <rect class="node-shape"  x="51" y="280" width="80" height="40" rx="0" ry="0" />
     
-    <text class="node-label" x="111" y="184.9" text-anchor="middle">A</text>
+    <text class="node-label" x="91" y="304.9" text-anchor="middle">A</text>
   </g>
   <g id="B">
-    <rect class="node-shape"  x="221" y="160" width="80" height="40" rx="0" ry="0" />
+    <rect class="node-shape"  x="201" y="280" width="80" height="40" rx="0" ry="0" />
     
-    <text class="node-label" x="261" y="184.9" text-anchor="middle">B</text>
+    <text class="node-label" x="241" y="304.9" text-anchor="middle">B</text>
   </g>
   <g id="C">
-    <rect class="node-shape"  x="71" y="320" width="80" height="40" rx="0" ry="0" />
+    <rect class="node-shape"  x="51" y="440" width="80" height="40" rx="0" ry="0" />
     
-    <text class="node-label" x="111" y="344.9" text-anchor="middle">C</text>
+    <text class="node-label" x="91" y="464.9" text-anchor="middle">C</text>
   </g>
   <g id="D">
-    <rect class="node-shape"  x="221" y="320" width="80" height="40" rx="0" ry="0" />
+    <rect class="node-shape"  x="201" y="440" width="80" height="40" rx="0" ry="0" />
     
-    <text class="node-label" x="261" y="344.9" text-anchor="middle">D</text>
+    <text class="node-label" x="241" y="464.9" text-anchor="middle">D</text>
   </g>
-  <g><path class="edge-path" d="M151,180 L161,180 C173,180 205,180 211,180 L221,180" stroke-linecap="round" stroke-linejoin="round" />
-<path d="M221,180 L215,182.5 L215,177.5 Z" fill="#555555" /></g>
-  <g><path class="edge-path" d="M151,340 L161,340 C173,340 205,340 211,340 L221,340" stroke-linecap="round" stroke-linejoin="round" />
-<path d="M221,340 L215,342.5 L215,337.5 Z" fill="#555555" /></g>
-  <g><path class="edge-path" d="M331,171 L351,171 L113.4,171 L113.4,331 L41,331" stroke-linecap="round" stroke-linejoin="round" />
-<path d="M41,331 L47,328.5 L47,333.5 Z" fill="#555555" /></g>
-  <g class="cluster-overlay" transform="translate(41,112)">
+  <g id="A1">
+    <rect class="node-shape"  x="51" y="600" width="80" height="40" rx="0" ry="0" />
+    
+    <text class="node-label" x="91" y="624.9" text-anchor="middle">A1</text>
+  </g>
+  <g id="B1">
+    <rect class="node-shape"  x="201" y="600" width="80" height="40" rx="0" ry="0" />
+    
+    <text class="node-label" x="241" y="624.9" text-anchor="middle">B1</text>
+  </g>
+  <g><path class="edge-path" d="M131,300 L141,300 C153,300 185,300 191,300 L201,300" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M201,300 L195,302.5 L195,297.5 Z" fill="#555555" /></g>
+  <g><path class="edge-path" d="M131,460 L141,460 C153,460 185,460 191,460 L201,460" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M201,460 L195,462.5 L195,457.5 Z" fill="#555555" /></g>
+  <g><path class="edge-path" d="M131,620 L141,620 C153,620 185,620 191,620 L201,620" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M201,620 L195,622.5 L195,617.5 Z" fill="#555555" /></g>
+  <g class="cluster-overlay" transform="translate(21,232)">
 <rect class="cluster-border" x="0" y="0" width="290" height="118" rx="0"/>
 <rect class="cluster-title-bg" x="6" y="5" width="60" height="18" rx="3"/>
 <text class="cluster-label-text" x="36" y="18" text-anchor="middle">Group A</text>
 </g>
-  <g class="cluster-overlay" transform="translate(41,272)">
+  <g class="cluster-overlay" transform="translate(21,392)">
 <rect class="cluster-border" x="0" y="0" width="290" height="118" rx="0"/>
 <rect class="cluster-title-bg" x="6" y="5" width="60" height="18" rx="3"/>
 <text class="cluster-label-text" x="36" y="18" text-anchor="middle">Group B</text>

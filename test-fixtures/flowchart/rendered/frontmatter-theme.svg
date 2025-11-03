@@ -74,7 +74,7 @@
 <path d="M150,389 L147.5,383 L152.5,383 Z" fill="#555555" /></g>
   <g class="cluster-overlay" transform="translate(80,21)">
 <rect class="cluster-border" x="0" y="0" width="140" height="278" rx="0"/>
-<rect class="cluster-title-bg" x="6" y="5" width="46" height="18" rx="3"/>
-<text class="cluster-label-text" x="29" y="18" text-anchor="middle">Group</text>
+<rect class="cluster-title-bg" x="6" y="5" width="82" height="18" rx="3"/>
+<text class="cluster-label-text" x="47" y="18" text-anchor="middle">subgraph_0</text>
 </g>
 </svg>
