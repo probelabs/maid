@@ -102,7 +102,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
+Syntax error in text
 ```
 
 </td>
@@ -194,7 +194,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
+Syntax error in text
 ```
 
 </td>
@@ -359,7 +359,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -443,7 +443,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -529,7 +529,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 5:
+Syntax error in text
 ```
 
 </td>
@@ -611,7 +611,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 5:
+Syntax error in text
 ```
 
 </td>
@@ -711,7 +711,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 8:
+Syntax error in text
 ```
 
 </td>
@@ -807,7 +807,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 6:
+Syntax error in text
 ```
 
 </td>
@@ -901,7 +901,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 6:
+Syntax error in text
 ```
 
 </td>
@@ -1161,7 +1161,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Lexical error on line 2. Unrecognized text.
+Syntax error in text
 ```
 
 </td>
@@ -1237,7 +1237,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
+Syntax error in text
 ```
 
 </td>
@@ -1334,7 +1334,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: The destroyed participant undefined does not have an associated destroying message after its declaration. Please check the sequence diagram.
+Syntax error in text
 ```
 
 </td>
@@ -1413,7 +1413,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 5:
+Syntax error in text
 ```
 
 </td>
@@ -1508,7 +1508,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
+Syntax error in text
 ```
 
 </td>
@@ -1755,7 +1755,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
+Syntax error in text
 ```
 
 </td>
@@ -1940,7 +1940,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
+Syntax error in text
 ```
 
 </td>
@@ -2021,7 +2021,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -2103,7 +2103,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
+Syntax error in text
 ```
 
 </td>
@@ -2272,7 +2272,7 @@ sequenceDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
+Syntax error in text
 ```
 
 </td>

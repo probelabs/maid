@@ -75,7 +75,7 @@ Tree : root: Node<string>
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 9:
+Syntax error in text
 ```
 
 </td>
@@ -170,7 +170,7 @@ classDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Lexical error on line 2. Unrecognized text.
+Syntax error in text
 ```
 
 </td>
@@ -272,7 +272,7 @@ Foo -> Bar : wrong arrow
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -349,7 +349,7 @@ class Foo {
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
+Syntax error in text
 ```
 
 </td>
@@ -431,7 +431,7 @@ classDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -533,7 +533,7 @@ classDiagram
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
+Syntax error in text
 ```
 
 </td>
@@ -649,7 +649,7 @@ class "Logger "core"" as L
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -725,7 +725,7 @@ Foo <|-- : extends
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
