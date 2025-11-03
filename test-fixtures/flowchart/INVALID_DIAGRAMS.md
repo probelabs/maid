@@ -81,7 +81,7 @@ This file contains invalid flowchart test fixtures with:
 | 17 | [invalid class](#17-invalid-class) | INVALID | INVALID | — |
 | 18 | [invalid node syntax](#18-invalid-node-syntax) | INVALID | INVALID | ✅ all |
 | 19 | [invalid subgraph](#19-invalid-subgraph) | INVALID | INVALID | — |
-| 20 | [label with at sign](#20-label-with-at-sign) | INVALID | INVALID | ❌ safe |
+| 20 | [label with at sign](#20-label-with-at-sign) | INVALID | INVALID | ✅ safe |
 | 21 | [label with at slash](#21-label-with-at-slash) | INVALID | INVALID | ✅ safe |
 | 22 | [label with function call](#22-label-with-function-call) | INVALID | INVALID | ✅ safe |
 | 23 | [label with tip](#23-label-with-tip) | INVALID | INVALID | ✅ safe |
@@ -285,7 +285,7 @@ graph TB
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 34:
+Syntax error in text
 ```
 
 </td>
@@ -685,7 +685,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Lexical error on line 2. Unrecognized text.
+Syntax error in text
 ```
 
 </td>
@@ -768,7 +768,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
+Syntax error in text
 ```
 
 </td>
@@ -842,7 +842,7 @@ graph TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -930,7 +930,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -1014,7 +1014,7 @@ graph TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 7:
+Syntax error in text
 ```
 
 </td>
@@ -1137,7 +1137,7 @@ graph TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 5:
+Syntax error in text
 ```
 
 </td>
@@ -1229,7 +1229,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -1298,7 +1298,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -1392,7 +1392,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 6:
+Syntax error in text
 ```
 
 </td>
@@ -1487,7 +1487,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 6:
+Syntax error in text
 ```
 
 </td>
@@ -1568,7 +1568,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
+Syntax error in text
 ```
 
 </td>
@@ -1642,7 +1642,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-TypeError: Cannot set properties of undefined (setting 'style')
+Syntax error in text
 ```
 
 </td>
@@ -1720,7 +1720,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
+Syntax error in text
 ```
 
 </td>
@@ -1798,7 +1798,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
+Syntax error in text
 ```
 
 </td>
@@ -1870,7 +1870,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -1943,7 +1943,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
+Syntax error in text
 ```
 
 </td>
@@ -2011,7 +2011,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
+Syntax error in text
 ```
 
 </td>
@@ -2237,7 +2237,7 @@ graph TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
+Syntax error in text
 ```
 
 </td>
@@ -2326,7 +2326,7 @@ graph TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 7:
+Syntax error in text
 ```
 
 </td>
@@ -2431,7 +2431,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 7:
+Syntax error in text
 ```
 
 </td>
@@ -2529,7 +2529,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -2614,7 +2614,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
+Syntax error in text
 ```
 
 </td>
@@ -2692,7 +2692,7 @@ graph TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 5:
+Syntax error in text
 ```
 
 </td>
@@ -2788,7 +2788,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -2862,7 +2862,7 @@ flowchart LR
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -2954,7 +2954,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
+Syntax error in text
 ```
 
 </td>
@@ -3044,7 +3044,7 @@ graph TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
+Syntax error in text
 ```
 
 </td>
@@ -3144,7 +3144,7 @@ B --> C
 **Result**: ❌ INVALID
 
 ```
-UnknownDiagramError: No diagram type detected matching given configuration for text: A --> B
+UnknownDiagramError: No diagram type detected
 ```
 
 </td>
@@ -3212,7 +3212,7 @@ flowchart LR
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -3312,7 +3312,7 @@ graph TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 9:
+Syntax error in text
 ```
 
 </td>
@@ -3407,7 +3407,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -3483,7 +3483,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -3559,7 +3559,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 2:
+Syntax error in text
 ```
 
 </td>
@@ -3650,7 +3650,7 @@ flowchart LR
 **Result**: ❌ INVALID
 
 ```
-Syntax error in text
+Error: No such shape: parallelogram.
 ```
 
 </td>
@@ -3761,7 +3761,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Syntax error in text
+Error: No such shape: rhombus.
 ```
 
 </td>
@@ -3858,7 +3858,7 @@ flowchart LR
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
+Syntax error in text
 ```
 
 </td>
@@ -4012,7 +4012,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
+Syntax error in text
 ```
 
 </td>
@@ -4089,7 +4089,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
+Syntax error in text
 ```
 
 </td>
@@ -4172,7 +4172,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 7:
+Syntax error in text
 ```
 
 </td>
@@ -4296,7 +4296,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 4:
+Syntax error in text
 ```
 
 </td>
@@ -4414,7 +4414,7 @@ flowchart TD
 **Result**: ❌ INVALID
 
 ```
-Error: Parse error on line 3:
+Syntax error in text
 ```
 
 </td>
@@ -4492,7 +4492,7 @@ flowchart XY
 **Result**: ❌ INVALID
 
 ```
-Error: Lexical error on line 1. Unrecognized text.
+Syntax error in text
 ```
 
 </td>

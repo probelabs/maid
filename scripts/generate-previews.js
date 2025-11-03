@@ -51,18 +51,16 @@ function canonicalizeMermaidError(input) {
   if (!input) return 'INVALID (no message)';
   const s = sanitizeMermaidMessage(String(input));
   const lines = s.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
-  // Prefer the explicit parse error line if present
-  const parseLine = lines.find((l) => /^Error:\s*Parse error on line\s*\d+/.test(l));
-  if (parseLine) return parseLine;
-  // Fallback to the generic syntax error line
-  const syntax = lines.find((l) => /Syntax error in text/i.test(l));
-  if (syntax) return 'Syntax error in text';
-  // Strip the boilerplate mermaid-cli banner if that's all we got
-  if (lines.length === 1 && /Generating single mermaid chart/.test(lines[0])) {
-    return 'Syntax error in text';
-  }
-  // Last resort: first non-empty line
-  return lines[0] || 'INVALID (no message)';
+  // Stable buckets to avoid env-dependent diffs
+  const stable = (t) => t.replace(/\s+/g, ' ').trim();
+  // Keep explicit "No such shape" messages verbatim (they are stable)
+  const noShape = lines.find((l) => /No such shape:/i.test(l));
+  if (noShape) return stable(noShape.startsWith('Error:') ? noShape : `Error: ${noShape}`);
+  // Keep UnknownDiagramError but shrink to a single stable line
+  const unknown = lines.find((l) => /UnknownDiagramError/i.test(l) || /No diagram type detected/i.test(l));
+  if (unknown) return 'UnknownDiagramError: No diagram type detected';
+  // Everything else → single canonical line
+  return 'Syntax error in text';
 }
 
 // Choose a safe backtick fence length so inner backticks in content don't break the block.
