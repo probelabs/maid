@@ -36,9 +36,12 @@
     "GEN-HEADER-INVALID"
   ],
   "quotes-double-inside-single.mmd": [
-    "FL-LABEL-DOUBLE-IN-SINGLE"
+    "FL-LABEL-DOUBLE-IN-SINGLE",
+    "FL-LABEL-QUOTE-IN-UNQUOTED"
   ],
   "quotes-in-node-labels.mmd": [
+    "FL-LABEL-QUOTE-IN-UNQUOTED",
+    "FL-LABEL-QUOTE-IN-UNQUOTED",
     "FL-LABEL-QUOTE-IN-UNQUOTED"
   ],
   "unclosed-bracket.mmd": [
@@ -71,6 +74,9 @@
   ],
   "unquoted-parens-with-backticks.mmd": [
     "FL-LABEL-PARENS-UNQUOTED"
+  ],
+  "label-with-attribute-quotes.mmd": [
+    "FL-LABEL-QUOTE-IN-UNQUOTED"
   ],
   "diamond-parens-unquoted.mmd": [
     "FL-LABEL-PARENS-UNQUOTED"

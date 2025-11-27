@@ -1,0 +1,7 @@
+graph TD
+  A[Backend: Developer configures Meta with VisibilityCondition] --> B{Go Template: select_one.tmpl}
+  B --> C[HTML Output: select element with data-trigger-visibility="true"]
+  C --> D{JS Plugin: qor-select-visibility.js}
+  D -- on change --> E{Show/Hide Logic}
+  E --> F[Target Elements: .visibility-by-condition]
+
