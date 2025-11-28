@@ -36,8 +36,7 @@
     "GEN-HEADER-INVALID"
   ],
   "quotes-double-inside-single.mmd": [
-    "FL-LABEL-DOUBLE-IN-SINGLE",
-    "FL-LABEL-QUOTE-IN-UNQUOTED"
+    "FL-LABEL-DOUBLE-IN-SINGLE"
   ],
   "quotes-in-node-labels.mmd": [
     "FL-LABEL-QUOTE-IN-UNQUOTED",

@@ -64,7 +64,7 @@ This file contains invalid flowchart test fixtures with:
 | # | Diagram | mermaid-cli | maid | Auto-fix? |
 |---:|---|:---:|:---:|:---:|
 | 1 | [agent schema workflow](#1-agent-schema-workflow) | INVALID | INVALID | ❌ safe |
-| 2 | [backticks in quoted label](#2-backticks-in-quoted-label) | INVALID | INVALID | ❌ safe |
+| 2 | [backticks in quoted label](#2-backticks-in-quoted-label) | INVALID | INVALID | ✅ safe |
 | 3 | [curly in quoted](#3-curly-in-quoted) | INVALID | INVALID | — |
 | 4 | [diamond indexof brackets](#4-diamond-indexof-brackets) | INVALID | INVALID | ✅ safe |
 | 5 | [diamond parens unquoted](#5-diamond-parens-unquoted) | INVALID | INVALID | ✅ safe |
@@ -3318,14 +3318,6 @@ at test-fixtures/flowchart/invalid/quotes-double-inside-single.mmd:2:15
     |               ^
   3 | 
 hint: Change to "She said &quot;Hello&quot;" or replace inner " with &quot;.
-
-error[FL-LABEL-QUOTE-IN-UNQUOTED]: Quotes are not allowed inside unquoted node labels. Use &quot; for quotes or wrap the entire label in quotes.
-at test-fixtures/flowchart/invalid/quotes-double-inside-single.mmd:2:5
-  1 | flowchart LR
-  2 |   A['She said "Hello"'] --> B
-    |     ^
-  3 | 
-hint: Example: C["HTML Output: data-trigger-visibility=&quot;true&quot;"]
 ```
 
 </td>
@@ -3336,7 +3328,7 @@ hint: Example: C["HTML Output: data-trigger-visibility=&quot;true&quot;"]
 
 ```mermaid
 flowchart LR
-  A["'She said &quot;Hello&quot;'llo&quot;'"] --> B
+  A['She said &quot;Hello&quot;'] --> B
 
 
 ```
@@ -3793,7 +3785,7 @@ flowchart LR
 **Result**: ❌ INVALID
 
 ```
-Syntax error in text
+Error: No such shape: parallelogram.
 ```
 
 </td>

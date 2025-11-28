@@ -193,6 +193,7 @@ export function validateFlowchart(text: string, options: ValidateOptions = {}): 
                 const hasParens = seg.includes('(') || seg.includes(')');
                 const hasAt = seg.includes('@');
                 const hasQuote = seg.includes('"');
+                const isSingleQuoted = /^'[^]*'$/.test(trimmed);
                 if (!covered && !isQuoted && !isParenWrapped && hasParens) {
                   errs.push({ line: ln, column: startCol, severity: 'error', code: 'FL-LABEL-PARENS-UNQUOTED', message: 'Parentheses inside an unquoted label are not supported by Mermaid.', hint: 'Wrap the label in quotes, e.g., A["Mark (X)"] — or replace ( and ) with HTML entities: &#40; and &#41;.' } as any);
                   existing.push({ start: startCol, end: endCol });
@@ -203,7 +204,7 @@ export function validateFlowchart(text: string, options: ValidateOptions = {}): 
                   existing.push({ start: startCol, end: endCol });
                   byLine.set(ln, existing);
                 }
-                if (!covered && !isQuoted && !isSlashPair && hasQuote) {
+                if (!covered && !isQuoted && !isSlashPair && hasQuote && !isSingleQuoted) {
                   errs.push({ line: ln, column: startCol, severity: 'error', code: 'FL-LABEL-QUOTE-IN-UNQUOTED', message: 'Quotes are not allowed inside unquoted node labels. Use &quot; for quotes or wrap the entire label in quotes.', hint: 'Example: C["HTML Output: data-trigger-visibility=&quot;true&quot;"]' } as any);
                   existing.push({ start: startCol, end: endCol });
                   byLine.set(ln, existing);
