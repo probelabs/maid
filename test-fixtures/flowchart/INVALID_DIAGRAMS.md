@@ -91,7 +91,7 @@ This file contains invalid flowchart test fixtures with:
 | 26 | [linkstyle id unknown](#26-linkstyle-id-unknown) | INVALID | INVALID | — |
 | 27 | [method parens in unquoted label](#27-method-parens-in-unquoted-label) | INVALID | INVALID | ✅ safe |
 | 28 | [missing arrow](#28-missing-arrow) | INVALID | INVALID | ✅ all |
-| 29 | [mixed brackets](#29-mixed-brackets) | INVALID | INVALID | ❌ safe |
+| 29 | [mixed brackets](#29-mixed-brackets) | INVALID | INVALID | ✅ safe |
 | 30 | [mixed quotes in labels](#30-mixed-quotes-in-labels) | INVALID | INVALID | — |
 | 31 | [model initialize call](#31-model-initialize-call) | INVALID | INVALID | ✅ safe |
 | 32 | [no diagram type](#32-no-diagram-type) | INVALID | INVALID | — |
