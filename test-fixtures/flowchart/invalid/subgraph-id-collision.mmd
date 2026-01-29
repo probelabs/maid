@@ -1,0 +1,10 @@
+flowchart TD
+    A[Start] --> B{Choose Path}
+
+    subgraph S1["Container"]
+        B --> C[Option 1]
+        B --> D[Option 2]
+        D --> S1["Problem Node"]
+    end
+
+    C --> E[End]

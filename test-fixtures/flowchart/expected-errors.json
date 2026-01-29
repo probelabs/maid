@@ -92,5 +92,8 @@
   ],
   "round-parens-unquoted.mmd": [
     "FL-LABEL-PARENS-UNQUOTED"
+  ],
+  "subgraph-id-collision.mmd": [
+    "FL-SUBGRAPH-ID-COLLISION"
   ]
 }

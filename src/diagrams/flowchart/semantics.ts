@@ -12,6 +12,8 @@ class FlowSemanticsVisitor extends BaseVisitor {
   private edgeCount = 0;
   private knownIds: Set<string>;
   private knownEdgeIds: Set<string>;
+  private subgraphStack: { id: string }[] = [];
+  private reportedSubgraphIdCollision = new Set<string>();
 
   constructor(ctx: Ctx, knownIds: Set<string>, knownEdgeIds: Set<string>) {
     super();
@@ -222,7 +224,10 @@ class FlowSemanticsVisitor extends BaseVisitor {
   }
 
   subgraph(ctx: any) {
+    const idTok = (ctx.subgraphIdOrFirstWord && ctx.subgraphIdOrFirstWord[0]) as IToken | undefined;
+    if (idTok) this.subgraphStack.push({ id: String(idTok.image) });
     if (ctx.subgraphStatement) ctx.subgraphStatement.forEach((s: CstNode) => this.visit(s));
+    if (idTok) this.subgraphStack.pop();
   }
 
   subgraphStatement(ctx: any) {
@@ -286,6 +291,28 @@ class FlowSemanticsVisitor extends BaseVisitor {
       });
     }
     if (ctx.nodeShape) ctx.nodeShape.forEach((n: CstNode) => this.visit(n));
+
+    const idTok: IToken | undefined = (ctx.nodeId && ctx.nodeId[0]) as IToken | undefined;
+    const idNumTok: IToken | undefined = (ctx.nodeIdNum && ctx.nodeIdNum[0]) as IToken | undefined;
+    const idToken = idTok || idNumTok;
+    if (idToken && this.subgraphStack.length > 0) {
+      const id = String(idToken.image);
+      const hasCollision = this.subgraphStack.some(sg => sg.id === id);
+      if (hasCollision) {
+        const key = `${id}:${idToken.startLine ?? 1}:${idToken.startColumn ?? 1}`;
+        if (!this.reportedSubgraphIdCollision.has(key)) {
+          this.reportedSubgraphIdCollision.add(key);
+          this.ctx.errors.push({
+            line: idToken.startLine ?? 1,
+            column: idToken.startColumn ?? 1,
+            severity: 'error',
+            code: 'FL-SUBGRAPH-ID-COLLISION',
+            message: `Node id '${id}' conflicts with an enclosing subgraph id and creates a cycle in Mermaid.`,
+            hint: 'Rename the subgraph id or the node id, or use a quoted subgraph title with no explicit id.'
+          });
+        }
+      }
+    }
 
     if (hasAttr) {
       const attr = (ctx as any).attrObject?.[0];
