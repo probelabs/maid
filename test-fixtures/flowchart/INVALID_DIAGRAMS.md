@@ -99,7 +99,7 @@ This file contains invalid flowchart test fixtures with:
 | 33 | [quotes double inside single](#33-quotes-double-inside-single) | INVALID | INVALID | ✅ safe |
 | 34 | [quotes in node labels](#34-quotes-in-node-labels) | INVALID | INVALID | ✅ safe |
 | 35 | [round parens unquoted](#35-round-parens-unquoted) | INVALID | INVALID | ✅ safe |
-| 36 | [subgraph id collision](#36-subgraph-id-collision) | INVALID | INVALID | — |
+| 36 | [subgraph id collision](#36-subgraph-id-collision) | INVALID | INVALID | ✅ all |
 | 37 | [title unsupported](#37-title-unsupported) | INVALID | INVALID | ✅ all |
 | 38 | [typed parallelogram parens](#38-typed-parallelogram-parens) | INVALID | INVALID | ✅ safe |
 | 39 | [typed shapes all](#39-typed-shapes-all) | INVALID | INVALID | — |
@@ -3655,7 +3655,19 @@ No auto-fix changes (safe level).
 
 ### maid Auto-fix (`--fix=all`) Preview
 
-No auto-fix changes (all level).
+```mermaid
+flowchart TD
+    A[Start] --> B{Choose Path}
+
+    subgraph S1["Container"]
+        B --> C[Option 1]
+        B --> D[Option 2]
+        D --> S1_node["Problem Node"]
+    end
+
+    C --> E[End]
+
+```
 
 <details>
 <summary>View source code</summary>
