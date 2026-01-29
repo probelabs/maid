@@ -11,6 +11,7 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
   const patchedLines = new Set<number>();
   const seen = new Set<string>();
   const piQuoteClosedLines = new Set<number>();
+  const subgraphCollisionRename = new Map<string, string>();
   // Utility: sanitize all quoted segments inside shape labels on a given line
   function sanitizeAllQuotedSegmentsInShapes(lineText: string, lineNo: number) {
     // Shapes and their closers in order of preference (double before single)
@@ -791,6 +792,28 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
             end: { line: e.line, column: lineText.length + 1 },
             newText: fixedLine
           });
+        }
+      }
+      continue;
+    }
+    // Flowchart: node id conflicts with an enclosing subgraph id (heuristic rename)
+    if (is('FL-SUBGRAPH-ID-COLLISION', e)) {
+      if (level === 'all') {
+        const lineText = lineTextAt(text, e.line);
+        if (lineText.trimStart().startsWith('subgraph')) continue;
+        const caret0 = Math.max(0, e.column - 1);
+        const slice = lineText.slice(caret0);
+        const m = slice.match(/^([A-Za-z_][A-Za-z0-9_]*(?:-[A-Za-z0-9_]+)*)/);
+        if (m) {
+          const id = m[1];
+          let newId = subgraphCollisionRename.get(id);
+          if (!newId) {
+            newId = id.endsWith('_node') ? `${id}2` : `${id}_node`;
+            subgraphCollisionRename.set(id, newId);
+          }
+          if (newId !== id) {
+            edits.push(replaceRange(text, { line: e.line, column: caret0 + 1 }, id.length, newId));
+          }
         }
       }
       continue;

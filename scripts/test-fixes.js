@@ -185,6 +185,12 @@ const cases = [
     after:  'flowchart TD\n    A-->B\n',
     afterLevel: 'all'
   },
+  {
+    name: 'FL-SUBGRAPH-ID-COLLISION (all)',
+    before: 'flowchart TD\n  subgraph S1["Container"]\n    A --> S1["Node"]\n  end\n',
+    after:  'flowchart TD\n  subgraph S1["Container"]\n    A --> S1_node["Node"]\n  end\n',
+    afterLevel: 'all'
+  },
   // Sequence
   { name: 'SE-MSG-COLON-MISSING', before: 'sequenceDiagram\nA->B hi\n', after: 'sequenceDiagram\nA->B : hi\n' },
   { name: 'SE-NOTE-MALFORMED', before: 'sequenceDiagram\nNote right of A Hello\n', after: 'sequenceDiagram\nNote right of A : Hello\n' },

@@ -44,18 +44,19 @@ This file contains invalid flowchart test fixtures with:
 33. [Quotes Double Inside Single](#33-quotes-double-inside-single)
 34. [Quotes In Node Labels](#34-quotes-in-node-labels)
 35. [Round Parens Unquoted](#35-round-parens-unquoted)
-36. [Title Unsupported](#36-title-unsupported)
-37. [Typed Parallelogram Parens](#37-typed-parallelogram-parens)
-38. [Typed Shapes All](#38-typed-shapes-all)
-39. [Typed Shapes Unknowns](#39-typed-shapes-unknowns)
-40. [Unclosed Bracket](#40-unclosed-bracket)
-41. [Unclosed Quote In Label](#41-unclosed-quote-in-label)
-42. [Unescaped Quotes In Decision](#42-unescaped-quotes-in-decision)
-43. [Unmatched End](#43-unmatched-end)
-44. [Unquoted Label With Quotes](#44-unquoted-label-with-quotes)
-45. [Unquoted Parens In Labels](#45-unquoted-parens-in-labels)
-46. [Unquoted Parens With Backticks](#46-unquoted-parens-with-backticks)
-47. [Wrong Direction](#47-wrong-direction)
+36. [Subgraph Id Collision](#36-subgraph-id-collision)
+37. [Title Unsupported](#37-title-unsupported)
+38. [Typed Parallelogram Parens](#38-typed-parallelogram-parens)
+39. [Typed Shapes All](#39-typed-shapes-all)
+40. [Typed Shapes Unknowns](#40-typed-shapes-unknowns)
+41. [Unclosed Bracket](#41-unclosed-bracket)
+42. [Unclosed Quote In Label](#42-unclosed-quote-in-label)
+43. [Unescaped Quotes In Decision](#43-unescaped-quotes-in-decision)
+44. [Unmatched End](#44-unmatched-end)
+45. [Unquoted Label With Quotes](#45-unquoted-label-with-quotes)
+46. [Unquoted Parens In Labels](#46-unquoted-parens-in-labels)
+47. [Unquoted Parens With Backticks](#47-unquoted-parens-with-backticks)
+48. [Wrong Direction](#48-wrong-direction)
 
 ---
 
@@ -98,18 +99,19 @@ This file contains invalid flowchart test fixtures with:
 | 33 | [quotes double inside single](#33-quotes-double-inside-single) | INVALID | INVALID | ✅ safe |
 | 34 | [quotes in node labels](#34-quotes-in-node-labels) | INVALID | INVALID | ✅ safe |
 | 35 | [round parens unquoted](#35-round-parens-unquoted) | INVALID | INVALID | ✅ safe |
-| 36 | [title unsupported](#36-title-unsupported) | INVALID | INVALID | ✅ all |
-| 37 | [typed parallelogram parens](#37-typed-parallelogram-parens) | INVALID | INVALID | ✅ safe |
-| 38 | [typed shapes all](#38-typed-shapes-all) | INVALID | INVALID | — |
-| 39 | [typed shapes unknowns](#39-typed-shapes-unknowns) | INVALID | INVALID | — |
-| 40 | [unclosed bracket](#40-unclosed-bracket) | INVALID | INVALID | ✅ safe |
-| 41 | [unclosed quote in label](#41-unclosed-quote-in-label) | INVALID | INVALID | ✅ all |
-| 42 | [unescaped quotes in decision](#42-unescaped-quotes-in-decision) | INVALID | INVALID | ✅ safe |
-| 43 | [unmatched end](#43-unmatched-end) | INVALID | INVALID | — |
-| 44 | [unquoted label with quotes](#44-unquoted-label-with-quotes) | INVALID | INVALID | ✅ safe |
-| 45 | [unquoted parens in labels](#45-unquoted-parens-in-labels) | INVALID | INVALID | ✅ safe |
-| 46 | [unquoted parens with backticks](#46-unquoted-parens-with-backticks) | INVALID | INVALID | ✅ safe |
-| 47 | [wrong direction](#47-wrong-direction) | INVALID | INVALID | — |
+| 36 | [subgraph id collision](#36-subgraph-id-collision) | INVALID | INVALID | ✅ all |
+| 37 | [title unsupported](#37-title-unsupported) | INVALID | INVALID | ✅ all |
+| 38 | [typed parallelogram parens](#38-typed-parallelogram-parens) | INVALID | INVALID | ✅ safe |
+| 39 | [typed shapes all](#39-typed-shapes-all) | INVALID | INVALID | — |
+| 40 | [typed shapes unknowns](#40-typed-shapes-unknowns) | INVALID | INVALID | — |
+| 41 | [unclosed bracket](#41-unclosed-bracket) | INVALID | INVALID | ✅ safe |
+| 42 | [unclosed quote in label](#42-unclosed-quote-in-label) | INVALID | INVALID | ✅ all |
+| 43 | [unescaped quotes in decision](#43-unescaped-quotes-in-decision) | INVALID | INVALID | ✅ safe |
+| 44 | [unmatched end](#44-unmatched-end) | INVALID | INVALID | — |
+| 45 | [unquoted label with quotes](#45-unquoted-label-with-quotes) | INVALID | INVALID | ✅ safe |
+| 46 | [unquoted parens in labels](#46-unquoted-parens-in-labels) | INVALID | INVALID | ✅ safe |
+| 47 | [unquoted parens with backticks](#47-unquoted-parens-with-backticks) | INVALID | INVALID | ✅ safe |
+| 48 | [wrong direction](#48-wrong-direction) | INVALID | INVALID | — |
 
 ---
 
@@ -3590,7 +3592,104 @@ flowchart TD
 
 ---
 
-## 36. Title Unsupported
+## 36. Subgraph Id Collision
+
+📄 **Source**: [`subgraph-id-collision.mmd`](./invalid/subgraph-id-collision.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+flowchart TD
+    A[Start] --> B{Choose Path}
+
+    subgraph S1["Container"]
+        B --> C[Option 1]
+        B --> D[Option 2]
+        D --> S1["Problem Node"]
+    end
+
+    C --> E[End]
+
+```
+
+### Error Comparison: mermaid-cli vs maid
+
+<table>
+<tr>
+<th width="50%">mermaid-cli</th>
+<th width="50%">maid</th>
+</tr>
+<tr>
+<td valign="top">
+
+**Result**: ❌ INVALID
+
+```
+Syntax error in text
+```
+
+</td>
+<td valign="top">
+
+**Result**: ❌ INVALID
+
+```
+error[FL-SUBGRAPH-ID-COLLISION]: Node id 'S1' conflicts with an enclosing subgraph id and creates a cycle in Mermaid.
+at test-fixtures/flowchart/invalid/subgraph-id-collision.mmd:7:15
+   6 |         B --> D[Option 2]
+   7 |         D --> S1["Problem Node"]
+     |               ^
+   8 |     end
+hint: Rename the subgraph id or the node id, or use a quoted subgraph title with no explicit id.
+```
+
+</td>
+</tr>
+</table>
+
+### maid Auto-fix (`--fix`) Preview
+
+No auto-fix changes (safe level).
+
+### maid Auto-fix (`--fix=all`) Preview
+
+```mermaid
+flowchart TD
+    A[Start] --> B{Choose Path}
+
+    subgraph S1["Container"]
+        B --> C[Option 1]
+        B --> D[Option 2]
+        D --> S1_node["Problem Node"]
+    end
+
+    C --> E[End]
+
+```
+
+<details>
+<summary>View source code</summary>
+
+```
+flowchart TD
+    A[Start] --> B{Choose Path}
+
+    subgraph S1["Container"]
+        B --> C[Option 1]
+        B --> D[Option 2]
+        D --> S1["Problem Node"]
+    end
+
+    C --> E[End]
+
+```
+</details>
+
+---
+
+## 37. Title Unsupported
 
 📄 **Source**: [`title-unsupported.mmd`](./invalid/title-unsupported.mmd)
 
@@ -3665,7 +3764,7 @@ flowchart TD
 
 ---
 
-## 37. Typed Parallelogram Parens
+## 38. Typed Parallelogram Parens
 
 📄 **Source**: [`typed-parallelogram-parens.mmd`](./invalid/typed-parallelogram-parens.mmd)
 
@@ -3744,7 +3843,7 @@ flowchart TD
 
 ---
 
-## 38. Typed Shapes All
+## 39. Typed Shapes All
 
 📄 **Source**: [`typed-shapes-all.mmd`](./invalid/typed-shapes-all.mmd)
 
@@ -3865,7 +3964,7 @@ flowchart LR
 
 ---
 
-## 39. Typed Shapes Unknowns
+## 40. Typed Shapes Unknowns
 
 📄 **Source**: [`typed-shapes-unknowns.mmd`](./invalid/typed-shapes-unknowns.mmd)
 
@@ -3966,7 +4065,7 @@ flowchart TD
 
 ---
 
-## 40. Unclosed Bracket
+## 41. Unclosed Bracket
 
 📄 **Source**: [`unclosed-bracket.mmd`](./invalid/unclosed-bracket.mmd)
 
@@ -4039,7 +4138,7 @@ flowchart LR
 
 ---
 
-## 41. Unclosed Quote In Label
+## 42. Unclosed Quote In Label
 
 📄 **Source**: [`unclosed-quote-in-label.mmd`](./invalid/unclosed-quote-in-label.mmd)
 
@@ -4118,7 +4217,7 @@ flowchart TD
 
 ---
 
-## 42. Unescaped Quotes In Decision
+## 43. Unescaped Quotes In Decision
 
 📄 **Source**: [`unescaped-quotes-in-decision.mmd`](./invalid/unescaped-quotes-in-decision.mmd)
 
@@ -4197,7 +4296,7 @@ flowchart TD
 
 ---
 
-## 43. Unmatched End
+## 44. Unmatched End
 
 📄 **Source**: [`unmatched-end.mmd`](./invalid/unmatched-end.mmd)
 
@@ -4265,7 +4364,7 @@ flowchart TD
 
 ---
 
-## 44. Unquoted Label With Quotes
+## 45. Unquoted Label With Quotes
 
 📄 **Source**: [`unquoted-label-with-quotes.mmd`](./invalid/unquoted-label-with-quotes.mmd)
 
@@ -4383,7 +4482,7 @@ flowchart TD
 
 ---
 
-## 45. Unquoted Parens In Labels
+## 46. Unquoted Parens In Labels
 
 📄 **Source**: [`unquoted-parens-in-labels.mmd`](./invalid/unquoted-parens-in-labels.mmd)
 
@@ -4519,7 +4618,7 @@ flowchart TD
 
 ---
 
-## 46. Unquoted Parens With Backticks
+## 47. Unquoted Parens With Backticks
 
 📄 **Source**: [`unquoted-parens-with-backticks.mmd`](./invalid/unquoted-parens-with-backticks.mmd)
 
@@ -4601,7 +4700,7 @@ flowchart TD
 
 ---
 
-## 47. Wrong Direction
+## 48. Wrong Direction
 
 📄 **Source**: [`wrong-direction.mmd`](./invalid/wrong-direction.mmd)
 
