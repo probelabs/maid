@@ -90,6 +90,10 @@
   "label-with-at-slash.mmd": [
     "FL-LABEL-AT-IN-UNQUOTED"
   ],
+  "issue-60-parens-unquoted.mmd": [
+    "FL-LABEL-PARENS-UNQUOTED",
+    "FL-LABEL-PARENS-UNQUOTED"
+  ],
   "round-parens-unquoted.mmd": [
     "FL-LABEL-PARENS-UNQUOTED"
   ],

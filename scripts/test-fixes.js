@@ -77,6 +77,11 @@ const cases = [
     after:  'flowchart TD\n  E[Component e.g., CheckExecutionEngine] --> F["Calls logger.debug(&quot;message&quot;, data)"];\n'
   },
   {
+    name: 'FL-LABEL-PARENS-UNQUOTED (decision, issue #60)',
+    before: 'flowchart TD\n  D1{Tics cause functional impairment (pain)?}\n  D1 --> B1[Offer therapy (CBIT)]\n',
+    after:  'flowchart TD\n  D1{"Tics cause functional impairment (pain)?"}\n  D1 --> B1["Offer therapy (CBIT)"]\n'
+  },
+  {
     name: 'FL-QUOTE-UNCLOSED (all)',
     before: 'flowchart TD\n  A["Unclosed label]\n  A --> B\n',
     after:  'flowchart TD\n  A["Unclosed label"]\n  A --> B\n',
