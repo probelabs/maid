@@ -62,7 +62,6 @@ This file contains invalid flowchart test fixtures with:
 
 ---
 
-
 ## Summary
 
 | # | Diagram | mermaid-cli | maid | Auto-fix? |
@@ -119,7 +118,6 @@ This file contains invalid flowchart test fixtures with:
 | 50 | [wrong direction](#50-wrong-direction) | INVALID | INVALID | — |
 
 ---
-
 
 ## 1. Agent Schema Workflow
 
@@ -667,7 +665,6 @@ graph TB
 
 ---
 
-
 ## 2. Backticks In Quoted Label
 
 📄 **Source**: [`backticks-in-quoted-label.mmd`](./invalid/backticks-in-quoted-label.mmd)
@@ -750,7 +747,6 @@ flowchart TD
 
 ---
 
-
 ## 3. Curly In Quoted
 
 📄 **Source**: [`curly-in-quoted.mmd`](./invalid/curly-in-quoted.mmd)
@@ -823,7 +819,6 @@ flowchart TD
 </details>
 
 ---
-
 
 ## 4. Diamond Indexof Brackets
 
@@ -915,7 +910,6 @@ graph TD
 
 ---
 
-
 ## 5. Diamond Parens Unquoted
 
 📄 **Source**: [`diamond-parens-unquoted.mmd`](./invalid/diamond-parens-unquoted.mmd)
@@ -991,7 +985,6 @@ flowchart TD
 </details>
 
 ---
-
 
 ## 6. Edge Label Backticks
 
@@ -1116,7 +1109,6 @@ graph TD
 
 ---
 
-
 ## 7. Edge Label Brackets
 
 📄 **Source**: [`edge-label-brackets.mmd`](./invalid/edge-label-brackets.mmd)
@@ -1217,7 +1209,6 @@ graph TD
 
 ---
 
-
 ## 8. Edge Label Parens
 
 📄 **Source**: [`edge-label-parens.mmd`](./invalid/edge-label-parens.mmd)
@@ -1287,7 +1278,6 @@ flowchart TD
 </details>
 
 ---
-
 
 ## 9. Edge Label Quoted
 
@@ -1377,7 +1367,6 @@ flowchart LR
 
 ---
 
-
 ## 10. Empty Nodes
 
 📄 **Source**: [`empty-nodes.mmd`](./invalid/empty-nodes.mmd)
@@ -1465,7 +1454,6 @@ flowchart TD
 </details>
 
 ---
-
 
 ## 11. Escaped Quotes In Decision
 
@@ -1566,7 +1554,6 @@ flowchart TD
 
 ---
 
-
 ## 12. Interactions Click Call Missing Fn
 
 📄 **Source**: [`interactions-click-call-missing-fn.mmd`](./invalid/interactions-click-call-missing-fn.mmd)
@@ -1648,7 +1635,6 @@ flowchart TD
 
 ---
 
-
 ## 13. Interactions Click Call Parens
 
 📄 **Source**: [`interactions-click-call-parens.mmd`](./invalid/interactions-click-call-parens.mmd)
@@ -1721,7 +1707,6 @@ flowchart TD
 </details>
 
 ---
-
 
 ## 14. Interactions Click Href
 
@@ -1797,7 +1782,6 @@ flowchart TD
 </details>
 
 ---
-
 
 ## 15. Interactions Linkstyle Multi
 
@@ -1880,7 +1864,6 @@ flowchart TD
 
 ---
 
-
 ## 16. Interactions Linkstyle Ranges
 
 📄 **Source**: [`interactions-linkstyle-ranges.mmd`](./invalid/interactions-linkstyle-ranges.mmd)
@@ -1956,7 +1939,6 @@ flowchart TD
 
 ---
 
-
 ## 17. Invalid Arrow
 
 📄 **Source**: [`invalid-arrow.mmd`](./invalid/invalid-arrow.mmd)
@@ -2030,7 +2012,6 @@ flowchart TD
 
 ---
 
-
 ## 18. Invalid Class
 
 📄 **Source**: [`invalid-class.mmd`](./invalid/invalid-class.mmd)
@@ -2098,7 +2079,6 @@ flowchart TD
 </details>
 
 ---
-
 
 ## 19. Invalid Node Syntax
 
@@ -2173,7 +2153,6 @@ flowchart TD
 
 ---
 
-
 ## 20. Invalid Subgraph
 
 📄 **Source**: [`invalid-subgraph.mmd`](./invalid/invalid-subgraph.mmd)
@@ -2244,7 +2223,6 @@ flowchart TD
 </details>
 
 ---
-
 
 ## 21. Issue 60 Parens Unquoted
 
@@ -2333,7 +2311,6 @@ flowchart TD
 
 ---
 
-
 ## 22. Label With At Sign
 
 📄 **Source**: [`label-with-at-sign.mmd`](./invalid/label-with-at-sign.mmd)
@@ -2412,7 +2389,6 @@ graph TD
 </details>
 
 ---
-
 
 ## 23. Label With At Slash
 
@@ -2495,7 +2471,6 @@ graph TD
 </details>
 
 ---
-
 
 ## 24. Label With Attribute Quotes
 
@@ -2584,7 +2559,6 @@ graph TD
 </details>
 
 ---
-
 
 ## 25. Label With Function Call
 
@@ -2688,7 +2662,6 @@ graph TD
 </details>
 
 ---
-
 
 ## 26. Label With Tip
 
@@ -2799,7 +2772,6 @@ flowchart TD
 
 ---
 
-
 ## 27. Link One Sided Marker
 
 📄 **Source**: [`link-one-sided-marker.mmd`](./invalid/link-one-sided-marker.mmd)
@@ -2884,7 +2856,6 @@ flowchart TD
 
 ---
 
-
 ## 28. Linkstyle Id Unknown
 
 📄 **Source**: [`linkstyle-id-unknown.mmd`](./invalid/linkstyle-id-unknown.mmd)
@@ -2956,7 +2927,6 @@ flowchart TD
 </details>
 
 ---
-
 
 ## 29. Method Parens In Unquoted Label
 
@@ -3063,7 +3033,6 @@ graph TD
 
 ---
 
-
 ## 30. Missing Arrow
 
 📄 **Source**: [`missing-arrow.mmd`](./invalid/missing-arrow.mmd)
@@ -3132,7 +3101,6 @@ flowchart TD
 </details>
 
 ---
-
 
 ## 31. Mixed Brackets
 
@@ -3218,7 +3186,6 @@ flowchart LR
 </details>
 
 ---
-
 
 ## 32. Mixed Quotes In Labels
 
@@ -3310,7 +3277,6 @@ flowchart TD
 </details>
 
 ---
-
 
 ## 33. Model Initialize Call
 
@@ -3423,7 +3389,6 @@ graph TD
 
 ---
 
-
 ## 34. No Diagram Type
 
 📄 **Source**: [`no-diagram-type.mmd`](./invalid/no-diagram-type.mmd)
@@ -3489,7 +3454,6 @@ B --> C
 </details>
 
 ---
-
 
 ## 35. Quotes Double Inside Single
 
@@ -3566,7 +3530,6 @@ flowchart LR
 </details>
 
 ---
-
 
 ## 36. Quotes In Node Labels
 
@@ -3732,7 +3695,6 @@ graph TD
 
 ---
 
-
 ## 37. Round Parens Unquoted
 
 📄 **Source**: [`round-parens-unquoted.mmd`](./invalid/round-parens-unquoted.mmd)
@@ -3808,7 +3770,6 @@ flowchart TD
 </details>
 
 ---
-
 
 ## 38. Subgraph Id Collision
 
@@ -3907,7 +3868,6 @@ flowchart TD
 
 ---
 
-
 ## 39. Title Unsupported
 
 📄 **Source**: [`title-unsupported.mmd`](./invalid/title-unsupported.mmd)
@@ -3982,7 +3942,6 @@ flowchart TD
 </details>
 
 ---
-
 
 ## 40. Typed Parallelogram Parens
 
@@ -4062,7 +4021,6 @@ flowchart TD
 </details>
 
 ---
-
 
 ## 41. Typed Shapes All
 
@@ -4185,7 +4143,6 @@ flowchart LR
 
 ---
 
-
 ## 42. Typed Shapes Unknowns
 
 📄 **Source**: [`typed-shapes-unknowns.mmd`](./invalid/typed-shapes-unknowns.mmd)
@@ -4287,7 +4244,6 @@ flowchart TD
 
 ---
 
-
 ## 43. Unclosed Bracket
 
 📄 **Source**: [`unclosed-bracket.mmd`](./invalid/unclosed-bracket.mmd)
@@ -4360,7 +4316,6 @@ flowchart LR
 </details>
 
 ---
-
 
 ## 44. Unclosed Quote In Label
 
@@ -4441,7 +4396,6 @@ flowchart TD
 
 ---
 
-
 ## 45. Unescaped Quotes In Decision
 
 📄 **Source**: [`unescaped-quotes-in-decision.mmd`](./invalid/unescaped-quotes-in-decision.mmd)
@@ -4521,7 +4475,6 @@ flowchart TD
 
 ---
 
-
 ## 46. Unmatched End
 
 📄 **Source**: [`unmatched-end.mmd`](./invalid/unmatched-end.mmd)
@@ -4589,7 +4542,6 @@ flowchart TD
 </details>
 
 ---
-
 
 ## 47. Unquoted Label With Quotes
 
@@ -4708,7 +4660,6 @@ flowchart TD
 </details>
 
 ---
-
 
 ## 48. Unquoted Parens In Labels
 
@@ -4846,7 +4797,6 @@ flowchart TD
 
 ---
 
-
 ## 49. Unquoted Parens With Backticks
 
 📄 **Source**: [`unquoted-parens-with-backticks.mmd`](./invalid/unquoted-parens-with-backticks.mmd)
@@ -4929,7 +4879,6 @@ flowchart TD
 
 ---
 
-
 ## 50. Wrong Direction
 
 📄 **Source**: [`wrong-direction.mmd`](./invalid/wrong-direction.mmd)
@@ -4995,4 +4944,3 @@ flowchart XY
 </details>
 
 ---
-
