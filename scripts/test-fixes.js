@@ -154,6 +154,11 @@ const cases = [
     before: 'flowchart TD\nA --> B -- Detects `tip` --> C\n',
     after:  'flowchart TD\nA --> B --|Detects tip|--> C\n'
   },
+  {
+    name: 'FL-EDGE-LABEL-QUOTED (quotes to pipes)',
+    before: 'flowchart LR\n  A -- \"renders cards via\" --> B\n',
+    after:  'flowchart LR\n  A --|renders cards via|--> B\n'
+  },
 
   {
     name: 'FL-EDGE-LABEL-BRACKET (encode square brackets)',

@@ -84,6 +84,9 @@
     "FL-LABEL-PARENS-UNQUOTED",
     "FL-LABEL-PARENS-UNQUOTED"
   ],
+  "edge-label-quoted.mmd": [
+    "FL-EDGE-LABEL-QUOTED"
+  ],
   "typed-parallelogram-parens.mmd": [
     "FL-LABEL-PARENS-UNQUOTED"
   ],
