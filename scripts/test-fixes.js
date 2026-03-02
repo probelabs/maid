@@ -150,6 +150,11 @@ const cases = [
     after:  'flowchart TD\n  A[package.json] --> B["@probelabs/probe v0.6.0-rc149"]\n'
   },
   {
+    name: 'FL-LABEL-SLASH-UNQUOTED (wrap in quotes)',
+    before: 'flowchart TD\n  A[/dev/tty unavailable]\n',
+    after:  'flowchart TD\n  A["/dev/tty unavailable"]\n'
+  },
+  {
     name: 'FL-EDGE-LABEL-BACKTICK (inline edge label to pipe)',
     before: 'flowchart TD\nA --> B -- Detects `tip` --> C\n',
     after:  'flowchart TD\nA --> B --|Detects tip|--> C\n'
