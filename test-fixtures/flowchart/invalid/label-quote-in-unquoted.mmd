@@ -1,0 +1,8 @@
+graph TD
+    A[User Request: "Amend docs"] --> B{route-projects skill};
+    B --|Before PR|--> C["'tyk-docs' not in projects list"];
+    C --> D[Empty Result];
+    D --> G[Engineer Fails];
+    B --|After PR|--> E["'tyk-docs' is in projects list"];
+    E --> F["Project 'tyk-docs' Selected"];
+    F --> H[Engineer Proceeds];
