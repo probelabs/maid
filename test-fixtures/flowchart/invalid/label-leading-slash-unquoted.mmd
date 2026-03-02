@@ -1,0 +1,11 @@
+flowchart TD
+    A[Command Received] --> B{checkInteractiveCommand}
+    B -->|Interactive Pattern| C[Return Error with Suggestion]
+    B -->|OK| D[Spawn with detached:true]
+    D --> E[setsid creates new session]
+    E --> F[/dev/tty unavailable]
+    F --> G{Command tries TTY?}
+    G -->|Yes| H[ENXIO - Immediate Failure]
+    G -->|No| I[Normal Execution]
+    H --> J[killProcessGroup cleanup]
+    I --> K[Return Result]

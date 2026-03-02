@@ -867,8 +867,8 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
       }
       continue;
     }
-    // Flowchart: wrap unquoted labels containing parentheses or at-sign in quotes
-    if (is('FL-LABEL-PARENS-UNQUOTED', e) || is('FL-LABEL-AT-IN-UNQUOTED', e)) {
+    // Flowchart: wrap unquoted labels containing parentheses, at-sign, or leading slashes in quotes
+    if (is('FL-LABEL-PARENS-UNQUOTED', e) || is('FL-LABEL-AT-IN-UNQUOTED', e) || is('FL-LABEL-SLASH-UNQUOTED', e)) {
       if (level === 'safe' || level === 'all') {
         if (patchedLines.has(e.line)) continue; // Already patched this line
         const lineText = lineTextAt(text, e.line);

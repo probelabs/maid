@@ -131,7 +131,7 @@ export function validateFlowchart(text: string, options: ValidateOptions = {}): 
         const byLine = new Map<number, {start:number,end:number}[]>();
         const collect = (arr: any[]) => {
           for (const e of (arr || [])) {
-            if (e && ((e as any).code === 'FL-LABEL-PARENS-UNQUOTED' || (e as any).code === 'FL-LABEL-AT-IN-UNQUOTED' || (e as any).code === 'FL-LABEL-QUOTE-IN-UNQUOTED')) {
+            if (e && ((e as any).code === 'FL-LABEL-PARENS-UNQUOTED' || (e as any).code === 'FL-LABEL-AT-IN-UNQUOTED' || (e as any).code === 'FL-LABEL-QUOTE-IN-UNQUOTED' || (e as any).code === 'FL-LABEL-SLASH-UNQUOTED')) {
               const ln = (e as any).line ?? 0;
               const col = (e as any).column ?? 1;
               const list = byLine.get(ln) || [];
@@ -194,6 +194,7 @@ export function validateFlowchart(text: string, options: ValidateOptions = {}): 
                 const hasAt = seg.includes('@');
                 const hasQuote = seg.includes('"');
                 const isSingleQuoted = /^'[^]*'$/.test(trimmed);
+                const hasLeadingSlash = lsp === '/' || lsp === '\\';
                 if (!covered && !isQuoted && !isParenWrapped && hasParens) {
                   errs.push({ line: ln, column: startCol, severity: 'error', code: 'FL-LABEL-PARENS-UNQUOTED', message: 'Parentheses inside an unquoted label are not supported by Mermaid.', hint: 'Wrap the label in quotes, e.g., A["Mark (X)"] — or replace ( and ) with HTML entities: &#40; and &#41;.' } as any);
                   existing.push({ start: startCol, end: endCol });
@@ -201,6 +202,11 @@ export function validateFlowchart(text: string, options: ValidateOptions = {}): 
                 }
                 if (!covered && !isQuoted && !isSlashPair && hasAt) {
                   errs.push({ line: ln, column: startCol, severity: 'error', code: 'FL-LABEL-AT-IN-UNQUOTED', message: "'@' inside an unquoted label can be misparsed by Mermaid.", hint: 'Wrap the label in quotes, e.g., B["@probelabs/probe v0.6.0-rc149"]' } as any);
+                  existing.push({ start: startCol, end: endCol });
+                  byLine.set(ln, existing);
+                }
+                if (!covered && !isQuoted && !isSlashPair && hasLeadingSlash) {
+                  errs.push({ line: ln, column: startCol, severity: 'error', code: 'FL-LABEL-SLASH-UNQUOTED', message: 'Leading / or \\ inside an unquoted label is treated as a shape marker by Mermaid.', hint: 'Wrap the label in quotes, e.g., F["/dev/tty unavailable"], or use &#47; / &#92; for literal slashes.' } as any);
                   existing.push({ start: startCol, end: endCol });
                   byLine.set(ln, existing);
                 }
