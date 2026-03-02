@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="680" height="262" viewBox="0 0 680 262">
+  <rect x="0" y="0" width="680" height="262" fill="#ffffff" />
+  <style>
+    .node-shape { fill: #eef0ff; stroke: #3f3f3f; stroke-width: 1px; }
+    .node-label { fill: #333; font-family: Arial, sans-serif; font-size: 14px; }
+    .edge-path { stroke: #555555; stroke-width: 2px; fill: none; }
+    .edge-label-bg { fill: rgba(232,232,232, 0.8); opacity: 0.5; }
+    .edge-label-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+    .edge-marker { stroke: #555555; }
+    .edge-marker-fill { fill: #555555; }
+
+    /* Basic stroke dash animation used by flowchart link animation presets */
+    @keyframes dash { to { stroke-dashoffset: -1000; } }
+
+    /* Cluster (flowchart + sequence blocks) */
+    .cluster-bg { fill: #ffffde; }
+    .cluster-border { fill: none; stroke: #aaaa33; stroke-width: 1px; }
+    .cluster-title-bg { fill: rgba(255,255,255,0.8); }
+    .cluster-label-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+
+    /* Notes */
+    .note { fill: #fff5ad; stroke: #aaaa33; stroke-width: 1px; }
+    .note-text { fill: #333; font-family: Arial, sans-serif; font-size: 12px; }
+
+    /* Sequence-specific add-ons (safe for flowcharts too) */
+    .actor-rect { fill: #eaeaea; stroke: #666; stroke-width: 1.5px; }
+    .actor-label { fill: #111; font-family: Arial, sans-serif; font-size: 16px; }
+    .lifeline { stroke: #999; stroke-width: 1px; }
+    .activation { fill: #f4f4f4; stroke: #666; stroke-width: 1px; }
+    .msg-line { stroke: #333; stroke-width: 1.5px; fill: none; }
+    .msg-line.dotted { stroke-dasharray: 2 2; }
+    .msg-line.thick { stroke-width: 3px; }
+    .openhead { fill: none; stroke: #333; stroke-width: 1.5px; }
+    .crosshead path { stroke: #333; stroke-width: 1.5px; }
+    .msg-label { fill: #333; font-family: Arial, sans-serif; font-size: 12px; dominant-baseline: middle; }
+    .msg-label-bg { fill: #ffffff; stroke: #cccccc; stroke-width: 1px; rx: 3; }
+
+    /* State overlays */
+    .lane-divider { stroke: #aaaaaa; stroke-width: 1px; stroke-dasharray: 4 3; }
+    .end-double { stroke: #3f3f3f; stroke-width: 1px; fill: none; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 11 11" markerWidth="11" markerHeight="11" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L0,11 L11,6 z" fill="#555555" />
+    </marker>
+    <marker id="circle-marker" viewBox="0 0 9 9" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <circle cx="4.5" cy="4.5" r="4.5" fill="#555555" />
+    </marker>
+    <marker id="cross-marker" viewBox="0 0 12 12" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1.5,1.5 L10.5,10.5 M10.5,1.5 L1.5,10.5" stroke="#555555" stroke-width="2.25" />
+    </marker>
+  </defs>
+  <g id="mdx1">
+    <rect class="node-shape"  x="40" y="40" width="240" height="56" rx="0" ry="0" />
+    
+    <text class="node-label">
+    <tspan x="160" y="63.9" text-anchor="middle">ai-management/overview.mdx</tspan>
+    <tspan x="160" y="81.9" text-anchor="middle">frontmatter</tspan>
+  </text>
+  </g>
+  <g id="mdx2">
+    <rect class="node-shape"  x="40" y="186" width="240" height="56" rx="0" ry="0" />
+    
+    <text class="node-label">
+    <tspan x="160" y="209.9" text-anchor="middle">snippets/AIStudioCards.mdx</tspan>
+    <tspan x="160" y="227.9" text-anchor="middle">snippet</tspan>
+  </text>
+  </g>
+  <g id="comp1">
+    <rect class="node-shape"  x="466" y="194" width="194" height="40" rx="0" ry="0" />
+    
+    <text class="node-label" x="563" y="218.9" text-anchor="middle">FeatureCards component</text>
+  </g>
+  <g>
+    <path class="edge-path" d="M280,214 L293.95,214 C310.69,214 443.68,214 452.05,214 L466,214" stroke-linecap="round" stroke-linejoin="round" />
+    <rect class="edge-label-bg" x="327.3" y="207" width="110" height="14" rx="3" />
+    <text class="edge-label-text" x="382.3" y="214" text-anchor="middle" dominant-baseline="middle">renders cards via</text>
+    <path d="M466,214 L460,216.5 L460,211.5 Z" fill="#555555" />
+  </g>
+  <g>
+    <path class="edge-path" d="M102.06896551724138,96 L92.75862068965517,100.5 C91.72413793103448,101 50.3448275862069,119.75 40,126 C29.655172413793103,132.25 20,131 40,133.5 C60,136 120,141 160,141 C200,141 260,136 280,133.5 C300,131 290.3448275862069,132.25 280,126 L217.9310344827586,96" stroke-linecap="round" stroke-linejoin="round" />
+    <rect class="edge-label-bg" x="103.6289929383295" y="132.7731879413544" width="152" height="14" rx="3" />
+    <text class="edge-label-text" x="179.6289929383295" y="139.7731879413544" text-anchor="middle" dominant-baseline="middle">uses updated description</text>
+    <path d="M217.9310344827586,96 L224.42104985116094,96.36013958113678 L222.24520654845958,100.8618843453465 Z" fill="#555555" />
+  </g>
+  
+</svg>

@@ -210,6 +210,10 @@ export function mapFlowchartParserError(err: IRecognitionException, text: string
     const hasLinkBefore = beforeQuote.match(/--\s*$|==\s*$|-\.\s*$|-\.-\s*$|\[\s*$/);
 
     if (inLinkRule || hasLinkBefore) {
+      const colIdx = Math.max(0, column - 1);
+      const pipeBefore = lineContent.lastIndexOf('|', colIdx);
+      const pipeAfter = lineContent.indexOf('|', colIdx + 1);
+      const inPipeLabel = pipeBefore !== -1 && pipeAfter !== -1 && pipeBefore < colIdx && pipeAfter > colIdx;
       if (tokType === 'SquareOpen' || tokType === 'SquareClose') {
         return {
           line,
@@ -222,6 +226,17 @@ export function mapFlowchartParserError(err: IRecognitionException, text: string
         };
       }
       const quotedText = found.startsWith('"') ? found.slice(1, -1) : found;
+      if (inPipeLabel) {
+        return {
+          line,
+          column,
+          severity: 'error',
+          code: 'FL-EDGE-LABEL-QUOTE-IN-PIPES',
+          message: 'Quotes are not supported inside pipe-delimited edge labels.',
+          hint: 'Replace " with &quot; inside |...|. Use &#91;/&#93; and &#123;/&#125; for brackets/braces, e.g., --|&quot;&#123;&quot; or &quot;&#91;&quot;|-->',
+          length: len
+        };
+      }
       return {
         line,
         column,

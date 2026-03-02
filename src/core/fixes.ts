@@ -153,6 +153,45 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
       }
       continue;
     }
+    // Encode quotes inside pipe-delimited edge labels
+    if (is('FL-EDGE-LABEL-QUOTE-IN-PIPES', e)) {
+      const lineText = lineTextAt(text, e.line);
+      const col = Math.max(0, e.column - 1);
+      const firstBar = lineText.lastIndexOf('|', col);
+      const secondBar = firstBar >= 0 ? lineText.indexOf('|', col + 1) : -1;
+      if (firstBar >= 0 && secondBar > firstBar) {
+        const before = lineText.slice(0, firstBar + 1);
+        const label = lineText.slice(firstBar + 1, secondBar);
+        const after = lineText.slice(secondBar);
+        const encodeLabel = (value: string) =>
+          value
+            .replace(/\\"/g, '&quot;')
+            .replace(/"/g, '&quot;')
+            .replace(/\{/g, '&#123;')
+            .replace(/\}/g, '&#125;')
+            .replace(/\[/g, '&#91;')
+            .replace(/\]/g, '&#93;');
+
+        const parts = label.match(/^(\s*)(.*?)(\s*)$/);
+        const leading = parts ? parts[1] : '';
+        const core = parts ? parts[2] : label;
+        const trailing = parts ? parts[3] : '';
+        let fixedLabel = encodeLabel(label);
+
+        if (/^"(?:[^"\\]|\\.)*"$/.test(core)) {
+          try {
+            const decoded = JSON.parse(core);
+            fixedLabel = leading + encodeLabel(decoded) + trailing;
+          } catch {
+            // Fall back to encoding the raw label.
+          }
+        }
+
+        const fixedLine = before + fixedLabel + after;
+        edits.push({ start: { line: e.line, column: 1 }, end: { line: e.line, column: lineText.length + 1 }, newText: fixedLine });
+      }
+      continue;
+    }
         if (is('FL-EDGE-LABEL-BRACKET', e)) {
       const lineText = lineTextAt(text, e.line);
       const firstBar = lineText.indexOf('|');

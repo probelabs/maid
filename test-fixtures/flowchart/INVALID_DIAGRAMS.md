@@ -17,7 +17,7 @@ This file contains invalid flowchart test fixtures with:
 6. [Edge Label Backticks](#6-edge-label-backticks)
 7. [Edge Label Brackets](#7-edge-label-brackets)
 8. [Edge Label Parens](#8-edge-label-parens)
-9. [Edge Label Quoted](#9-edge-label-quoted)
+9. [Edge Label Quote In Pipes](#9-edge-label-quote-in-pipes)
 10. [Empty Nodes](#10-empty-nodes)
 11. [Escaped Quotes In Decision](#11-escaped-quotes-in-decision)
 12. [Interactions Click Call Missing Fn](#12-interactions-click-call-missing-fn)
@@ -74,7 +74,7 @@ This file contains invalid flowchart test fixtures with:
 | 6 | [edge label backticks](#6-edge-label-backticks) | INVALID | INVALID | ✅ safe |
 | 7 | [edge label brackets](#7-edge-label-brackets) | INVALID | INVALID | ✅ safe |
 | 8 | [edge label parens](#8-edge-label-parens) | INVALID | INVALID | — |
-| 9 | [edge label quoted](#9-edge-label-quoted) | INVALID | INVALID | ✅ safe |
+| 9 | [edge label quote in pipes](#9-edge-label-quote-in-pipes) | INVALID | INVALID | ✅ safe |
 | 10 | [empty nodes](#10-empty-nodes) | INVALID | INVALID | ✅ safe |
 | 11 | [escaped quotes in decision](#11-escaped-quotes-in-decision) | INVALID | INVALID | ✅ safe |
 | 12 | [interactions click call missing fn](#12-interactions-click-call-missing-fn) | INVALID | INVALID | — |
@@ -1279,22 +1279,36 @@ flowchart TD
 
 ---
 
-## 9. Edge Label Quoted
+## 9. Edge Label Quote In Pipes
 
-📄 **Source**: [`edge-label-quoted.mmd`](./invalid/edge-label-quoted.mmd)
+📄 **Source**: [`edge-label-quote-in-pipes.mmd`](./invalid/edge-label-quote-in-pipes.mmd)
 
 ### GitHub Render Attempt
 
 > **Note**: This invalid diagram may not render or may render incorrectly.
 
 ```mermaid
-flowchart LR
-  mdx1["`ai-management/overview.mdx` frontmatter"]
-  mdx2["`snippets/AIStudioCards.mdx` snippet"]
-  comp1["`FeatureCards` component"]
-
-  mdx2 -- "renders cards via" --> comp1
-  mdx1 -- "uses updated description" --> mdx1
+flowchart TD
+    A[Start parsing JSON] --> B{Current char}
+    B --|\\|--> C{inString?}
+    C -->|Yes| D[Set escapeNext=true]
+    C -->|No| E[Continue]
+    B -->|"\""| F[Toggle inString]
+    B -->|"{" or "["| G{inString?}
+    G -->|No| H[Increment bracket count]
+    G -->|Yes| I[Skip - inside string]
+    B -->|"}" or "]"| J{inString?}
+    J -->|No| K[Decrement bracket count]
+    J -->|Yes| L[Skip - inside string]
+    D --> E
+    E --> B
+    F --> B
+    H --> B
+    I --> B
+    K --> M{bracketCount == 0?}
+    L --> B
+    M -->|Yes| N[Found valid JSON end]
+    M -->|No| B
 
 ```
 
@@ -1320,13 +1334,13 @@ Syntax error in text
 **Result**: ❌ INVALID
 
 ```
-error[FL-EDGE-LABEL-QUOTED]: Edge labels must use pipe syntax, not quotes.
-at test-fixtures/flowchart/invalid/edge-label-quoted.mmd:6:11
-  5 | 
-  6 |   mdx2 -- "renders cards via" --> comp1
-    |           ^^^^^^^^^^^^^^^^^^^
-  7 |   mdx1 -- "uses updated description" --> mdx1
-hint: Change -- "renders cards via" --> to --|renders cards via|--> or use -- |renders cards via| -->
+error[FL-EDGE-LABEL-QUOTE-IN-PIPES]: Quotes are not supported inside pipe-delimited edge labels.
+at test-fixtures/flowchart/invalid/edge-label-quote-in-pipes.mmd:6:11
+   5 |     C -->|No| E[Continue]
+   6 |     B -->|"\""| F[Toggle inString]
+     |           ^^^^
+   7 |     B -->|"{" or "["| G{inString?}
+hint: Replace " with &quot; inside |...|. Use &#91;/&#93; and &#123;/&#125; for brackets/braces, e.g., --|&quot;&#123;&quot; or &quot;&#91;&quot;|-->
 ```
 
 </td>
@@ -1336,13 +1350,27 @@ hint: Change -- "renders cards via" --> to --|renders cards via|--> or use -- |r
 ### maid Auto-fix (`--fix`) Preview
 
 ```mermaid
-flowchart LR
-  mdx1["ai-management/overview.mdx frontmatter"]
-  mdx2["snippets/AIStudioCards.mdx snippet"]
-  comp1["FeatureCards component"]
-
-  mdx2 --|renders cards via|--> comp1
-  mdx1 --|uses updated description|--> mdx1
+flowchart TD
+    A[Start parsing JSON] --> B{Current char}
+    B --|\\|--> C{inString?}
+    C -->|Yes| D[Set escapeNext=true]
+    C -->|No| E[Continue]
+    B -->|&quot;| F[Toggle inString]
+    B -->|&quot;&#123;&quot; or &quot;&#91;&quot;| G{inString?}
+    G -->|No| H[Increment bracket count]
+    G -->|Yes| I[Skip - inside string]
+    B -->|&quot;&#125;&quot; or &quot;&#93;&quot;| J{inString?}
+    J -->|No| K[Decrement bracket count]
+    J -->|Yes| L[Skip - inside string]
+    D --> E
+    E --> B
+    F --> B
+    H --> B
+    I --> B
+    K --> M{bracketCount == 0?}
+    L --> B
+    M -->|Yes| N[Found valid JSON end]
+    M -->|No| B
 
 ```
 
@@ -1354,13 +1382,27 @@ Shown above (safe changes applied).
 <summary>View source code</summary>
 
 ```
-flowchart LR
-  mdx1["`ai-management/overview.mdx` frontmatter"]
-  mdx2["`snippets/AIStudioCards.mdx` snippet"]
-  comp1["`FeatureCards` component"]
-
-  mdx2 -- "renders cards via" --> comp1
-  mdx1 -- "uses updated description" --> mdx1
+flowchart TD
+    A[Start parsing JSON] --> B{Current char}
+    B --|\\|--> C{inString?}
+    C -->|Yes| D[Set escapeNext=true]
+    C -->|No| E[Continue]
+    B -->|"\""| F[Toggle inString]
+    B -->|"{" or "["| G{inString?}
+    G -->|No| H[Increment bracket count]
+    G -->|Yes| I[Skip - inside string]
+    B -->|"}" or "]"| J{inString?}
+    J -->|No| K[Decrement bracket count]
+    J -->|Yes| L[Skip - inside string]
+    D --> E
+    E --> B
+    F --> B
+    H --> B
+    I --> B
+    K --> M{bracketCount == 0?}
+    L --> B
+    M -->|Yes| N[Found valid JSON end]
+    M -->|No| B
 
 ```
 </details>

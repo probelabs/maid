@@ -1,0 +1,21 @@
+flowchart TD
+    A[Start parsing JSON] --> B{Current char}
+    B --|\\|--> C{inString?}
+    C -->|Yes| D[Set escapeNext=true]
+    C -->|No| E[Continue]
+    B -->|"\""| F[Toggle inString]
+    B -->|"{" or "["| G{inString?}
+    G -->|No| H[Increment bracket count]
+    G -->|Yes| I[Skip - inside string]
+    B -->|"}" or "]"| J{inString?}
+    J -->|No| K[Decrement bracket count]
+    J -->|Yes| L[Skip - inside string]
+    D --> E
+    E --> B
+    F --> B
+    H --> B
+    I --> B
+    K --> M{bracketCount == 0?}
+    L --> B
+    M -->|Yes| N[Found valid JSON end]
+    M -->|No| B

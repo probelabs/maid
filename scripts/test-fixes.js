@@ -155,15 +155,14 @@ const cases = [
     after:  'flowchart TD\nA --> B --|Detects tip|--> C\n'
   },
   {
-    name: 'FL-EDGE-LABEL-QUOTED (quotes to pipes)',
-    before: 'flowchart LR\n  A -- \"renders cards via\" --> B\n',
-    after:  'flowchart LR\n  A --|renders cards via|--> B\n'
-  },
-
-  {
     name: 'FL-EDGE-LABEL-BRACKET (encode square brackets)',
     before: 'flowchart TD\nA -->|run: [aggregate]| B\n',
     after:  'flowchart TD\nA -->|run: &#91;aggregate&#93;| B\n'
+  },
+  {
+    name: 'FL-EDGE-LABEL-QUOTE-IN-PIPES (encode quotes)',
+    before: 'flowchart TD\nA -->|\"\\\"\"| B\nA -->|\"{\" or \"[\"| C\n',
+    after:  'flowchart TD\nA -->|&quot;| B\nA -->|&quot;&#123;&quot; or &quot;&#91;&quot;| C\n'
   },
   // FL-LABEL-CURLY-IN-QUOTED is not auto-fixable because:
   // 1. Curly braces work perfectly in quoted labels

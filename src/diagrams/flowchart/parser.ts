@@ -414,16 +414,32 @@ export class MermaidParser extends CstParser {
             this.CONSUME(tokens.AtSign);
         });
         this.OR([
-            // Arrows with inline text (e.g., -.text.-> or ==text==>)
+            // Two-dash line with pipe label (e.g., --|label|-->)
             {
                 ALT: () => {
+                    this.CONSUME2(tokens.TwoDashes);
+                    this.CONSUME3(tokens.Pipe);
+                    this.SUBRULE2(this.linkText);
+                    this.CONSUME4(tokens.Pipe);
                     this.OR2([
+                        { ALT: () => this.CONSUME3(tokens.ArrowRight) },
+                        { ALT: () => this.CONSUME3(tokens.DottedArrowRight) },
+                        { ALT: () => this.CONSUME3(tokens.ThickArrowRight) }
+                    ]);
+                }
+            },
+            // Arrows with inline text (e.g., -.text.-> or ==text==>)
+            {
+                // Avoid ambiguity with pipe-labeled links that start with `--|`
+                GATE: () => !(this.LA(1).tokenType === tokens.TwoDashes && this.LA(2).tokenType === tokens.Pipe),
+                ALT: () => {
+                    this.OR3([
                         { ALT: () => this.CONSUME(tokens.DottedLine) },
                         { ALT: () => this.CONSUME(tokens.ThickLine) },
                         { ALT: () => this.CONSUME(tokens.TwoDashes) }
                     ]);
                     this.SUBRULE(this.linkTextInline);
-                    this.OR3([
+                    this.OR4([
                         { ALT: () => this.CONSUME(tokens.ArrowRight) },
                         { ALT: () => this.CONSUME(tokens.DottedArrowRight) },
                         { ALT: () => this.CONSUME(tokens.ThickArrowRight) }
@@ -470,6 +486,7 @@ export class MermaidParser extends CstParser {
                 { ALT: () => this.CONSUME(tokens.Identifier) },
                 { ALT: () => this.CONSUME(tokens.Text) },
                 { ALT: () => this.CONSUME(tokens.NumberLiteral) },
+                { ALT: () => this.CONSUME(tokens.ColorValue) },
                 // Allow HTML-like angle brackets and slashes for <br/>, <i>, etc.
                 { ALT: () => this.CONSUME(tokens.AngleLess) },
                 { ALT: () => this.CONSUME(tokens.AngleOpen) },
@@ -491,6 +508,7 @@ export class MermaidParser extends CstParser {
                 { ALT: () => this.CONSUME(tokens.Identifier) },
                 { ALT: () => this.CONSUME(tokens.Text) },
                 { ALT: () => this.CONSUME(tokens.NumberLiteral) },
+                { ALT: () => this.CONSUME(tokens.QuotedString) },
                 { ALT: () => this.CONSUME(tokens.Pipe) } // Sometimes used in inline
             ]);
         });

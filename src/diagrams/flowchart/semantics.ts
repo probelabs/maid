@@ -648,6 +648,7 @@ class FlowSemanticsVisitor extends BaseVisitor {
         .concat(ch.Identifier || [])
         .concat(ch.Text || [])
         .concat(ch.NumberLiteral || [])
+        .concat(ch.QuotedString || [])
         .concat(ch.Pipe || []);
       if (parts.length) {
         const raw = parts.map(t => String(t.image || '')).join('').trim();
