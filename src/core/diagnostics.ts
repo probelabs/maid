@@ -356,11 +356,19 @@ export function mapFlowchartParserError(err: IRecognitionException, text: string
         }
       }
       // Check if the actual token found is a QuotedString - this means there's a quote in the middle of an unquoted label
-      if (tokType === 'QuotedString' || tokType === 'SquareOpen' || tokType === 'SquareClose') {
+      if (tokType === 'QuotedString') {
         return {
           line, column, severity: 'error', code: 'FL-LABEL-QUOTE-IN-UNQUOTED',
           message: 'Quotes are not allowed inside unquoted node labels. Use &quot; for quotes or wrap the entire label in quotes.',
           hint: 'Example: I[Log &quot;processing N items&quot;] or I["Log \\"processing N items\\""]',
+          length: len
+        };
+      }
+      if (tokType === 'SquareOpen' || tokType === 'SquareClose') {
+        return {
+          line, column, severity: 'error', code: 'FL-LABEL-BRACKET-IN-UNQUOTED',
+          message: 'Square brackets are not supported inside unquoted node labels.',
+          hint: 'Use &#91; and &#93; for literal brackets or wrap the label in quotes, e.g., C["bind_paths[]"]',
           length: len
         };
       }
@@ -375,11 +383,19 @@ export function mapFlowchartParserError(err: IRecognitionException, text: string
     }
     if (expecting(err, 'RoundClose')) {
       // Check if the actual token found is a QuotedString - this means there's a quote in the middle of an unquoted label
-      if (tokType === 'QuotedString' || tokType === 'SquareOpen' || tokType === 'SquareClose') {
+      if (tokType === 'QuotedString') {
         return {
           line, column, severity: 'error', code: 'FL-LABEL-QUOTE-IN-UNQUOTED',
           message: 'Quotes are not allowed inside unquoted node labels. Use &quot; for quotes or wrap the entire label in quotes.',
           hint: 'Example: E(Log &quot;message&quot;) or E["Log \\"message\\""]',
+          length: len
+        };
+      }
+      if (tokType === 'SquareOpen' || tokType === 'SquareClose') {
+        return {
+          line, column, severity: 'error', code: 'FL-LABEL-BRACKET-IN-UNQUOTED',
+          message: 'Square brackets are not supported inside unquoted node labels.',
+          hint: 'Use &#91; and &#93; for literal brackets or wrap the label in quotes, e.g., C["bind_paths[]"]',
           length: len
         };
       }
@@ -414,11 +430,19 @@ export function mapFlowchartParserError(err: IRecognitionException, text: string
     }
     if (expecting(err, 'DiamondClose')) {
       // Check if the actual token found is a QuotedString - this means there's a quote in the middle of an unquoted label
-      if (tokType === 'QuotedString' || tokType === 'SquareOpen' || tokType === 'SquareClose') {
+      if (tokType === 'QuotedString') {
         return {
           line, column, severity: 'error', code: 'FL-LABEL-QUOTE-IN-UNQUOTED',
           message: 'Quotes are not allowed inside unquoted node labels. Use &apos; for single quotes or &quot; for double quotes.',
           hint: "Example: B{Does &apos;B&apos; depend on a forEach check &apos;A&apos;?}",
+          length: len
+        };
+      }
+      if (tokType === 'SquareOpen' || tokType === 'SquareClose') {
+        return {
+          line, column, severity: 'error', code: 'FL-LABEL-BRACKET-IN-UNQUOTED',
+          message: 'Square brackets are not supported inside unquoted node labels.',
+          hint: 'Use &#91; and &#93; for literal brackets or wrap the label in quotes, e.g., C["bind_paths[]"]',
           length: len
         };
       }

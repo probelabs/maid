@@ -868,8 +868,8 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
       }
       continue;
     }
-    // Flowchart: wrap unquoted labels containing parentheses, at-sign, or leading slashes in quotes
-    if (is('FL-LABEL-PARENS-UNQUOTED', e) || is('FL-LABEL-AT-IN-UNQUOTED', e) || is('FL-LABEL-SLASH-UNQUOTED', e) || is('FL-LABEL-CURLY-IN-UNQUOTED', e)) {
+    // Flowchart: wrap or normalize unquoted labels containing special characters
+    if (is('FL-LABEL-PARENS-UNQUOTED', e) || is('FL-LABEL-AT-IN-UNQUOTED', e) || is('FL-LABEL-SLASH-UNQUOTED', e) || is('FL-LABEL-CURLY-IN-UNQUOTED', e) || is('FL-LABEL-BRACKET-IN-UNQUOTED', e)) {
       if (level === 'safe' || level === 'all') {
         if (patchedLines.has(e.line)) continue; // Already patched this line
         const lineText = lineTextAt(text, e.line);
@@ -913,7 +913,7 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
             if (openIdx === -1) break;
             const contentStart = openIdx + shape.open.length;
             // Use smart matching for round shapes to handle nested parentheses
-            const closeIdx = (shape.open === '(' && shape.close === ')')
+            const closeIdx = ((shape.open === '(' && shape.close === ')') || (shape.open === '[' && shape.close === ']'))
               ? findMatchingCloser(lineText, openIdx, shape.open, shape.close)
               : lineText.indexOf(shape.close, contentStart);
             if (closeIdx === -1) break;
@@ -954,12 +954,20 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
                   .replace(/"/g, '&quot;');
                 replaced = '"' + escaped + '"';
               } else {
-                // Parallelogram/trapezoid shapes don't support quotes: encode parens and double quotes only
+                // Parallelogram/trapezoid shapes don't support quotes: encode unsafe characters only
                 replaced = inner
                   .replace(/`/g, '')
                   .replace(/\(/g, '&#40;').replace(/\)/g, '&#41;')
+                  .replace(/\[/g, '&#91;').replace(/\]/g, '&#93;')
                   .replace(/\"/g, '&quot;')
                   .replace(/"/g, '&quot;');
+              }
+
+              if (is('FL-LABEL-BRACKET-IN-UNQUOTED', e)) {
+                if (!isParallelogramShape) {
+                  // Prefer encoding brackets to avoid nested [ ] inside labels.
+                  replaced = inner.replace(/\[/g, '&#91;').replace(/\]/g, '&#93;');
+                }
               }
 
               if (replaced !== inner) {
