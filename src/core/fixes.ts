@@ -943,7 +943,20 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
               // Primary strategy: wrap in quotes (standard Mermaid syntax for special characters)
               // Fallback: for parallelogram/trapezoid shapes, encode only characters that break parsing
               let replaced: string;
-              if (is('FL-LABEL-CURLY-IN-UNQUOTED', e)) {
+              if (is('FL-LABEL-BRACKET-IN-UNQUOTED', e) && !isParallelogramShape) {
+                // For simple bracket-only labels, encode brackets in place.
+                // If other unsafe chars are present too, prefer full quoting so one fix resolves all.
+                const hasOtherHazards = /[(){}@]/.test(inner) || inner.includes('"') || inner.includes('\\"');
+                if (hasOtherHazards) {
+                  const escaped = inner
+                    .replace(/`/g, '')
+                    .replace(/\"/g, '&quot;')
+                    .replace(/"/g, '&quot;');
+                  replaced = '"' + escaped + '"';
+                } else {
+                  replaced = inner.replace(/\[/g, '&#91;').replace(/\]/g, '&#93;');
+                }
+              } else if (is('FL-LABEL-CURLY-IN-UNQUOTED', e)) {
                 // Curly braces in unquoted labels break Mermaid parsing; encode in place.
                 replaced = inner.replace(/\{/g, '&#123;').replace(/\}/g, '&#125;');
               } else if (!isParallelogramShape) {
@@ -961,13 +974,6 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
                   .replace(/\[/g, '&#91;').replace(/\]/g, '&#93;')
                   .replace(/\"/g, '&quot;')
                   .replace(/"/g, '&quot;');
-              }
-
-              if (is('FL-LABEL-BRACKET-IN-UNQUOTED', e)) {
-                if (!isParallelogramShape) {
-                  // Prefer encoding brackets to avoid nested [ ] inside labels.
-                  replaced = inner.replace(/\[/g, '&#91;').replace(/\]/g, '&#93;');
-                }
               }
 
               if (replaced !== inner) {

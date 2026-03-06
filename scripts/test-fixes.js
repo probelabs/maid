@@ -165,6 +165,11 @@ const cases = [
     after:  'flowchart TD\n  A[bind_paths&#91;&#93;]\n'
   },
   {
+    name: 'FL-LABEL-BRACKET-IN-UNQUOTED (mixed hazards fall back to quoting)',
+    before: 'flowchart TD\n  A[foo(bar[])]\n',
+    after:  'flowchart TD\n  A["foo(bar[])"]\n'
+  },
+  {
     name: 'FL-EDGE-LABEL-BACKTICK (inline edge label to pipe)',
     before: 'flowchart TD\nA --> B -- Detects `tip` --> C\n',
     after:  'flowchart TD\nA --> B --|Detects tip|--> C\n'
