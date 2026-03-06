@@ -155,6 +155,11 @@ const cases = [
     after:  'flowchart TD\n  A["/dev/tty unavailable"]\n'
   },
   {
+    name: 'FL-LABEL-CURLY-IN-UNQUOTED (encode braces)',
+    before: 'flowchart TD\n  C[Substitute {params}]\n',
+    after:  'flowchart TD\n  C[Substitute &#123;params&#125;]\n'
+  },
+  {
     name: 'FL-EDGE-LABEL-BACKTICK (inline edge label to pipe)',
     before: 'flowchart TD\nA --> B -- Detects `tip` --> C\n',
     after:  'flowchart TD\nA --> B --|Detects tip|--> C\n'
@@ -169,6 +174,11 @@ const cases = [
     name: 'FL-EDGE-LABEL-BRACKET (encode square brackets)',
     before: 'flowchart TD\nA -->|run: [aggregate]| B\n',
     after:  'flowchart TD\nA -->|run: &#91;aggregate&#93;| B\n'
+  },
+  {
+    name: 'FL-EDGE-LABEL-CURLY-IN-PIPES (encode braces)',
+    before: 'flowchart TD\nA -->|Resolve ${VAR}| B\n',
+    after:  'flowchart TD\nA -->|Resolve $&#123;VAR&#125;| B\n'
   },
   // FL-LABEL-CURLY-IN-QUOTED is not auto-fixable because:
   // 1. Curly braces work perfectly in quoted labels

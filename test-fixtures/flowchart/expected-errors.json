@@ -1,6 +1,6 @@
 {
   "curly-in-quoted.mmd": [
-    "FL-LABEL-QUOTE-IN-UNQUOTED"
+    "FL-LABEL-CURLY-IN-UNQUOTED"
   ],
   "empty-nodes.mmd": [
     "FL-NODE-EMPTY",
@@ -80,6 +80,9 @@
   "label-leading-slash-unquoted.mmd": [
     "FL-LABEL-SLASH-UNQUOTED"
   ],
+  "label-curly-in-unquoted.mmd": [
+    "FL-LABEL-CURLY-IN-UNQUOTED"
+  ],
   "diamond-parens-unquoted.mmd": [
     "FL-LABEL-PARENS-UNQUOTED"
   ],
@@ -89,6 +92,9 @@
   ],
   "edge-label-quoted.mmd": [
     "FL-EDGE-LABEL-QUOTED"
+  ],
+  "edge-label-curly-in-pipes.mmd": [
+    "FL-EDGE-LABEL-CURLY-IN-PIPES"
   ],
   "typed-parallelogram-parens.mmd": [
     "FL-LABEL-PARENS-UNQUOTED"

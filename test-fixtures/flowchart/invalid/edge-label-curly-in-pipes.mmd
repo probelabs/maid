@@ -1,0 +1,21 @@
+graph TB
+    subgraph "Provider Layer"
+        A[HttpClientProvider]
+    end
+
+    subgraph "Utilities Layer"
+        B[OAuth2TokenCache]
+        C[EnvironmentResolver]
+    end
+
+    subgraph "External Services"
+        D[OAuth2 Token Endpoint]
+        E[Target API]
+    end
+
+    A -->|getToken| B
+    B -->|HTTP POST| D
+    B -->|Return cached| A
+    A -->|HTTP with Bearer token| E
+    C -->|Resolve ${VAR}| B
+    C -->|Resolve ${VAR}| A

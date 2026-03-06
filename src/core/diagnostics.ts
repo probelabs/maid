@@ -196,8 +196,8 @@ export function mapFlowchartParserError(err: IRecognitionException, text: string
       length: len
     };
   }
-// 3) Edge label with quotes instead of pipes
-  if (tokType === 'QuotedString' || tokType === 'SquareOpen' || tokType === 'SquareClose') {
+// 3) Edge label with unsupported inline chars in pipe labels
+  if (tokType === 'QuotedString' || tokType === 'SquareOpen' || tokType === 'SquareClose' || tokType === 'DiamondOpen' || tokType === 'DiamondClose') {
     // Check context to see if we're in a link rule
     const context = (err as any)?.context;
     const inLinkRule = context?.ruleStack?.includes('linkTextInline') ||
@@ -210,6 +210,17 @@ export function mapFlowchartParserError(err: IRecognitionException, text: string
     const hasLinkBefore = beforeQuote.match(/--\s*$|==\s*$|-\.\s*$|-\.-\s*$|\[\s*$/);
 
     if (inLinkRule || hasLinkBefore) {
+      if (tokType === 'DiamondOpen' || tokType === 'DiamondClose') {
+        return {
+          line,
+          column,
+          severity: 'error',
+          code: 'FL-EDGE-LABEL-CURLY-IN-PIPES',
+          message: 'Curly braces { } are not supported inside pipe-delimited edge labels.',
+          hint: 'Use HTML entities &#123; and &#125; inside |...|, e.g., --|Resolve $&#123;VAR&#125;|-->',
+          length: len
+        };
+      }
       if (tokType === 'SquareOpen' || tokType === 'SquareClose') {
         return {
           line,
@@ -274,6 +285,17 @@ export function mapFlowchartParserError(err: IRecognitionException, text: string
           length: len
         };
       }
+      if (tokType === 'DiamondOpen' || tokType === 'DiamondClose') {
+        return {
+          line,
+          column,
+          severity: 'error',
+          code: 'FL-LABEL-CURLY-IN-UNQUOTED',
+          message: 'Curly braces are not supported inside unquoted node labels.',
+          hint: 'Use &#123; and &#125; for literal braces, e.g., C[Substitute &#123;params&#125;].',
+          length: len
+        };
+      }
 
       // Heuristic: if there are hazards inside an unquoted square-bracket label, map to targeted errors
       {
@@ -317,6 +339,17 @@ export function mapFlowchartParserError(err: IRecognitionException, text: string
               code: 'FL-LABEL-PARENS-UNQUOTED',
               message: 'Parentheses inside an unquoted label are not supported by Mermaid.',
               hint: 'Wrap the label in quotes, e.g., A["Mark (X)"] — or replace ( and ) with HTML entities: &#40; and &#41;.',
+              length: len
+            };
+          }
+          if ((seg.includes('{') || seg.includes('}'))) {
+            return {
+              line,
+              column,
+              severity: 'error',
+              code: 'FL-LABEL-CURLY-IN-UNQUOTED',
+              message: 'Curly braces are not supported inside unquoted node labels.',
+              hint: 'Use &#123; and &#125; for literal braces, e.g., C[Substitute &#123;params&#125;].',
               length: len
             };
           }

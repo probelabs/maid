@@ -1,0 +1,8 @@
+graph LR
+    A[Config] --> B{base_url + path?}
+    B -->|Yes| C[Substitute {params}]
+    C --> D[Normalize slashes]
+    D --> E[Append query params]
+    E --> F[Final URL]
+    B -->|No| G[Use url directly]
+    G --> F
