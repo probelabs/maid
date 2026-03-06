@@ -950,7 +950,7 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
                 if (hasOtherHazards) {
                   const escaped = inner
                     .replace(/`/g, '')
-                    .replace(/\"/g, '&quot;')
+                    .replace(/\\"/g, '&quot;')
                     .replace(/"/g, '&quot;');
                   replaced = '"' + escaped + '"';
                 } else {
@@ -963,7 +963,7 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
                 // Wrap in quotes and escape internal double quotes. Curly braces and parens are fine inside quotes.
                 const escaped = inner
                   .replace(/`/g, '')
-                  .replace(/\"/g, '&quot;')
+                  .replace(/\\"/g, '&quot;')
                   .replace(/"/g, '&quot;');
                 replaced = '"' + escaped + '"';
               } else {
@@ -972,7 +972,7 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
                   .replace(/`/g, '')
                   .replace(/\(/g, '&#40;').replace(/\)/g, '&#41;')
                   .replace(/\[/g, '&#91;').replace(/\]/g, '&#93;')
-                  .replace(/\"/g, '&quot;')
+                  .replace(/\\"/g, '&quot;')
                   .replace(/"/g, '&quot;');
               }
 
