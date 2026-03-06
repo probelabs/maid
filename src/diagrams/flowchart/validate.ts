@@ -131,7 +131,7 @@ export function validateFlowchart(text: string, options: ValidateOptions = {}): 
         const byLine = new Map<number, {start:number,end:number}[]>();
         const collect = (arr: any[]) => {
           for (const e of (arr || [])) {
-            if (e && ((e as any).code === 'FL-LABEL-PARENS-UNQUOTED' || (e as any).code === 'FL-LABEL-AT-IN-UNQUOTED' || (e as any).code === 'FL-LABEL-QUOTE-IN-UNQUOTED' || (e as any).code === 'FL-LABEL-SLASH-UNQUOTED')) {
+            if (e && ((e as any).code === 'FL-LABEL-PARENS-UNQUOTED' || (e as any).code === 'FL-LABEL-AT-IN-UNQUOTED' || (e as any).code === 'FL-LABEL-QUOTE-IN-UNQUOTED' || (e as any).code === 'FL-LABEL-SLASH-UNQUOTED' || (e as any).code === 'FL-LABEL-CURLY-IN-UNQUOTED')) {
               const ln = (e as any).line ?? 0;
               const col = (e as any).column ?? 1;
               const list = byLine.get(ln) || [];
@@ -193,6 +193,7 @@ export function validateFlowchart(text: string, options: ValidateOptions = {}): 
                 const hasParens = seg.includes('(') || seg.includes(')');
                 const hasAt = seg.includes('@');
                 const hasQuote = seg.includes('"');
+                const hasCurly = seg.includes('{') || seg.includes('}');
                 const isSingleQuoted = /^'[^]*'$/.test(trimmed);
                 const hasLeadingSlash = lsp === '/' || lsp === '\\';
                 if (!covered && !isQuoted && !isParenWrapped && hasParens) {
@@ -207,6 +208,11 @@ export function validateFlowchart(text: string, options: ValidateOptions = {}): 
                 }
                 if (!covered && !isQuoted && !isSlashPair && hasLeadingSlash) {
                   errs.push({ line: ln, column: startCol, severity: 'error', code: 'FL-LABEL-SLASH-UNQUOTED', message: 'Leading / or \\ inside an unquoted label is treated as a shape marker by Mermaid.', hint: 'Wrap the label in quotes, e.g., F["/dev/tty unavailable"], or use &#47; / &#92; for literal slashes.' } as any);
+                  existing.push({ start: startCol, end: endCol });
+                  byLine.set(ln, existing);
+                }
+                if (!covered && !isQuoted && !isSlashPair && hasCurly) {
+                  errs.push({ line: ln, column: startCol, severity: 'error', code: 'FL-LABEL-CURLY-IN-UNQUOTED', message: 'Curly braces are not supported inside unquoted node labels.', hint: 'Use &#123; and &#125; for literal braces, e.g., C[Substitute &#123;params&#125;].' } as any);
                   existing.push({ start: startCol, end: endCol });
                   byLine.set(ln, existing);
                 }

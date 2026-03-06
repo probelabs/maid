@@ -153,7 +153,7 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
       }
       continue;
     }
-        if (is('FL-EDGE-LABEL-BRACKET', e)) {
+        if (is('FL-EDGE-LABEL-BRACKET', e) || is('FL-EDGE-LABEL-CURLY-IN-PIPES', e)) {
       const lineText = lineTextAt(text, e.line);
       const firstBar = lineText.indexOf('|');
       const secondBar = firstBar >= 0 ? lineText.indexOf('|', firstBar + 1) : -1;
@@ -161,7 +161,8 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
         const before = lineText.slice(0, firstBar + 1);
         const label = lineText.slice(firstBar + 1, secondBar);
         const after = lineText.slice(secondBar);
-        const fixedLabel = label.replace(/\[/g, '&#91;').replace(/\]/g, '&#93;');
+        let fixedLabel = label.replace(/\[/g, '&#91;').replace(/\]/g, '&#93;');
+        fixedLabel = fixedLabel.replace(/\{/g, '&#123;').replace(/\}/g, '&#125;');
         const fixedLine = before + fixedLabel + after;
         const finalLine = fixedLine.replace(/\[([^\]]*)\]/g, (m, seg) => '[' + String(seg).replace(/`/g, '') + ']');
         edits.push({ start: { line: e.line, column: 1 }, end: { line: e.line, column: lineText.length + 1 }, newText: finalLine });
@@ -868,7 +869,7 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
       continue;
     }
     // Flowchart: wrap unquoted labels containing parentheses, at-sign, or leading slashes in quotes
-    if (is('FL-LABEL-PARENS-UNQUOTED', e) || is('FL-LABEL-AT-IN-UNQUOTED', e) || is('FL-LABEL-SLASH-UNQUOTED', e)) {
+    if (is('FL-LABEL-PARENS-UNQUOTED', e) || is('FL-LABEL-AT-IN-UNQUOTED', e) || is('FL-LABEL-SLASH-UNQUOTED', e) || is('FL-LABEL-CURLY-IN-UNQUOTED', e)) {
       if (level === 'safe' || level === 'all') {
         if (patchedLines.has(e.line)) continue; // Already patched this line
         const lineText = lineTextAt(text, e.line);
@@ -942,7 +943,10 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
               // Primary strategy: wrap in quotes (standard Mermaid syntax for special characters)
               // Fallback: for parallelogram/trapezoid shapes, encode only characters that break parsing
               let replaced: string;
-              if (!isParallelogramShape) {
+              if (is('FL-LABEL-CURLY-IN-UNQUOTED', e)) {
+                // Curly braces in unquoted labels break Mermaid parsing; encode in place.
+                replaced = inner.replace(/\{/g, '&#123;').replace(/\}/g, '&#125;');
+              } else if (!isParallelogramShape) {
                 // Wrap in quotes and escape internal double quotes. Curly braces and parens are fine inside quotes.
                 const escaped = inner
                   .replace(/`/g, '')

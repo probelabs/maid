@@ -371,6 +371,7 @@ export class MermaidParser extends CstParser {
                             { ALT: () => this.CONSUME(tokens.Identifier) },
                             { ALT: () => this.CONSUME(tokens.Text) },
                             { ALT: () => this.CONSUME(tokens.NumberLiteral) },
+                            { ALT: () => this.CONSUME(tokens.ColorValue) },
                             // Note: RoundOpen and RoundClose (parentheses) are NOT allowed in unquoted labels
                             // to match Mermaid's behavior - use quoted labels like ["text (with parens)"] instead
                             // Allow HTML-like tags (e.g., <br/>) inside labels
@@ -470,6 +471,7 @@ export class MermaidParser extends CstParser {
                 { ALT: () => this.CONSUME(tokens.Identifier) },
                 { ALT: () => this.CONSUME(tokens.Text) },
                 { ALT: () => this.CONSUME(tokens.NumberLiteral) },
+                { ALT: () => this.CONSUME(tokens.ColorValue) },
                 // Allow HTML-like angle brackets and slashes for <br/>, <i>, etc.
                 { ALT: () => this.CONSUME(tokens.AngleLess) },
                 { ALT: () => this.CONSUME(tokens.AngleOpen) },
