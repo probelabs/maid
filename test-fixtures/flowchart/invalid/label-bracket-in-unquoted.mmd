@@ -1,0 +1,21 @@
+graph TD
+    A[User Config / Workflow] --> B[SandboxConfig]
+    B --> C[bind_paths[]]
+    B --> D[workdir: 'host']
+    B --> E[visor_path]
+    
+    C --> F{Engine Type}
+    F -->|docker| G[DockerImageSandbox]
+    F -->|bubblewrap| H[BubblewrapSandbox]
+    F -->|seatbelt| I[SeatbeltSandbox]
+    
+    D --> F
+    E --> F
+    
+    G --> J["docker run -v host:container"]
+    H --> K["bwrap --ro-bind/--bind"]
+    I --> L["sandbox-exec SBPL profile"]
+    
+    M[WorkflowDefinition] --> N[projectWorkflowToGraph]
+    N --> O[VisorConfig with sandboxes]
+    O --> P[Workflow Steps with Sandbox Support]

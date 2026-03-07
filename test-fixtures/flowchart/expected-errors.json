@@ -83,6 +83,9 @@
   "label-curly-in-unquoted.mmd": [
     "FL-LABEL-CURLY-IN-UNQUOTED"
   ],
+  "label-bracket-in-unquoted.mmd": [
+    "FL-LABEL-BRACKET-IN-UNQUOTED"
+  ],
   "diamond-parens-unquoted.mmd": [
     "FL-LABEL-PARENS-UNQUOTED"
   ],
