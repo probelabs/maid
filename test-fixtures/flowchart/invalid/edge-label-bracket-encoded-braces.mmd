@@ -1,0 +1,7 @@
+graph TD
+    A[ProbeAgent emits] -->|ai.tool_calls: [&#123;name, args&#125;]| B[Before Fix]
+    B -->|Silently dropped| C[OTel Span]
+    A -->|ai.tool_calls: [&#123;name, args&#125;]| D[After Fix]
+    D -->|flattenAttrs| E[ai.tool_calls: stringified JSON]
+    E -->|Successfully recorded| C
+    F[recordToolDecision] -->|tool.decision events| C

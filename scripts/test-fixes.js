@@ -186,6 +186,11 @@ const cases = [
     after:  'flowchart TD\nA -->|run: &#91;aggregate&#93;| B\n'
   },
   {
+    name: 'FL-EDGE-LABEL-BRACKET (multiple labels, encoded braces inside)',
+    before: 'graph TD\nA -->|ai.tool_calls: [&#123;name, args&#125;]| B\nA -->|ai.tool_calls: [&#123;name, args&#125;]| C\n',
+    after:  'graph TD\nA -->|ai.tool_calls: &#91;&#123;name, args&#125;&#93;| B\nA -->|ai.tool_calls: &#91;&#123;name, args&#125;&#93;| C\n'
+  },
+  {
     name: 'FL-EDGE-LABEL-CURLY-IN-PIPES (encode braces)',
     before: 'flowchart TD\nA -->|Resolve ${VAR}| B\n',
     after:  'flowchart TD\nA -->|Resolve $&#123;VAR&#125;| B\n'
