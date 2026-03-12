@@ -19,51 +19,52 @@ This file contains invalid flowchart test fixtures with:
 8. [Edge Label Brackets](#8-edge-label-brackets)
 9. [Edge Label Curly In Pipes](#9-edge-label-curly-in-pipes)
 10. [Edge Label Parens](#10-edge-label-parens)
-11. [Edge Label Quoted](#11-edge-label-quoted)
-12. [Empty Nodes](#12-empty-nodes)
-13. [Escaped Quotes In Decision](#13-escaped-quotes-in-decision)
-14. [Interactions Click Call Missing Fn](#14-interactions-click-call-missing-fn)
-15. [Interactions Click Call Parens](#15-interactions-click-call-parens)
-16. [Interactions Click Href](#16-interactions-click-href)
-17. [Interactions Linkstyle Multi](#17-interactions-linkstyle-multi)
-18. [Interactions Linkstyle Ranges](#18-interactions-linkstyle-ranges)
-19. [Invalid Arrow](#19-invalid-arrow)
-20. [Invalid Class](#20-invalid-class)
-21. [Invalid Node Syntax](#21-invalid-node-syntax)
-22. [Invalid Subgraph](#22-invalid-subgraph)
-23. [Issue 60 Parens Unquoted](#23-issue-60-parens-unquoted)
-24. [Label Bracket In Unquoted](#24-label-bracket-in-unquoted)
-25. [Label Curly In Unquoted](#25-label-curly-in-unquoted)
-26. [Label Leading Slash Unquoted](#26-label-leading-slash-unquoted)
-27. [Label With At Sign](#27-label-with-at-sign)
-28. [Label With At Slash](#28-label-with-at-slash)
-29. [Label With Attribute Quotes](#29-label-with-attribute-quotes)
-30. [Label With Function Call](#30-label-with-function-call)
-31. [Label With Tip](#31-label-with-tip)
-32. [Link One Sided Marker](#32-link-one-sided-marker)
-33. [Linkstyle Id Unknown](#33-linkstyle-id-unknown)
-34. [Method Parens In Unquoted Label](#34-method-parens-in-unquoted-label)
-35. [Missing Arrow](#35-missing-arrow)
-36. [Mixed Brackets](#36-mixed-brackets)
-37. [Mixed Quotes In Labels](#37-mixed-quotes-in-labels)
-38. [Model Initialize Call](#38-model-initialize-call)
-39. [No Diagram Type](#39-no-diagram-type)
-40. [Quotes Double Inside Single](#40-quotes-double-inside-single)
-41. [Quotes In Node Labels](#41-quotes-in-node-labels)
-42. [Round Parens Unquoted](#42-round-parens-unquoted)
-43. [Subgraph Id Collision](#43-subgraph-id-collision)
-44. [Title Unsupported](#44-title-unsupported)
-45. [Typed Parallelogram Parens](#45-typed-parallelogram-parens)
-46. [Typed Shapes All](#46-typed-shapes-all)
-47. [Typed Shapes Unknowns](#47-typed-shapes-unknowns)
-48. [Unclosed Bracket](#48-unclosed-bracket)
-49. [Unclosed Quote In Label](#49-unclosed-quote-in-label)
-50. [Unescaped Quotes In Decision](#50-unescaped-quotes-in-decision)
-51. [Unmatched End](#51-unmatched-end)
-52. [Unquoted Label With Quotes](#52-unquoted-label-with-quotes)
-53. [Unquoted Parens In Labels](#53-unquoted-parens-in-labels)
-54. [Unquoted Parens With Backticks](#54-unquoted-parens-with-backticks)
-55. [Wrong Direction](#55-wrong-direction)
+11. [Edge Label Quote In Pipes](#11-edge-label-quote-in-pipes)
+12. [Edge Label Quoted](#12-edge-label-quoted)
+13. [Empty Nodes](#13-empty-nodes)
+14. [Escaped Quotes In Decision](#14-escaped-quotes-in-decision)
+15. [Interactions Click Call Missing Fn](#15-interactions-click-call-missing-fn)
+16. [Interactions Click Call Parens](#16-interactions-click-call-parens)
+17. [Interactions Click Href](#17-interactions-click-href)
+18. [Interactions Linkstyle Multi](#18-interactions-linkstyle-multi)
+19. [Interactions Linkstyle Ranges](#19-interactions-linkstyle-ranges)
+20. [Invalid Arrow](#20-invalid-arrow)
+21. [Invalid Class](#21-invalid-class)
+22. [Invalid Node Syntax](#22-invalid-node-syntax)
+23. [Invalid Subgraph](#23-invalid-subgraph)
+24. [Issue 60 Parens Unquoted](#24-issue-60-parens-unquoted)
+25. [Label Bracket In Unquoted](#25-label-bracket-in-unquoted)
+26. [Label Curly In Unquoted](#26-label-curly-in-unquoted)
+27. [Label Leading Slash Unquoted](#27-label-leading-slash-unquoted)
+28. [Label With At Sign](#28-label-with-at-sign)
+29. [Label With At Slash](#29-label-with-at-slash)
+30. [Label With Attribute Quotes](#30-label-with-attribute-quotes)
+31. [Label With Function Call](#31-label-with-function-call)
+32. [Label With Tip](#32-label-with-tip)
+33. [Link One Sided Marker](#33-link-one-sided-marker)
+34. [Linkstyle Id Unknown](#34-linkstyle-id-unknown)
+35. [Method Parens In Unquoted Label](#35-method-parens-in-unquoted-label)
+36. [Missing Arrow](#36-missing-arrow)
+37. [Mixed Brackets](#37-mixed-brackets)
+38. [Mixed Quotes In Labels](#38-mixed-quotes-in-labels)
+39. [Model Initialize Call](#39-model-initialize-call)
+40. [No Diagram Type](#40-no-diagram-type)
+41. [Quotes Double Inside Single](#41-quotes-double-inside-single)
+42. [Quotes In Node Labels](#42-quotes-in-node-labels)
+43. [Round Parens Unquoted](#43-round-parens-unquoted)
+44. [Subgraph Id Collision](#44-subgraph-id-collision)
+45. [Title Unsupported](#45-title-unsupported)
+46. [Typed Parallelogram Parens](#46-typed-parallelogram-parens)
+47. [Typed Shapes All](#47-typed-shapes-all)
+48. [Typed Shapes Unknowns](#48-typed-shapes-unknowns)
+49. [Unclosed Bracket](#49-unclosed-bracket)
+50. [Unclosed Quote In Label](#50-unclosed-quote-in-label)
+51. [Unescaped Quotes In Decision](#51-unescaped-quotes-in-decision)
+52. [Unmatched End](#52-unmatched-end)
+53. [Unquoted Label With Quotes](#53-unquoted-label-with-quotes)
+54. [Unquoted Parens In Labels](#54-unquoted-parens-in-labels)
+55. [Unquoted Parens With Backticks](#55-unquoted-parens-with-backticks)
+56. [Wrong Direction](#56-wrong-direction)
 
 ---
 
@@ -81,51 +82,52 @@ This file contains invalid flowchart test fixtures with:
 | 8 | [edge label brackets](#8-edge-label-brackets) | INVALID | INVALID | ✅ safe |
 | 9 | [edge label curly in pipes](#9-edge-label-curly-in-pipes) | INVALID | INVALID | ✅ safe |
 | 10 | [edge label parens](#10-edge-label-parens) | INVALID | INVALID | — |
-| 11 | [edge label quoted](#11-edge-label-quoted) | INVALID | INVALID | ✅ safe |
-| 12 | [empty nodes](#12-empty-nodes) | INVALID | INVALID | ✅ safe |
-| 13 | [escaped quotes in decision](#13-escaped-quotes-in-decision) | INVALID | INVALID | ✅ safe |
-| 14 | [interactions click call missing fn](#14-interactions-click-call-missing-fn) | INVALID | INVALID | — |
-| 15 | [interactions click call parens](#15-interactions-click-call-parens) | INVALID | INVALID | — |
-| 16 | [interactions click href](#16-interactions-click-href) | INVALID | INVALID | — |
-| 17 | [interactions linkstyle multi](#17-interactions-linkstyle-multi) | INVALID | INVALID | — |
-| 18 | [interactions linkstyle ranges](#18-interactions-linkstyle-ranges) | INVALID | INVALID | — |
-| 19 | [invalid arrow](#19-invalid-arrow) | INVALID | INVALID | ✅ safe |
-| 20 | [invalid class](#20-invalid-class) | INVALID | INVALID | — |
-| 21 | [invalid node syntax](#21-invalid-node-syntax) | INVALID | INVALID | ✅ all |
-| 22 | [invalid subgraph](#22-invalid-subgraph) | INVALID | INVALID | — |
-| 23 | [issue 60 parens unquoted](#23-issue-60-parens-unquoted) | INVALID | INVALID | ✅ safe |
-| 24 | [label bracket in unquoted](#24-label-bracket-in-unquoted) | INVALID | INVALID | ✅ safe |
-| 25 | [label curly in unquoted](#25-label-curly-in-unquoted) | INVALID | INVALID | ✅ safe |
-| 26 | [label leading slash unquoted](#26-label-leading-slash-unquoted) | INVALID | INVALID | ✅ safe |
-| 27 | [label with at sign](#27-label-with-at-sign) | INVALID | INVALID | ✅ safe |
-| 28 | [label with at slash](#28-label-with-at-slash) | INVALID | INVALID | ✅ safe |
-| 29 | [label with attribute quotes](#29-label-with-attribute-quotes) | INVALID | INVALID | ✅ safe |
-| 30 | [label with function call](#30-label-with-function-call) | INVALID | INVALID | ✅ safe |
-| 31 | [label with tip](#31-label-with-tip) | INVALID | INVALID | ✅ safe |
-| 32 | [link one sided marker](#32-link-one-sided-marker) | INVALID | INVALID | ✅ safe |
-| 33 | [linkstyle id unknown](#33-linkstyle-id-unknown) | INVALID | INVALID | — |
-| 34 | [method parens in unquoted label](#34-method-parens-in-unquoted-label) | INVALID | INVALID | ✅ safe |
-| 35 | [missing arrow](#35-missing-arrow) | INVALID | INVALID | ✅ all |
-| 36 | [mixed brackets](#36-mixed-brackets) | INVALID | INVALID | ✅ safe |
-| 37 | [mixed quotes in labels](#37-mixed-quotes-in-labels) | INVALID | INVALID | — |
-| 38 | [model initialize call](#38-model-initialize-call) | INVALID | INVALID | ✅ safe |
-| 39 | [no diagram type](#39-no-diagram-type) | INVALID | INVALID | — |
-| 40 | [quotes double inside single](#40-quotes-double-inside-single) | INVALID | INVALID | ✅ safe |
-| 41 | [quotes in node labels](#41-quotes-in-node-labels) | INVALID | INVALID | ✅ safe |
-| 42 | [round parens unquoted](#42-round-parens-unquoted) | INVALID | INVALID | ✅ safe |
-| 43 | [subgraph id collision](#43-subgraph-id-collision) | INVALID | INVALID | ✅ all |
-| 44 | [title unsupported](#44-title-unsupported) | INVALID | INVALID | ✅ all |
-| 45 | [typed parallelogram parens](#45-typed-parallelogram-parens) | INVALID | INVALID | ✅ safe |
-| 46 | [typed shapes all](#46-typed-shapes-all) | INVALID | INVALID | — |
-| 47 | [typed shapes unknowns](#47-typed-shapes-unknowns) | INVALID | INVALID | — |
-| 48 | [unclosed bracket](#48-unclosed-bracket) | INVALID | INVALID | ✅ safe |
-| 49 | [unclosed quote in label](#49-unclosed-quote-in-label) | INVALID | INVALID | ✅ all |
-| 50 | [unescaped quotes in decision](#50-unescaped-quotes-in-decision) | INVALID | INVALID | ✅ safe |
-| 51 | [unmatched end](#51-unmatched-end) | INVALID | INVALID | — |
-| 52 | [unquoted label with quotes](#52-unquoted-label-with-quotes) | INVALID | INVALID | ✅ safe |
-| 53 | [unquoted parens in labels](#53-unquoted-parens-in-labels) | INVALID | INVALID | ✅ safe |
-| 54 | [unquoted parens with backticks](#54-unquoted-parens-with-backticks) | INVALID | INVALID | ✅ safe |
-| 55 | [wrong direction](#55-wrong-direction) | INVALID | INVALID | — |
+| 11 | [edge label quote in pipes](#11-edge-label-quote-in-pipes) | INVALID | INVALID | ✅ safe |
+| 12 | [edge label quoted](#12-edge-label-quoted) | INVALID | INVALID | ✅ safe |
+| 13 | [empty nodes](#13-empty-nodes) | INVALID | INVALID | ✅ safe |
+| 14 | [escaped quotes in decision](#14-escaped-quotes-in-decision) | INVALID | INVALID | ✅ safe |
+| 15 | [interactions click call missing fn](#15-interactions-click-call-missing-fn) | INVALID | INVALID | — |
+| 16 | [interactions click call parens](#16-interactions-click-call-parens) | INVALID | INVALID | — |
+| 17 | [interactions click href](#17-interactions-click-href) | INVALID | INVALID | — |
+| 18 | [interactions linkstyle multi](#18-interactions-linkstyle-multi) | INVALID | INVALID | — |
+| 19 | [interactions linkstyle ranges](#19-interactions-linkstyle-ranges) | INVALID | INVALID | — |
+| 20 | [invalid arrow](#20-invalid-arrow) | INVALID | INVALID | ✅ safe |
+| 21 | [invalid class](#21-invalid-class) | INVALID | INVALID | — |
+| 22 | [invalid node syntax](#22-invalid-node-syntax) | INVALID | INVALID | ✅ all |
+| 23 | [invalid subgraph](#23-invalid-subgraph) | INVALID | INVALID | — |
+| 24 | [issue 60 parens unquoted](#24-issue-60-parens-unquoted) | INVALID | INVALID | ✅ safe |
+| 25 | [label bracket in unquoted](#25-label-bracket-in-unquoted) | INVALID | INVALID | ✅ safe |
+| 26 | [label curly in unquoted](#26-label-curly-in-unquoted) | INVALID | INVALID | ✅ safe |
+| 27 | [label leading slash unquoted](#27-label-leading-slash-unquoted) | INVALID | INVALID | ✅ safe |
+| 28 | [label with at sign](#28-label-with-at-sign) | INVALID | INVALID | ✅ safe |
+| 29 | [label with at slash](#29-label-with-at-slash) | INVALID | INVALID | ✅ safe |
+| 30 | [label with attribute quotes](#30-label-with-attribute-quotes) | INVALID | INVALID | ✅ safe |
+| 31 | [label with function call](#31-label-with-function-call) | INVALID | INVALID | ✅ safe |
+| 32 | [label with tip](#32-label-with-tip) | INVALID | INVALID | ✅ safe |
+| 33 | [link one sided marker](#33-link-one-sided-marker) | INVALID | INVALID | ✅ safe |
+| 34 | [linkstyle id unknown](#34-linkstyle-id-unknown) | INVALID | INVALID | — |
+| 35 | [method parens in unquoted label](#35-method-parens-in-unquoted-label) | INVALID | INVALID | ✅ safe |
+| 36 | [missing arrow](#36-missing-arrow) | INVALID | INVALID | ✅ all |
+| 37 | [mixed brackets](#37-mixed-brackets) | INVALID | INVALID | ✅ safe |
+| 38 | [mixed quotes in labels](#38-mixed-quotes-in-labels) | INVALID | INVALID | — |
+| 39 | [model initialize call](#39-model-initialize-call) | INVALID | INVALID | ✅ safe |
+| 40 | [no diagram type](#40-no-diagram-type) | INVALID | INVALID | — |
+| 41 | [quotes double inside single](#41-quotes-double-inside-single) | INVALID | INVALID | ✅ safe |
+| 42 | [quotes in node labels](#42-quotes-in-node-labels) | INVALID | INVALID | ✅ safe |
+| 43 | [round parens unquoted](#43-round-parens-unquoted) | INVALID | INVALID | ✅ safe |
+| 44 | [subgraph id collision](#44-subgraph-id-collision) | INVALID | INVALID | ✅ all |
+| 45 | [title unsupported](#45-title-unsupported) | INVALID | INVALID | ✅ all |
+| 46 | [typed parallelogram parens](#46-typed-parallelogram-parens) | INVALID | INVALID | ✅ safe |
+| 47 | [typed shapes all](#47-typed-shapes-all) | INVALID | INVALID | — |
+| 48 | [typed shapes unknowns](#48-typed-shapes-unknowns) | INVALID | INVALID | — |
+| 49 | [unclosed bracket](#49-unclosed-bracket) | INVALID | INVALID | ✅ safe |
+| 50 | [unclosed quote in label](#50-unclosed-quote-in-label) | INVALID | INVALID | ✅ all |
+| 51 | [unescaped quotes in decision](#51-unescaped-quotes-in-decision) | INVALID | INVALID | ✅ safe |
+| 52 | [unmatched end](#52-unmatched-end) | INVALID | INVALID | — |
+| 53 | [unquoted label with quotes](#53-unquoted-label-with-quotes) | INVALID | INVALID | ✅ safe |
+| 54 | [unquoted parens in labels](#54-unquoted-parens-in-labels) | INVALID | INVALID | ✅ safe |
+| 55 | [unquoted parens with backticks](#55-unquoted-parens-with-backticks) | INVALID | INVALID | ✅ safe |
+| 56 | [wrong direction](#56-wrong-direction) | INVALID | INVALID | — |
 
 ---
 
@@ -1513,7 +1515,101 @@ flowchart TD
 
 ---
 
-## 11. Edge Label Quoted
+## 11. Edge Label Quote In Pipes
+
+📄 **Source**: [`edge-label-quote-in-pipes.mmd`](./invalid/edge-label-quote-in-pipes.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+graph TD
+    A[User Prompt] --|e.g. "navigate to example.com"|--> B(Oel Core);
+    B --|matches 'browser-automation' skill|--> C{"Skill/Tool Dispatcher"};
+    C --|reads config from|--> D["Oel/config/skills.yaml"];
+    C --|invokes 'puppeteer_navigate' via SSE|--> E("External Puppeteer Service");
+    E --|performs browser action|--> F[Target Website];
+    E --|streams results back|--> C;
+    C --> B;
+    B --|returns result to user|--> G[Final Response];
+
+```
+
+### Error Comparison: mermaid-cli vs maid
+
+<table>
+<tr>
+<th width="50%">mermaid-cli</th>
+<th width="50%">maid</th>
+</tr>
+<tr>
+<td valign="top">
+
+**Result**: ❌ INVALID
+
+```
+Syntax error in text
+```
+
+</td>
+<td valign="top">
+
+**Result**: ❌ INVALID
+
+```
+error[FL-EDGE-LABEL-QUOTE-IN-PIPES]: Quotes are not supported inside pipe-delimited edge labels.
+at test-fixtures/flowchart/invalid/edge-label-quote-in-pipes.mmd:2:28
+   1 | graph TD
+   2 |     A[User Prompt] --|e.g. "navigate to example.com"|--> B(Oel Core);
+     |                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+   3 |     B --|matches 'browser-automation' skill|--> C{"Skill/Tool Dispatcher"};
+hint: Use &quot; inside |...|, e.g., --|e.g. &quot;navigate to example.com&quot;|-->
+```
+
+</td>
+</tr>
+</table>
+
+### maid Auto-fix (`--fix`) Preview
+
+```mermaid
+graph TD
+    A[User Prompt] --|e.g. &quot;navigate to example.com&quot;|--> B(Oel Core);
+    B --|matches 'browser-automation' skill|--> C{"Skill/Tool Dispatcher"};
+    C --|reads config from|--> D["Oel/config/skills.yaml"];
+    C --|invokes 'puppeteer_navigate' via SSE|--> E("External Puppeteer Service");
+    E --|performs browser action|--> F[Target Website];
+    E --|streams results back|--> C;
+    C --> B;
+    B --|returns result to user|--> G[Final Response];
+
+```
+
+### maid Auto-fix (`--fix=all`) Preview
+
+Shown above (safe changes applied).
+
+<details>
+<summary>View source code</summary>
+
+```
+graph TD
+    A[User Prompt] --|e.g. "navigate to example.com"|--> B(Oel Core);
+    B --|matches 'browser-automation' skill|--> C{"Skill/Tool Dispatcher"};
+    C --|reads config from|--> D["Oel/config/skills.yaml"];
+    C --|invokes 'puppeteer_navigate' via SSE|--> E("External Puppeteer Service");
+    E --|performs browser action|--> F[Target Website];
+    E --|streams results back|--> C;
+    C --> B;
+    B --|returns result to user|--> G[Final Response];
+
+```
+</details>
+
+---
+
+## 12. Edge Label Quoted
 
 📄 **Source**: [`edge-label-quoted.mmd`](./invalid/edge-label-quoted.mmd)
 
@@ -1601,7 +1697,7 @@ flowchart LR
 
 ---
 
-## 12. Empty Nodes
+## 13. Empty Nodes
 
 📄 **Source**: [`empty-nodes.mmd`](./invalid/empty-nodes.mmd)
 
@@ -1689,7 +1785,7 @@ flowchart TD
 
 ---
 
-## 13. Escaped Quotes In Decision
+## 14. Escaped Quotes In Decision
 
 📄 **Source**: [`escaped-quotes-in-decision.mmd`](./invalid/escaped-quotes-in-decision.mmd)
 
@@ -1788,7 +1884,7 @@ flowchart TD
 
 ---
 
-## 14. Interactions Click Call Missing Fn
+## 15. Interactions Click Call Missing Fn
 
 📄 **Source**: [`interactions-click-call-missing-fn.mmd`](./invalid/interactions-click-call-missing-fn.mmd)
 
@@ -1869,7 +1965,7 @@ flowchart TD
 
 ---
 
-## 15. Interactions Click Call Parens
+## 16. Interactions Click Call Parens
 
 📄 **Source**: [`interactions-click-call-parens.mmd`](./invalid/interactions-click-call-parens.mmd)
 
@@ -1942,7 +2038,7 @@ flowchart TD
 
 ---
 
-## 16. Interactions Click Href
+## 17. Interactions Click Href
 
 📄 **Source**: [`interactions-click-href.mmd`](./invalid/interactions-click-href.mmd)
 
@@ -2017,7 +2113,7 @@ flowchart TD
 
 ---
 
-## 17. Interactions Linkstyle Multi
+## 18. Interactions Linkstyle Multi
 
 📄 **Source**: [`interactions-linkstyle-multi.mmd`](./invalid/interactions-linkstyle-multi.mmd)
 
@@ -2098,7 +2194,7 @@ flowchart TD
 
 ---
 
-## 18. Interactions Linkstyle Ranges
+## 19. Interactions Linkstyle Ranges
 
 📄 **Source**: [`interactions-linkstyle-ranges.mmd`](./invalid/interactions-linkstyle-ranges.mmd)
 
@@ -2173,7 +2269,7 @@ flowchart TD
 
 ---
 
-## 19. Invalid Arrow
+## 20. Invalid Arrow
 
 📄 **Source**: [`invalid-arrow.mmd`](./invalid/invalid-arrow.mmd)
 
@@ -2246,7 +2342,7 @@ flowchart TD
 
 ---
 
-## 20. Invalid Class
+## 21. Invalid Class
 
 📄 **Source**: [`invalid-class.mmd`](./invalid/invalid-class.mmd)
 
@@ -2314,7 +2410,7 @@ flowchart TD
 
 ---
 
-## 21. Invalid Node Syntax
+## 22. Invalid Node Syntax
 
 📄 **Source**: [`invalid-node-syntax.mmd`](./invalid/invalid-node-syntax.mmd)
 
@@ -2387,7 +2483,7 @@ flowchart TD
 
 ---
 
-## 22. Invalid Subgraph
+## 23. Invalid Subgraph
 
 📄 **Source**: [`invalid-subgraph.mmd`](./invalid/invalid-subgraph.mmd)
 
@@ -2458,7 +2554,7 @@ flowchart TD
 
 ---
 
-## 23. Issue 60 Parens Unquoted
+## 24. Issue 60 Parens Unquoted
 
 📄 **Source**: [`issue-60-parens-unquoted.mmd`](./invalid/issue-60-parens-unquoted.mmd)
 
@@ -2545,7 +2641,7 @@ flowchart TD
 
 ---
 
-## 24. Label Bracket In Unquoted
+## 25. Label Bracket In Unquoted
 
 📄 **Source**: [`label-bracket-in-unquoted.mmd`](./invalid/label-bracket-in-unquoted.mmd)
 
@@ -2675,7 +2771,7 @@ graph TD
 
 ---
 
-## 25. Label Curly In Unquoted
+## 26. Label Curly In Unquoted
 
 📄 **Source**: [`label-curly-in-unquoted.mmd`](./invalid/label-curly-in-unquoted.mmd)
 
@@ -2766,7 +2862,7 @@ graph LR
 
 ---
 
-## 26. Label Leading Slash Unquoted
+## 27. Label Leading Slash Unquoted
 
 📄 **Source**: [`label-leading-slash-unquoted.mmd`](./invalid/label-leading-slash-unquoted.mmd)
 
@@ -2866,7 +2962,7 @@ flowchart TD
 
 ---
 
-## 27. Label With At Sign
+## 28. Label With At Sign
 
 📄 **Source**: [`label-with-at-sign.mmd`](./invalid/label-with-at-sign.mmd)
 
@@ -2945,7 +3041,7 @@ graph TD
 
 ---
 
-## 28. Label With At Slash
+## 29. Label With At Slash
 
 📄 **Source**: [`label-with-at-slash.mmd`](./invalid/label-with-at-slash.mmd)
 
@@ -3027,7 +3123,7 @@ graph TD
 
 ---
 
-## 29. Label With Attribute Quotes
+## 30. Label With Attribute Quotes
 
 📄 **Source**: [`label-with-attribute-quotes.mmd`](./invalid/label-with-attribute-quotes.mmd)
 
@@ -3115,7 +3211,7 @@ graph TD
 
 ---
 
-## 30. Label With Function Call
+## 31. Label With Function Call
 
 📄 **Source**: [`label-with-function-call.mmd`](./invalid/label-with-function-call.mmd)
 
@@ -3218,7 +3314,7 @@ graph TD
 
 ---
 
-## 31. Label With Tip
+## 32. Label With Tip
 
 📄 **Source**: [`label-with-tip.mmd`](./invalid/label-with-tip.mmd)
 
@@ -3327,7 +3423,7 @@ flowchart TD
 
 ---
 
-## 32. Link One Sided Marker
+## 33. Link One Sided Marker
 
 📄 **Source**: [`link-one-sided-marker.mmd`](./invalid/link-one-sided-marker.mmd)
 
@@ -3411,7 +3507,7 @@ flowchart TD
 
 ---
 
-## 33. Linkstyle Id Unknown
+## 34. Linkstyle Id Unknown
 
 📄 **Source**: [`linkstyle-id-unknown.mmd`](./invalid/linkstyle-id-unknown.mmd)
 
@@ -3483,7 +3579,7 @@ flowchart TD
 
 ---
 
-## 34. Method Parens In Unquoted Label
+## 35. Method Parens In Unquoted Label
 
 📄 **Source**: [`method-parens-in-unquoted-label.mmd`](./invalid/method-parens-in-unquoted-label.mmd)
 
@@ -3588,7 +3684,7 @@ graph TD
 
 ---
 
-## 35. Missing Arrow
+## 36. Missing Arrow
 
 📄 **Source**: [`missing-arrow.mmd`](./invalid/missing-arrow.mmd)
 
@@ -3657,7 +3753,7 @@ flowchart TD
 
 ---
 
-## 36. Mixed Brackets
+## 37. Mixed Brackets
 
 📄 **Source**: [`mixed-brackets.mmd`](./invalid/mixed-brackets.mmd)
 
@@ -3742,7 +3838,7 @@ flowchart LR
 
 ---
 
-## 37. Mixed Quotes In Labels
+## 38. Mixed Quotes In Labels
 
 📄 **Source**: [`mixed-quotes-in-labels.mmd`](./invalid/mixed-quotes-in-labels.mmd)
 
@@ -3833,7 +3929,7 @@ flowchart TD
 
 ---
 
-## 38. Model Initialize Call
+## 39. Model Initialize Call
 
 📄 **Source**: [`model-initialize-call.mmd`](./invalid/model-initialize-call.mmd)
 
@@ -3944,7 +4040,7 @@ graph TD
 
 ---
 
-## 39. No Diagram Type
+## 40. No Diagram Type
 
 📄 **Source**: [`no-diagram-type.mmd`](./invalid/no-diagram-type.mmd)
 
@@ -4010,7 +4106,7 @@ B --> C
 
 ---
 
-## 40. Quotes Double Inside Single
+## 41. Quotes Double Inside Single
 
 📄 **Source**: [`quotes-double-inside-single.mmd`](./invalid/quotes-double-inside-single.mmd)
 
@@ -4086,7 +4182,7 @@ flowchart LR
 
 ---
 
-## 41. Quotes In Node Labels
+## 42. Quotes In Node Labels
 
 📄 **Source**: [`quotes-in-node-labels.mmd`](./invalid/quotes-in-node-labels.mmd)
 
@@ -4250,7 +4346,7 @@ graph TD
 
 ---
 
-## 42. Round Parens Unquoted
+## 43. Round Parens Unquoted
 
 📄 **Source**: [`round-parens-unquoted.mmd`](./invalid/round-parens-unquoted.mmd)
 
@@ -4326,7 +4422,7 @@ flowchart TD
 
 ---
 
-## 43. Subgraph Id Collision
+## 44. Subgraph Id Collision
 
 📄 **Source**: [`subgraph-id-collision.mmd`](./invalid/subgraph-id-collision.mmd)
 
@@ -4423,7 +4519,7 @@ flowchart TD
 
 ---
 
-## 44. Title Unsupported
+## 45. Title Unsupported
 
 📄 **Source**: [`title-unsupported.mmd`](./invalid/title-unsupported.mmd)
 
@@ -4498,7 +4594,7 @@ flowchart TD
 
 ---
 
-## 45. Typed Parallelogram Parens
+## 46. Typed Parallelogram Parens
 
 📄 **Source**: [`typed-parallelogram-parens.mmd`](./invalid/typed-parallelogram-parens.mmd)
 
@@ -4577,7 +4673,7 @@ flowchart TD
 
 ---
 
-## 46. Typed Shapes All
+## 47. Typed Shapes All
 
 📄 **Source**: [`typed-shapes-all.mmd`](./invalid/typed-shapes-all.mmd)
 
@@ -4698,7 +4794,7 @@ flowchart LR
 
 ---
 
-## 47. Typed Shapes Unknowns
+## 48. Typed Shapes Unknowns
 
 📄 **Source**: [`typed-shapes-unknowns.mmd`](./invalid/typed-shapes-unknowns.mmd)
 
@@ -4799,7 +4895,7 @@ flowchart TD
 
 ---
 
-## 48. Unclosed Bracket
+## 49. Unclosed Bracket
 
 📄 **Source**: [`unclosed-bracket.mmd`](./invalid/unclosed-bracket.mmd)
 
@@ -4872,7 +4968,7 @@ flowchart LR
 
 ---
 
-## 49. Unclosed Quote In Label
+## 50. Unclosed Quote In Label
 
 📄 **Source**: [`unclosed-quote-in-label.mmd`](./invalid/unclosed-quote-in-label.mmd)
 
@@ -4951,7 +5047,7 @@ flowchart TD
 
 ---
 
-## 50. Unescaped Quotes In Decision
+## 51. Unescaped Quotes In Decision
 
 📄 **Source**: [`unescaped-quotes-in-decision.mmd`](./invalid/unescaped-quotes-in-decision.mmd)
 
@@ -5030,7 +5126,7 @@ flowchart TD
 
 ---
 
-## 51. Unmatched End
+## 52. Unmatched End
 
 📄 **Source**: [`unmatched-end.mmd`](./invalid/unmatched-end.mmd)
 
@@ -5098,7 +5194,7 @@ flowchart TD
 
 ---
 
-## 52. Unquoted Label With Quotes
+## 53. Unquoted Label With Quotes
 
 📄 **Source**: [`unquoted-label-with-quotes.mmd`](./invalid/unquoted-label-with-quotes.mmd)
 
@@ -5216,7 +5312,7 @@ flowchart TD
 
 ---
 
-## 53. Unquoted Parens In Labels
+## 54. Unquoted Parens In Labels
 
 📄 **Source**: [`unquoted-parens-in-labels.mmd`](./invalid/unquoted-parens-in-labels.mmd)
 
@@ -5352,7 +5448,7 @@ flowchart TD
 
 ---
 
-## 54. Unquoted Parens With Backticks
+## 55. Unquoted Parens With Backticks
 
 📄 **Source**: [`unquoted-parens-with-backticks.mmd`](./invalid/unquoted-parens-with-backticks.mmd)
 
@@ -5434,7 +5530,7 @@ flowchart TD
 
 ---
 
-## 55. Wrong Direction
+## 56. Wrong Direction
 
 📄 **Source**: [`wrong-direction.mmd`](./invalid/wrong-direction.mmd)
 

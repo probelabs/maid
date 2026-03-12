@@ -208,8 +208,23 @@ export function mapFlowchartParserError(err: IRecognitionException, text: string
     const lineContent = allLines[Math.max(0, line - 1)] || '';
     const beforeQuote = lineContent.slice(0, Math.max(0, column - 1));
     const hasLinkBefore = beforeQuote.match(/--\s*$|==\s*$|-\.\s*$|-\.-\s*$|\[\s*$/);
+    const caret0 = Math.max(0, column - 1);
+    const firstBar = lineContent.lastIndexOf('|', caret0);
+    const secondBar = firstBar >= 0 ? lineContent.indexOf('|', caret0 + 1) : -1;
+    const inPipeLabel = firstBar >= 0 && secondBar > firstBar && firstBar < caret0 && secondBar > caret0;
 
     if (inLinkRule || hasLinkBefore) {
+      if (tokType === 'QuotedString' && inPipeLabel) {
+        return {
+          line,
+          column,
+          severity: 'error',
+          code: 'FL-EDGE-LABEL-QUOTE-IN-PIPES',
+          message: 'Quotes are not supported inside pipe-delimited edge labels.',
+          hint: 'Use &quot; inside |...|, e.g., --|e.g. &quot;navigate to example.com&quot;|-->',
+          length: len
+        };
+      }
       if (tokType === 'DiamondOpen' || tokType === 'DiamondClose') {
         return {
           line,

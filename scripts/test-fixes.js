@@ -195,6 +195,11 @@ const cases = [
     before: 'flowchart TD\nA -->|Resolve ${VAR}| B\n',
     after:  'flowchart TD\nA -->|Resolve $&#123;VAR&#125;| B\n'
   },
+  {
+    name: 'FL-EDGE-LABEL-QUOTE-IN-PIPES (encode quotes)',
+    before: 'graph TD\nA -->|e.g. \"navigate to example.com\"| B\n',
+    after:  'graph TD\nA -->|e.g. &quot;navigate to example.com&quot;| B\n'
+  },
   // FL-LABEL-CURLY-IN-QUOTED is not auto-fixable because:
   // 1. Curly braces work perfectly in quoted labels
   // 2. Mermaid doesn't decode numeric HTML entities (&#123;/&#125;)

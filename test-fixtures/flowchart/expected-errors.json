@@ -99,6 +99,9 @@
   "edge-label-curly-in-pipes.mmd": [
     "FL-EDGE-LABEL-CURLY-IN-PIPES"
   ],
+  "edge-label-quote-in-pipes.mmd": [
+    "FL-EDGE-LABEL-QUOTE-IN-PIPES"
+  ],
   "edge-label-bracket-encoded-braces.mmd": [
     "FL-EDGE-LABEL-BRACKET"
   ],
