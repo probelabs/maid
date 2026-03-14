@@ -4,6 +4,7 @@ import { validatePie } from '../diagrams/pie/validate.js';
 import { validateSequence } from '../diagrams/sequence/validate.js';
 import { validateClass } from '../diagrams/class/validate.js';
 import { validateState } from '../diagrams/state/validate.js';
+import { parseFrontmatter } from './frontmatter.js';
 
 function firstNonCommentLine(text: string): string | undefined {
   const lines = text.split(/\r?\n/);
@@ -17,7 +18,8 @@ function firstNonCommentLine(text: string): string | undefined {
 }
 
 export function detectDiagramType(text: string): DiagramType {
-  const header = firstNonCommentLine(text);
+  const { content } = stripFrontmatter(text);
+  const header = firstNonCommentLine(content);
   if (!header) return 'unknown';
 
   if (/^(flowchart|graph)\b/i.test(header)) return 'flowchart';
@@ -53,21 +55,27 @@ function isOtherMermaidDiagram(headerLine: string | undefined): boolean {
 }
 
 export function validate(text: string, options: ValidateOptions = {}): { type: DiagramType; errors: ValidationError[] } {
-  const type = detectDiagramType(text);
+  const { content, lineOffset } = stripFrontmatter(text);
+  const type = detectDiagramType(content);
+  const withOffset = (errors: ValidationError[]): ValidationError[] => {
+    if (lineOffset === 0) return errors;
+    return errors.map((e) => ({ ...e, line: Math.max(1, (e.line || 1) + lineOffset) }));
+  };
+
   switch (type) {
     case 'flowchart':
-      return { type, errors: validateFlowchart(text, options) };
+      return { type, errors: withOffset(validateFlowchart(content, options)) };
     case 'pie':
-      return { type, errors: validatePie(text, options) };
+      return { type, errors: withOffset(validatePie(content, options)) };
     case 'sequence':
-      return { type, errors: validateSequence(text, options) };
+      return { type, errors: withOffset(validateSequence(content, options)) };
     case 'class':
-      return { type, errors: validateClass(text, options) };
+      return { type, errors: withOffset(validateClass(content, options)) };
     case 'state':
-      return { type, errors: validateState(text, options) };
+      return { type, errors: withOffset(validateState(content, options)) };
     default:
       // Treat other (unsupported) Mermaid diagram types as valid (pass-through).
-      const header = firstNonCommentLine(text);
+      const header = firstNonCommentLine(content);
       if (isOtherMermaidDiagram(header)) {
         return { type, errors: [] };
       }
@@ -76,7 +84,7 @@ export function validate(text: string, options: ValidateOptions = {}): { type: D
         type,
         errors: [
           {
-            line: 1,
+            line: lineOffset + 1,
             column: 1,
             message: 'Diagram must start with "graph", "flowchart", "pie", "sequenceDiagram", "classDiagram" or "stateDiagram[-v2]"',
             severity: 'error',
@@ -86,4 +94,10 @@ export function validate(text: string, options: ValidateOptions = {}): { type: D
         ],
       };
   }
+}
+
+function stripFrontmatter(text: string): { content: string; lineOffset: number } {
+  const fm = parseFrontmatter(text);
+  if (!fm) return { content: text, lineOffset: 0 };
+  return { content: fm.body, lineOffset: fm.bodyStartLine - 1 };
 }
