@@ -153,16 +153,18 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
       }
       continue;
     }
-        if (is('FL-EDGE-LABEL-BRACKET', e) || is('FL-EDGE-LABEL-CURLY-IN-PIPES', e)) {
+        if (is('FL-EDGE-LABEL-BRACKET', e) || is('FL-EDGE-LABEL-CURLY-IN-PIPES', e) || is('FL-EDGE-LABEL-QUOTE-IN-PIPES', e)) {
       const lineText = lineTextAt(text, e.line);
-      const firstBar = lineText.indexOf('|');
-      const secondBar = firstBar >= 0 ? lineText.indexOf('|', firstBar + 1) : -1;
+      const col = Math.max(0, e.column - 1);
+      const firstBar = lineText.lastIndexOf('|', col);
+      const secondBar = firstBar >= 0 ? lineText.indexOf('|', col + 1) : -1;
       if (firstBar >= 0 && secondBar > firstBar) {
         const before = lineText.slice(0, firstBar + 1);
         const label = lineText.slice(firstBar + 1, secondBar);
         const after = lineText.slice(secondBar);
         let fixedLabel = label.replace(/\[/g, '&#91;').replace(/\]/g, '&#93;');
         fixedLabel = fixedLabel.replace(/\{/g, '&#123;').replace(/\}/g, '&#125;');
+        fixedLabel = fixedLabel.replace(/\\"/g, '&quot;').replace(/"/g, '&quot;');
         const fixedLine = before + fixedLabel + after;
         const finalLine = fixedLine.replace(/\[([^\]]*)\]/g, (m, seg) => '[' + String(seg).replace(/`/g, '') + ']');
         edits.push({ start: { line: e.line, column: 1 }, end: { line: e.line, column: lineText.length + 1 }, newText: finalLine });

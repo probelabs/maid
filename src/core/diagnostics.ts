@@ -208,8 +208,23 @@ export function mapFlowchartParserError(err: IRecognitionException, text: string
     const lineContent = allLines[Math.max(0, line - 1)] || '';
     const beforeQuote = lineContent.slice(0, Math.max(0, column - 1));
     const hasLinkBefore = beforeQuote.match(/--\s*$|==\s*$|-\.\s*$|-\.-\s*$|\[\s*$/);
+    const caret0 = Math.max(0, column - 1);
+    const firstBar = lineContent.lastIndexOf('|', caret0);
+    const secondBar = firstBar >= 0 ? lineContent.indexOf('|', caret0 + 1) : -1;
+    const inPipeLabel = firstBar >= 0 && secondBar > firstBar && firstBar < caret0 && secondBar > caret0;
 
     if (inLinkRule || hasLinkBefore) {
+      if (tokType === 'QuotedString' && inPipeLabel) {
+        return {
+          line,
+          column,
+          severity: 'error',
+          code: 'FL-EDGE-LABEL-QUOTE-IN-PIPES',
+          message: 'Quotes are not supported inside pipe-delimited edge labels.',
+          hint: 'Use &quot; inside |...|, e.g., --|e.g. &quot;navigate to example.com&quot;|-->',
+          length: len
+        };
+      }
       if (tokType === 'DiamondOpen' || tokType === 'DiamondClose') {
         return {
           line,
@@ -816,20 +831,6 @@ export function mapSequenceParserError(err: IRecognitionException, text: string)
     return { line, column, severity: 'error', code: 'SE-ARROW-INVALID', message: `Invalid sequence arrow near '${found}'.`, hint: 'Use ->, -->, ->>, -->>, -x, --x, -), --), <<->>, or <<-->>', length: len };
   }
 
-  // Bullet-like lines beginning with '-' are not supported by Mermaid sequence diagrams.
-  // Map a clear diagnostic when a stray '-' appears where a statement keyword is expected.
-  if ((err.name === 'NoViableAltException' || err.name === 'MismatchedTokenException') && tokType === 'Minus') {
-    return {
-      line,
-      column,
-      severity: 'error',
-      code: 'SE-BULLET-LINE-UNSUPPORTED',
-      message: "Bullet list lines starting with '-' are not supported in sequence diagrams.",
-      hint: "Wrap free‑form text in a note block instead, for example:\nNote over A : Item 1\nNote over A\n  - Item 1\n  - Item 2\nend note",
-      length: len
-    };
-  }
-
   // Note forms
   if (inRule('noteStmt')) {
     if (err.name === 'MismatchedTokenException' && exp('Colon')) {
@@ -837,6 +838,27 @@ export function mapSequenceParserError(err: IRecognitionException, text: string)
     }
     if (err.name === 'NoViableAltException') {
       return { line, column, severity: 'error', code: 'SE-NOTE-MALFORMED', message: 'Malformed note statement. Use left|right of X or over X[,Y]: text', hint: 'Examples: Note over A,B: hi', length: len };
+    }
+  }
+
+  // Keep this dedicated mapping after note handling so we can surface
+  // note-specific diagnostics for malformed multiline notes.
+  if ((err.name === 'NoViableAltException' || err.name === 'MismatchedTokenException') && tokType === 'Minus') {
+    const nonWs = ltxt.search(/\S/);
+    const minusAtLineStart = nonWs >= 0 && ltxt[nonWs] === '-' && column === nonWs + 1;
+    if (!minusAtLineStart) {
+      // Avoid false positives for hyphenated identifiers/aliases.
+      // Fall through to other mappings.
+    } else {
+      return {
+        line,
+        column,
+        severity: 'error',
+        code: 'SE-BULLET-LINE-UNSUPPORTED',
+        message: "Bullet list lines starting with '-' are not supported in sequence diagrams.",
+        hint: "Wrap free‑form text in a note block instead, for example:\nNote over A : Item 1\nNote over A\n  - Item 1\n  - Item 2\nend note",
+        length: len
+      };
     }
   }
 

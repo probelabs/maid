@@ -27,14 +27,15 @@ This file contains invalid sequence test fixtures with:
 16. [Details And Properties](#16-details-and-properties)
 17. [Else In Par Nested](#17-else-in-par-nested)
 18. [Else Outside Alt](#18-else-outside-alt)
-19. [Missing Colon](#19-missing-colon)
-20. [Note Malformed](#20-note-malformed)
-21. [Note Multiline Missing Colon](#21-note-multiline-missing-colon)
-22. [Option In Par](#22-option-in-par)
-23. [Option Outside Critical](#23-option-outside-critical)
-24. [Title And Accessibility](#24-title-and-accessibility)
-25. [Unmatched End](#25-unmatched-end)
-26. [Wrong Arrow](#26-wrong-arrow)
+19. [Issue Note Over Multiline Hyphen Alias](#19-issue-note-over-multiline-hyphen-alias)
+20. [Missing Colon](#20-missing-colon)
+21. [Note Malformed](#21-note-malformed)
+22. [Note Multiline Missing Colon](#22-note-multiline-missing-colon)
+23. [Option In Par](#23-option-in-par)
+24. [Option Outside Critical](#24-option-outside-critical)
+25. [Title And Accessibility](#25-title-and-accessibility)
+26. [Unmatched End](#26-unmatched-end)
+27. [Wrong Arrow](#27-wrong-arrow)
 
 ---
 
@@ -60,14 +61,15 @@ This file contains invalid sequence test fixtures with:
 | 16 | [details and properties](#16-details-and-properties) | INVALID | INVALID | — |
 | 17 | [else in par nested](#17-else-in-par-nested) | INVALID | INVALID | — |
 | 18 | [else outside alt](#18-else-outside-alt) | INVALID | INVALID | — |
-| 19 | [missing colon](#19-missing-colon) | INVALID | INVALID | ✅ safe |
-| 20 | [note malformed](#20-note-malformed) | INVALID | INVALID | ✅ safe |
-| 21 | [note multiline missing colon](#21-note-multiline-missing-colon) | INVALID | INVALID | ✅ safe |
-| 22 | [option in par](#22-option-in-par) | INVALID | INVALID | — |
-| 23 | [option outside critical](#23-option-outside-critical) | INVALID | INVALID | — |
-| 24 | [title and accessibility](#24-title-and-accessibility) | INVALID | INVALID | — |
-| 25 | [unmatched end](#25-unmatched-end) | INVALID | INVALID | — |
-| 26 | [wrong arrow](#26-wrong-arrow) | INVALID | INVALID | — |
+| 19 | [issue note over multiline hyphen alias](#19-issue-note-over-multiline-hyphen-alias) | INVALID | INVALID | ✅ safe |
+| 20 | [missing colon](#20-missing-colon) | INVALID | INVALID | ✅ safe |
+| 21 | [note malformed](#21-note-malformed) | INVALID | INVALID | ✅ safe |
+| 22 | [note multiline missing colon](#22-note-multiline-missing-colon) | INVALID | INVALID | ✅ safe |
+| 23 | [option in par](#23-option-in-par) | INVALID | INVALID | — |
+| 24 | [option outside critical](#24-option-outside-critical) | INVALID | INVALID | — |
+| 25 | [title and accessibility](#25-title-and-accessibility) | INVALID | INVALID | — |
+| 26 | [unmatched end](#26-unmatched-end) | INVALID | INVALID | — |
+| 27 | [wrong arrow](#27-wrong-arrow) | INVALID | INVALID | — |
 
 ---
 
@@ -1643,7 +1645,144 @@ sequenceDiagram
 
 ---
 
-## 19. Missing Colon
+## 19. Issue Note Over Multiline Hyphen Alias
+
+📄 **Source**: [`issue-note-over-multiline-hyphen-alias.mmd`](./invalid/issue-note-over-multiline-hyphen-alias.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+sequenceDiagram
+  participant User
+  participant engineer as engineer.yaml
+  participant prepare as prepare-projects
+  participant setup as project-setup
+  participant merge as merge-projects
+  participant AI as engineer-task AI
+
+  User->>engineer: task + projects (pre-resolved)
+  engineer->>prepare: Check if projects provided
+  prepare->>merge: Return pre-resolved projects
+  merge->>AI: Execute with project paths
+  AI->>User: PR URLs, files changed
+
+  Note over engineer
+    OR: Standalone mode
+  end note
+
+  User->>engineer: task + project_definitions
+  engineer->>prepare: No pre-resolved projects
+  prepare->>setup: Run project-setup
+  setup->>merge: Return checkout_projects
+  merge->>AI: Execute with checked-out projects
+  AI->>User: PR URLs, files changed
+
+```
+
+### Error Comparison: mermaid-cli vs maid
+
+<table>
+<tr>
+<th width="50%">mermaid-cli</th>
+<th width="50%">maid</th>
+</tr>
+<tr>
+<td valign="top">
+
+**Result**: ❌ INVALID
+
+```
+Syntax error in text
+```
+
+</td>
+<td valign="top">
+
+**Result**: ❌ INVALID
+
+```
+error[SE-NOTE-MALFORMED]: Malformed note: missing colon before the note text.
+at test-fixtures/sequence/invalid/issue-note-over-multiline-hyphen-alias.mmd:15:21
+  14 | 
+  15 |   Note over engineer
+     |                     ^
+  16 |     OR: Standalone mode
+hint: Example: Note right of Alice: Hello
+```
+
+</td>
+</tr>
+</table>
+
+### maid Auto-fix (`--fix`) Preview
+
+```mermaid
+sequenceDiagram
+  participant User
+  participant engineer as engineer.yaml
+  participant prepare as prepare-projects
+  participant setup as project-setup
+  participant merge as merge-projects
+  participant AI as engineer-task AI
+
+  User->>engineer: task + projects (pre-resolved)
+  engineer->>prepare: Check if projects provided
+  prepare->>merge: Return pre-resolved projects
+  merge->>AI: Execute with project paths
+  AI->>User: PR URLs, files changed
+
+  Note over engineer : OR: Standalone mode
+
+  User->>engineer: task + project_definitions
+  engineer->>prepare: No pre-resolved projects
+  prepare->>setup: Run project-setup
+  setup->>merge: Return checkout_projects
+  merge->>AI: Execute with checked-out projects
+  AI->>User: PR URLs, files changed
+
+```
+
+### maid Auto-fix (`--fix=all`) Preview
+
+Shown above (safe changes applied).
+
+<details>
+<summary>View source code</summary>
+
+```
+sequenceDiagram
+  participant User
+  participant engineer as engineer.yaml
+  participant prepare as prepare-projects
+  participant setup as project-setup
+  participant merge as merge-projects
+  participant AI as engineer-task AI
+
+  User->>engineer: task + projects (pre-resolved)
+  engineer->>prepare: Check if projects provided
+  prepare->>merge: Return pre-resolved projects
+  merge->>AI: Execute with project paths
+  AI->>User: PR URLs, files changed
+
+  Note over engineer
+    OR: Standalone mode
+  end note
+
+  User->>engineer: task + project_definitions
+  engineer->>prepare: No pre-resolved projects
+  prepare->>setup: Run project-setup
+  setup->>merge: Return checkout_projects
+  merge->>AI: Execute with checked-out projects
+  AI->>User: PR URLs, files changed
+
+```
+</details>
+
+---
+
+## 20. Missing Colon
 
 📄 **Source**: [`missing-colon.mmd`](./invalid/missing-colon.mmd)
 
@@ -1725,7 +1864,7 @@ sequenceDiagram
 
 ---
 
-## 20. Note Malformed
+## 21. Note Malformed
 
 📄 **Source**: [`note-malformed.mmd`](./invalid/note-malformed.mmd)
 
@@ -1807,7 +1946,7 @@ sequenceDiagram
 
 ---
 
-## 21. Note Multiline Missing Colon
+## 22. Note Multiline Missing Colon
 
 📄 **Source**: [`note-multiline-missing-colon.mmd`](./invalid/note-multiline-missing-colon.mmd)
 
@@ -1909,7 +2048,7 @@ sequenceDiagram
 
 ---
 
-## 22. Option In Par
+## 23. Option In Par
 
 📄 **Source**: [`option-in-par.mmd`](./invalid/option-in-par.mmd)
 
@@ -1992,7 +2131,7 @@ sequenceDiagram
 
 ---
 
-## 23. Option Outside Critical
+## 24. Option Outside Critical
 
 📄 **Source**: [`option-outside-critical.mmd`](./invalid/option-outside-critical.mmd)
 
@@ -2070,7 +2209,7 @@ sequenceDiagram
 
 ---
 
-## 24. Title And Accessibility
+## 25. Title And Accessibility
 
 📄 **Source**: [`title-and-accessibility.mmd`](./invalid/title-and-accessibility.mmd)
 
@@ -2167,7 +2306,7 @@ sequenceDiagram
 
 ---
 
-## 25. Unmatched End
+## 26. Unmatched End
 
 📄 **Source**: [`unmatched-end.mmd`](./invalid/unmatched-end.mmd)
 
@@ -2242,7 +2381,7 @@ sequenceDiagram
 
 ---
 
-## 26. Wrong Arrow
+## 27. Wrong Arrow
 
 📄 **Source**: [`wrong-arrow.mmd`](./invalid/wrong-arrow.mmd)
 

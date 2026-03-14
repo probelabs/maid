@@ -1,0 +1,9 @@
+graph TD
+    A[User Prompt] --|e.g. "navigate to example.com"|--> B(Oel Core);
+    B --|matches 'browser-automation' skill|--> C{"Skill/Tool Dispatcher"};
+    C --|reads config from|--> D["Oel/config/skills.yaml"];
+    C --|invokes 'puppeteer_navigate' via SSE|--> E("External Puppeteer Service");
+    E --|performs browser action|--> F[Target Website];
+    E --|streams results back|--> C;
+    C --> B;
+    B --|returns result to user|--> G[Final Response];
