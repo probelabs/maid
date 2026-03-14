@@ -4,6 +4,7 @@
 export interface Frontmatter {
   raw: string;
   body: string;
+  bodyStartLine: number;
   config?: Record<string, any>;
   themeVariables?: Record<string, string>;
 }
@@ -22,6 +23,7 @@ export function parseFrontmatter(input: string): Frontmatter | null {
   if (i >= lines.length) return null; // no closing '---'
 
   const body = lines.slice(i + 1).join('\n');
+  const bodyStartLine = i + 2; // 1-based line where diagram body starts
   const raw = block.join('\n');
 
   // Simple indentation-based parse for keys we care about
@@ -78,7 +80,13 @@ export function parseFrontmatter(input: string): Frontmatter | null {
     ensure(config, 'themeVariables', {});
     Object.assign(config.themeVariables, themeVars);
   }
-  return { raw, body, config: Object.keys(config).length ? config : undefined, themeVariables: Object.keys(themeVars).length ? themeVars : undefined };
+  return {
+    raw,
+    body,
+    bodyStartLine,
+    config: Object.keys(config).length ? config : undefined,
+    themeVariables: Object.keys(themeVars).length ? themeVars : undefined
+  };
 }
 
 function ensure(obj: Record<string, any>, key: string, def: any) {

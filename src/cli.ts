@@ -360,19 +360,15 @@ async function main() {
                     }
                 }
             } else {
-                // Support Mermaid frontmatter in standalone .mmd files (no fences)
-                const { parseFrontmatter } = await import('./core/frontmatter.js');
-                const fmDir = parseFrontmatter(content);
-                const bodyDir = fmDir?.body ?? content;
-                const kind = detectDiagramType(bodyDir);
+                const kind = detectDiagramType(content);
                 if (kind !== 'unknown') {
                     diagramCount++;
                     if (fixLevel) {
-                        const { fixed, errors: afterErrs } = autoFixMultipass(bodyDir, strict, fixLevel);
-                        if (fixed !== bodyDir && !dryRun) { fs.writeFileSync(file, fixed, 'utf8'); modifiedCount++; }
+                        const { fixed, errors: afterErrs } = autoFixMultipass(content, strict, fixLevel);
+                        if (fixed !== content && !dryRun) { fs.writeFileSync(file, fixed, 'utf8'); modifiedCount++; }
                         errs = afterErrs;
                     } else {
-                        const res = validate(bodyDir, { strict });
+                        const res = validate(content, { strict });
                         errs = res.errors;
                     }
                 } else if (isMermaidFile) {
@@ -464,19 +460,16 @@ async function main() {
         }
     } else {
         // If no mermaid fences found, only validate whole file when it looks like a diagram.
-        const { parseFrontmatter } = await import('./core/frontmatter.js');
-        const fm = parseFrontmatter(content);
-        const body = fm?.body ?? content;
-        const kind = detectDiagramType(body);
+        const kind = detectDiagramType(content);
         if (kind !== 'unknown') {
             diagramsFound = true;
             if (fixLevel) {
-                const { fixed, errors: afterErrs } = autoFixMultipass(body, strict, fixLevel);
+                const { fixed, errors: afterErrs } = autoFixMultipass(content, strict, fixLevel);
                 if (!dryRun && filename !== '<stdin>') fs.writeFileSync(filename, fixed, 'utf8');
                 if (printFixed || filename === '<stdin>') process.stdout.write(fixed);
                 errors = afterErrs;
             } else {
-                const res = validate(body, { strict });
+                const res = validate(content, { strict });
                 errors = res.errors;
             }
         } else {
