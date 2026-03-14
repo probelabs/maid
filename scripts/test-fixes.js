@@ -240,6 +240,11 @@ const cases = [
   { name: 'SE-MSG-COLON-MISSING', before: 'sequenceDiagram\nA->B hi\n', after: 'sequenceDiagram\nA->B : hi\n' },
   { name: 'SE-NOTE-MALFORMED', before: 'sequenceDiagram\nNote right of A Hello\n', after: 'sequenceDiagram\nNote right of A : Hello\n' },
   { name: 'SE-NOTE-MALFORMED (multiline header)', before: 'sequenceDiagram\nNote right of A\n  body\nend note\n', after: 'sequenceDiagram\nNote right of A : body\n' },
+  {
+    name: 'SE-NOTE-MALFORMED (multiline over with hyphen alias)',
+    before: 'sequenceDiagram\nparticipant engineer as engineer.yaml\nparticipant prepare as prepare-projects\nNote over engineer\n  OR: Standalone mode\nend note\n',
+    after: 'sequenceDiagram\nparticipant engineer as engineer.yaml\nparticipant prepare as prepare-projects\nNote over engineer : OR: Standalone mode\n'
+  },
   { name: 'SE-ELSE-IN-CRITICAL', before: 'sequenceDiagram\ncritical Do\n  else Not allowed\nend\n', after: 'sequenceDiagram\ncritical Do\n  option Not allowed\nend\n' },
   { name: 'SE-BLOCK-MISSING-END', before: 'sequenceDiagram\npar Do work\n  A->B: hi\n', afterLevel: 'safe' },
   { name: 'SE-LABEL-DOUBLE-IN-DOUBLE', before: 'sequenceDiagram\n  participant "Logger "debug"" as L\n  L->>L: hi\n', after: 'sequenceDiagram\n  participant "Logger &quot;debug&quot;" as L\n  L->>L: hi\n' },

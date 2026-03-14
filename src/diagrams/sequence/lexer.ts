@@ -1,8 +1,8 @@
 import { createToken, Lexer } from 'chevrotain';
 
 // Identifiers (actor/participant ids)
-// Keep '-' out to avoid consuming the '-' of arrows like A->B
-export const Identifier = createToken({ name: 'Identifier', pattern: /[A-Za-z_][A-Za-z0-9_]*/ });
+// Allow internal '-' segments (prepare-projects), but do not consume arrow heads.
+export const Identifier = createToken({ name: 'Identifier', pattern: /[A-Za-z_][A-Za-z0-9_.]*(?:-(?![>x)\s])[A-Za-z0-9_.]+)*/ });
 
 export const NumberLiteral = createToken({ name: 'NumberLiteral', pattern: /[0-9]+/ });
 

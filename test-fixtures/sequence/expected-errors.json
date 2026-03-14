@@ -80,5 +80,8 @@
   ],
   "bullet-dash-lines.mmd": [
     "SE-BULLET-LINE-UNSUPPORTED"
+  ],
+  "issue-note-over-multiline-hyphen-alias.mmd": [
+    "SE-NOTE-MALFORMED"
   ]
 }

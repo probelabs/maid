@@ -1,0 +1,24 @@
+sequenceDiagram
+  participant User
+  participant engineer as engineer.yaml
+  participant prepare as prepare-projects
+  participant setup as project-setup
+  participant merge as merge-projects
+  participant AI as engineer-task AI
+
+  User->>engineer: task + projects (pre-resolved)
+  engineer->>prepare: Check if projects provided
+  prepare->>merge: Return pre-resolved projects
+  merge->>AI: Execute with project paths
+  AI->>User: PR URLs, files changed
+
+  Note over engineer
+    OR: Standalone mode
+  end note
+
+  User->>engineer: task + project_definitions
+  engineer->>prepare: No pre-resolved projects
+  prepare->>setup: Run project-setup
+  setup->>merge: Return checkout_projects
+  merge->>AI: Execute with checked-out projects
+  AI->>User: PR URLs, files changed

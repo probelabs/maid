@@ -831,20 +831,6 @@ export function mapSequenceParserError(err: IRecognitionException, text: string)
     return { line, column, severity: 'error', code: 'SE-ARROW-INVALID', message: `Invalid sequence arrow near '${found}'.`, hint: 'Use ->, -->, ->>, -->>, -x, --x, -), --), <<->>, or <<-->>', length: len };
   }
 
-  // Bullet-like lines beginning with '-' are not supported by Mermaid sequence diagrams.
-  // Map a clear diagnostic when a stray '-' appears where a statement keyword is expected.
-  if ((err.name === 'NoViableAltException' || err.name === 'MismatchedTokenException') && tokType === 'Minus') {
-    return {
-      line,
-      column,
-      severity: 'error',
-      code: 'SE-BULLET-LINE-UNSUPPORTED',
-      message: "Bullet list lines starting with '-' are not supported in sequence diagrams.",
-      hint: "Wrap free‑form text in a note block instead, for example:\nNote over A : Item 1\nNote over A\n  - Item 1\n  - Item 2\nend note",
-      length: len
-    };
-  }
-
   // Note forms
   if (inRule('noteStmt')) {
     if (err.name === 'MismatchedTokenException' && exp('Colon')) {
@@ -852,6 +838,27 @@ export function mapSequenceParserError(err: IRecognitionException, text: string)
     }
     if (err.name === 'NoViableAltException') {
       return { line, column, severity: 'error', code: 'SE-NOTE-MALFORMED', message: 'Malformed note statement. Use left|right of X or over X[,Y]: text', hint: 'Examples: Note over A,B: hi', length: len };
+    }
+  }
+
+  // Keep this dedicated mapping after note handling so we can surface
+  // note-specific diagnostics for malformed multiline notes.
+  if ((err.name === 'NoViableAltException' || err.name === 'MismatchedTokenException') && tokType === 'Minus') {
+    const nonWs = ltxt.search(/\S/);
+    const minusAtLineStart = nonWs >= 0 && ltxt[nonWs] === '-' && column === nonWs + 1;
+    if (!minusAtLineStart) {
+      // Avoid false positives for hyphenated identifiers/aliases.
+      // Fall through to other mappings.
+    } else {
+      return {
+        line,
+        column,
+        severity: 'error',
+        code: 'SE-BULLET-LINE-UNSUPPORTED',
+        message: "Bullet list lines starting with '-' are not supported in sequence diagrams.",
+        hint: "Wrap free‑form text in a note block instead, for example:\nNote over A : Item 1\nNote over A\n  - Item 1\n  - Item 2\nend note",
+        length: len
+      };
     }
   }
 
