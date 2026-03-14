@@ -54,7 +54,7 @@
   <text class="msg-label" x="146" y="98" text-anchor="middle">Hello</text>
   <g class="note" transform="translate(144,68)">
     <rect width="160" height="28" rx="0"/>
-    <text class="note-text" x="80" y="18" text-anchor="middle">Thinking ...</text>
+    <text class="note-text" x="80" y="18" text-anchor="middle">Thinking...</text>
   </g>
   <g class="note" transform="translate(71,140)">
     <rect width="150" height="28" rx="0"/>
