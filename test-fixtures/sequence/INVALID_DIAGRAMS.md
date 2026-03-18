@@ -27,15 +27,16 @@ This file contains invalid sequence test fixtures with:
 16. [Details And Properties](#16-details-and-properties)
 17. [Else In Par Nested](#17-else-in-par-nested)
 18. [Else Outside Alt](#18-else-outside-alt)
-19. [Issue Note Over Multiline Hyphen Alias](#19-issue-note-over-multiline-hyphen-alias)
-20. [Missing Colon](#20-missing-colon)
-21. [Note Malformed](#21-note-malformed)
-22. [Note Multiline Missing Colon](#22-note-multiline-missing-colon)
-23. [Option In Par](#23-option-in-par)
-24. [Option Outside Critical](#24-option-outside-critical)
-25. [Title And Accessibility](#25-title-and-accessibility)
-26. [Unmatched End](#26-unmatched-end)
-27. [Wrong Arrow](#27-wrong-arrow)
+19. [Issue 69 Semicolon In Message](#19-issue-69-semicolon-in-message)
+20. [Issue Note Over Multiline Hyphen Alias](#20-issue-note-over-multiline-hyphen-alias)
+21. [Missing Colon](#21-missing-colon)
+22. [Note Malformed](#22-note-malformed)
+23. [Note Multiline Missing Colon](#23-note-multiline-missing-colon)
+24. [Option In Par](#24-option-in-par)
+25. [Option Outside Critical](#25-option-outside-critical)
+26. [Title And Accessibility](#26-title-and-accessibility)
+27. [Unmatched End](#27-unmatched-end)
+28. [Wrong Arrow](#28-wrong-arrow)
 
 ---
 
@@ -61,15 +62,16 @@ This file contains invalid sequence test fixtures with:
 | 16 | [details and properties](#16-details-and-properties) | INVALID | INVALID | — |
 | 17 | [else in par nested](#17-else-in-par-nested) | INVALID | INVALID | — |
 | 18 | [else outside alt](#18-else-outside-alt) | INVALID | INVALID | — |
-| 19 | [issue note over multiline hyphen alias](#19-issue-note-over-multiline-hyphen-alias) | INVALID | INVALID | ✅ safe |
-| 20 | [missing colon](#20-missing-colon) | INVALID | INVALID | ✅ safe |
-| 21 | [note malformed](#21-note-malformed) | INVALID | INVALID | ✅ safe |
-| 22 | [note multiline missing colon](#22-note-multiline-missing-colon) | INVALID | INVALID | ✅ safe |
-| 23 | [option in par](#23-option-in-par) | INVALID | INVALID | — |
-| 24 | [option outside critical](#24-option-outside-critical) | INVALID | INVALID | — |
-| 25 | [title and accessibility](#25-title-and-accessibility) | INVALID | INVALID | — |
-| 26 | [unmatched end](#26-unmatched-end) | INVALID | INVALID | — |
-| 27 | [wrong arrow](#27-wrong-arrow) | INVALID | INVALID | — |
+| 19 | [issue 69 semicolon in message](#19-issue-69-semicolon-in-message) | INVALID | INVALID | ✅ safe |
+| 20 | [issue note over multiline hyphen alias](#20-issue-note-over-multiline-hyphen-alias) | INVALID | INVALID | ✅ safe |
+| 21 | [missing colon](#21-missing-colon) | INVALID | INVALID | ✅ safe |
+| 22 | [note malformed](#22-note-malformed) | INVALID | INVALID | ✅ safe |
+| 23 | [note multiline missing colon](#23-note-multiline-missing-colon) | INVALID | INVALID | ✅ safe |
+| 24 | [option in par](#24-option-in-par) | INVALID | INVALID | — |
+| 25 | [option outside critical](#25-option-outside-critical) | INVALID | INVALID | — |
+| 26 | [title and accessibility](#26-title-and-accessibility) | INVALID | INVALID | — |
+| 27 | [unmatched end](#27-unmatched-end) | INVALID | INVALID | — |
+| 28 | [wrong arrow](#28-wrong-arrow) | INVALID | INVALID | — |
 
 ---
 
@@ -1645,7 +1647,86 @@ sequenceDiagram
 
 ---
 
-## 19. Issue Note Over Multiline Hyphen Alias
+## 19. Issue 69 Semicolon In Message
+
+📄 **Source**: [`issue-69-semicolon-in-message.mmd`](./invalid/issue-69-semicolon-in-message.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+sequenceDiagram
+    participant UI
+
+    UI->>UI: Some text; with a semicolon
+
+```
+
+### Error Comparison: mermaid-cli vs maid
+
+<table>
+<tr>
+<th width="50%">mermaid-cli</th>
+<th width="50%">maid</th>
+</tr>
+<tr>
+<td valign="top">
+
+**Result**: ❌ INVALID
+
+```
+Syntax error in text
+```
+
+</td>
+<td valign="top">
+
+**Result**: ❌ INVALID
+
+```
+error[SE-MSG-SEMICOLON-UNESCAPED]: Semicolons in sequence message text must be escaped as '#59;'.
+at test-fixtures/sequence/invalid/issue-69-semicolon-in-message.mmd:4:23
+  3 | 
+  4 |     UI->>UI: Some text; with a semicolon
+    |                       ^
+  5 | 
+hint: Replace ';' with '#59;' in the message text.
+```
+
+</td>
+</tr>
+</table>
+
+### maid Auto-fix (`--fix`) Preview
+
+```mermaid
+sequenceDiagram
+    participant UI
+
+    UI->>UI: Some text#59; with a semicolon
+
+```
+
+### maid Auto-fix (`--fix=all`) Preview
+
+Shown above (safe changes applied).
+
+<details>
+<summary>View source code</summary>
+
+```
+sequenceDiagram
+    participant UI
+
+    UI->>UI: Some text; with a semicolon
+
+```
+</details>
+
+---
+
+## 20. Issue Note Over Multiline Hyphen Alias
 
 📄 **Source**: [`issue-note-over-multiline-hyphen-alias.mmd`](./invalid/issue-note-over-multiline-hyphen-alias.mmd)
 
@@ -1782,7 +1863,7 @@ sequenceDiagram
 
 ---
 
-## 20. Missing Colon
+## 21. Missing Colon
 
 📄 **Source**: [`missing-colon.mmd`](./invalid/missing-colon.mmd)
 
@@ -1864,7 +1945,7 @@ sequenceDiagram
 
 ---
 
-## 21. Note Malformed
+## 22. Note Malformed
 
 📄 **Source**: [`note-malformed.mmd`](./invalid/note-malformed.mmd)
 
@@ -1946,7 +2027,7 @@ sequenceDiagram
 
 ---
 
-## 22. Note Multiline Missing Colon
+## 23. Note Multiline Missing Colon
 
 📄 **Source**: [`note-multiline-missing-colon.mmd`](./invalid/note-multiline-missing-colon.mmd)
 
@@ -2048,7 +2129,7 @@ sequenceDiagram
 
 ---
 
-## 23. Option In Par
+## 24. Option In Par
 
 📄 **Source**: [`option-in-par.mmd`](./invalid/option-in-par.mmd)
 
@@ -2131,7 +2212,7 @@ sequenceDiagram
 
 ---
 
-## 24. Option Outside Critical
+## 25. Option Outside Critical
 
 📄 **Source**: [`option-outside-critical.mmd`](./invalid/option-outside-critical.mmd)
 
@@ -2209,7 +2290,7 @@ sequenceDiagram
 
 ---
 
-## 25. Title And Accessibility
+## 26. Title And Accessibility
 
 📄 **Source**: [`title-and-accessibility.mmd`](./invalid/title-and-accessibility.mmd)
 
@@ -2306,7 +2387,7 @@ sequenceDiagram
 
 ---
 
-## 26. Unmatched End
+## 27. Unmatched End
 
 📄 **Source**: [`unmatched-end.mmd`](./invalid/unmatched-end.mmd)
 
@@ -2381,7 +2462,7 @@ sequenceDiagram
 
 ---
 
-## 27. Wrong Arrow
+## 28. Wrong Arrow
 
 📄 **Source**: [`wrong-arrow.mmd`](./invalid/wrong-arrow.mmd)
 

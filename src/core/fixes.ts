@@ -71,6 +71,22 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
     out = out.split(SENT_Q).join('&quot;');
     return out;
   }
+
+  function escapeUnescapedSemicolons(textPart: string): string {
+    let out = '';
+    for (let i = 0; i < textPart.length; i++) {
+      const ch = textPart[i];
+      if (ch !== ';') {
+        out += ch;
+        continue;
+      }
+      const upto = textPart.slice(0, i + 1);
+      const isEntity = /(?:#\d+|&#\d+|&[A-Za-z][A-Za-z0-9]+);$/.test(upto);
+      out += isEntity ? ';' : '#59;';
+    }
+    return out;
+  }
+
   for (const e of errors) {
     const key = `${e.code}@${e.line}:${e.column}:${e.length ?? 1}`;
     if (seen.has(key)) continue;
@@ -1086,6 +1102,32 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
       } else {
         // Fallback: insert at current caret
         edits.push(insertAt(text, at(e), ': '));
+      }
+      continue;
+    }
+    if (is('SE-MSG-SEMICOLON-UNESCAPED', e)) {
+      const lineText = lineTextAt(text, e.line);
+      const arrows = ['<<-->>', '<<->>', '-->>', '->>', '-->', '->', '--x', '-x', '--)', '-)'];
+      let ai = -1;
+      let alen = 0;
+      for (const a of arrows) {
+        const idx = lineText.indexOf(a);
+        if (idx !== -1 && (ai === -1 || idx < ai)) { ai = idx; alen = a.length; }
+      }
+      if (ai !== -1) {
+        const colonIdx = lineText.indexOf(':', ai + alen);
+        if (colonIdx !== -1) {
+          const head = lineText.slice(0, colonIdx + 1);
+          const tail = lineText.slice(colonIdx + 1);
+          const fixedTail = escapeUnescapedSemicolons(tail);
+          if (fixedTail !== tail) {
+            edits.push({
+              start: { line: e.line, column: 1 },
+              end: { line: e.line, column: lineText.length + 1 },
+              newText: head + fixedTail
+            });
+          }
+        }
       }
       continue;
     }

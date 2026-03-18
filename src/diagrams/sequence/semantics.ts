@@ -14,6 +14,11 @@ class SequenceSemanticsVisitor extends BaseVisitor {
   }
 }
 
+function isEscapedEntitySemicolon(image: string, semicolonIdx: number): boolean {
+  const uptoSemicolon = image.slice(0, semicolonIdx + 1);
+  return /(?:#\d+|&#\d+|&[A-Za-z][A-Za-z0-9]+);$/.test(uptoSemicolon);
+}
+
 export function analyzeSequence(_cst: CstNode, _tokens: IToken[]): ValidationError[] {
   const ctx = { tokens: _tokens };
   const v = new SequenceSemanticsVisitor(ctx);
@@ -113,6 +118,32 @@ export function analyzeSequence(_cst: CstNode, _tokens: IToken[]): ValidationErr
     if (arrowIdx > 0) {
       const from = grabActorRef(arr, 0);
       const to = grabActorRef(arr, arrowIdx+1);
+      const colonIdx = arr.findIndex((tk, idx) => idx > arrowIdx && tk.tokenType === t.Colon);
+      if (colonIdx !== -1) {
+        let semicolonColumn: number | null = null;
+        for (let i = colonIdx + 1; i < arr.length && semicolonColumn == null; i++) {
+          const tk = arr[i];
+          const img = tk.image || '';
+          if (!img.includes(';')) continue;
+          for (let j = 0; j < img.length; j++) {
+            if (img[j] !== ';') continue;
+            if (isEscapedEntitySemicolon(img, j)) continue;
+            semicolonColumn = (tk.startColumn ?? 1) + j;
+            break;
+          }
+        }
+        if (semicolonColumn != null) {
+          errs.push({
+            line: ln,
+            column: semicolonColumn,
+            severity: 'error',
+            code: 'SE-MSG-SEMICOLON-UNESCAPED',
+            message: "Semicolons in sequence message text must be escaped as '#59;'.",
+            hint: "Replace ';' with '#59;' in the message text.",
+            length: 1
+          });
+        }
+      }
       if (from || to) {
         // suffix checks: presence of Plus/Minus tokens on the line
         const plusTok = arr.find(tk => tk.tokenType === t.Plus);
