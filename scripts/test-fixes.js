@@ -238,6 +238,16 @@ const cases = [
   },
   // Sequence
   { name: 'SE-MSG-COLON-MISSING', before: 'sequenceDiagram\nA->B hi\n', after: 'sequenceDiagram\nA->B : hi\n' },
+  {
+    name: 'SE-MSG-SEMICOLON-UNESCAPED',
+    before: 'sequenceDiagram\nparticipant UI\nUI->>UI: Some text; with a semicolon\n',
+    after: 'sequenceDiagram\nparticipant UI\nUI->>UI: Some text#59; with a semicolon\n'
+  },
+  {
+    name: 'SE-MSG-SEMICOLON-ESCAPED',
+    before: 'sequenceDiagram\nparticipant UI\nUI->>UI: Some text#59; with a semicolon\n',
+    after: 'sequenceDiagram\nparticipant UI\nUI->>UI: Some text#59; with a semicolon\n'
+  },
   { name: 'SE-NOTE-MALFORMED', before: 'sequenceDiagram\nNote right of A Hello\n', after: 'sequenceDiagram\nNote right of A : Hello\n' },
   { name: 'SE-NOTE-MALFORMED (multiline header)', before: 'sequenceDiagram\nNote right of A\n  body\nend note\n', after: 'sequenceDiagram\nNote right of A : body\n' },
   {

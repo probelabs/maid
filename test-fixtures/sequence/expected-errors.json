@@ -83,5 +83,8 @@
   ],
   "issue-note-over-multiline-hyphen-alias.mmd": [
     "SE-NOTE-MALFORMED"
+  ],
+  "issue-69-semicolon-in-message.mmd": [
+    "SE-MSG-SEMICOLON-UNESCAPED"
   ]
 }
