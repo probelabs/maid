@@ -31,15 +31,9 @@ jobs:
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
           installation-id: ${{ secrets.APP_INSTALLATION_ID }}
           auto-review: ${{ (github.event_name == 'pull_request_target' || github.event_name == 'pull_request') && 'true' || 'false' }}
-          max-parallelism: '1'
           debug: 'true'
           fail-fast: 'true'
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
           # AI Provider API Keys (configure one of these in your repository secrets)
-          # GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-          ANTHROPIC_API_KEY: ${{ secrets.GLM_API_KEY }}
-          ANTHROPIC_API_URL: 'https://api.z.ai/api/anthropic/v1'
-          # OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          # Optional: Specify the AI model to use
-          MODEL_NAME: 'glm-5'
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
