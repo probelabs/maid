@@ -1,0 +1,23 @@
+classDiagram
+    class Animal {
+        +name: string
+        +makeSound()
+    }
+    class Dog {
+        +breed: string
+        +bark()
+    }
+    class Cat {
+        +color: string
+        +meow()
+    }
+
+    Animal <|-- Dog
+    Animal <|-- Cat
+
+    style Animal fill:#1565c0,stroke:#42a5f5,color:#fff
+    style Dog fill:#2e7d32,stroke:#66bb6a,color:#fff
+    style Cat fill:#2e7d32,stroke:#66bb6a,color:#fff
+
+    classDef abstract fill:#e8f4fd,stroke:#2196f3
+    cssClass "Animal" abstract

@@ -22,6 +22,9 @@ export class ClassParser extends CstParser {
       { ALT: () => this.SUBRULE(this.interfaceLine) },
       { ALT: () => this.SUBRULE(this.relationStmt) },
       { ALT: () => this.SUBRULE(this.noteStmt) },
+      { ALT: () => this.SUBRULE(this.styleStatement) },
+      { ALT: () => this.SUBRULE(this.classDefStatement) },
+      { ALT: () => this.SUBRULE(this.cssClassStatement) },
       { ALT: () => this.SUBRULE(this.memberAssignStmt) },
       { ALT: () => this.CONSUME(t.Newline) },
     ]);
@@ -234,6 +237,46 @@ export class ClassParser extends CstParser {
       { ALT: () => this.CONSUME(t.NumberLiteral) },
     ]);
     this.OPTION2(() => this.CONSUME(t.Newline));
+  });
+
+  // style ClassName fill:#f9f,stroke:#333,color:#fff
+  private styleStatement = this.RULE('styleStatement', () => {
+    this.CONSUME(t.StyleKeyword);
+    this.CONSUME(t.Identifier);
+    this.MANY(() => {
+      this.OR([
+        { ALT: () => this.CONSUME2(t.Identifier) },
+        { ALT: () => this.CONSUME(t.ColorValue) },
+        { ALT: () => this.CONSUME(t.Colon) },
+        { ALT: () => this.CONSUME(t.Comma) },
+        { ALT: () => this.CONSUME(t.NumberLiteral) },
+      ]);
+    });
+    this.OPTION(() => this.CONSUME(t.Newline));
+  });
+
+  // classDef myStyle fill:#f9f,stroke:#333
+  private classDefStatement = this.RULE('classDefStatement', () => {
+    this.CONSUME(t.ClassDefKeyword);
+    this.CONSUME(t.Identifier);
+    this.MANY(() => {
+      this.OR([
+        { ALT: () => this.CONSUME2(t.Identifier) },
+        { ALT: () => this.CONSUME(t.ColorValue) },
+        { ALT: () => this.CONSUME(t.Colon) },
+        { ALT: () => this.CONSUME(t.Comma) },
+        { ALT: () => this.CONSUME(t.NumberLiteral) },
+      ]);
+    });
+    this.OPTION(() => this.CONSUME(t.Newline));
+  });
+
+  // cssClass "ClassName1,ClassName2" myStyle
+  private cssClassStatement = this.RULE('cssClassStatement', () => {
+    this.CONSUME(t.CssClassKeyword);
+    this.CONSUME(t.QuotedString);
+    this.CONSUME(t.Identifier);
+    this.OPTION(() => this.CONSUME(t.Newline));
   });
 
   private relationOp = this.RULE('relationOp', () => {
