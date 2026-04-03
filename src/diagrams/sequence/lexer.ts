@@ -73,6 +73,8 @@ export const Comma = createToken({ name: 'Comma', pattern: /,/ });
 export const Colon = createToken({ name: 'Colon', pattern: /:/ });
 export const LParen = createToken({ name: 'LParen', pattern: /\(/ });
 export const RParen = createToken({ name: 'RParen', pattern: /\)/ });
+export const LSquare = createToken({ name: 'LSquare', pattern: /\[/ });
+export const RSquare = createToken({ name: 'RSquare', pattern: /]/ });
 
 // Strings and text
 // Allow escaped characters within quotes (e.g., \" inside "...")
@@ -145,6 +147,8 @@ export const allTokens = [
   Colon,
   LParen,
   RParen,
+  LSquare,
+  RSquare,
   Plus,
   Minus,
   // Values

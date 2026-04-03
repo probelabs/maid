@@ -248,12 +248,12 @@ export class SequenceParser extends CstParser {
   // Blocks
   private altBlock = this.RULE('altBlock', () => {
     this.CONSUME(t.AltKeyword);
-    this.OPTION(() => this.SUBRULE(this.lineRemainder));
+    this.OPTION(() => this.SUBRULE(this.blockLabel));
     this.AT_LEAST_ONE(() => this.CONSUME(t.Newline));
     this.MANY(() => this.SUBRULE(this.line));
     this.MANY2(() => {
       this.CONSUME(t.ElseKeyword);
-      this.OPTION2(() => this.SUBRULE2(this.lineRemainder));
+      this.OPTION2(() => this.SUBRULE2(this.blockLabel));
       this.AT_LEAST_ONE2(() => this.CONSUME2(t.Newline));
       this.MANY3(() => this.SUBRULE2(this.line));
     });
@@ -266,7 +266,7 @@ export class SequenceParser extends CstParser {
 
   private optBlock = this.RULE('optBlock', () => {
     this.CONSUME(t.OptKeyword);
-    this.OPTION(() => this.SUBRULE(this.lineRemainder));
+    this.OPTION(() => this.SUBRULE(this.blockLabel));
     this.AT_LEAST_ONE(() => this.CONSUME(t.Newline));
     this.MANY(() => this.SUBRULE(this.line));
     this.CONSUME(t.EndKeyword);
@@ -278,7 +278,7 @@ export class SequenceParser extends CstParser {
 
   private loopBlock = this.RULE('loopBlock', () => {
     this.CONSUME(t.LoopKeyword);
-    this.OPTION(() => this.SUBRULE(this.lineRemainder));
+    this.OPTION(() => this.SUBRULE(this.blockLabel));
     this.AT_LEAST_ONE(() => this.CONSUME(t.Newline));
     this.MANY(() => this.SUBRULE(this.line));
     this.CONSUME(t.EndKeyword);
@@ -295,7 +295,7 @@ export class SequenceParser extends CstParser {
     this.MANY(() => this.SUBRULE(this.line));
     this.MANY2(() => {
       this.CONSUME(t.AndKeyword);
-      this.OPTION2(() => this.SUBRULE2(this.lineRemainder));
+      this.OPTION2(() => this.SUBRULE2(this.blockLabel));
       this.AT_LEAST_ONE2(() => this.CONSUME2(t.Newline));
       this.MANY3(() => this.SUBRULE2(this.line));
     });
@@ -314,21 +314,21 @@ export class SequenceParser extends CstParser {
           this.CONSUME(t.OverKeyword);
           this.SUBRULE(this.actorRef);
           this.OPTION(() => { this.CONSUME(t.Comma); this.SUBRULE2(this.actorRef); });
-          this.OPTION1(() => this.SUBRULE(this.lineRemainder));
+          this.OPTION1(() => this.SUBRULE(this.blockLabel));
         }
       },
-      { ALT: () => this.SUBRULE2(this.lineRemainder) }
+      { ALT: () => this.SUBRULE2(this.blockLabel) }
     ]);
   });
 
   private criticalBlock = this.RULE('criticalBlock', () => {
     this.CONSUME(t.CriticalKeyword);
-    this.OPTION(() => this.SUBRULE(this.lineRemainder));
+    this.OPTION(() => this.SUBRULE(this.blockLabel));
     this.AT_LEAST_ONE(() => this.CONSUME(t.Newline));
     this.MANY(() => this.SUBRULE(this.line));
     this.MANY2(() => {
       this.CONSUME(t.OptionKeyword);
-      this.OPTION2(() => this.SUBRULE2(this.lineRemainder));
+      this.OPTION2(() => this.SUBRULE2(this.blockLabel));
       this.AT_LEAST_ONE2(() => this.CONSUME2(t.Newline));
       this.MANY3(() => this.SUBRULE2(this.line));
     });
@@ -338,7 +338,7 @@ export class SequenceParser extends CstParser {
 
   private breakBlock = this.RULE('breakBlock', () => {
     this.CONSUME(t.BreakKeyword);
-    this.OPTION(() => this.SUBRULE(this.lineRemainder));
+    this.OPTION(() => this.SUBRULE(this.blockLabel));
     this.AT_LEAST_ONE(() => this.CONSUME(t.Newline));
     this.MANY(() => this.SUBRULE(this.line));
     this.CONSUME(t.EndKeyword);
@@ -375,6 +375,41 @@ export class SequenceParser extends CstParser {
     ]);
   });
 
+  // Shared list of keyword alternatives allowed in free-form text.
+  private keywordAlts = () => [
+    { ALT: () => this.CONSUME(t.AndKeyword) },
+    { ALT: () => this.CONSUME(t.ElseKeyword) },
+    { ALT: () => this.CONSUME(t.OptKeyword) },
+    { ALT: () => this.CONSUME(t.OptionKeyword) },
+    { ALT: () => this.CONSUME(t.LoopKeyword) },
+    { ALT: () => this.CONSUME(t.ParKeyword) },
+    { ALT: () => this.CONSUME(t.RectKeyword) },
+    { ALT: () => this.CONSUME(t.CriticalKeyword) },
+    { ALT: () => this.CONSUME(t.BreakKeyword) },
+    { ALT: () => this.CONSUME(t.BoxKeyword) },
+    { ALT: () => this.CONSUME(t.EndKeyword) },
+    { ALT: () => this.CONSUME(t.TitleKeyword) },
+    { ALT: () => this.CONSUME(t.AccTitleKeyword) },
+    { ALT: () => this.CONSUME(t.AccDescrKeyword) },
+    { ALT: () => this.CONSUME(t.NoteKeyword) },
+    { ALT: () => this.CONSUME(t.LeftKeyword) },
+    { ALT: () => this.CONSUME(t.RightKeyword) },
+    { ALT: () => this.CONSUME(t.OverKeyword) },
+    { ALT: () => this.CONSUME(t.OfKeyword) },
+    { ALT: () => this.CONSUME(t.AutonumberKeyword) },
+    { ALT: () => this.CONSUME(t.OffKeyword) },
+    { ALT: () => this.CONSUME(t.LinkKeyword) },
+    { ALT: () => this.CONSUME(t.LinksKeyword) },
+    { ALT: () => this.CONSUME(t.CreateKeyword) },
+    { ALT: () => this.CONSUME(t.DestroyKeyword) },
+    { ALT: () => this.CONSUME(t.ParticipantKeyword) },
+    { ALT: () => this.CONSUME(t.ActorKeyword) },
+    { ALT: () => this.CONSUME(t.ActivateKeyword) },
+    { ALT: () => this.CONSUME(t.DeactivateKeyword) },
+  ];
+
+  // lineRemainder: accepts all tokens including brackets/parens.
+  // Used for message text (after ':'), note text, meta text, etc.
   private lineRemainder = this.RULE('lineRemainder', () => {
     this.AT_LEAST_ONE(() => this.OR([
       { ALT: () => this.CONSUME(t.Identifier) },
@@ -387,36 +422,25 @@ export class SequenceParser extends CstParser {
       { ALT: () => this.CONSUME(t.Colon) },
       { ALT: () => this.CONSUME(t.LParen) },
       { ALT: () => this.CONSUME(t.RParen) },
-      // Allow any keywords if they happen to appear in text
-      { ALT: () => this.CONSUME(t.AndKeyword) },
-      { ALT: () => this.CONSUME(t.ElseKeyword) },
-      { ALT: () => this.CONSUME(t.OptKeyword) },
-      { ALT: () => this.CONSUME(t.OptionKeyword) },
-      { ALT: () => this.CONSUME(t.LoopKeyword) },
-      { ALT: () => this.CONSUME(t.ParKeyword) },
-      { ALT: () => this.CONSUME(t.RectKeyword) },
-      { ALT: () => this.CONSUME(t.CriticalKeyword) },
-      { ALT: () => this.CONSUME(t.BreakKeyword) },
-      { ALT: () => this.CONSUME(t.BoxKeyword) },
-      { ALT: () => this.CONSUME(t.EndKeyword) },
-      { ALT: () => this.CONSUME(t.TitleKeyword) },
-      { ALT: () => this.CONSUME(t.AccTitleKeyword) },
-      { ALT: () => this.CONSUME(t.AccDescrKeyword) },
-      { ALT: () => this.CONSUME(t.NoteKeyword) },
-      { ALT: () => this.CONSUME(t.LeftKeyword) },
-      { ALT: () => this.CONSUME(t.RightKeyword) },
-      { ALT: () => this.CONSUME(t.OverKeyword) },
-      { ALT: () => this.CONSUME(t.OfKeyword) },
-      { ALT: () => this.CONSUME(t.AutonumberKeyword) },
-      { ALT: () => this.CONSUME(t.OffKeyword) },
-      { ALT: () => this.CONSUME(t.LinkKeyword) },
-      { ALT: () => this.CONSUME(t.LinksKeyword) },
-      { ALT: () => this.CONSUME(t.CreateKeyword) },
-      { ALT: () => this.CONSUME(t.DestroyKeyword) },
-      { ALT: () => this.CONSUME(t.ParticipantKeyword) },
-      { ALT: () => this.CONSUME(t.ActorKeyword) },
-      { ALT: () => this.CONSUME(t.ActivateKeyword) },
-      { ALT: () => this.CONSUME(t.DeactivateKeyword) },
+      { ALT: () => this.CONSUME(t.LSquare) },
+      { ALT: () => this.CONSUME(t.RSquare) },
+      ...this.keywordAlts(),
+    ]));
+  });
+
+  // blockLabel: restricted text for block labels (loop, alt, opt, par, etc.).
+  // Excludes brackets and parens which mermaid.js rejects in these positions.
+  private blockLabel = this.RULE('blockLabel', () => {
+    this.AT_LEAST_ONE(() => this.OR([
+      { ALT: () => this.CONSUME(t.Identifier) },
+      { ALT: () => this.CONSUME(t.NumberLiteral) },
+      { ALT: () => this.CONSUME(t.QuotedString) },
+      { ALT: () => this.CONSUME(t.Text) },
+      { ALT: () => this.CONSUME(t.Plus) },
+      { ALT: () => this.CONSUME(t.Minus) },
+      { ALT: () => this.CONSUME(t.Comma) },
+      { ALT: () => this.CONSUME(t.Colon) },
+      ...this.keywordAlts(),
     ]));
   });
 }
