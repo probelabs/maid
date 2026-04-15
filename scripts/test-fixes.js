@@ -236,6 +236,12 @@ const cases = [
     after:  'flowchart TD\n  subgraph S1["Container"]\n    A --> S1_node["Node"]\n  end\n',
     afterLevel: 'all'
   },
+  {
+    name: 'FL-NOTE-NOT-SUPPORTED (multiline block, all)',
+    before: 'flowchart TD\n  A[Build] --> B[Release]\n\n  note right of B\n    The release job should wait for\n    the dependency guard to finish.\n  endnote\n',
+    after: 'flowchart TD\n  A[Build] --> B[Release]\n\nB -.-> B_note_4["The release job should wait for<br/>the dependency guard to finish."]\n',
+    afterLevel: 'all'
+  },
   // Sequence
   { name: 'SE-MSG-COLON-MISSING', before: 'sequenceDiagram\nA->B hi\n', after: 'sequenceDiagram\nA->B : hi\n' },
   {

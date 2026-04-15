@@ -1,0 +1,7 @@
+flowchart TD
+  A[Build] --> B[Release]
+
+  note right of B
+    The release job should wait for
+    the dependency guard to finish.
+  endnote

@@ -49,22 +49,23 @@ This file contains invalid flowchart test fixtures with:
 38. [Mixed Quotes In Labels](#38-mixed-quotes-in-labels)
 39. [Model Initialize Call](#39-model-initialize-call)
 40. [No Diagram Type](#40-no-diagram-type)
-41. [Quotes Double Inside Single](#41-quotes-double-inside-single)
-42. [Quotes In Node Labels](#42-quotes-in-node-labels)
-43. [Round Parens Unquoted](#43-round-parens-unquoted)
-44. [Subgraph Id Collision](#44-subgraph-id-collision)
-45. [Title Unsupported](#45-title-unsupported)
-46. [Typed Parallelogram Parens](#46-typed-parallelogram-parens)
-47. [Typed Shapes All](#47-typed-shapes-all)
-48. [Typed Shapes Unknowns](#48-typed-shapes-unknowns)
-49. [Unclosed Bracket](#49-unclosed-bracket)
-50. [Unclosed Quote In Label](#50-unclosed-quote-in-label)
-51. [Unescaped Quotes In Decision](#51-unescaped-quotes-in-decision)
-52. [Unmatched End](#52-unmatched-end)
-53. [Unquoted Label With Quotes](#53-unquoted-label-with-quotes)
-54. [Unquoted Parens In Labels](#54-unquoted-parens-in-labels)
-55. [Unquoted Parens With Backticks](#55-unquoted-parens-with-backticks)
-56. [Wrong Direction](#56-wrong-direction)
+41. [Note Block Endnote](#41-note-block-endnote)
+42. [Quotes Double Inside Single](#42-quotes-double-inside-single)
+43. [Quotes In Node Labels](#43-quotes-in-node-labels)
+44. [Round Parens Unquoted](#44-round-parens-unquoted)
+45. [Subgraph Id Collision](#45-subgraph-id-collision)
+46. [Title Unsupported](#46-title-unsupported)
+47. [Typed Parallelogram Parens](#47-typed-parallelogram-parens)
+48. [Typed Shapes All](#48-typed-shapes-all)
+49. [Typed Shapes Unknowns](#49-typed-shapes-unknowns)
+50. [Unclosed Bracket](#50-unclosed-bracket)
+51. [Unclosed Quote In Label](#51-unclosed-quote-in-label)
+52. [Unescaped Quotes In Decision](#52-unescaped-quotes-in-decision)
+53. [Unmatched End](#53-unmatched-end)
+54. [Unquoted Label With Quotes](#54-unquoted-label-with-quotes)
+55. [Unquoted Parens In Labels](#55-unquoted-parens-in-labels)
+56. [Unquoted Parens With Backticks](#56-unquoted-parens-with-backticks)
+57. [Wrong Direction](#57-wrong-direction)
 
 ---
 
@@ -112,22 +113,23 @@ This file contains invalid flowchart test fixtures with:
 | 38 | [mixed quotes in labels](#38-mixed-quotes-in-labels) | INVALID | INVALID | — |
 | 39 | [model initialize call](#39-model-initialize-call) | INVALID | INVALID | ✅ safe |
 | 40 | [no diagram type](#40-no-diagram-type) | INVALID | INVALID | — |
-| 41 | [quotes double inside single](#41-quotes-double-inside-single) | INVALID | INVALID | ✅ safe |
-| 42 | [quotes in node labels](#42-quotes-in-node-labels) | INVALID | INVALID | ✅ safe |
-| 43 | [round parens unquoted](#43-round-parens-unquoted) | INVALID | INVALID | ✅ safe |
-| 44 | [subgraph id collision](#44-subgraph-id-collision) | INVALID | INVALID | ✅ all |
-| 45 | [title unsupported](#45-title-unsupported) | INVALID | INVALID | ✅ all |
-| 46 | [typed parallelogram parens](#46-typed-parallelogram-parens) | INVALID | INVALID | ✅ safe |
-| 47 | [typed shapes all](#47-typed-shapes-all) | INVALID | INVALID | — |
-| 48 | [typed shapes unknowns](#48-typed-shapes-unknowns) | INVALID | INVALID | — |
-| 49 | [unclosed bracket](#49-unclosed-bracket) | INVALID | INVALID | ✅ safe |
-| 50 | [unclosed quote in label](#50-unclosed-quote-in-label) | INVALID | INVALID | ✅ all |
-| 51 | [unescaped quotes in decision](#51-unescaped-quotes-in-decision) | INVALID | INVALID | ✅ safe |
-| 52 | [unmatched end](#52-unmatched-end) | INVALID | INVALID | — |
-| 53 | [unquoted label with quotes](#53-unquoted-label-with-quotes) | INVALID | INVALID | ✅ safe |
-| 54 | [unquoted parens in labels](#54-unquoted-parens-in-labels) | INVALID | INVALID | ✅ safe |
-| 55 | [unquoted parens with backticks](#55-unquoted-parens-with-backticks) | INVALID | INVALID | ✅ safe |
-| 56 | [wrong direction](#56-wrong-direction) | INVALID | INVALID | — |
+| 41 | [note block endnote](#41-note-block-endnote) | INVALID | INVALID | ✅ all |
+| 42 | [quotes double inside single](#42-quotes-double-inside-single) | INVALID | INVALID | ✅ safe |
+| 43 | [quotes in node labels](#43-quotes-in-node-labels) | INVALID | INVALID | ✅ safe |
+| 44 | [round parens unquoted](#44-round-parens-unquoted) | INVALID | INVALID | ✅ safe |
+| 45 | [subgraph id collision](#45-subgraph-id-collision) | INVALID | INVALID | ✅ all |
+| 46 | [title unsupported](#46-title-unsupported) | INVALID | INVALID | ✅ all |
+| 47 | [typed parallelogram parens](#47-typed-parallelogram-parens) | INVALID | INVALID | ✅ safe |
+| 48 | [typed shapes all](#48-typed-shapes-all) | INVALID | INVALID | — |
+| 49 | [typed shapes unknowns](#49-typed-shapes-unknowns) | INVALID | INVALID | — |
+| 50 | [unclosed bracket](#50-unclosed-bracket) | INVALID | INVALID | ✅ safe |
+| 51 | [unclosed quote in label](#51-unclosed-quote-in-label) | INVALID | INVALID | ✅ all |
+| 52 | [unescaped quotes in decision](#52-unescaped-quotes-in-decision) | INVALID | INVALID | ✅ safe |
+| 53 | [unmatched end](#53-unmatched-end) | INVALID | INVALID | — |
+| 54 | [unquoted label with quotes](#54-unquoted-label-with-quotes) | INVALID | INVALID | ✅ safe |
+| 55 | [unquoted parens in labels](#55-unquoted-parens-in-labels) | INVALID | INVALID | ✅ safe |
+| 56 | [unquoted parens with backticks](#56-unquoted-parens-with-backticks) | INVALID | INVALID | ✅ safe |
+| 57 | [wrong direction](#57-wrong-direction) | INVALID | INVALID | — |
 
 ---
 
@@ -4106,7 +4108,92 @@ B --> C
 
 ---
 
-## 41. Quotes Double Inside Single
+## 41. Note Block Endnote
+
+📄 **Source**: [`note-block-endnote.mmd`](./invalid/note-block-endnote.mmd)
+
+### GitHub Render Attempt
+
+> **Note**: This invalid diagram may not render or may render incorrectly.
+
+```mermaid
+flowchart TD
+  A[Build] --> B[Release]
+
+  note right of B
+    The release job should wait for
+    the dependency guard to finish.
+  endnote
+
+```
+
+### Error Comparison: mermaid-cli vs maid
+
+<table>
+<tr>
+<th width="50%">mermaid-cli</th>
+<th width="50%">maid</th>
+</tr>
+<tr>
+<td valign="top">
+
+**Result**: ❌ INVALID
+
+```
+Syntax error in text
+```
+
+</td>
+<td valign="top">
+
+**Result**: ❌ INVALID
+
+```
+error[FL-NOTE-NOT-SUPPORTED]: 'note' syntax is not supported in flowchart/graph diagrams.
+at test-fixtures/flowchart/invalid/note-block-endnote.mmd:4:3
+  3 | 
+  4 |   note right of B
+    |   ^^^^
+  5 |     The release job should wait for
+hint: Notes are only available in sequence diagrams. Use node labels or HTML comments (%%comment%%) instead.
+```
+
+</td>
+</tr>
+</table>
+
+### maid Auto-fix (`--fix`) Preview
+
+No auto-fix changes (safe level).
+
+### maid Auto-fix (`--fix=all`) Preview
+
+```mermaid
+flowchart TD
+  A[Build] --> B[Release]
+
+B -.-> B_note_4["The release job should wait for<br/>the dependency guard to finish."]
+
+```
+
+<details>
+<summary>View source code</summary>
+
+```
+flowchart TD
+  A[Build] --> B[Release]
+
+  note right of B
+    The release job should wait for
+    the dependency guard to finish.
+  endnote
+
+```
+</details>
+
+---
+
+## 42. Quotes Double Inside Single
 
 📄 **Source**: [`quotes-double-inside-single.mmd`](./invalid/quotes-double-inside-single.mmd)
 
@@ -4182,7 +4269,7 @@ flowchart LR
 
 ---
 
-## 42. Quotes In Node Labels
+## 43. Quotes In Node Labels
 
 📄 **Source**: [`quotes-in-node-labels.mmd`](./invalid/quotes-in-node-labels.mmd)
 
@@ -4346,7 +4433,7 @@ graph TD
 
 ---
 
-## 43. Round Parens Unquoted
+## 44. Round Parens Unquoted
 
 📄 **Source**: [`round-parens-unquoted.mmd`](./invalid/round-parens-unquoted.mmd)
 
@@ -4422,7 +4509,7 @@ flowchart TD
 
 ---
 
-## 44. Subgraph Id Collision
+## 45. Subgraph Id Collision
 
 📄 **Source**: [`subgraph-id-collision.mmd`](./invalid/subgraph-id-collision.mmd)
 
@@ -4519,7 +4606,7 @@ flowchart TD
 
 ---
 
-## 45. Title Unsupported
+## 46. Title Unsupported
 
 📄 **Source**: [`title-unsupported.mmd`](./invalid/title-unsupported.mmd)
 
@@ -4594,7 +4681,7 @@ flowchart TD
 
 ---
 
-## 46. Typed Parallelogram Parens
+## 47. Typed Parallelogram Parens
 
 📄 **Source**: [`typed-parallelogram-parens.mmd`](./invalid/typed-parallelogram-parens.mmd)
 
@@ -4673,7 +4760,7 @@ flowchart TD
 
 ---
 
-## 47. Typed Shapes All
+## 48. Typed Shapes All
 
 📄 **Source**: [`typed-shapes-all.mmd`](./invalid/typed-shapes-all.mmd)
 
@@ -4794,7 +4881,7 @@ flowchart LR
 
 ---
 
-## 48. Typed Shapes Unknowns
+## 49. Typed Shapes Unknowns
 
 📄 **Source**: [`typed-shapes-unknowns.mmd`](./invalid/typed-shapes-unknowns.mmd)
 
@@ -4895,7 +4982,7 @@ flowchart TD
 
 ---
 
-## 49. Unclosed Bracket
+## 50. Unclosed Bracket
 
 📄 **Source**: [`unclosed-bracket.mmd`](./invalid/unclosed-bracket.mmd)
 
@@ -4968,7 +5055,7 @@ flowchart LR
 
 ---
 
-## 50. Unclosed Quote In Label
+## 51. Unclosed Quote In Label
 
 📄 **Source**: [`unclosed-quote-in-label.mmd`](./invalid/unclosed-quote-in-label.mmd)
 
@@ -5047,7 +5134,7 @@ flowchart TD
 
 ---
 
-## 51. Unescaped Quotes In Decision
+## 52. Unescaped Quotes In Decision
 
 📄 **Source**: [`unescaped-quotes-in-decision.mmd`](./invalid/unescaped-quotes-in-decision.mmd)
 
@@ -5126,7 +5213,7 @@ flowchart TD
 
 ---
 
-## 52. Unmatched End
+## 53. Unmatched End
 
 📄 **Source**: [`unmatched-end.mmd`](./invalid/unmatched-end.mmd)
 
@@ -5194,7 +5281,7 @@ flowchart TD
 
 ---
 
-## 53. Unquoted Label With Quotes
+## 54. Unquoted Label With Quotes
 
 📄 **Source**: [`unquoted-label-with-quotes.mmd`](./invalid/unquoted-label-with-quotes.mmd)
 
@@ -5312,7 +5399,7 @@ flowchart TD
 
 ---
 
-## 54. Unquoted Parens In Labels
+## 55. Unquoted Parens In Labels
 
 📄 **Source**: [`unquoted-parens-in-labels.mmd`](./invalid/unquoted-parens-in-labels.mmd)
 
@@ -5448,7 +5535,7 @@ flowchart TD
 
 ---
 
-## 55. Unquoted Parens With Backticks
+## 56. Unquoted Parens With Backticks
 
 📄 **Source**: [`unquoted-parens-with-backticks.mmd`](./invalid/unquoted-parens-with-backticks.mmd)
 
@@ -5530,7 +5617,7 @@ flowchart TD
 
 ---
 
-## 56. Wrong Direction
+## 57. Wrong Direction
 
 📄 **Source**: [`wrong-direction.mmd`](./invalid/wrong-direction.mmd)
 

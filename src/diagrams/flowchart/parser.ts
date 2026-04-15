@@ -464,26 +464,34 @@ export class MermaidParser extends CstParser {
     
     // Text inside link (between pipes)
     private linkText = this.RULE("linkText", () => {
-        // Align permissiveness with nodeContent so HTML-like tags (e.g., <br/>)
-        // and common punctuation are accepted inside pipe-delimited labels.
-        this.AT_LEAST_ONE(() => {
-            this.OR([
-                { ALT: () => this.CONSUME(tokens.Identifier) },
-                { ALT: () => this.CONSUME(tokens.Text) },
-                { ALT: () => this.CONSUME(tokens.NumberLiteral) },
-                { ALT: () => this.CONSUME(tokens.ColorValue) },
-                // Allow HTML-like angle brackets and slashes for <br/>, <i>, etc.
-                { ALT: () => this.CONSUME(tokens.AngleLess) },
-                { ALT: () => this.CONSUME(tokens.AngleOpen) },
-                { ALT: () => this.CONSUME(tokens.ForwardSlash) },
-                { ALT: () => this.CONSUME(tokens.Backslash) },
-                // Allow common punctuation seen in labels
-                { ALT: () => this.CONSUME(tokens.Comma) },
-                { ALT: () => this.CONSUME(tokens.Colon) },
-                { ALT: () => this.CONSUME(tokens.Ampersand) },
-                { ALT: () => this.CONSUME(tokens.Semicolon) },
-            ]);
-        });
+        this.OR1([
+            // Mermaid accepts a fully quoted string as the entire pipe label.
+            { ALT: () => this.CONSUME(tokens.QuotedString) },
+            {
+                ALT: () => {
+                    // Align permissiveness with nodeContent so HTML-like tags (e.g., <br/>)
+                    // and common punctuation are accepted inside pipe-delimited labels.
+                    this.AT_LEAST_ONE(() => {
+                        this.OR2([
+                            { ALT: () => this.CONSUME(tokens.Identifier) },
+                            { ALT: () => this.CONSUME(tokens.Text) },
+                            { ALT: () => this.CONSUME(tokens.NumberLiteral) },
+                            { ALT: () => this.CONSUME(tokens.ColorValue) },
+                            // Allow HTML-like angle brackets and slashes for <br/>, <i>, etc.
+                            { ALT: () => this.CONSUME(tokens.AngleLess) },
+                            { ALT: () => this.CONSUME(tokens.AngleOpen) },
+                            { ALT: () => this.CONSUME(tokens.ForwardSlash) },
+                            { ALT: () => this.CONSUME(tokens.Backslash) },
+                            // Allow common punctuation seen in labels
+                            { ALT: () => this.CONSUME(tokens.Comma) },
+                            { ALT: () => this.CONSUME(tokens.Colon) },
+                            { ALT: () => this.CONSUME(tokens.Ampersand) },
+                            { ALT: () => this.CONSUME(tokens.Semicolon) },
+                        ]);
+                    });
+                }
+            }
+        ]);
     });
     
     // Inline link text (e.g., in -.text.-> or -- text -->)

@@ -7,6 +7,7 @@ import { lintWithChevrotain } from '../../core/pipeline.js';
 import { coercePos, mapFlowchartParserError } from '../../core/diagnostics.js';
 import { detectDoubleInDouble, detectUnclosedQuotesInText } from '../../core/quoteHygiene.js';
 import { detectEscapedQuotes } from '../../core/quoteHygiene.js';
+import { findFlowchartNoteBlocks } from './note-blocks.js';
 
 export function validateFlowchart(text: string, options: ValidateOptions = {}): ValidationError[] {
   return lintWithChevrotain(text, {
@@ -32,6 +33,28 @@ export function validateFlowchart(text: string, options: ValidateOptions = {}): 
       return errs;
     },
     postParse: (text, tokens, _cst, prevErrors) => {
+      const noteBlocks = findFlowchartNoteBlocks(text);
+      if (noteBlocks.length > 0) {
+        const isInsideNoteBlock = (line: number) => noteBlocks.some((b) => line >= b.startLine && line <= b.endLine);
+        for (let i = prevErrors.length - 1; i >= 0; i--) {
+          const err = prevErrors[i];
+          if (!err || !isInsideNoteBlock(err.line)) continue;
+          if (err.code === 'FL-NOTE-NOT-SUPPORTED' && noteBlocks.some((b) => b.startLine === err.line)) continue;
+          prevErrors.splice(i, 1);
+        }
+        for (const block of noteBlocks) {
+          if (prevErrors.some((e) => e.code === 'FL-NOTE-NOT-SUPPORTED' && e.line === block.startLine)) continue;
+          prevErrors.push({
+            line: block.startLine,
+            column: 1,
+            severity: 'error',
+            code: 'FL-NOTE-NOT-SUPPORTED',
+            message: "'note' syntax is not supported in flowchart/graph diagrams.",
+            hint: "Notes are only available in sequence diagrams. Use a regular node plus a dotted link instead, or convert the block with '--fix=all'.",
+            length: 4
+          });
+        }
+      }
       
       // Flowchart: unsupported meta headers (title)
       {

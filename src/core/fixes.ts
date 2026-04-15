@@ -1,5 +1,6 @@
 import type { ValidationError, TextEditLC, FixLevel } from './types.js';
 import { insertAt, replaceRange, lineTextAt, inferIndentFromLine } from './edits.js';
+import { findFlowchartNoteBlocks } from '../diagrams/flowchart/note-blocks.js';
 
 // Helpers
 function at(e: ValidationError) { return { line: e.line, column: e.column }; }
@@ -87,6 +88,16 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
     return out;
   }
 
+  let flowchartNoteBlocksByStartLine: Map<number, ReturnType<typeof findFlowchartNoteBlocks>[number]> | null = null;
+  function getFlowchartNoteBlock(startLine: number) {
+    if (!flowchartNoteBlocksByStartLine) {
+      flowchartNoteBlocksByStartLine = new Map(
+        findFlowchartNoteBlocks(text).map((block) => [block.startLine, block])
+      );
+    }
+    return flowchartNoteBlocksByStartLine.get(startLine) ?? null;
+  }
+
   for (const e of errors) {
     const key = `${e.code}@${e.line}:${e.column}:${e.length ?? 1}`;
     if (seen.has(key)) continue;
@@ -107,6 +118,21 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
     if (is('FL-LINK-UNSUPPORTED-MARKER', e)) {
       // Remove the unsupported one-sided marker (x/o) from the inline link text
       edits.push(replaceRange(text, at(e), e.length ?? 1, ''));
+      continue;
+    }
+    if (is('FL-NOTE-NOT-SUPPORTED', e)) {
+      if (level !== 'all') continue;
+      const parsed = getFlowchartNoteBlock(e.line);
+      if (!parsed || !parsed.text) continue;
+      const noteIdBase = `${parsed.targetId}_note_${parsed.startLine}`;
+      const noteId = noteIdBase.replace(/[^A-Za-z0-9_]/g, '_');
+      const noteNode = `${noteId}["${parsed.text.replace(/"/g, '&quot;')}"]`;
+      const replacement = parsed.position === 'left'
+        ? `${noteNode} -.-> ${parsed.targetId}`
+        : `${parsed.targetId} -.-> ${noteNode}`;
+      const start = { line: parsed.startLine, column: 1 };
+      const end = { line: parsed.endLine + 1, column: 1 };
+      edits.push({ start, end, newText: `${replacement}\n` });
       continue;
     }
     // Fix quoted edge labels to use pipe syntax
