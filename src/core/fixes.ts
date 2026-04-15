@@ -87,6 +87,49 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
     return out;
   }
 
+  function parseFlowchartNoteBlock(textSource: string, startLine: number): {
+    startLine: number;
+    endLine: number;
+    targetId: string;
+    position: 'left' | 'right' | 'over';
+    text: string;
+  } | null {
+    const lines = textSource.split(/\r?\n/);
+    const raw = lines[startLine - 1] || '';
+    const m = /^\s*note\s+(left|right)\s+of\s+([A-Za-z_][A-Za-z0-9_-]*)\s*(?::\s*(.*))?\s*$/i.exec(raw)
+      || /^\s*note\s+over\s+([A-Za-z_][A-Za-z0-9_-]*)(?:\s*,\s*[A-Za-z_][A-Za-z0-9_-]*)?\s*(?::\s*(.*))?\s*$/i.exec(raw);
+    if (!m) return null;
+
+    const isOver = /^note\s+over\b/i.test(raw.trimStart());
+    const position = isOver ? 'over' : String(m[1] || '').toLowerCase() as 'left' | 'right';
+    const targetId = isOver ? String(m[1] || '') : String(m[2] || '');
+    const inlineText = isOver ? String(m[2] || '') : String(m[3] || '');
+    if (!targetId) return null;
+
+    if (inlineText.trim()) {
+      return {
+        startLine,
+        endLine: startLine,
+        targetId,
+        position,
+        text: inlineText.trim()
+      };
+    }
+
+    const body: string[] = [];
+    let endLine = startLine;
+    for (let i = startLine; i < lines.length; i++) {
+      const bodyRaw = lines[i] || '';
+      if (/^\s*end\s*note\s*$/i.test(bodyRaw) || /^\s*endnote\s*$/i.test(bodyRaw)) {
+        endLine = i + 1;
+        break;
+      }
+      body.push(bodyRaw.trim());
+    }
+    const textOut = body.filter(Boolean).join('<br/>').trim();
+    return { startLine, endLine, targetId, position, text: textOut };
+  }
+
   for (const e of errors) {
     const key = `${e.code}@${e.line}:${e.column}:${e.length ?? 1}`;
     if (seen.has(key)) continue;
@@ -107,6 +150,21 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
     if (is('FL-LINK-UNSUPPORTED-MARKER', e)) {
       // Remove the unsupported one-sided marker (x/o) from the inline link text
       edits.push(replaceRange(text, at(e), e.length ?? 1, ''));
+      continue;
+    }
+    if (is('FL-NOTE-NOT-SUPPORTED', e)) {
+      if (level !== 'all') continue;
+      const parsed = parseFlowchartNoteBlock(text, e.line);
+      if (!parsed || !parsed.text) continue;
+      const noteIdBase = `${parsed.targetId}_note_${parsed.startLine}`;
+      const noteId = noteIdBase.replace(/[^A-Za-z0-9_]/g, '_');
+      const noteNode = `${noteId}["${parsed.text.replace(/"/g, '&quot;')}"]`;
+      const replacement = parsed.position === 'left'
+        ? `${noteNode} -.-> ${parsed.targetId}`
+        : `${parsed.targetId} -.-> ${noteNode}`;
+      const start = { line: parsed.startLine, column: 1 };
+      const end = { line: parsed.endLine + 1, column: 1 };
+      edits.push({ start, end, newText: `${replacement}\n` });
       continue;
     }
     // Fix quoted edge labels to use pipe syntax

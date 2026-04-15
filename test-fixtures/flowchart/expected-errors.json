@@ -120,5 +120,8 @@
   ],
   "subgraph-id-collision.mmd": [
     "FL-SUBGRAPH-ID-COLLISION"
+  ],
+  "note-block-endnote.mmd": [
+    "FL-NOTE-NOT-SUPPORTED"
   ]
 }
