@@ -1,5 +1,6 @@
 import type { ValidationError, TextEditLC, FixLevel } from './types.js';
 import { insertAt, replaceRange, lineTextAt, inferIndentFromLine } from './edits.js';
+import { findFlowchartNoteBlocks } from '../diagrams/flowchart/note-blocks.js';
 
 // Helpers
 function at(e: ValidationError) { return { line: e.line, column: e.column }; }
@@ -87,47 +88,14 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
     return out;
   }
 
-  function parseFlowchartNoteBlock(textSource: string, startLine: number): {
-    startLine: number;
-    endLine: number;
-    targetId: string;
-    position: 'left' | 'right' | 'over';
-    text: string;
-  } | null {
-    const lines = textSource.split(/\r?\n/);
-    const raw = lines[startLine - 1] || '';
-    const m = /^\s*note\s+(left|right)\s+of\s+([A-Za-z_][A-Za-z0-9_-]*)\s*(?::\s*(.*))?\s*$/i.exec(raw)
-      || /^\s*note\s+over\s+([A-Za-z_][A-Za-z0-9_-]*)(?:\s*,\s*[A-Za-z_][A-Za-z0-9_-]*)?\s*(?::\s*(.*))?\s*$/i.exec(raw);
-    if (!m) return null;
-
-    const isOver = /^note\s+over\b/i.test(raw.trimStart());
-    const position = isOver ? 'over' : String(m[1] || '').toLowerCase() as 'left' | 'right';
-    const targetId = isOver ? String(m[1] || '') : String(m[2] || '');
-    const inlineText = isOver ? String(m[2] || '') : String(m[3] || '');
-    if (!targetId) return null;
-
-    if (inlineText.trim()) {
-      return {
-        startLine,
-        endLine: startLine,
-        targetId,
-        position,
-        text: inlineText.trim()
-      };
+  let flowchartNoteBlocksByStartLine: Map<number, ReturnType<typeof findFlowchartNoteBlocks>[number]> | null = null;
+  function getFlowchartNoteBlock(startLine: number) {
+    if (!flowchartNoteBlocksByStartLine) {
+      flowchartNoteBlocksByStartLine = new Map(
+        findFlowchartNoteBlocks(text).map((block) => [block.startLine, block])
+      );
     }
-
-    const body: string[] = [];
-    let endLine = startLine;
-    for (let i = startLine; i < lines.length; i++) {
-      const bodyRaw = lines[i] || '';
-      if (/^\s*end\s*note\s*$/i.test(bodyRaw) || /^\s*endnote\s*$/i.test(bodyRaw)) {
-        endLine = i + 1;
-        break;
-      }
-      body.push(bodyRaw.trim());
-    }
-    const textOut = body.filter(Boolean).join('<br/>').trim();
-    return { startLine, endLine, targetId, position, text: textOut };
+    return flowchartNoteBlocksByStartLine.get(startLine) ?? null;
   }
 
   for (const e of errors) {
@@ -154,7 +122,7 @@ export function computeFixes(text: string, errors: ValidationError[], level: Fix
     }
     if (is('FL-NOTE-NOT-SUPPORTED', e)) {
       if (level !== 'all') continue;
-      const parsed = parseFlowchartNoteBlock(text, e.line);
+      const parsed = getFlowchartNoteBlock(e.line);
       if (!parsed || !parsed.text) continue;
       const noteIdBase = `${parsed.targetId}_note_${parsed.startLine}`;
       const noteId = noteIdBase.replace(/[^A-Za-z0-9_]/g, '_');

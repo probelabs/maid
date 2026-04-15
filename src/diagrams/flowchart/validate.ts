@@ -7,45 +7,7 @@ import { lintWithChevrotain } from '../../core/pipeline.js';
 import { coercePos, mapFlowchartParserError } from '../../core/diagnostics.js';
 import { detectDoubleInDouble, detectUnclosedQuotesInText } from '../../core/quoteHygiene.js';
 import { detectEscapedQuotes } from '../../core/quoteHygiene.js';
-
-type FlowchartNoteBlock = {
-  startLine: number;
-  endLine: number;
-  hasInlineBody: boolean;
-};
-
-function findFlowchartNoteBlocks(text: string): FlowchartNoteBlock[] {
-  const lines = text.split(/\r?\n/);
-  const out: FlowchartNoteBlock[] = [];
-  const startRe = /^\s*note\s+(?:(?:left|right)\s+of|over)\s+\S(?:.*)$/i;
-  const endRe = /^\s*end\s*note\s*$/i;
-  const endCompactRe = /^\s*endnote\s*$/i;
-
-  for (let i = 0; i < lines.length; i++) {
-    const raw = lines[i] || '';
-    if (!startRe.test(raw)) continue;
-    const startLine = i + 1;
-
-    const colonIdx = raw.indexOf(':');
-    if (colonIdx !== -1) {
-      out.push({ startLine, endLine: startLine, hasInlineBody: true });
-      continue;
-    }
-
-    let endLine = startLine;
-    for (let j = i + 1; j < lines.length; j++) {
-      const bodyRaw = lines[j] || '';
-      if (endRe.test(bodyRaw) || endCompactRe.test(bodyRaw)) {
-        endLine = j + 1;
-        i = j;
-        break;
-      }
-    }
-    out.push({ startLine, endLine, hasInlineBody: false });
-  }
-
-  return out;
-}
+import { findFlowchartNoteBlocks } from './note-blocks.js';
 
 export function validateFlowchart(text: string, options: ValidateOptions = {}): ValidationError[] {
   return lintWithChevrotain(text, {
