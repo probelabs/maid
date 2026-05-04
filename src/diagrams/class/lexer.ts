@@ -16,6 +16,12 @@ export const AsKw = createToken({ name: 'AsKw', pattern: /as/, longer_alt: Ident
 export const NoteKw = createToken({ name: 'NoteKw', pattern: /note/, longer_alt: Identifier });
 export const ForKw = createToken({ name: 'ForKw', pattern: /for/, longer_alt: Identifier });
 
+// Styling keywords (parity with mermaid.js classDiagram spec)
+export const StyleKeyword = createToken({ name: 'StyleKeyword', pattern: /style/, longer_alt: Identifier });
+export const ClassDefKeyword = createToken({ name: 'ClassDefKeyword', pattern: /classDef/, longer_alt: Identifier });
+export const CssClassKeyword = createToken({ name: 'CssClassKeyword', pattern: /cssClass/, longer_alt: Identifier });
+export const ColorValue = createToken({ name: 'ColorValue', pattern: /#[0-9a-fA-F]{3,6}/ });
+
 // Relationship operators (order matters: longest first)
 export const RelCompToAgg = createToken({ name: 'RelCompToAgg', pattern: /\*--o/ });
 export const RelAggToComp = createToken({ name: 'RelAggToComp', pattern: /o--\*/ });
@@ -66,6 +72,9 @@ export const allTokens = [
   TitleKw,
   NamespaceKw,
   InterfaceKw,
+  ClassDefKeyword,
+  CssClassKeyword,
+  StyleKeyword,
   ClassKw,
   AsKw,
   NoteKw,
@@ -96,8 +105,9 @@ export const allTokens = [
   LParen, RParen,
   SquareOpen, SquareClose,
   Colon, Comma,
+  // Atoms (ColorValue before Visibility so #hex isn't split into # + hex)
+  ColorValue,
   Visibility,
-  // Atoms
   NumberLiteral,
   BacktickName,
   Identifier,
