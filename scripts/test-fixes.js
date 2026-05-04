@@ -191,6 +191,11 @@ const cases = [
     after:  'graph TD\nA -->|ai.tool_calls: &#91;&#123;name, args&#125;&#93;| B\nA -->|ai.tool_calls: &#91;&#123;name, args&#125;&#93;| C\n'
   },
   {
+    name: 'FL-EDGE-LABEL-BRACKET (inline pipe label with quoted brackets)',
+    before: 'graph TD\nB --|preGroupOperation["aggregated_graph_analytics"] == true|--> C{Route to Graph Analytics}\n',
+    after:  'graph TD\nB --|preGroupOperation&#91;&quot;aggregated_graph_analytics&quot;&#93; == true|--> C{Route to Graph Analytics}\n'
+  },
+  {
     name: 'FL-EDGE-LABEL-CURLY-IN-PIPES (encode braces)',
     before: 'flowchart TD\nA -->|Resolve ${VAR}| B\n',
     after:  'flowchart TD\nA -->|Resolve $&#123;VAR&#125;| B\n'

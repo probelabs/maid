@@ -498,10 +498,21 @@ export class MermaidParser extends CstParser {
     private linkTextInline = this.RULE("linkTextInline", () => {
         this.AT_LEAST_ONE(() => {
             this.OR([
+                // Support HTML entity-encoded punctuation in inline pipe labels,
+                // e.g. --|run: &#91;aggregate&#93;|--> after autofix.
+                { ALT: () => this.CONSUME(tokens.Pipe) },
                 { ALT: () => this.CONSUME(tokens.Identifier) },
                 { ALT: () => this.CONSUME(tokens.Text) },
                 { ALT: () => this.CONSUME(tokens.NumberLiteral) },
-                { ALT: () => this.CONSUME(tokens.Pipe) } // Sometimes used in inline
+                { ALT: () => this.CONSUME(tokens.ColorValue) },
+                { ALT: () => this.CONSUME(tokens.AngleLess) },
+                { ALT: () => this.CONSUME(tokens.AngleOpen) },
+                { ALT: () => this.CONSUME(tokens.ForwardSlash) },
+                { ALT: () => this.CONSUME(tokens.Backslash) },
+                { ALT: () => this.CONSUME(tokens.Comma) },
+                { ALT: () => this.CONSUME(tokens.Colon) },
+                { ALT: () => this.CONSUME(tokens.Ampersand) },
+                { ALT: () => this.CONSUME(tokens.Semicolon) }
             ]);
         });
     });

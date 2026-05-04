@@ -105,6 +105,9 @@
   "edge-label-bracket-encoded-braces.mmd": [
     "FL-EDGE-LABEL-BRACKET"
   ],
+  "edge-label-brackets-with-quotes.mmd": [
+    "FL-EDGE-LABEL-BRACKET"
+  ],
   "typed-parallelogram-parens.mmd": [
     "FL-LABEL-PARENS-UNQUOTED"
   ],
