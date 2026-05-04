@@ -27,7 +27,8 @@ This file contains all valid class test fixtures rendered with both Mermaid and 
 12. [relations leftward](#12-relations-leftward)
 13. [simple](#13-simple)
 14. [stereotype and alias](#14-stereotype-and-alias)
-15. [title only](#15-title-only)
+15. [style and classdef](#15-style-and-classdef)
+16. [title only](#16-title-only)
 
 ---
 
@@ -851,7 +852,90 @@ ServiceInterface ..|> Service : implements
 
 ---
 
-## 15. Title Only
+## 15. Style And Classdef
+
+📄 **Source**: [`style-and-classdef.mmd`](./valid/style-and-classdef.mmd)
+
+### Rendered Output
+
+<table>
+<tr>
+<th width="50%">Mermaid (Official)</th>
+<th width="50%">Maid (Experimental)</th>
+</tr>
+<tr>
+<td>
+
+```mermaid
+classDiagram
+    class Animal {
+        +name: string
+        +makeSound()
+    }
+    class Dog {
+        +breed: string
+        +bark()
+    }
+    class Cat {
+        +color: string
+        +meow()
+    }
+
+    Animal <|-- Dog
+    Animal <|-- Cat
+
+    style Animal fill:#1565c0,stroke:#42a5f5,color:#fff
+    style Dog fill:#2e7d32,stroke:#66bb6a,color:#fff
+    style Cat fill:#2e7d32,stroke:#66bb6a,color:#fff
+
+    classDef abstract fill:#e8f4fd,stroke:#2196f3
+    cssClass "Animal" abstract
+
+```
+
+</td>
+<td>
+
+<img src="./rendered/style-and-classdef.svg" alt="Maid Rendered Diagram" />
+
+</td>
+</tr>
+</table>
+
+<details>
+<summary>View source code</summary>
+
+```
+classDiagram
+    class Animal {
+        +name: string
+        +makeSound()
+    }
+    class Dog {
+        +breed: string
+        +bark()
+    }
+    class Cat {
+        +color: string
+        +meow()
+    }
+
+    Animal <|-- Dog
+    Animal <|-- Cat
+
+    style Animal fill:#1565c0,stroke:#42a5f5,color:#fff
+    style Dog fill:#2e7d32,stroke:#66bb6a,color:#fff
+    style Cat fill:#2e7d32,stroke:#66bb6a,color:#fff
+
+    classDef abstract fill:#e8f4fd,stroke:#2196f3
+    cssClass "Animal" abstract
+
+```
+</details>
+
+---
+
+## 16. Title Only
 
 📄 **Source**: [`title-only.mmd`](./valid/title-only.mmd)
 
